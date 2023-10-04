@@ -18,17 +18,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/rocketninja7)]
 [[portfolio](team/andrewyapp.md)]
 
-* Role: Software Developer
+- Role: Project Advisor
 
-### Jane Doe
+### Marques Tye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marquestye.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/marquestye)]
+[[portfolio](team/marquestye.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities: UI
 
 ### Wong Ji Kean
 
@@ -38,8 +38,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Data
 
 ### Kyle Zheng Ching Chan
 
@@ -48,8 +48,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/xCOLOURx)]
 [[portfolio](team/xcolourx.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
 
 ### James Doe
 
@@ -58,5 +58,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: UI
