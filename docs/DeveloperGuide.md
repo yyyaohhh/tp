@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -269,71 +269,131 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is planning to take NUS modules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Provide a fast and easy way for students to track courses to take to meet graduation requirements and plan courses to take, optimized for users who prefer typing in CLI.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …                                                                 | I want to …                                                                                 | So that I can…                                               |
+|----------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | fast typer                                                             | use the typing interface                                                                    | I save time from interacting with the GUI                    |
+| `* * *`  | current student                                                        | set my major                                                                                |                                                              |
+| `* * *`  | current student                                                        | add modules to "taken" / "taking" / "plan to take" lists                                    |                                                              |
+| `* * *`  | current student                                                        | search for modules by module code or module name                                            |                                                              |
+| `* * *`  | current student                                                        | remove modules from the lists                                                               |                                                              |
+| `* * *`  | current student                                                        | access data entered in a previous session                                                   |                                                              |
+| `* * *`  | forgetful student                                                      | view which year and semester I have taken certain modules                                   |                                                              |
+| `* * *`  | current student                                                        | see the modules I need to take to graduate                                                  | I can apply for and take those modules to graduate           |
+| `* * *`  | incoming freshman                                                      | see the modules I might need to take for my course                                          | I can make an informed decision about what I am applying for |
+| `* * *`  | current student                                                        | check how many MCs I haven taken                                                            | I know how many more I need to take to graduate              |
+| `* * *`  | overworked student                                                     | just check what modules I have taken                                                        | I don't have to remember them myself                         |
+| `* *`    | student going on exchange                                              | see which modules can be mapped over                                                        |                                                              |
+| `* *`    | current student                                                        | see how the modules I plan to take affect what modules I will be able to take in the future | I can plan my future semesters                               |
+| `* *`    | current student                                                        | check what prerequisite modules I need to take                                              | I can take this specific module                              |
+| `* *`    | struggling student                                                     | see what modules I can use my remaining S/Us on                                             | I can plan my modules accordingly                            |
+| `* *`    | current student                                                        | set the grade for taken mods and expected grade for future mods                             | the app can calculate my CAP for me                          |
+| `* *`    | current student                                                        | see my current calculated CAP / predicted graduation CAP                                    | I do not have to calculate it myself                         |
+| `* *`    | graduated student                                                      | check what modules I have taken to revise the skills I have learnt in university            | I can use my skills at my job                                |
+| `* *`    | graduated student                                                      | check the modules I have taken for completing my resume and answering interview questions   | I can get the job                                            |
+| `* *`    | student with many friends in different majors                          | check whether I can also take the modules they are taking                                   | we can help each other with the module                       |
+| `* *`    | double major/degree student                                            | check what modules I can double count                                                       | I can lower my workload                                      |
+| `* *`    | student looking to take a second major or minor                        | see if I can take the modules required                                                      | I can obtain the second major or minor                       |
+| `* *`    | student staying in RC/NUSC or taking other special programs (like SPM) | check for modules that fulfill requirements                                                 | I can replace the general education modules                  |
+| `* *`    | student that wants to take niche modules                               | search for it                                                                               | I know what are the options                                  |
+| `* *`    | current student                                                        | see if certain modules are available in the current semester                                | I can plan my study plan or take it this semester            |
+| `* *`    | student who likes a certain professor                                  | see which semester that professor will be teaching the module                               | I can take their module                                      |
+| `* *`    | student who dislikes a certain professor                               | see which modules they will be teaching                                                     | I can avoid them                                             |
+| `* *`    | student taking credit-bearing internships                              | see how my internships fulfill my graduation requirement and MCs                            |                                                              |
+| `* *`    | student taking a focus area                                            | see if the module I have taken satisfy my focus area                                        |                                                              |
+| `* *`    | failing student                                                        | see if I can drop certain modules                                                           | I can graduate through an alternate path                     |
+| `* *`    | student looking for work                                               | see which modules give me skills I need                                                     | I can apply for certain jobs/internships                     |
+| `* *`    | student who wants to switch courses                                    | check which modules I can carry over and still take                                         | I can graduate                                               |
+| `*`      | advanced user                                                          | manually edit the data file                                                                 | I can manipulate the data as I wish                          |
+| `*`      | student that hates a specific module                                   | check for other alternative modules so that I can avoid that module                         | I can prevent excessive stress                               |
+| `*`      | ambitious student                                                      | find the fastest way to graduate                                                            |                                                              |
+| `*`      | kiasu student                                                          | see which modules are popular/oversubscribed                                                | I can adjust my academic plan                                |
+| `*`      | JC/Poly student                                                        | see what modules I am exempted from                                                         |                                                              |
+| `*`      | foreign student                                                        | see the bridging modules I am required to take                                              |                                                              |
+| `*`      | current student                                                        | check if I am exempted from the bridging modules                                            | I can take them to skip the mod                              |
+| `*`      | Advanced Placement student                                             | add what modules I have taken before                                                        |                                                              |
+| `*`      | current student                                                        | see which modules have a diagnostic test                                                    | I can skip the mod                                           |
+| `*`      | tryhard student                                                        | see what modules are available in the special term                                          |                                                              |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ModCraft` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Planning mods to take in the upcoming semester**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User searches a module that he wants to take next semester
+2. Modcraft displays the information for the module.
+3. User adds that module to his timetable
+4. Modcraft shows the module in the User’s timetable
+Steps 1-4 are repeated for each module the User is interested in
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Modcraft detects that the module does not exist.
+    * 1a1. Modcraft informs the user it is unavailable
+    * 1a2. User searches another module
+Steps 1a1 to 1a2 are repeated until the module is available
+Use case resumes from step 2.
 
-  Use case ends.
+* 3a. Modcraft detects that the module is unavailable for the semester.
+    * 3a1. Modcraft informs the user it is unavailable
+    * 3a2. User searches another module 
+Steps 3a1 to 3a2 are repeated until the module is available
+Use case resumes from step 4.
 
-* 3a. The given index is invalid.
+* *a. At any time, user choose to delete a module
+    * *a1. User deletes the module
+    * *a2. Modcraft removes the module from the timetable
+Use case resumes from step 1.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC02 - Updating end of semester grades**
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User inputs grades for a module that they have taken.
+2. System shows the updated grade in the timetable.
+Steps 1-2 are repeated for each grade the user would like to update for.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Grade is invalid
+    * 1a1. System shows the user the grade is invalid
+    * 1a2. User inputs correct grade 
+Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
+Use case resumes from step 2.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be able to hold up to 10,000 courses without a noticeable sluggishness in performance for typical usage.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* *{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
