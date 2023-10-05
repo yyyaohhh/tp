@@ -2,6 +2,7 @@
 
 ## Project ModCraft
 
+
 ModCraft is an app that provides a fast and easy way for students to track courses
 to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
@@ -32,4 +33,5 @@ Given below are my contributions to the project.
   - Some parts of some feature I added was adopted by several other class mates (to be added soon)
 
 - **Tools**:
+
   - to be added soon

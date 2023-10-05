@@ -7,7 +7,7 @@
 This is **ModCraft**.<br>
 
 ModCraft provides a fast and easy way for students to track courses to take to meet graduation requirements and plan courses to take.
-  
+
 Example usages:
   * as a platform to plan and track your NUS modules
   * as a way to keep track of your current progess in NUS,
@@ -24,7 +24,4 @@ This project is **currently ongoing** with the following features planned:
 * Delete taken modules
 * See taken modules
 
-
-
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). 
-
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

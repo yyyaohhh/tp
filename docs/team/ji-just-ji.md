@@ -1,10 +1,10 @@
 # Ji Kean's Project Portfolio Page
- 
 
-## Project ModCraft 
 
-ModCraft is an app that provides a fast and easy way for students to track courses 
-to take to meet graduation requirements and plan courses to take. The user interacts 
+## Project ModCraft
+
+ModCraft is an app that provides a fast and easy way for students to track courses
+to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
 
 Given below are my contributions to the project.
