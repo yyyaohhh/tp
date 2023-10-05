@@ -353,7 +353,7 @@ Use case resumes from step 2.
 
 * 3a. Modcraft detects that the module is unavailable for the semester.
     * 3a1. Modcraft informs the user it is unavailable
-    * 3a2. User searches another module 
+    * 3a2. User searches another module
 Steps 3a1 to 3a2 are repeated until the module is available
 Use case resumes from step 4.
 
@@ -376,7 +376,7 @@ Use case ends.
 
 * 1a. Grade is invalid
     * 1a1. System shows the user the grade is invalid
-    * 1a2. User inputs correct grade 
+    * 1a2. User inputs correct grade
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
