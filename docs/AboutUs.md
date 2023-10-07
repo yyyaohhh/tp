@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Huan Yaohong
 
-<img src="images/yh.jpg" width="200px">
+<img src="images/yyyaohhh.png" width="200px">
 
 [[github](http://github.com/yyyaohhh)]
 [[portfolio](team/yyyaohhh.md)]
