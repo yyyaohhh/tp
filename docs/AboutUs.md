@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/rocketninja7.png" width="200px">
 
 [[github](https://github.com/rocketninja7)]
-[[portfolio](team/andrewyapp.md)]
+[[portfolio](team/rocketninja7.md)]
 
 - Role: Project Advisor
 
