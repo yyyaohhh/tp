@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,6 +52,13 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    boolean hasModule(Module module);
+    void deleteModule(Module module);
+    void addModule(Module module);
+    void setModule(Module target, Module editedModule);
+
+    ObservableList<Module> getFilteredModuleList();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
