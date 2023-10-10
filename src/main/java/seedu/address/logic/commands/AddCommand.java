@@ -29,8 +29,8 @@ public class AddCommand extends Command {
             + PREFIX_SEMESTER + "1 "
             + PREFIX_GRADE + "B ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New module added: %1$s";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already has already been added.";
 
     private final Module toAdd;
 
@@ -46,8 +46,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasModule(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
+
         }
 
         model.addModule(toAdd);
