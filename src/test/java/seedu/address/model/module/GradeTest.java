@@ -1,10 +1,10 @@
 package seedu.address.model.module;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class GradeTest {
     @Test
@@ -27,5 +27,7 @@ public class GradeTest {
         assertTrue(Grade.isValidGrade("A+"));
         assertTrue(Grade.isValidGrade("B-"));
         assertTrue(Grade.isValidGrade("F"));
+        assertTrue(Grade.isValidGrade("IP"));
+        assertTrue(Grade.isValidGrade("W"));
     }
 }

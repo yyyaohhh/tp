@@ -3,9 +3,13 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Module's Module Code in the system.
+ * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
+ */
 public class ModuleCode {
     /*
-    Refer to https://www.nus.edu.sg/registrar/academic-information-policies/graduate/modular-system or
+    Refer to https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system or
     https://www.nus.edu.sg/registrar/docs/info/nusbulletin/AY201213_GeneralInformation.pdf.
      */
     public static final String MESSAGE_CONSTRAINTS = "Module codes should contain a two- or three-letter prefix "

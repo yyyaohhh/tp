@@ -3,10 +3,14 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the year of a student when a Module is taken in the system.
+ * Guarantees: immutable; is valid as declared in {@link #isValidYear(String)}
+ */
 public class Year {
     public static final String MESSAGE_CONSTRAINTS = "Year should only contain 4 digits.";
 
-    public static final String VALIDATION_REGEX = "^[\\p{Digit}]{4}$";
+    public static final String VALIDATION_REGEX = "^[0-6]$";
 
     public final Integer year;
 
