@@ -104,7 +104,7 @@ Find the information about a certain module by module code.
 
 Format: `info m/MODULE`
 
-* To search for modules with variants add a `*` at the end of the module moduleName.
+* To search for modules with variants add a `*` at the end of the module name.
 
 Examples:
 * `info CS2019`
