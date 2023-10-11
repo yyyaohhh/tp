@@ -37,9 +37,9 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Module person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Module module) {
+        requireNonNull(module);
+        toAdd = module;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasModule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
 
         }
