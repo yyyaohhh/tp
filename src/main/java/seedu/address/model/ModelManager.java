@@ -104,7 +104,7 @@ public class ModelManager implements Model {
 
     public void deleteModule(Module module) {
         requireNonNull(module);
-        addressBook.deleteModule(module);
+        addressBook.removeModule(module);
     }
 
     @Override
