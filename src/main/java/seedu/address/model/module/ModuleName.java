@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Module's name in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class ModuleName {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not start with space.";
 
@@ -17,17 +17,17 @@ public class Name {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String name;
+    public final String moduleName;
 
     /**
      * Constructs a {@code Name}.
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public ModuleName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.name = name;
+        this.moduleName = name;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Name {
 
     @Override
     public String toString() {
-        return name;
+        return moduleName;
     }
 
     @Override
@@ -54,11 +54,11 @@ public class Name {
         }
 
         seedu.address.model.person.Name otherName = (seedu.address.model.person.Name) other;
-        return name.equals(otherName.fullName);
+        return moduleName.equals(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return moduleName.hashCode();
     }
 }
