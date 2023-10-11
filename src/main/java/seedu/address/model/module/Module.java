@@ -36,6 +36,18 @@ public class Module {
         this.grade = grade;
     }
 
+    public Module(ModuleCode moduleCode, Year year, Semester semester, Grade grade) {
+        requireAllNonNull(moduleCode, year, semester, grade);
+        this.moduleCode = moduleCode;
+        this.yearTaken = year;
+        this.semesterTaken = semester;
+        this.grade = grade;
+        // Temporary until we get back-end setup
+        this.name = null;
+        this.description = null;
+        this.lecturers = null;
+    }
+
     public Name getName() {
         return name;
     }
