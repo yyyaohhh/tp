@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.module.*;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +122,38 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static ModuleCode parseCode(String code) throws ParseException {
+        requireNonNull(code);
+        String trimmedCode = code.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedCode);
+    }
+    public static Year parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedYear)) {
+            throw new ParseException(Year.MESSAGE_CONSTRAINTS);
+        }
+        return new Year(trimmedYear);
+    }
+    public static Semester parseSem(String sem) throws ParseException {
+        requireNonNull(sem);
+        String trimmedSem = sem.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedSem)) {
+            throw new ParseException(Semester.MESSAGE_CONSTRAINTS);
+        }
+        return new Semester(trimmedSem);
+    }
+    public static Grade parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return new Grade(trimmedGrade);
     }
 }

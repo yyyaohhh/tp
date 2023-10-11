@@ -53,7 +53,7 @@ public class UniqueModuleList implements Iterable<Module> {
      * {@code target} must exist in the list.
      * The module identity of {@code editedmodule} must not be the same as another existing module in the list.
      */
-    public void setModule(Module target, Module editedModule) {
+    public void setModules(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
 
         int index = internalList.indexOf(target);
