@@ -95,6 +95,10 @@ public class ModelManager implements Model {
         return addressBook.hasModule(module);
     }
 
+    public void deleteModule(Module module) {
+        requireNonNull(module);
+        addressBook.removeModule(module);
+    }
     @Override
     public void addModule(Module module) {
         requireNonNull(module);
@@ -102,10 +106,6 @@ public class ModelManager implements Model {
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
-    public void deleteModule(Module module) {
-        requireNonNull(module);
-        addressBook.removeModule(module);
-    }
 
     @Override
     public void setModule(Module target, Module editedModule) {
