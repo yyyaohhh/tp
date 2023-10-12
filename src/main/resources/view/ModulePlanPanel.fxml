@@ -4,5 +4,5 @@
 <?import javafx.scene.layout.HBox?>
 
 <HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="modulePlanView" HBox.hgrow="ALWAYS" />
+    <ListView fx:id="modulePlanView" orientation="HORIZONTAL" HBox.hgrow="ALWAYS" />
 </HBox>

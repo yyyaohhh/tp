@@ -41,14 +41,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
 
-    @FXML
-    private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane modulePlanPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,9 +111,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +119,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        //TODO
+        ModulePlanPanel modulePlanPanel = new ModulePlanPanel();
+        modulePlanPlaceholder.getChildren().add(modulePlanPanel.getRoot());
     }
 
     /**

@@ -2,8 +2,11 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -14,14 +17,8 @@ public class ModulePlanCard extends UiPart<Region> {
 
     private static final String FXML = "ModulePlanCard.fxml";
 
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
 
+    //TODO uncomment when ModulePlan is added.
     //public final ModulePlan modulePlanSemester;
 
     @FXML
@@ -31,11 +28,27 @@ public class ModulePlanCard extends UiPart<Region> {
     @FXML
     private FlowPane modules;
 
+
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ModulePlanCard() {
+    public ModulePlanCard(String semester) {
         super(FXML);
+
+        //Placeholder text
+        this.semester.setText(semester);
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+        modules.getChildren().add(new Label("CS2103"));
+
 
         //TODO
 //        this.modulePlanSemester = modulePlanSemester;
