@@ -113,6 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return modules.asUnmodifiableObservableList();
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -11,7 +11,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -27,22 +29,22 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newModule_success() {
+        Module validModule = new ModuleBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        Model expectedModel = new ModelManager((model.getAddressBook()), new UserPrefs());
+        expectedModel.addModule(validModule);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddCommand(validModule), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validModule)),
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateModule_throwsCommandException() {
+        Module moduleInList = model.getAddressBook().getModuleList().get(0);
+        assertCommandFailure(new AddCommand(moduleInList), model,
+                AddCommand.MESSAGE_DUPLICATE_MODULE);
     }
 
 }
