@@ -1,8 +1,8 @@
 
 # ModCraft User Guide
 
-ModCraft is an app that provides a fast and easy way for students to track courses 
-to take to meet graduation requirements and plan courses to take. The user interacts 
+ModCraft is an app that provides a fast and easy way for students to track courses
+to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
 
 <!-- * Table of Contents -->
@@ -24,11 +24,11 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-   
+
    * `info CS1101S` : Shows Information about the module CS1101S
-   
+
    * `add CS2030S Y1S2` : Adds the module CS2030S to semester 2 in year 1
-   
+
    * `delete CS2040S` : Deletes the module CS2040S if present from the list of modules taken
 
    * `exit` : Exits the app.
@@ -94,7 +94,7 @@ Format: `delete m/MODULE`
 
 Examples:
 
-* `delete GEA1000` 
+* `delete GEA1000`
 
 
 

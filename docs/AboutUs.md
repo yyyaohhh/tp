@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/rocketninja7.png" width="200px">
 
 [[github](https://github.com/rocketninja7)]
-[[portfolio](team/andrewyapp.md)]
+[[portfolio](team/rocketninja7.md)]
 
 - Role: Project Advisor
 
@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wong Ji Kean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ji-just-ji.png" width="200px">
 
 [[github](http://github.com/ji-just-ji)]
 [[portfolio](team/johndoe.md)]
@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Huan Yaohong
 
-<img src="images/yh.jpg" width="200px">
+<img src="images/yyyaohhh.png" width="200px">
 
 [[github](http://github.com/yyyaohhh)]
 [[portfolio](team/yyyaohhh.md)]

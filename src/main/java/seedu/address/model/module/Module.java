@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Module {
     // Identity fields
-    private final Name name;
+    private final ModuleName moduleName;
     private final ModuleCode moduleCode;
 
     // Data fields
@@ -25,10 +25,10 @@ public class Module {
      * Every field must be present and not null.
      */
     public Module(
-            Name name, ModuleCode moduleCode, Description description, List<Lecturer> lecturers,
+            ModuleName name, ModuleCode moduleCode, Description description, List<Lecturer> lecturers,
             Year yearTaken, Semester semesterTaken, Grade grade, ModularCredit modularCredit) {
-        requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade, modularCredit);
-        this.name = name;
+        requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade);
+        this.moduleName = name;
         this.moduleCode = moduleCode;
         this.description = description;
         this.lecturers = lecturers;
@@ -37,9 +37,21 @@ public class Module {
         this.grade = grade;
         this.modularCredit = modularCredit;
     }
+    public Module(ModuleCode moduleCode, Year year, Semester semester, Grade grade) {
+        requireAllNonNull(moduleCode, year, semester, grade);
+        this.moduleCode = moduleCode;
+        this.yearTaken = year;
+        this.semesterTaken = semester;
+        this.grade = grade;
+        // Temporary until we get back-end setup
+        this.moduleName = null;
+        this.description = null;
+        this.lecturers = null;
+        this.modularCredit = null;
+    }
 
-    public Name getName() {
-        return name;
+    public ModuleName getName() {
+        return moduleName;
     }
 
     public ModuleCode getModuleCode() {
