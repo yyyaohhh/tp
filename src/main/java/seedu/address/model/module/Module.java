@@ -19,14 +19,15 @@ public class Module {
     private final Year yearTaken;
     private final Semester semesterTaken;
     private final Grade grade;
+    private final ModularCredit modularCredit;
 
     /**
      * Every field must be present and not null.
      */
     public Module(
             Name name, ModuleCode moduleCode, Description description, List<Lecturer> lecturers,
-            Year yearTaken, Semester semesterTaken, Grade grade) {
-        requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade);
+            Year yearTaken, Semester semesterTaken, Grade grade, ModularCredit modularCredit) {
+        requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade, modularCredit);
         this.name = name;
         this.moduleCode = moduleCode;
         this.description = description;
@@ -34,6 +35,7 @@ public class Module {
         this.yearTaken = yearTaken;
         this.semesterTaken = semesterTaken;
         this.grade = grade;
+        this.modularCredit = modularCredit;
     }
 
     public Name getName() {
@@ -62,6 +64,10 @@ public class Module {
 
     public Grade getGrade() {
         return grade;
+    }
+
+    public ModularCredit getModularCredit() {
+        return modularCredit;
     }
 
     /**
