@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wong Ji Kean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ji-just-ji.png" width="200px">
 
 [[github](http://github.com/ji-just-ji)]
 [[portfolio](team/johndoe.md)]
