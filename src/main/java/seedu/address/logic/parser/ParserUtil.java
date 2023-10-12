@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Year;
 import seedu.address.model.module.Semester;
@@ -166,25 +167,4 @@ public class ParserUtil {
         }
         return new Grade(trimmedGrade);
     }
-
-    //Not needed right?
-    public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new Name(trimmedName);
-    }
-
-    //Not needed right?
-    public static Description parseDescription(String description) throws ParseException {
-        requireNonNull(description);
-        String trimmedDescription = description.trim();
-        if(!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
-        }
-        return new Description(trimmedDescription);
-    }
-
 }
