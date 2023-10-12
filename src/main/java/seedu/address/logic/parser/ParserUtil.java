@@ -14,7 +14,7 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Year;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Grade;
-import seedu.address.model.module.Name;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Description;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
