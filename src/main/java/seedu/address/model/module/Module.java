@@ -3,6 +3,7 @@ package seedu.address.model.module;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a Module in the system.
@@ -15,7 +16,7 @@ public class Module {
 
     // Data fields
     private final Description description;
-    private final List<Lecturer> lecturers;
+    private final Set<Lecturer> lecturers;
     private final Year yearTaken;
     private final Semester semesterTaken;
     private final Grade grade;
@@ -24,9 +25,8 @@ public class Module {
     /**
      * Every field must be present and not null.
      */
-    public Module(
-            ModuleName name, ModuleCode moduleCode, Description description, List<Lecturer> lecturers,
-            Year yearTaken, Semester semesterTaken, Grade grade, ModularCredit modularCredit) {
+    public  Module(ModuleCode moduleCode, Year yearTaken, Semester semesterTaken, Grade grade, ModuleName name,
+                   Description description, Set<Lecturer> lecturers, ModularCredit modularCredit) {
         requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade);
         this.moduleName = name;
         this.moduleCode = moduleCode;
@@ -62,7 +62,7 @@ public class Module {
         return description;
     }
 
-    public List<Lecturer> getLecturers() {
+    public Set<Lecturer> getLecturers() {
         return lecturers;
     }
 
