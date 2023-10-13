@@ -34,9 +34,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
-        ModuleCode code = ParserUtil.parseCode(argMultimap.getValue(PREFIX_CODE).get());
+        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
         Year year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
-        Semester semester = ParserUtil.parseSem(argMultimap.getValue(PREFIX_SEMESTER).get());
+        Semester semester = ParserUtil.parseSemester(argMultimap.getValue(PREFIX_SEMESTER).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
 
         Module module = new Module(code, year, semester, grade);
