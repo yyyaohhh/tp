@@ -84,6 +84,17 @@ public class UniqueModuleList implements Iterable<Module> {
         internalList.setAll(replacement.internalList);
     }
 
+    public Module find(ModuleCode code) {
+        Module[] mods = new Module[internalList.size()];
+        mods = internalList.toArray(mods);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (mods[i].getModuleCode().equals(code)) {
+                return mods[i];
+            }
+        }
+        throw new ModuleNotFoundException();
+    }
+
     /**
      * Replaces the contents of this list with {@code modules}.
      * {@code modules} must not contain duplicate modules.
