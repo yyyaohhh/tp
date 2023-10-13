@@ -79,9 +79,33 @@ public class UniqueModuleList implements Iterable<Module> {
         }
     }
 
+    /**
+     * Replaces the modules in the internal list with the modules from the provided `UniqueModuleList`.
+     *
+     * @param replacement The `UniqueModuleList` containing the modules to replace the internal list.
+     * @throws NullPointerException If the provided replacement is null.
+     */
     public void setModules(UniqueModuleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Finds and returns the module with the specified module code.
+     *
+     * @param code The module code to search for.
+     * @return The module with the specified code.
+     * @throws ModuleNotFoundException If no module with the given code is found.
+     */
+    public Module find(ModuleCode code) {
+        Module[] mods = new Module[internalList.size()];
+        mods = internalList.toArray(mods);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (mods[i].getModuleCode().equals(code)) {
+                return mods[i];
+            }
+        }
+        throw new ModuleNotFoundException();
     }
 
     /**

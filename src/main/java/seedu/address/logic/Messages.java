@@ -61,5 +61,4 @@ public class Messages {
                 .append(module.getGrade());
         return builder.toString();
     }
-
 }

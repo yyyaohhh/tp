@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
@@ -76,7 +78,15 @@ public interface Model {
      */
     void setModule(Module target, Module editedPerson);
 
-    /** Returns an unmodifiable view of the filtered module list */
+    /**
+     * Finds and returns a module using its module code.
+     *
+     * @param code The module code used to search for the module.
+     * @return The module with the specified module code, or null if not found.
+     */
+    Module findModuleUsingCode(ModuleCode code);
+
+    /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Module> getFilteredModuleList();
 
     /**

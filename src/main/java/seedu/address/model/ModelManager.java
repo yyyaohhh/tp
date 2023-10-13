@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -94,6 +96,7 @@ public class ModelManager implements Model {
         return addressBook.hasModule(module);
     }
 
+    @Override
     public void deleteModule(Module module) {
         requireNonNull(module);
         addressBook.removeModule(module);
@@ -112,7 +115,13 @@ public class ModelManager implements Model {
         addressBook.setModule(target, editedModule);
     }
 
-    //=========== Filtered Module List Accessors =============================================================
+    @Override
+    public Module findModuleUsingCode(ModuleCode code) {
+        requireAllNonNull(code);
+        return addressBook.findUsingCode(code);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of

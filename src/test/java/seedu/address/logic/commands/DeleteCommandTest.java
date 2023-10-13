@@ -17,7 +17,10 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ModuleBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,14 +32,15 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Module moduleToDelete = new ModuleBuilder().withCode("CS2030S").build();
+        ModuleCode code = moduleToDelete.getModuleCode();
+        DeleteCommand deleteCommand = new DeleteCommand(code);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
+                Messages.format(moduleToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteModule(moduleToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -81,14 +85,18 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        Module cs2030s = new ModuleBuilder().withCode("CS2030S").build();
+        Module cs2040s = new ModuleBuilder().withCode("CS2040S").build();
+        ModuleCode firstCode = cs2030s.getModuleCode();
+        ModuleCode secondCode = cs2040s.getModuleCode();
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstCode);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondCode);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstCode);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -103,9 +111,10 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        Module cs2030s = new ModuleBuilder().withCode("CS2030S").build();
+        ModuleCode code = cs2030s.getModuleCode();
+        DeleteCommand deleteCommand = new DeleteCommand(code);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetModule=" + code + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
@@ -113,8 +122,8 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        model.updateFilteredModuleList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredModuleList().isEmpty());
     }
 }

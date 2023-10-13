@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.UniqueModuleList;
 
 /**
@@ -76,8 +77,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         modules.add(m);
     }
 
-
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -97,6 +96,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         modules.setModules(target, editedModule);
     }
 
+    /**
+     * Finds and returns a module using its module code from the internal list of modules.
+     *
+     * @param code The module code to search for.
+     * @return The module with the specified module code, or null if not found.
+     * @throws NullPointerException If the provided module code is null.
+     */
+    public Module findUsingCode(ModuleCode code) {
+        requireNonNull(code);
+        return modules.find(code);
+    }
 
 
     //// util methods
