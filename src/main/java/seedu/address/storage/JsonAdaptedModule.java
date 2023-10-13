@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.*;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,17 +26,21 @@ public class JsonAdaptedModule {
     private final String name;
     private final String description;
     private final List<JsonAdaptedLecturer> lecturers = new ArrayList<>();
+    private final String modularCredit;
 
     /**
      * Constructs a {@code JsonAdaptedModule} with the given module details.
      */
 
     @JsonCreator
-    public JsonAdaptedModule(@JsonProperty("code") String code, @JsonProperty("year") String year,
-                             @JsonProperty("sem") String sem, @JsonProperty("grade") String grade,
+    public JsonAdaptedModule(@JsonProperty("code") String code, 
+                             @JsonProperty("year") String year,
+                             @JsonProperty("sem") String sem, 
+                             @JsonProperty("grade") String grade,
                              @JsonProperty("name") String name,
                              @JsonProperty("description") String description,
-                             @JsonProperty("lecturers") List<JsonAdaptedLecturer> lecturers) {
+                             @JsonProperty("lecturers") List<JsonAdaptedLecturer> lecturers,
+                             @JsonProperty("modularCredit") String modularCredit) {
         this.code = code;
         this.year = year;
         this.sem = sem;
@@ -48,6 +50,7 @@ public class JsonAdaptedModule {
         if (lecturers != null) {
             this.lecturers.addAll(lecturers);
         }
+        this.modularCredit = modularCredit;
     }
     /**
      * Converts a given {@code Module} into this class for Jackson use.
@@ -62,18 +65,15 @@ public class JsonAdaptedModule {
         lecturers.addAll(source.getLecturers().stream()
                 .map(JsonAdaptedLecturer::new)
                 .collect(Collectors.toList()));
+        modularCredit = source.getModularCredit().toString();
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted module object into the model's {@code Module} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted module.
      */
     public Module toModelType() throws IllegalValueException {
-        final List<Lecturer> moduleLecturers = new ArrayList<>();
-        for (JsonAdaptedLecturer lecturer : lecturers) {
-            moduleLecturers.add(lecturer.toModelType());
-        }
 
         if (code == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
@@ -82,7 +82,6 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
         final ModuleCode modelCode = new ModuleCode(code);
-
 
         if (year == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Year.class.getSimpleName()));
@@ -123,9 +122,22 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
+        
+        final List<Lecturer> moduleLecturers = new ArrayList<>();
+        for (JsonAdaptedLecturer lecturer : lecturers) {
+            moduleLecturers.add(lecturer.toModelType());
+        }
+
+        if(modularCredit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
+        }
+        if (!ModularCredit.isValidModularCredit(modularCredit)) {
+            throw new IllegalValueException(ModularCredit.MESSAGE_CONSTRAINTS);
+        }
+        final ModularCredit modelModularCredit = new ModularCredit(modularCredit);
 
         final Set<Lecturer> modelLecturer = new HashSet<>(moduleLecturers);
-        return new Module(modelCode, modelYear, modelSem, modelGrade, modelName, modelDescription, modelLecturer);
+        return new Module(modelCode, modelYear, modelSem, modelGrade, modelName, modelDescription, modelLecturer, modelModularCredit);
     }
 
 }
