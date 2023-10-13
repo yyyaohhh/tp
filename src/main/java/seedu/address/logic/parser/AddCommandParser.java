@@ -33,7 +33,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor( PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
         ModuleCode code = ParserUtil.parseCode(argMultimap.getValue(PREFIX_CODE).get());
         Year year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
         Semester semester = ParserUtil.parseSem(argMultimap.getValue(PREFIX_SEMESTER).get());
