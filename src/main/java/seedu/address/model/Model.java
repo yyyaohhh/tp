@@ -78,6 +78,12 @@ public interface Model {
      */
     void setModule(Module target, Module editedPerson);
 
+    /**
+     * Finds and returns a module using its module code.
+     *
+     * @param code The module code used to search for the module.
+     * @return The module with the specified module code, or null if not found.
+     */
     Module findModuleUsingCode(ModuleCode code);
 
     /** Returns an unmodifiable view of the filtered person list */

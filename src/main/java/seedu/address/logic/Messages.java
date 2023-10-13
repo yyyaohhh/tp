@@ -49,6 +49,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code module} for display to the user.
+     */
     public static String format(Module module) {
         final StringBuilder builder = new StringBuilder();
         builder.append((module.getModuleCode()))
@@ -58,5 +61,4 @@ public class Messages {
                 .append(module.getGrade());
         return builder.toString();
     }
-
 }
