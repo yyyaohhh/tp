@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="cardPane" fx:id="modulePlanCardPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane VBox.vgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+         </columnConstraints>
+         <children>
+            <VBox alignment="TOP_CENTER" minHeight="105" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="5" left="15" right="5" top="5" />
+               </padding>
+               <children>
+                  <Label fx:id="semester" styleClass="cell_big_label" text="\$semester">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <FlowPane fx:id="modules" alignment="TOP_CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefWrapLength="100.0" rowValignment="TOP" vgap="5.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</VBox>
