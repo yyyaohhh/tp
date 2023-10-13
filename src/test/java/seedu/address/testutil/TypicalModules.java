@@ -27,6 +27,19 @@ public class TypicalModules {
             .withYear("1")
             .withSem("2")
             .withGrade("B+").build();
+
+    // Manually added
+    public static final Module CS2101 = new ModuleBuilder()
+            .withCode("MA2001")
+            .withYear("2")
+            .withSem("1")
+            .withGrade("IP").build();
+
+    public static final Module GEA1000 = new ModuleBuilder()
+            .withCode("GEA1000")
+            .withYear("1")
+            .withSem("1")
+            .withGrade("A+").build();
     //Add more
 
     private TypicalModules() {}
