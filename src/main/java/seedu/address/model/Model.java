@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
@@ -54,34 +53,34 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the address book.
      */
-
     boolean hasModule(Module module);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given module.
+     * The module must exist in the address book.
      */
     void deleteModule(Module module);
+
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given module.
+     * {@code module} must not already exist in the address book.
      */
     void addModule(Module module);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given module {@code target} with {@code editedModule}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     void setModule(Module target, Module editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered module list */
     ObservableList<Module> getFilteredModuleList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered module list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredModuleList(Predicate<Module> predicate);
