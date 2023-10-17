@@ -3,6 +3,7 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.awt.datatransfer.FlavorEvent;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -92,6 +93,10 @@ public class Grade {
     @Override
     public String toString() {
         return grade.getGrade();
+    }
+
+    public Float gradePoint() {
+        return grade.getGradePoint();
     }
 
     @Override

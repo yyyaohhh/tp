@@ -18,7 +18,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            ModuleCode code = ParserUtil.parseModuleCode(args);
+            ModuleCode code = ParserUtil.parseCode(args);
             return new DeleteCommand(code);
 
         } catch (ParseException pe) {

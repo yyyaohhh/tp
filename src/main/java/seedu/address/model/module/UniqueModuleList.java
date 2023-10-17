@@ -109,6 +109,36 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
+     * Calculates and returns the total modular credits of all modules in the internal list.
+     *
+     * @return The total modular credits of all modules in the internal list.
+     */
+    public int modularCredits() {
+        Module[] mods = new Module[internalList.size()];
+        mods = internalList.toArray(mods);
+        int modularCredits = 0;
+        for (int i = 0; i < internalList.size(); i++) {
+            modularCredits += mods[i].getModularCredit().hashCode();
+        }
+        return modularCredits;
+    }
+
+    /**
+     * Calculates and returns the total grade points weighted by the modular credits of all modules in the internal list.
+     *
+     * @return The total grade points weighted by modular credits as a floating-point number.
+     */
+    public Float gradePointsWithUnits() {
+        Module[] mods = new Module[internalList.size()];
+        mods = internalList.toArray(mods);
+        float gradePoints = 0;
+        for (int i = 0; i < internalList.size(); i++) {
+            gradePoints += mods[i].getGrade().gradePoint() * mods[i].getModularCredit().hashCode();
+        }
+        return gradePoints;
+    }
+
+    /**
      * Replaces the contents of this list with {@code modules}.
      * {@code modules} must not contain duplicate modules.
      */
