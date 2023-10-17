@@ -10,7 +10,6 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 
-
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
