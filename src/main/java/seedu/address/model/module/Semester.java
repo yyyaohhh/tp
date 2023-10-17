@@ -40,7 +40,7 @@ public class Semester {
     }
 
     /**
-     * Returns true if a given string is a valid year.
+     * Returns true if a given string is a valid semester.
      */
     public static boolean isValidSemester(String test) {
         try {

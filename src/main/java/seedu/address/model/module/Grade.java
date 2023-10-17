@@ -58,6 +58,10 @@ public class Grade {
         public String getGrade() {
             return this.grade;
         }
+
+        public Float getGradePoint() {
+            return this.gradePoint;
+        }
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Grade should only be the following: "
@@ -68,9 +72,9 @@ public class Grade {
     private final GradeEnum grade;
 
     /**
-     * Constructs a {@code Lecturer}.
+     * Constructs a {@code Grade}.
      *
-     * @param grade A valid lecturer's name.
+     * @param grade A valid grade.
      */
     public Grade(String grade) {
         requireNonNull(grade);

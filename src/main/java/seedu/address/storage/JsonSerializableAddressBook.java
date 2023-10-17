@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.Person;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,11 +21,10 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given modules.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("module") List<JsonAdaptedModule> modules) {

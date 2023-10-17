@@ -9,13 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
+import seedu.address.model.module.Description;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Year;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Grade;
-import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.Description;
+import seedu.address.model.module.ModularCredit;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
@@ -48,7 +49,6 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    /*
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -57,8 +57,6 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
-
-     */
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -132,15 +130,27 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static ModuleCode parseCode(String code) throws ParseException {
-        requireNonNull(code);
-        String trimmedCode = code.trim();
+    /**
+     * Parses a {@code String moduleCode} into an {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedCode = moduleCode.trim();
         if (!ModuleCode.isValidModuleCode(trimmedCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
         return new ModuleCode(trimmedCode);
     }
 
+    /**
+     * Parses a {@code String year} into an {@code Year}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code year} is invalid.
+     */
     public static Year parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
@@ -150,15 +160,27 @@ public class ParserUtil {
         return new Year(trimmedYear);
     }
 
-    public static Semester parseSem(String sem) throws ParseException {
-        requireNonNull(sem);
-        String trimmedSem = sem.trim();
-        if (!Semester.isValidSemester(trimmedSem)) {
+    /**
+     * Parses a {@code String semester} into an {@code Semester}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code semester} is invalid.
+     */
+    public static Semester parseSemester(String semester) throws ParseException {
+        requireNonNull(semester);
+        String trimmedSemester = semester.trim();
+        if (!Semester.isValidSemester(trimmedSemester)) {
             throw new ParseException(Semester.MESSAGE_CONSTRAINTS);
         }
-        return new Semester(trimmedSem);
+        return new Semester(trimmedSemester);
     }
 
+    /**
+     * Parses a {@code String grade} into an {@code Grade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
     public static Grade parseGrade(String grade) throws ParseException {
         requireNonNull(grade);
         String trimmedGrade = grade.trim();
@@ -166,5 +188,50 @@ public class ParserUtil {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
         return new Grade(trimmedGrade);
+    }
+
+    /**
+     * Parses a {@code String moduleName} into an {@code ModuleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleName} is invalid.
+     */
+    public static ModuleName parseModuleName(String moduleName) throws ParseException {
+        requireNonNull(moduleName);
+        String trimmedModuleName = moduleName.trim();
+        if (!ModuleName.isValidName(trimmedModuleName)) {
+            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleName(trimmedModuleName);
+    }
+
+    /**
+     * Parses a {@code String description} into an {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String modularCredit} into an {@code ModularCredit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code modularCredit} is invalid.
+     */
+    public static ModularCredit parseModularCredit(String modularCredit) throws ParseException {
+        requireNonNull(modularCredit);
+        String trimmedModularCredit = modularCredit.trim();
+        if (!ModularCredit.isValidModularCredit(trimmedModularCredit)) {
+            throw new ParseException(ModularCredit.MESSAGE_CONSTRAINTS);
+        }
+        return new ModularCredit(trimmedModularCredit);
     }
 }
