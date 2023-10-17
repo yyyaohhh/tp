@@ -16,5 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_YEAR = new Prefix("y/");
     public static final Prefix PREFIX_SEMESTER = new Prefix("s/");
     public static final Prefix PREFIX_GRADE = new Prefix("g/");
+    public static final Prefix PREFIX_FUNCTION = new Prefix("f/");
 
 }
