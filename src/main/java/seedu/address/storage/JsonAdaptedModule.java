@@ -1,17 +1,24 @@
 package seedu.address.storage;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.module.*;
-import seedu.address.model.module.Module;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.Grade;
+import seedu.address.model.module.Lecturer;
+import seedu.address.model.module.ModularCredit;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
 
 /**
  * Jackson-friendly version of {@link Module}.
@@ -76,7 +83,8 @@ public class JsonAdaptedModule {
     public Module toModelType() throws IllegalValueException {
 
         if (code == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
         if (!ModuleCode.isValidModuleCode(code)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
@@ -92,7 +100,8 @@ public class JsonAdaptedModule {
         final Year modelYear = new Year(year);
 
         if (sem == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Semester.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Semester.class.getSimpleName()));
         }
         if (!Semester.isValidSemester(sem)) {
             throw new IllegalValueException(Semester.MESSAGE_CONSTRAINTS);
@@ -107,8 +116,9 @@ public class JsonAdaptedModule {
         }
         final Grade modelGrade = new Grade(grade);
 
-        if(name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
+        if (name == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
         if (!ModuleName.isValidName(name)) {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
@@ -116,9 +126,10 @@ public class JsonAdaptedModule {
         final ModuleName modelName = new ModuleName(name);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if(!Description.isValidDescription(description)) {
+        if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
@@ -128,8 +139,9 @@ public class JsonAdaptedModule {
             moduleLecturers.add(lecturer.toModelType());
         }
 
-        if(modularCredit == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
+        if (modularCredit == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
         }
         if (!ModularCredit.isValidModularCredit(modularCredit)) {
             throw new IllegalValueException(ModularCredit.MESSAGE_CONSTRAINTS);
@@ -137,7 +149,8 @@ public class JsonAdaptedModule {
         final ModularCredit modelModularCredit = new ModularCredit(modularCredit);
 
         final Set<Lecturer> modelLecturer = new HashSet<>(moduleLecturers);
-        return new Module(modelCode, modelYear, modelSem, modelGrade, modelName, modelDescription, modelLecturer, modelModularCredit);
+        return new Module(modelCode, modelYear, modelSem, modelGrade, modelName, modelDescription,
+                modelLecturer, modelModularCredit);
     }
 
 }

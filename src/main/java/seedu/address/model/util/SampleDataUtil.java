@@ -35,7 +35,7 @@ public class SampleDataUtil {
 
             new Module(new ModuleCode("CS2101"), new Year("2"), new Semester("1"), new Grade("A-"),
                 new ModuleName("Effective Communication for Computing Professionals"),
-                new Description("Introduces the necessary conceptual and analytic tools for systematic and rigorous development of software systems."),
+                new Description("Equips students with the skills needed to communicate technical information."),
                 Set.of(new Lecturer("Lee Bu Sung")), new ModularCredit("4")),
         };
     }

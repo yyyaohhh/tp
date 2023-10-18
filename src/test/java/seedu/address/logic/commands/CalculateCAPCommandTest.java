@@ -12,9 +12,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalModules;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for CalculateCAPCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for CalculateCapCommand.
  */
-public class CalculateCAPCommandTest {
+public class CalculateCapCommandTest {
 
     private Model model;
     private Model expectedModel;

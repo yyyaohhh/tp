@@ -7,11 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,8 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
-        }
-        else {
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),
                     new ParseException(MESSAGE_INVALID_MODULE_CODE));

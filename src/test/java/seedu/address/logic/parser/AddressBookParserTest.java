@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CalculateCAPCommand;
-import seedu.address.logic.commands.CalculateMCCommand;
+import seedu.address.logic.commands.CalculateCapCommand;
+import seedu.address.logic.commands.CalculateMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -90,13 +90,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_calculateCAP() throws Exception {
-        assertTrue(parser.parseCommand(CalculateCAPCommand.COMMAND_WORD) instanceof CalculateCAPCommand);
+    public void parseCommand_calculateCap() throws Exception {
+        assertTrue(parser.parseCommand(CalculateCapCommand.COMMAND_WORD) instanceof CalculateCapCommand);
     }
 
     @Test
-    public void parseCommand_calculateMC() throws Exception {
-        assertTrue(parser.parseCommand(CalculateMCCommand.COMMAND_WORD) instanceof CalculateMCCommand);
+    public void parseCommand_calculateMc() throws Exception {
+        assertTrue(parser.parseCommand(CalculateMcCommand.COMMAND_WORD) instanceof CalculateMcCommand);
     }
 
     @Test

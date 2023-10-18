@@ -3,6 +3,9 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the number of Modular Credits a Module is worth.
+ */
 public class ModularCredit {
     public static final String MESSAGE_CONSTRAINTS = "Modular credits should be a non-negative integer.";
 

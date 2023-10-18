@@ -12,9 +12,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalModules;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for CalculateMCCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for CalculateMcCommand.
  */
-public class CalculateMCCommandTest {
+public class CalculateMcCommandTest {
     private Model model;
     private Model expectedModel;
     @BeforeEach
