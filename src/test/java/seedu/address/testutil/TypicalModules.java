@@ -3,6 +3,10 @@ package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
+import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ModulePlanSemester;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,8 +59,22 @@ public class TypicalModules {
         return ab;
     }
 
+    public static ModulePlan getTypicalModulePlan() {
+        ModulePlan mp = new ModulePlan();
+
+        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("SEMESTER_1")));
+        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("SEMESTER_2")));
+        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("SEMESTER_1")));
+        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("SEMESTER_2")));
+
+        for (Module module : getTypicalModules()) {
+            mp.addModule(module);
+        }
+        return mp;
+    }
+
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001));
+        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2101, GEA1000));
     }
 
 }

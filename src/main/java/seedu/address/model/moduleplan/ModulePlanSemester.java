@@ -1,6 +1,7 @@
 package seedu.address.model.moduleplan;
 
 
+import javafx.collections.ObservableList;
 import seedu.address.model.module.*;
 import seedu.address.model.module.Module;
 
@@ -36,7 +37,6 @@ public class ModulePlanSemester {
         this.year =  year;
         this.semester = semester;
     }
-
 
 
 
@@ -125,6 +125,10 @@ public class ModulePlanSemester {
             return true;
         }
         return false;
+    }
+
+    public ObservableList<Module> getModuleList() {
+        return modules.asUnmodifiableObservableList();
     }
 
 }
