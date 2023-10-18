@@ -57,6 +57,25 @@ public class ModulePlan implements ReadOnlyModulePlan {
         this.semesters.setSemesters(modules);
     }
 
+    /**
+     * Adds a new semester to the module plan.
+     *
+     * @param semester The semester to be added.
+     */
+    public void addSemester(ModulePlanSemester semester) {
+        this.semesters.addSemester(semester);
+    }
+
+    /**
+     * Removes a semester from the module plan.
+     *
+     * @param semester The semester to be removed.
+     */
+    public void removeSemester(ModulePlanSemester semester) {
+        this.semesters.removeSemester(semester);
+    }
+
+
     //// module-level operations
 
     /**

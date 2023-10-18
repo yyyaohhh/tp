@@ -15,6 +15,9 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
+import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ModulePlanSemester;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,19 +26,19 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Module[] getSampleModules() {
         return new Module[] {
-            new Module(new ModuleCode("CS1231S"), new Year("1"), new Semester("1"), new Grade("A+"),
+            new Module(new ModuleCode("CS1231S"), new Year("1"), new Semester("SEMESTER_1"), new Grade("A+"),
                 new ModuleName("Discrete Structures"), 
-                new Description("Introduces mathematical tools required the study of Computer Science."), 
+                new Description("Introduces mathematical tools required the study of Computer Science"),
                 Set.of(new Lecturer("Aaron Tan")), new ModularCredit("4")),
 
-            new Module(new ModuleCode("CS2040S"), new Year("1"), new Semester("2"), new Grade("A"),
+            new Module(new ModuleCode("CS2040S"), new Year("1"), new Semester("SEMESTER_2"), new Grade("A"),
                 new ModuleName("Data Structures and Algorithms"), 
-                new Description("Covers the design and implementation of efficient data structures and algorithms."), 
+                new Description("Covers the design and implementation of efficient data structures and algorithms"),
                 Set.of(new Lecturer("Tan Sun Teck")), new ModularCredit("4")),
 
-            new Module(new ModuleCode("CS2101"), new Year("2"), new Semester("1"), new Grade("A-"),
+            new Module(new ModuleCode("CS2101"), new Year("2"), new Semester("SEMESTER_1"), new Grade("A-"),
                 new ModuleName("Effective Communication for Computing Professionals"), 
-                new Description("Introduces the necessary conceptual and analytic tools for systematic and rigorous development of software systems."), 
+                new Description("Introduces the necessary conceptual and analytic tools for systematic and rigorous development of software systems"),
                 Set.of(new Lecturer("Lee Bu Sung")), new ModularCredit("4")),
         };
     }
@@ -46,6 +49,21 @@ public class SampleDataUtil {
             sampleAb.addModule(sampleModule);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyModulePlan getSampleModulePlan() {
+        ModulePlan sampleMp = new ModulePlan();
+
+        sampleMp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("SEMESTER_1")));
+        sampleMp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("SEMESTER_2")));
+        sampleMp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("SEMESTER_1")));
+        sampleMp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("SEMESTER_2")));
+
+        for (Module sampleModule : getSampleModules()) {
+            sampleMp.addModule(sampleModule);
+        }
+
+        return sampleMp;
     }
 
     /**
