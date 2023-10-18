@@ -10,8 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.Semester;
-import seedu.address.model.module.Year;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
 import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
@@ -19,8 +17,9 @@ import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
 
 /**
  * A list of semesters that enforces uniqueness between its elements and does not allow nulls.
- * A semester is considered unique by comparing using {@code ModulePlanSemester#equals(ModulePlanSemester)}. As such, adding and updating of
- * module uses ModulePlanSemester#equals(ModulePlanSemester) for equality so as to ensure that the semester being added or updated is
+ * A semester is considered unique by comparing using {@code ModulePlanSemester#equals(ModulePlanSemester)}.
+ * As such, adding and updating of module uses ModulePlanSemester#equals(ModulePlanSemester)
+ * for equality so as to ensure that the semester being added or updated is
  * unique in terms of identity in the ModulePlanSemesterList.
  *
  * Supports a minimal set of list operations.
@@ -44,7 +43,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     }
 
     /**
-     * Replaces the semesters in the internal list with the semesters from the provided `UniModulePlanSemesterListqueModuleList`.
+     * Replaces the semesters in the internal list with the semesters from
+     * the provided `UniModulePlanSemesterListqueModuleList`.
      *
      * @param replacement The `ModulePlanSemesterList` containing the semesters to replace the internal list.
      * @throws NullPointerException If the provided replacement is null.
@@ -72,7 +72,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void addSemester(ModulePlanSemester semester) {
         requireNonNull(semester);
 
-        if(containsSemester(semester)) {
+        if (containsSemester(semester)) {
             throw new DuplicateSemesterException();
         }
         internalList.add(semester);
@@ -87,7 +87,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void removeSemester(ModulePlanSemester semester) {
         requireNonNull(semester);
 
-        if(!containsSemester(semester)) {
+        if (!containsSemester(semester)) {
             throw new SemesterNotFoundException();
         }
         internalList.remove(semester);
@@ -187,7 +187,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     }
 
     /**
-     * Calculates and returns the total modular credits of all modules in the internal list.
+     * Calculates the total modular credits of all modules in the internal list.
      *
      * @return The total modular credits of all modules in the internal list.
      */
@@ -200,7 +200,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     }
 
     /**
-     * Calculates and returns the total grade points weighted by the modular credits of all modules in the internal list.
+     * Calculates the total grade points weighted by the modular credits of all modules in the internal list.
      *
      * @return The total grade points weighted by modular credits as a floating-point number.
      */
@@ -254,7 +254,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     private int findSemester(Module m) {
         for (int i = 0; i < internalList.size(); i++) {
-            if(internalList.get(i).checkModuleInSemester(m)) {
+            if (internalList.get(i).checkModuleInSemester(m)) {
                 return i;
             }
         }

@@ -24,7 +24,7 @@ public class Module {
     /**
      * Every field must be present and not null.
      */
-    public  Module(ModuleCode moduleCode, Year yearTaken, Semester semesterTaken, Grade grade, ModuleName name,
+    public Module(ModuleCode moduleCode, Year yearTaken, Semester semesterTaken, Grade grade, ModuleName name,
                    Description description, Set<Lecturer> lecturers, ModularCredit modularCredit) {
         requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade);
         this.moduleName = name;
@@ -36,6 +36,10 @@ public class Module {
         this.grade = grade;
         this.modularCredit = modularCredit;
     }
+
+    /**
+     * Constructs a {@code Module} with only user input fields.
+     */
     public Module(ModuleCode moduleCode, Year year, Semester semester, Grade grade) {
         requireAllNonNull(moduleCode, year, semester, grade);
         this.moduleCode = moduleCode;

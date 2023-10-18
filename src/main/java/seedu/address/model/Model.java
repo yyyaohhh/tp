@@ -9,7 +9,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.

@@ -69,17 +69,6 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
-     * Removes the equivalent module from the list.
-     * The module must exist in the list.
-     */
-    public void remove(Module toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new ModuleNotFoundException();
-        }
-    }
-
-    /**
      * Replaces the modules in the internal list with the modules from the provided `UniqueModuleList`.
      *
      * @param replacement The `UniqueModuleList` containing the modules to replace the internal list.
@@ -88,6 +77,30 @@ public class UniqueModuleList implements Iterable<Module> {
     public void setModules(UniqueModuleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code modules}.
+     * {@code modules} must not contain duplicate modules.
+     */
+    public void setModules(List<Module> modules) {
+        requireAllNonNull(modules);
+        if (!modulesAreUnique(modules)) {
+            throw new DuplicateModuleException();
+        }
+
+        internalList.setAll(modules);
+    }
+
+    /**
+     * Removes the equivalent module from the list.
+     * The module must exist in the list.
+     */
+    public void remove(Module toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new ModuleNotFoundException();
+        }
     }
 
     /**
@@ -108,7 +121,7 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
-     * Calculates and returns the total modular credits of all modules in the internal list.
+     * Calculates the total modular credits of all modules in the internal list.
      *
      * @return The total modular credits of all modules in the internal list.
      */
@@ -123,7 +136,7 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
-     * Calculates and returns the total grade points weighted by the modular credits of all modules in the internal list.
+     * Calculates the total grade points weighted by the modular credits of all modules in the internal list.
      *
      * @return The total grade points weighted by modular credits as a floating-point number.
      */
@@ -135,19 +148,6 @@ public class UniqueModuleList implements Iterable<Module> {
             gradePoints += mods[i].getGrade().gradePoint() * mods[i].getModularCredit().hashCode();
         }
         return gradePoints;
-    }
-
-    /**
-     * Replaces the contents of this list with {@code modules}.
-     * {@code modules} must not contain duplicate modules.
-     */
-    public void setModules(List<Module> modules) {
-        requireAllNonNull(modules);
-        if (!modulesAreUnique(modules)) {
-            throw new DuplicateModuleException();
-        }
-
-        internalList.setAll(modules);
     }
 
     /**

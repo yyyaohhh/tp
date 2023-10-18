@@ -6,9 +6,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Calculates the user's CAP from each module's grade.
  */
-public class CalculateCAPCommand extends Command {
+public class CalculateCapCommand extends Command {
 
     public static final String COMMAND_WORD = "calculateCAP";
     public static final String MESSAGE_CALCULATION_SUCCESS = "Calculated value: %1$s";
@@ -19,10 +19,10 @@ public class CalculateCAPCommand extends Command {
 
         int modularCredits = model.totalModularCredits();
 
-        Float gradePointsByUnits  = model.totalGradePointsByUnits();
+        Float gradePointsByUnits = model.totalGradePointsByUnits();
 
-        Float calculatedCAPValue = gradePointsByUnits / modularCredits;
+        Float calculatedCapValue = gradePointsByUnits / modularCredits;
 
-        return new CommandResult(String.format(MESSAGE_CALCULATION_SUCCESS, calculatedCAPValue));
+        return new CommandResult(String.format(MESSAGE_CALCULATION_SUCCESS, calculatedCapValue));
     }
 }

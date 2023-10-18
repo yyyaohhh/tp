@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CalculateCAPCommand;
-import seedu.address.logic.commands.CalculateMCCommand;
+import seedu.address.logic.commands.CalculateCapCommand;
+import seedu.address.logic.commands.CalculateMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -18,6 +18,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.InfoCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -55,40 +56,43 @@ public class ModulePlanParser {
 
         switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
-                return new AddCommandParser().parse(arguments);
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
+        case InfoCommand.COMMAND_WORD:
+            return new InfoCommandParser().parse(arguments);
 
-            case FindCommand.COMMAND_WORD:
-                return new FindCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case CalculateCAPCommand.COMMAND_WORD:
-                return new CalculateCAPCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case CalculateMCCommand.COMMAND_WORD:
-                return new CalculateMCCommand();
+        case CalculateCapCommand.COMMAND_WORD:
+            return new CalculateCapCommand();
+
+        case CalculateMcCommand.COMMAND_WORD:
+            return new CalculateMcCommand();
 
 
-            default:
-                logger.finer("This user input caused a ParseException: " + userInput);
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            logger.finer("This user input caused a ParseException: " + userInput);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

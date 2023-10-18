@@ -1,13 +1,16 @@
 package seedu.address.model.moduleplan;
 
-
-import javafx.collections.ObservableList;
-import seedu.address.model.module.*;
-import seedu.address.model.module.Module;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.module.Year;
+
 
 /**
  * A semester of the Module Plan timetable.
@@ -34,11 +37,9 @@ public class ModulePlanSemester {
      * Wraps all data at the Module Plan semester level.
      */
     public ModulePlanSemester(Year year, Semester semester) {
-        this.year =  year;
+        this.year = year;
         this.semester = semester;
     }
-
-
 
     /**
      * Replaces the contents of the module list with {@code modules}.
@@ -105,7 +106,7 @@ public class ModulePlanSemester {
     /**
      * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
+     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
      */
     public Float totalGradePointsByUnits() {
         return modules.gradePointsWithUnits();
@@ -132,7 +133,7 @@ public class ModulePlanSemester {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Year " + year.toString() + " " + semester.toString();
     }
 

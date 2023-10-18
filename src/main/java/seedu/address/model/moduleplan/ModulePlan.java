@@ -137,7 +137,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
     /**
      * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
+     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
      */
     public Float totalGradePointsByUnits() {
         return semesters.gradePointsWithUnits();

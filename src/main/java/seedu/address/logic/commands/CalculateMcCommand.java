@@ -5,7 +5,11 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-public class CalculateMCCommand extends Command {
+/**
+ * Calculates the user's total modular credits from their modules taken.
+ */
+public class CalculateMcCommand extends Command {
+
     public static final String COMMAND_WORD = "calculateMC";
     public static final String MESSAGE_CALCULATION_SUCCESS = "Calculated value: %1$s";
 

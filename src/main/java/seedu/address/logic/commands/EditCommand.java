@@ -5,14 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -20,11 +15,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Grade;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
-import seedu.address.model.module.Module;
-import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Edits the details of an existing person in the address book.
