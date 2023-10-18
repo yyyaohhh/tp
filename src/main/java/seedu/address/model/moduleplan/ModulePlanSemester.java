@@ -131,4 +131,9 @@ public class ModulePlanSemester {
         return modules.asUnmodifiableObservableList();
     }
 
+    @Override
+    public String toString(){
+        return "Year " + year.toString() + " " + semester.toString();
+    }
+
 }

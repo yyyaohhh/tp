@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-
+import seedu.address.model.moduleplan.ModulePlanSemester;
 
 
 public class ModulePlanCard extends UiPart<Region> {
@@ -18,8 +18,7 @@ public class ModulePlanCard extends UiPart<Region> {
     private static final String FXML = "ModulePlanCard.fxml";
 
 
-    //TODO uncomment when ModulePlan is added.
-    //public final ModulePlan modulePlanSemester;
+    public final ModulePlanSemester modulePlanSemester;
 
     @FXML
     private VBox modulePlanCardPane;
@@ -33,27 +32,14 @@ public class ModulePlanCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ModulePlanCard(String semester) {
+    public ModulePlanCard(ModulePlanSemester modulePlanSemester) {
         super(FXML);
 
-        //Placeholder text
-        this.semester.setText(semester);
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
-        modules.getChildren().add(new Label("CS2103"));
+        this.modulePlanSemester = modulePlanSemester;
 
+        semester.setText(this.modulePlanSemester.toString());
 
-        //TODO
-//        this.modulePlanSemester = modulePlanSemester;
-//        modulePlanSemester.getTags().stream()
-//                .sorted(Comparator.comparing(tag -> tag.tagName))
-//                .forEach(tag -> modules.getChildren().add(new Label(tag.tagName)));
+        modulePlanSemester.getModuleList().stream()
+                .forEach(module -> modules.getChildren().add(new Label(module.getModuleCode().toString())));
     }
 }

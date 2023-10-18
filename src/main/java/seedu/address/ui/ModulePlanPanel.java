@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,35 +21,31 @@ public class ModulePlanPanel extends UiPart<Region> {
 
     //TODO modify class.
     @FXML
-    private ListView<String> modulePlanView;
+    private ListView<ModulePlanSemester> modulePlanView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public ModulePlanPanel(/*ObservableList<ModulePlan> modulePlan*/) {
+    public ModulePlanPanel(ObservableList<ModulePlanSemester> modulePlan) {
         super(FXML);
 
-        //Placeholder values
-        ObservableList<String> items = FXCollections.observableArrayList("Y1S1", "Y1S2", "Y2S1", "Y2S2", "Y3S1", "Y3S2", "Y4S1", "Y4S2");
-
-        modulePlanView.setItems(items);
+        modulePlanView.setItems(modulePlan);
         modulePlanView.setCellFactory(listView -> new ModulePlanViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class ModulePlanViewCell extends ListCell<String> {
+    class ModulePlanViewCell extends ListCell<ModulePlanSemester> {
         @Override
-        protected void updateItem(String string, boolean empty) {
-            super.updateItem(string, empty);
+        protected void updateItem(ModulePlanSemester semester, boolean empty) {
+            super.updateItem(semester, empty);
 
-            if (empty || string == null) {
+            if (empty || semester == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                //Todo change constructor params
-                ModulePlanCard m = new ModulePlanCard(string);
+                ModulePlanCard m = new ModulePlanCard(semester);
                 setGraphic(m.getRoot());
             }
         }

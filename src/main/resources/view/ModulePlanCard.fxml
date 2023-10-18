@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="cardPane" fx:id="modulePlanCardPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="cardPane" fx:id="modulePlanCardPane" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane VBox.vgrow="ALWAYS">
          <columnConstraints>
@@ -21,7 +21,7 @@
                   <Insets bottom="5" left="15" right="5" top="5" />
                </padding>
                <children>
-                  <Label fx:id="semester" styleClass="cell_big_label" text="\$semester">
+                  <Label fx:id="semester" styleClass="cell_big_label" text="\$semester" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
