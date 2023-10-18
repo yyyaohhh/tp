@@ -103,11 +103,11 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public boolean containsModule(Module toCheck) {
         requireNonNull(toCheck);
         for (ModulePlanSemester m : internalList) {
-            if (!m.hasModule(toCheck)) {
-                return false;
+            if (m.hasModule(toCheck)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
