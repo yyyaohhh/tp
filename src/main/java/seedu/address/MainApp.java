@@ -21,6 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -75,20 +76,23 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
-        }
+//        Optional<ReadOnlyAddressBook> addressBookOptional;
+//        ReadOnlyAddressBook initialData;
+//        try {
+//            addressBookOptional = storage.readAddressBook();
+//            if (!addressBookOptional.isPresent()) {
+//                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+//                        + " populated with a sample AddressBook.");
+//            }
+//            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+//        } catch (DataLoadingException e) {
+//            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+//                    + " Will be starting with an empty AddressBook.");
+//            initialData = new AddressBook();
+//        }
+
+        //TODO implement loading from storage for ModulePlan.
+        ReadOnlyModulePlan initialData = SampleDataUtil.getSampleModulePlan();
 
         return new ModelManager(initialData, userPrefs);
     }

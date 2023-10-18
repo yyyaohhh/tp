@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.moduleplan.ModulePlanSemester;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,10 +51,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setModulePlan(ReadOnlyModulePlan modulePlan);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyModulePlan getModulePlan();
 
     /**
      * Returns true if a module with the same identity as {@code module} exists in the address book.
@@ -101,11 +103,6 @@ public interface Model {
     Float totalGradePointsByUnits();
 
     /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Module> getFilteredModuleList();
+    ObservableList<ModulePlanSemester> getFilteredModuleList();
 
-    /**
-     * Updates the filter of the filtered module list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredModuleList(Predicate<Module> predicate);
 }
