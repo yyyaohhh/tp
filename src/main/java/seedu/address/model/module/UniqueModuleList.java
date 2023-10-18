@@ -95,7 +95,6 @@ public class UniqueModuleList implements Iterable<Module> {
      *
      * @param code The module code to search for.
      * @return The module with the specified code.
-     * @throws ModuleNotFoundException If no module with the given code is found.
      */
     public Module find(ModuleCode code) {
         Module[] mods = new Module[internalList.size()];
