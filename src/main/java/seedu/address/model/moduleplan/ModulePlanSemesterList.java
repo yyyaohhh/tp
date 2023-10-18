@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
 import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
@@ -121,6 +123,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         }
 
         internalList.get(index).addModule(toAdd);
+        refreshList(index);
     }
 
     /**
@@ -143,6 +146,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         }
 
         internalList.get(indexTarget).setModule(target, editedModule);
+        refreshList(indexTarget);
+
     }
 
     /**
@@ -158,6 +163,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new ModuleNotFoundException();
         }
         internalList.get(index).removeModule(toRemove);
+        refreshList(index);
+
     }
 
 
@@ -252,6 +259,11 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             }
         }
         return -1;
+    }
+
+    private void refreshList(int index) {
+        ModulePlanSemester temp = internalList.get(index);
+        internalList.set(index, temp);
     }
 
 }

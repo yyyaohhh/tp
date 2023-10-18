@@ -21,7 +21,7 @@
                   <Insets bottom="5" left="15" right="5" top="5" />
                </padding>
                <children>
-                  <Label fx:id="semester" styleClass="cell_big_label" text="\$semester">
+                  <Label fx:id="semester" styleClass="cell_big_label" text="\$semester" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
