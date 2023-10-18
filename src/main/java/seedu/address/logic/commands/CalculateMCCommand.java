@@ -6,7 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class CalculateMCCommand extends Command {
-    public static final String COMMAND_WORD = "calculate MC";
+    public static final String COMMAND_WORD = "calculateMC";
     public static final String MESSAGE_CALCULATION_SUCCESS = "Calculated value: %1$s";
 
     @Override
