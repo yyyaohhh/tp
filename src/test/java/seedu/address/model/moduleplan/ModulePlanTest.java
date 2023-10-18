@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.moduleplan;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -85,7 +85,7 @@ public class ModulePlanTest {
         Module editedCS2040S = new ModuleBuilder()
                 .withCode("CS2040S")
                 .withYear("1")
-                .withSem("1")
+                .withSem("SEMESTER_1")
                 .withGrade("B-").build();
 
         assertTrue(modulePlan.hasModule(editedCS2040S));
