@@ -105,7 +105,7 @@ public class UniqueModuleList implements Iterable<Module> {
                 return mods[i];
             }
         }
-        throw new ModuleNotFoundException();
+        return null;
     }
 
     /**
