@@ -121,6 +121,16 @@ public class ModelManager implements Model {
         return addressBook.findUsingCode(code);
     }
 
+    @Override
+    public int totalModularCredits() {
+        return addressBook.totalModularCredits();
+    }
+
+    @Override
+    public Float totalGradePointsByUnits() {
+        return addressBook.totalGradePointsByUnits();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
