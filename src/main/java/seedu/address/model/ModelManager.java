@@ -4,15 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ModulePlanSemester;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,25 +21,23 @@ import seedu.address.model.module.ModuleCode;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ModulePlan modulePlan;
     private final UserPrefs userPrefs;
-    private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(modulePlan, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredModules = new FilteredList<>(this.addressBook.getModuleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ModulePlan(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -76,58 +75,57 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ModulePlan ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+        this.modulePlan.resetData(modulePlan);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyModulePlan getModulePlan() {
+        return modulePlan;
     }
 
 
     @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
-        return addressBook.hasModule(module);
+        return modulePlan.hasModule(module);
     }
 
     @Override
     public void deleteModule(Module module) {
         requireNonNull(module);
-        addressBook.removeModule(module);
+        modulePlan.removeModule(module);
     }
     @Override
     public void addModule(Module module) {
         requireNonNull(module);
-        addressBook.addModule(module);
-        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+        modulePlan.addModule(module);
     }
 
 
     @Override
     public void setModule(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
-        addressBook.setModule(target, editedModule);
+        modulePlan.setModule(target, editedModule);
     }
 
     @Override
     public Module findModuleUsingCode(ModuleCode code) {
         requireAllNonNull(code);
-        return addressBook.findUsingCode(code);
+        return modulePlan.findUsingCode(code);
     }
 
     @Override
     public int totalModularCredits() {
-        return addressBook.totalModularCredits();
+        return modulePlan.totalModularCredits();
     }
 
     @Override
     public Float totalGradePointsByUnits() {
-        return addressBook.totalGradePointsByUnits();
+        return modulePlan.totalGradePointsByUnits();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -137,15 +135,10 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Module> getFilteredModuleList() {
-        return filteredModules;
+    public ObservableList<ModulePlanSemester> getFilteredModuleList() {
+        return modulePlan.getModulePlanSemesterList();
     }
 
-    @Override
-    public void updateFilteredModuleList(Predicate<Module> predicate) {
-        requireNonNull(predicate);
-        filteredModules.setPredicate(predicate);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -159,9 +152,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredModules.equals(otherModelManager.filteredModules);
+        return modulePlan.equals(otherModelManager.modulePlan)
+                && userPrefs.equals(otherModelManager.userPrefs);
     }
 
 }

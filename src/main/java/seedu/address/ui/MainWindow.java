@@ -120,8 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        //TODO
-        ModulePlanPanel modulePlanPanel = new ModulePlanPanel();
+        ModulePlanPanel modulePlanPanel = new ModulePlanPanel(logic.getFilteredModuleList());
         modulePlanPlaceholder.getChildren().add(modulePlanPanel.getRoot());
     }
 

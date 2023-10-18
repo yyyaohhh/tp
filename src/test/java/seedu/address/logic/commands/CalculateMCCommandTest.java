@@ -19,8 +19,8 @@ public class CalculateMcCommandTest {
     private Model expectedModel;
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalModules.getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs());
+        expectedModel = new ModelManager(model.getModulePlan(), new UserPrefs());
     }
 
 

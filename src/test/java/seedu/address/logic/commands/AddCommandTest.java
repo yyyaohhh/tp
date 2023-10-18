@@ -23,6 +23,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ModulePlanSemester;
+import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.testutil.ModuleBuilder;
 
 public class AddCommandTest {
@@ -116,19 +120,20 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyModulePlan getModulePlan() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addModule(Module module) {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public boolean hasModule(Module module) {
@@ -146,12 +151,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Module> getFilteredModuleList() {
+        public Module findModuleUsingCode(ModuleCode code) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredModuleList(Predicate<Module> predicate) {
+        public int totalModularCredits() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Float totalGradePointsByUnits() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ModulePlanSemester> getFilteredModuleList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -193,8 +208,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyModulePlan getModulePlan() {
+            return new ModulePlan();
         }
     }
 

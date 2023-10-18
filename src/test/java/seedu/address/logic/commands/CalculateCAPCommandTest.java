@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalModules.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,8 @@ public class CalculateCapCommandTest {
     private Model expectedModel;
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalModules.getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalModulePlan(), new UserPrefs());
+        expectedModel = new ModelManager(model.getModulePlan(), new UserPrefs());
     }
 
 }
