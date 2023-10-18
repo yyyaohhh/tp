@@ -9,8 +9,11 @@ import org.junit.jupiter.api.Test;
 public class ModuleCodeTest {
     @Test
     public void constructor_invalidModuleCode_throwsIllegalArgumentException() {
-        String invalidModuleCode = "";
-        assertThrows(IllegalArgumentException.class, () -> new ModuleCode(invalidModuleCode));
+        String invalidModuleCodeEmpty = "";
+        assertThrows(IllegalArgumentException.class, () -> new ModuleCode(invalidModuleCodeEmpty));
+
+        String invalidModuleCodeLower = "cs2040s";
+        assertThrows(IllegalArgumentException.class, () -> new ModuleCode(invalidModuleCodeLower));
     }
 
     @Test
