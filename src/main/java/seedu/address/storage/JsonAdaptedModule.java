@@ -33,9 +33,9 @@ public class JsonAdaptedModule {
      */
 
     @JsonCreator
-    public JsonAdaptedModule(@JsonProperty("code") String code, 
+    public JsonAdaptedModule(@JsonProperty("code") String code,
                              @JsonProperty("year") String year,
-                             @JsonProperty("sem") String sem, 
+                             @JsonProperty("sem") String sem,
                              @JsonProperty("grade") String grade,
                              @JsonProperty("name") String name,
                              @JsonProperty("description") String description,
@@ -122,7 +122,7 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
-        
+
         final List<Lecturer> moduleLecturers = new ArrayList<>();
         for (JsonAdaptedLecturer lecturer : lecturers) {
             moduleLecturers.add(lecturer.toModelType());
