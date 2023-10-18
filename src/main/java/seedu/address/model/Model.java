@@ -86,6 +86,20 @@ public interface Model {
      */
     Module findModuleUsingCode(ModuleCode code);
 
+    /**
+     * Calculates and returns the total modular credits of all modules in the address book.
+     *
+     * @return The total modular credits of all modules in the address book.
+     */
+    int totalModularCredits();
+
+    /**
+     * Calculates and returns the total grade points weighted by modular credits of all modules.
+     *
+     * @return The total grade points weighted by modular credits as a floating-point number.
+     */
+    Float totalGradePointsByUnits();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Module> getFilteredModuleList();
 

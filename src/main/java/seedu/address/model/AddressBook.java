@@ -108,6 +108,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         return modules.find(code);
     }
 
+    /**
+     * Calculates and returns the total modular credits of all modules in the collection.
+     *
+     * @return The total modular credits of all modules in the collection.
+     */
+    public int totalModularCredits() {
+        return modules.modularCredits();
+    }
+
+    /**
+     * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
+     *
+     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
+     */
+    public Float totalGradePointsByUnits() {
+        return modules.gradePointsWithUnits();
+    }
 
     //// util methods
 

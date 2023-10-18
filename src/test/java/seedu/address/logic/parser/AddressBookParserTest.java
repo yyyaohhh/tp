@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalModules.CS2030S;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,20 +14,21 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CalculateCAPCommand;
+import seedu.address.logic.commands.CalculateMCCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.testutil.ModuleBuilder;
+import seedu.address.testutil.ModuleUtil;
 
 public class AddressBookParserTest {
 
@@ -35,9 +36,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Module module = new ModuleBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ModuleUtil.getAddCommand(module));
+        assertEquals(new AddCommand(module), command);
     }
 
     @Test
@@ -49,17 +50,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + CS2030S);
+        assertEquals(new DeleteCommand(CS2030S.getModuleCode()), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Module module = new ModuleBuilder().build();
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + CS2030S + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(CS2030S, descriptor), command);
     }
 
     @Test
@@ -86,6 +87,16 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_calculateCAP() throws Exception {
+        assertTrue(parser.parseCommand(CalculateCAPCommand.COMMAND_WORD) instanceof CalculateCAPCommand);
+    }
+
+    @Test
+    public void parseCommand_calculateMC() throws Exception {
+        assertTrue(parser.parseCommand(CalculateMCCommand.COMMAND_WORD) instanceof CalculateMCCommand);
     }
 
     @Test
