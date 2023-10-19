@@ -38,7 +38,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CODE + "CS2103T "
             + PREFIX_YEAR + "2 "
-            + PREFIX_SEMESTER + "1 "
+            + PREFIX_SEMESTER + "SEMESTER_1 "
             + PREFIX_GRADE + "IP";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";

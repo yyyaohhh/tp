@@ -56,7 +56,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append((module.getModuleCode()))
                 .append("; Semester: ")
-                .append("Y" + module.getYearTaken() + "S" + module.getSemesterTaken())
+                .append("Y" + module.getYearTaken() + " " + module.getSemesterTaken())
                 .append("; Grade: ")
                 .append(module.getGrade());
         return builder.toString();

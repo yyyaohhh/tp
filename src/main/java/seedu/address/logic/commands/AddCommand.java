@@ -24,11 +24,11 @@ public class AddCommand extends Command {
             + PREFIX_CODE + "Code "
             + PREFIX_YEAR + "Year "
             + PREFIX_SEMESTER + "Semester "
-            + PREFIX_GRADE + "Grade "
+            + PREFIX_GRADE + "Grade \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CODE + "CS2103T "
             + PREFIX_YEAR + "2 "
-            + PREFIX_SEMESTER + "1 "
+            + PREFIX_SEMESTER + "SEMESTER_1 "
             + PREFIX_GRADE + "B ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
