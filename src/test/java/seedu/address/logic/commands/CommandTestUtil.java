@@ -41,27 +41,27 @@ public class CommandTestUtil {
     public static final String VALID_GRADE_CS2040S = "A-";
     public static final String VALID_GRADE_CS2101 = "IP";
 
-    public static final String YEAR_DESC_1 = " " + PREFIX_YEAR + VALID_YEAR_CS2040S;
-    public static final String YEAR_DESC_2 = " " + PREFIX_YEAR + VALID_YEAR_CS2101;
-    public static final String SEMESTER_DESC_1 = " " + PREFIX_SEMESTER + VALID_SEMESTER_CS2040S;
-    public static final String SEMESTER_DESC_2 = " " + PREFIX_SEMESTER + VALID_SEMESTER_CS2101;
-    public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_CS2040S;
-    public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_CS2101;
+    public static final String YEAR_DESC_CS2040S = " " + PREFIX_YEAR + VALID_YEAR_CS2040S;
+    public static final String YEAR_DESC_CS2101 = " " + PREFIX_YEAR + VALID_YEAR_CS2101;
+    public static final String SEMESTER_DESC_CS2040S = " " + PREFIX_SEMESTER + VALID_SEMESTER_CS2040S;
+    public static final String SEMESTER_DESC_CS2101 = " " + PREFIX_SEMESTER + VALID_SEMESTER_CS2101;
+    public static final String GRADE_DESC_CS2040S = " " + PREFIX_GRADE + VALID_GRADE_CS2040S;
+    public static final String GRADE_DESC_CS2101 = " " + PREFIX_GRADE + VALID_GRADE_CS2101;
 
     public static final String INVALID_YEAR_DESC = " " + PREFIX_YEAR + "-1"; // '-' not allowed in names
-    public static final String INVALID_SEMESTER_DESC = " " + PREFIX_SEMESTER + "1"; // invalid semester enum
+    public static final String INVALID_SEMESTER_DESC = " " + PREFIX_SEMESTER + "0"; // invalid semester enum
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "ab"; // invalid grade enum
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditModuleDescriptor DESC_1;
-    public static final EditCommand.EditModuleDescriptor DESC_2;
+    public static final EditCommand.EditModuleDescriptor DESC_CS2040S;
+    public static final EditCommand.EditModuleDescriptor DESC_CS2101;
 
     static {
-        DESC_1 = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2040S)
+        DESC_CS2040S = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2040S)
                 .withSemester(VALID_SEMESTER_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
-        DESC_2 = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2101)
+        DESC_CS2101 = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2101)
                 .withSemester(VALID_SEMESTER_CS2101).withGrade(VALID_GRADE_CS2101).build();
     }
 

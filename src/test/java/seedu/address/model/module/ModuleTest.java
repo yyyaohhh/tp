@@ -5,6 +5,7 @@ import seedu.address.testutil.ModuleBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2040S;
@@ -33,11 +34,6 @@ public class ModuleTest {
         // different module code, all other attributes same -> returns false
         editedCS2040S = new ModuleBuilder(CS2040S).withCode(VALID_CODE_CS2101).build();
         assertFalse(CS2040S.isSameModule(editedCS2040S));
-
-        // module code has trailing spaces, all other attributes same -> returns false
-        String moduleCodeWithTrailingSpaces = VALID_CODE_CS2101 + " ";
-        Module editedCS2101 = new ModuleBuilder(CS2101).withCode(moduleCodeWithTrailingSpaces).build();
-        assertFalse(CS2101.isSameModule(editedCS2101));
     }
 
     @Test

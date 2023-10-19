@@ -36,6 +36,11 @@ public class EditModuleDescriptorBuilder {
     /**
      * Sets the {@code Year} of the {@code EditModuleDescriptor} that we are building.
      */
+
+
+    /**
+     * Sets the {@code Year} of the {@code EditModuleDescriptor} that we are building.
+     */
     public EditModuleDescriptorBuilder withYear(String year) {
         descriptor.setYear(new Year(year));
         return this;

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2040S;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2030S;
 
@@ -26,7 +27,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditModuleDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModuleUtil;
 
@@ -59,8 +62,8 @@ public class AddressBookParserTest {
         Module module = new ModuleBuilder().build();
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + CS2030S + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(CS2030S, descriptor), command);
+                + CS2030S.getModuleCode() + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(CS2030S.getModuleCode(), descriptor), command);
     }
 
     @Test

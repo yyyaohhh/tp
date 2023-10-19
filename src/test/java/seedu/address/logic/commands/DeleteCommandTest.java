@@ -27,7 +27,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Module moduleToDelete = new ModuleBuilder().withCode("CS2030S").build();
+        Module moduleToDelete = new ModuleBuilder().withCode("CS2040S").build();
         ModuleCode code = moduleToDelete.getModuleCode();
         DeleteCommand deleteCommand = new DeleteCommand(code);
 
@@ -72,7 +72,7 @@ public class DeleteCommandTest {
         Module cs2030s = new ModuleBuilder().withCode("CS2030S").build();
         ModuleCode code = cs2030s.getModuleCode();
         DeleteCommand deleteCommand = new DeleteCommand(code);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetModule=" + code + "}";
+        String expected = DeleteCommand.class.getCanonicalName() + "{toDelete=" + code + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
