@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidYear(String)}
  */
 public class Year {
-    public static final String MESSAGE_CONSTRAINTS = "Year should only contain 4 digits.";
+    public static final String MESSAGE_CONSTRAINTS = "Year should only contain a number from 0 to 6.";
 
     public static final String VALIDATION_REGEX = "^[0-6]$";
 

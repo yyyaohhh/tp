@@ -127,9 +127,9 @@ public class EditCommand extends Command {
          * Copy constructor.
          */
         public EditModuleDescriptor(EditModuleDescriptor toCopy) {
-            setYear(year);
-            setSemester(semester);
-            setGrade(grade);
+            setYear(toCopy.year);
+            setSemester(toCopy.semester);
+            setGrade(toCopy.grade);
         }
 
         /**

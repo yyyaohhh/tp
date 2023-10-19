@@ -34,7 +34,7 @@ public class TypicalModules {
 
     // Manually added
     public static final Module CS2101 = new ModuleBuilder()
-            .withCode("MA2001")
+            .withCode("CS2101")
             .withYear("2")
             .withSem("SEMESTER_1")
             .withGrade("IP").build();

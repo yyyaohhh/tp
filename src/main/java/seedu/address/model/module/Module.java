@@ -1,5 +1,7 @@
 package seedu.address.model.module;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
@@ -110,6 +112,19 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return isSameModule(otherModule);
+        return this.moduleCode.equals(otherModule.moduleCode)
+                && this.yearTaken.equals(otherModule.yearTaken)
+                && this.semesterTaken.equals(otherModule.semesterTaken)
+                && this.grade.equals(otherModule.grade);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("moduleCode", moduleCode)
+                .add("year", yearTaken)
+                .add("semester", semesterTaken)
+                .add("grade", grade)
+                .toString();
     }
 }
