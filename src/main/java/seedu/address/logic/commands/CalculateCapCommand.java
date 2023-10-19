@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class CalculateCapCommand extends Command {
 
     public static final String COMMAND_WORD = "calculateCAP";
-    public static final String MESSAGE_CALCULATION_SUCCESS = "Calculated value: %1$s";
+    public static final String MESSAGE_CALCULATION_SUCCESS = "Calculated CAP: %1$s";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
