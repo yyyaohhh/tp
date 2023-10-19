@@ -34,8 +34,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         ModuleCode moduleCode;
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
 
-        if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
-            moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
+        if (!argMultimap.getPreamble().isEmpty()) {
+            moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),

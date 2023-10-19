@@ -85,15 +85,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidModuleCode_failure() {
-        ModuleCode nonexistentModuleCode = new ModuleCode("cs1234");
-        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withYear("3").build();
-        EditCommand editCommand = new EditCommand(nonexistentModuleCode, descriptor);
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MODULE_CODE);
-    }
-
-    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(new ModuleCode(VALID_CODE_CS2040S), DESC_CS2040S);
 

@@ -141,6 +141,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new ModuleNotFoundException();
         }
 
+        // TODO: Check if this is correct
         if (indexTarget != indexEdit) {
             throw new ModuleNotFoundException();
         }
