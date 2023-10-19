@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.Parser;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
@@ -39,6 +40,9 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void setSemesters(List<ModulePlanSemester> semesters) {
         requireAllNonNull(semesters);
 
+        if (!semestersAreUnique(semesters)) {
+            throw new DuplicateSemesterException();
+        }
         internalList.setAll(semesters);
     }
 
@@ -51,6 +55,10 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     public void setSemesters(ModulePlanSemesterList replacement) {
         requireNonNull(replacement);
+
+        if (!semestersAreUnique(replacement.internalList)) {
+            throw new DuplicateSemesterException();
+        }
         internalList.setAll(replacement.internalList);
     }
 
@@ -141,13 +149,15 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new ModuleNotFoundException();
         }
 
-        // TODO: Check if this is correct
-        if (indexTarget != indexEdit) {
-            throw new ModuleNotFoundException();
+        if (indexTarget == indexEdit) {
+            internalList.get(indexTarget).setModule(target, editedModule);
+            refreshList(indexTarget);
+        } else {
+            internalList.get(indexTarget).removeModule(target);
+            internalList.get(indexEdit).addModule(editedModule);
+            refreshList(indexTarget);
+            refreshList(indexEdit);
         }
-
-        internalList.get(indexTarget).setModule(target, editedModule);
-        refreshList(indexTarget);
 
     }
 
@@ -238,8 +248,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             return false;
         }
 
-        ModulePlanSemesterList otherUniqueModuleList = (ModulePlanSemesterList) other;
-        return internalList.equals(otherUniqueModuleList.internalList);
+        ModulePlanSemesterList otherModulePlanSemesterList = (ModulePlanSemesterList) other;
+        return internalList.equals(otherModulePlanSemesterList.internalList);
     }
 
     @Override
@@ -265,6 +275,20 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     private void refreshList(int index) {
         ModulePlanSemester temp = internalList.get(index);
         internalList.set(index, temp);
+    }
+
+    /**
+     * Returns true if {@code msodules} contains only unique modules.
+     */
+    private boolean semestersAreUnique(List<ModulePlanSemester> semesters) {
+        for (int i = 0; i < semesters.size() - 1; i++) {
+            for (int j = i + 1; j < semesters.size(); j++) {
+                if (semesters.get(i).equals(semesters.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

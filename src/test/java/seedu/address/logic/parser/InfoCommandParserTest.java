@@ -20,7 +20,7 @@ public class InfoCommandParserTest {
         assertParseFailure(parser, "a1b2c3", MESSAGE_CONSTRAINTS);
 
         // Single word with non-alphanumeric characters
-        assertParseFailure(parser, "a_b\\c:e", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "a_b!!c:e", MESSAGE_CONSTRAINTS);
     }
 
     @Test

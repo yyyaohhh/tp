@@ -29,9 +29,9 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newModule_success() {
-        Module validModule = new ModuleBuilder().build();
+        Module validModule = new ModuleBuilder().withCode("CS3230").build();
 
-        Model expectedModel = new ModelManager((model.getModulePlan()), new UserPrefs());
+        Model expectedModel = new ModelManager((getTypicalModulePlan()), new UserPrefs());
         expectedModel.addModule(validModule);
 
         assertCommandSuccess(new AddCommand(validModule), model,
