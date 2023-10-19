@@ -137,4 +137,22 @@ public class ModulePlanSemester {
         return "Year " + year.toString() + " " + semester.toString();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModulePlanSemester)) {
+            return false;
+        }
+
+        ModulePlanSemester otherModulePlanSemester = (ModulePlanSemester) other;
+        boolean yearEquals = this.year.equals(otherModulePlanSemester.year);
+        boolean semesterEquals = this.semester.equals(otherModulePlanSemester.semester);
+
+        return yearEquals && semesterEquals;
+    }
+
 }

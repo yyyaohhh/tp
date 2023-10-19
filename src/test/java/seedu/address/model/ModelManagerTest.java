@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.moduleplan.ModulePlan;
+import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.testutil.TypicalModules;
 
 public class ModelManagerTest {
@@ -82,6 +84,9 @@ public class ModelManagerTest {
 
     @Test
     public void hasModule_moduleInModulePlan_returnsTrue() {
+        ModulePlanSemester m = new ModulePlanSemester(CS2101.getYearTaken(), CS2101.getSemesterTaken());
+        ModulePlan mp = (ModulePlan) modelManager.getModulePlan();
+        mp.addSemester(m);
         modelManager.addModule(CS2101);
         assertTrue(modelManager.hasModule(CS2101));
     }

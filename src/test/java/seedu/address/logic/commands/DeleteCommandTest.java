@@ -27,14 +27,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Module moduleToDelete = new ModuleBuilder().withCode("CS2040S").build();
+        Module moduleToDelete = TypicalModules.CS2040S;
         ModuleCode code = moduleToDelete.getModuleCode();
         DeleteCommand deleteCommand = new DeleteCommand(code);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
                 Messages.format(moduleToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getModulePlan(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

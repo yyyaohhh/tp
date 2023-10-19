@@ -33,9 +33,9 @@ import seedu.address.testutil.EditModuleDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModuleUtil;
 
-public class AddressBookParserTest {
+public class ModulePlanParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ModulePlanParser parser = new ModulePlanParser();
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -105,7 +105,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

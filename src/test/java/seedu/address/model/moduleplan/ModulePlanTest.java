@@ -75,12 +75,14 @@ public class ModulePlanTest {
 
     @Test
     public void hasModule_moduleInModulePlan_returnsTrue() {
+        modulePlan.addSemester(new ModulePlanSemester(CS2040S.getYearTaken(), CS2040S.getSemesterTaken()));
         modulePlan.addModule(CS2040S);
         assertTrue(modulePlan.hasModule(CS2040S));
     }
 
     @Test
     public void hasModule_moduleWithSameIdentityFieldsInModulePlan_returnsTrue() {
+        modulePlan.addSemester(new ModulePlanSemester(CS2040S.getYearTaken(), CS2040S.getSemesterTaken()));
         modulePlan.addModule(CS2040S);
         Module editedCS2040S = new ModuleBuilder()
                 .withCode("CS2040S")

@@ -23,6 +23,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2101;
 
 import org.junit.jupiter.api.Test;
@@ -40,22 +41,24 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Module expectedModule = new ModuleBuilder(CS2101).build();
-        String moduleCodeString = PREFIX_CODE + " " + expectedModule.getModuleCode();
+        Module expectedModule = new ModuleBuilder(CS2040S).build();
+        String moduleCodeString = " " + PREFIX_CODE + expectedModule.getModuleCode();
 
         // whitespace only preamble
 //        assertParseSuccess(parser, PREAMBLE_WHITESPACE + moduleCodeString + YEAR_DESC_CS2101
 //                + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101, new AddCommand(expectedModule));
 
+        System.out.println(moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
+                + GRADE_DESC_CS2040S);
 
         // no preamble
-        assertParseSuccess(parser, moduleCodeString + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101
-                + GRADE_DESC_CS2101, new AddCommand(expectedModule));
+        assertParseSuccess(parser, moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
+                + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedModuleString = PREFIX_CODE + " " + VALID_CODE_CS2101
+        String validExpectedModuleString = " " + PREFIX_CODE  + VALID_CODE_CS2101
                 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
 
         // multiple years
@@ -68,11 +71,11 @@ public class AddCommandParserTest {
 
         // multiple grades
         assertParseFailure(parser, GRADE_DESC_CS2101 + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedModuleString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
+                 YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
                         + validExpectedModuleString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
 
@@ -142,7 +145,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String moduleCodeString = PREFIX_CODE + " " + VALID_CODE_CS2101;
+        String moduleCodeString = " " + PREFIX_CODE + VALID_CODE_CS2101;
 
         // invalid year
         assertParseFailure(parser,
@@ -164,10 +167,12 @@ public class AddCommandParserTest {
                 moduleCodeString + INVALID_YEAR_DESC + SEMESTER_DESC_CS2101 + INVALID_GRADE_DESC,
                 Year.MESSAGE_CONSTRAINTS);
 
+
         // non-empty preamble
         assertParseFailure(parser,
-                moduleCodeString
-                + PREAMBLE_NON_EMPTY + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+                PREAMBLE_NON_EMPTY + moduleCodeString
+                 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
+
 }

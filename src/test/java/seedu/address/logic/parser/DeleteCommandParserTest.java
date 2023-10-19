@@ -22,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "CS2030", new DeleteCommand(CS2030S.getModuleCode()));
+        assertParseSuccess(parser, CS2030S.getModuleCode().toString(), new DeleteCommand(CS2030S.getModuleCode()));
     }
 
     @Test
