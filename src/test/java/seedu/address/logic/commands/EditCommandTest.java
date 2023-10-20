@@ -38,7 +38,7 @@ public class EditCommandTest {
         ModuleCode moduleCode = new ModuleCode(VALID_CODE_CS2040S);
         Module module = model.findModuleUsingCode(moduleCode);
 
-        Module editedModule = new ModuleBuilder().build();
+        Module editedModule = new ModuleBuilder().withCode(VALID_CODE_CS2040S).build();
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
         EditCommand editCommand = new EditCommand(moduleCode, descriptor);
