@@ -1,11 +1,7 @@
 package seedu.address.model.module;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.ModuleBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2040S;
@@ -16,6 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2101;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.testutil.ModuleBuilder;
 
 public class ModuleTest {
     @Test
@@ -39,8 +38,8 @@ public class ModuleTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Module CS2040SCopy = new ModuleBuilder(CS2040S).build();
-        assertTrue(CS2040S.equals(CS2040SCopy));
+        Module cS2040SCopy = new ModuleBuilder(CS2040S).build();
+        assertTrue(CS2040S.equals(cS2040SCopy));
 
         // same object -> returns true
         assertTrue(CS2040S.equals(CS2040S));

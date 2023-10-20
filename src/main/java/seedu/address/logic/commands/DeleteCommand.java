@@ -19,8 +19,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the module identified by the module code. \n"
-            + "Parameters: " + PREFIX_CODE + "code \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CODE + "CS2103T ";
+            + "Parameters: " + "code \n"
+            + "Example: " + COMMAND_WORD + " " + "CS2103T ";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
     public static final String MESSAGE_NOT_FOUND_MODULE = "This module is not found and has not been deleted.";

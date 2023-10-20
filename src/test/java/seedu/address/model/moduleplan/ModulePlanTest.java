@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.GEA1000;
 import static seedu.address.testutil.TypicalModules.CS2040S;
-
-
+import static seedu.address.testutil.TypicalModules.GEA1000;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,11 +19,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
-import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
-import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
-
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.TypicalModules;
 
@@ -100,8 +94,8 @@ public class ModulePlanTest {
 
     @Test
     public void toStringMethod() {
-//        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-//        assertEquals(expected, modulePlan.toString());
+        // String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        // assertEquals(expected, modulePlan.toString());
     }
 
     /**
