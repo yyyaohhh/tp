@@ -16,7 +16,7 @@ public class InfoCommandParser implements Parser<InfoCommand> {
 
     // Probably should be defined elsewhere
     // Pattern to check for single argument (no spaces)
-    private static final Pattern SINGLE_ARGUMENT_FORMAT = Pattern.compile("^[\\w/]+$");
+    private static final Pattern SINGLE_ARGUMENT_FORMAT = Pattern.compile("^[^\\s]+$");
 
     /**
      * Parses the given {@code String} of arguments in the context of the InfoCommand

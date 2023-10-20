@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.module.ModuleCode.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalModules.CS2030S;
 
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,14 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "2030", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_invalidSingleArg_throwsParseException() {
+        assertParseFailure(parser, "ab", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "2030s", MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidMultipleArgs_throwsParseException() {
+        assertParseFailure(parser, "a b", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "2030 s", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }

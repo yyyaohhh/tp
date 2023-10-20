@@ -15,7 +15,8 @@ public class InfoCommand extends Command {
     public static final String COMMAND_WORD = "info";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows information on the module identified by the module code. "
+            + ": Shows information on the module identified by the module code. \n"
+            + "Parameters: " + "code \n"
             + "Example: " + COMMAND_WORD + " " + "CS1101S ";
     public static final String MESSAGE_INFO_MODULE_SUCCESS = "%1$s: %2$s \n"
             + "%3$s \n"

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.InfoCommand.MESSAGE_USAGE;
 import org.junit.jupiter.api.Test;
 
 public class InfoCommandParserTest {
-    
+
     private InfoCommandParser parser = new InfoCommandParser();
 
     @Test
