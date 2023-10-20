@@ -1,10 +1,10 @@
 package seedu.address.model.module;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Module in the system.
