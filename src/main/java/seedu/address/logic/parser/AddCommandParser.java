@@ -41,13 +41,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Year year = null;
         Semester semester = null;
         Grade grade = null;
-        System.out.println("Printing");
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
         if (!argMultimap.getPreamble().isEmpty()) {
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         } else {
-            System.out.println("HELP");
-            System.out.println("HELP");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
                     new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
@@ -64,7 +61,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         if (year == null || semester == null || grade == null) {
-            System.out.println("Here2");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
                     new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
