@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -9,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Grade;
 import seedu.address.model.module.Module;
@@ -27,21 +29,43 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
+
+
+
+        ModuleCode moduleCode;
+        Year year = null;
+        Semester semester = null;
+        Grade grade = null;
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
+        if (!argMultimap.getPreamble().isEmpty()) {
+            moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
+                    new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
-        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
-        Year year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
-        Semester semester = ParserUtil.parseSemester(argMultimap.getValue(PREFIX_SEMESTER).get());
-        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
+        if (argMultimap.getValue(PREFIX_YEAR).isPresent()) {
+            year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
+        }
+        if (argMultimap.getValue(PREFIX_SEMESTER).isPresent()) {
+            semester = ParserUtil.parseSemester(argMultimap.getValue(PREFIX_SEMESTER).get());
+        }
+        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
+            grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
+        }
 
-        Module module = new Module(code, year, semester, grade);
+        if (year == null || semester == null || grade == null) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
+                    new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
+        }
+        Module module = new Module(moduleCode, year, semester, grade);
 
         return new AddCommand(module);
     }
