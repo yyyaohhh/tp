@@ -111,7 +111,7 @@ Examples:
 ### Calculating the total current CAP:
 Calculates the total current CAP of all modules stored in all years and semesters 
 using the formula:  
-$\frac{text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{text{total Modular Credits}}$.
+$\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
 
 Returns a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
