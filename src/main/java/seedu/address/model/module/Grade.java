@@ -16,7 +16,11 @@ public class Grade {
      * An enum to represent possible grades.
      */
     public enum GradeEnum {
-        // Based on https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system
+        // Based on the following:
+        // https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/
+        // modular-system
+        // https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/
+        // continuation-and-graduation-requirements
         A_PLUS("A+", 5.0f),
         A("A", 5.0f),
         A_MINUS("A-", 4.5f),
@@ -31,7 +35,12 @@ public class Grade {
         EXEMPTED("EXE", null),
         INCOMPLETE("IC", null),
         IN_PROGRESS("IP", null),
-        WITHDRAWN("W", null);
+        WITHDRAWN("W", null),
+        COMPLETED_SATISFACTORY("CS", null),
+        COMPLETED_UNSATISFACTORY("CU", null),
+        SATISFACTORY("S", null),
+        UNSATISFACTORY("U", null),
+        FUTURE("FUT", null);
 
         private final String grade;
         private final Float gradePoint;
