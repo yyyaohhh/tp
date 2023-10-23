@@ -15,15 +15,39 @@ public class Semester {
      * An enum to represent possible semesters.
      */
     public enum SemesterEnum {
-        SEMESTER_1,
-        SEMESTER_2,
-        SPECIAL_TERM_1,
-        SPECIAL_TERM_2;
+        SEMESTER_1("1"),
+        SEMESTER_2("2"),
+        SPECIAL_TERM_1("ST1"),
+        SPECIAL_TERM_2("ST2");
+
+        private final String semester;
+
+        SemesterEnum(String semester) {
+            this.semester = semester;
+        }
+
+        /**
+         * Converts a {@code String} to {@code SemesterEnum}
+         * @param semester The {@code String} representation of a semester.
+         * @return The corresponding {@code SemesterEnum}
+         */
+        public static SemesterEnum fromString(String semester) {
+            for (SemesterEnum semesterEnum: SemesterEnum.values()) {
+                if (semester.equals(semesterEnum.semester)) {
+                    return semesterEnum;
+                }
+            }
+            return null;
+        }
+
+        public String getSemester() {
+            return this.semester;
+        }
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Semester should only be the following: "
             + String.join(", ",
-            Arrays.stream(SemesterEnum.values()).map(SemesterEnum::toString)
+            Arrays.stream(SemesterEnum.values()).map(SemesterEnum::getSemester)
             .collect(Collectors.toList()));
 
     public final SemesterEnum semester;
@@ -36,24 +60,22 @@ public class Semester {
     public Semester(String semester) {
         requireNonNull(semester);
         checkArgument(isValidSemester(semester), MESSAGE_CONSTRAINTS);
-        this.semester = SemesterEnum.valueOf(semester);
+        this.semester = SemesterEnum.fromString(semester);
     }
 
     /**
      * Returns true if a given string is a valid semester.
      */
     public static boolean isValidSemester(String test) {
-        try {
-            SemesterEnum.valueOf(test);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        return SemesterEnum.fromString(test) != null;
     }
 
     @Override
     public String toString() {
-        return semester.toString();
+        if (semester.getSemester().matches("^[\\p{Digit}]+$")) {
+            return "S" + semester.getSemester();
+        }
+        return semester.getSemester();
     }
 
     @Override

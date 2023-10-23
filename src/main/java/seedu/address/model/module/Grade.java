@@ -39,8 +39,7 @@ public class Grade {
         COMPLETED_SATISFACTORY("CS", null),
         COMPLETED_UNSATISFACTORY("CU", null),
         SATISFACTORY("S", null),
-        UNSATISFACTORY("U", null),
-        FUTURE("FUT", null);
+        UNSATISFACTORY("U", null);
 
         private final String grade;
         private final Float gradePoint;
@@ -124,6 +123,6 @@ public class Grade {
 
     @Override
     public int hashCode() {
-        return grade.getGrade().hashCode();
+        return grade.hashCode();
     }
 }
