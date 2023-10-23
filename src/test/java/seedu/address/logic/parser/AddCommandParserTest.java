@@ -16,15 +16,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2101;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.testutil.TypicalModules.CS2101;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +29,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.module.Grade;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 import seedu.address.testutil.ModuleBuilder;
@@ -42,23 +40,23 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Module expectedModule = new ModuleBuilder(CS2040S).build();
-        String moduleCodeString = " " + PREFIX_CODE + expectedModule.getModuleCode();
+        String moduleCodeString = expectedModule.getModuleCode().toString();
 
         // whitespace only preamble
-//        assertParseSuccess(parser, PREAMBLE_WHITESPACE + moduleCodeString + YEAR_DESC_CS2101
-//                + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101, new AddCommand(expectedModule));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + moduleCodeString + YEAR_DESC_CS2040S
+                + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
 
         System.out.println(moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
                 + GRADE_DESC_CS2040S);
 
-        // no preamble
+        // no whitespace preamble
         assertParseSuccess(parser, moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
                 + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedModuleString = " " + PREFIX_CODE  + VALID_CODE_CS2101
+        String validExpectedModuleString = VALID_CODE_CS2101
                 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
 
         // multiple years
@@ -108,71 +106,59 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
     }
 
-//    @Test
-//    public void parse_optionalFieldsMissing_success() {
-//        // zero tags
-//        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-//        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-//                new AddCommand(expectedPerson));
-//    }
-
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
-        String moduleCodeString = PREFIX_CODE + " " + VALID_CODE_CS2101;
-
         // missing year prefix
         assertParseFailure(parser,
-                moduleCodeString + VALID_YEAR_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+                VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + " " + VALID_YEAR_CS2101 + GRADE_DESC_CS2101,
                 expectedMessage);
 
         // missing semester prefix
         assertParseFailure(parser,
-                moduleCodeString + YEAR_DESC_CS2101 + VALID_SEMESTER_CS2101 + GRADE_DESC_CS2101,
+                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + VALID_SEMESTER_CS2101 + GRADE_DESC_CS2101,
                 expectedMessage);
 
         // missing grade prefix
         assertParseFailure(parser,
-                moduleCodeString + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + VALID_GRADE_CS2101,
+                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + VALID_GRADE_CS2101,
                 expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser,
-                moduleCodeString + VALID_YEAR_CS2101 + VALID_SEMESTER_CS2101 + VALID_GRADE_CS2101,
+                VALID_CODE_CS2101 + VALID_YEAR_CS2101 + VALID_SEMESTER_CS2101 + VALID_GRADE_CS2101,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        String moduleCodeString = " " + PREFIX_CODE + VALID_CODE_CS2101;
-
         // invalid year
         assertParseFailure(parser,
-                moduleCodeString + INVALID_YEAR_DESC + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+                VALID_CODE_CS2101 + INVALID_YEAR_DESC + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
                 Year.MESSAGE_CONSTRAINTS);
 
         // invalid semester
         assertParseFailure(parser,
-                moduleCodeString + YEAR_DESC_CS2101 + INVALID_SEMESTER_DESC + GRADE_DESC_CS2101,
+                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + INVALID_SEMESTER_DESC + GRADE_DESC_CS2101,
                 Semester.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser,
-                moduleCodeString + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + INVALID_GRADE_DESC,
+                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + INVALID_GRADE_DESC,
                 Grade.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser,
-                moduleCodeString + INVALID_YEAR_DESC + SEMESTER_DESC_CS2101 + INVALID_GRADE_DESC,
+                VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + INVALID_YEAR_DESC + INVALID_GRADE_DESC,
                 Year.MESSAGE_CONSTRAINTS);
 
 
         // non-empty preamble
         assertParseFailure(parser,
-                PREAMBLE_NON_EMPTY + moduleCodeString
+                PREAMBLE_NON_EMPTY + VALID_CODE_CS2101
                  + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                ModuleCode.MESSAGE_CONSTRAINTS);
     }
 
 }

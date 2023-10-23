@@ -70,6 +70,10 @@ public class Semester {
         return SemesterEnum.fromString(test) != null;
     }
 
+    public String getSemesterString() {
+        return semester.getSemester();
+    }
+
     @Override
     public String toString() {
         if (semester.getSemester().matches("^[\\p{Digit}]+$")) {
