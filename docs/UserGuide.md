@@ -14,7 +14,7 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ModCraft.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your ModCraft.
 
@@ -43,7 +43,7 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add m/MODULE`, `NAME` is a parameter which can be used as `add m/CFG1002`.
+  e.g. in `add m/MODULE`, `MODULE` is a parameter which can be used as `add m/CFG1002`.
 
 * Items in square brackets are optional.<br>
   e.g `m/MODULE [s/SEM]` can be used as `m/ALS1010 s/Y1S1` or as `m/ALS1010`.
@@ -70,7 +70,7 @@ Format: `help`
 
 Adds a module to the list of modules taken
 
-Format: `add m/MODULE [s/SEM]`
+Format: `add MODULE [s/SEM]`
 
 <box type="tip" seamless>
 
@@ -83,15 +83,16 @@ Examples:
 
 ### Deleting a module : `delete`
 
-Deletes a module from the list of taken modules if it exists
+Deletes a module from the list of taken modules if it exists.
 
-Format: `delete m/MODULE`
+Format: `delete MODULE`
 
 * Removes the module from whichever semester the module is taken.
 
 Examples:
 
 * `delete GEA1000`
+* `delete CS2030S`
 
 
 
@@ -106,6 +107,20 @@ Format: `info m/MODULE`
 Examples:
 * `info CS2019`
 * `info CS1010*`
+
+### Calculating the total current CAP:
+Calculates the total current CAP of all modules stored in all years and semesters 
+using the formula:  
+$\frac{sum of all modules: (grade point of that module * Modular Credits of that module)}{total Modular Credits}$.
+
+Returns a `float` with value $\geq$ `0.0` and $\leq$ `5.0`.
+
+Format: `calculateCAP`
+
+### Calculating the total current Modular Credits (MCs)
+Calculates the total current Modular Credits (MCs) stored in all years and semesters.
+
+Format: `calculateMC`
 
 ### Exiting the program : `exit`
 
@@ -127,7 +142,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Archiving data files `[coming in v1.3]`
 
 _Details coming soon ..._
 
@@ -136,7 +151,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModCraft home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -151,6 +166,8 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
-**delete** | `delete m/MODULE` <br> e.g., `delete m/CS2040S`
+**delete** | `delete MODULE` <br> e.g., `delete CS2040S`
 **info**   | `info m/MODULE`<br> e.g., `info m/CS3230`
+**calculate CAP**   | `CalculateCAP`
+**calculate MCs**   | `CalculateMC`
 **help**   | `help`
