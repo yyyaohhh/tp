@@ -63,6 +63,8 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-module": "Deleting a module",
+        "calculating-total-cap": "Calculating total CAP",
+        "calculating-total-modular-credits-mcs": "Calculating total Modular Credits (MCs)",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
