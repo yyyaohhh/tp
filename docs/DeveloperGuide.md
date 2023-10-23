@@ -429,7 +429,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a module from a semester while all modules are being shown
 
-   1. Prerequisites: List all modules using the `list` command. Multiple module in the list.
+   1. Prerequisites: List all modules using the `list` command. Multiple modules in the list.
 
    1. Test case: `delete CS2030S`<br>
       Expected: The module CS2030S is deleted from the list. Details of the deleted module shown in the status message. The modules shown in the semester list is updated.
@@ -439,6 +439,34 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete 1234`, `...` (when the format of the module code to be deleted is incorrect)<br>
       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Calculating total CAP
+
+1. Calculating the current CAP from all modules
+
+    1. Prerequisites: Multiple module in the list.
+
+    1. Test case: `calculateCAP`<br>
+       Expected: The CAP output is a `float` of `0.0` $\leq$ CAP $\leq$ `5.0` with a status message.
+
+    1. Test case: `calculateCAP` when there are no modules in the semester list<br>
+       Expected: The CAP output is `0.0`
+
+1. _{ more test cases …​ }_
+
+### Calculating total Modular Credits (MCs)
+
+1. Calculating the current Modular Credits (MCs) from all modules
+
+    1. Prerequisites: Multiple modules in the list.
+
+    1. Test case: `calculateMC`<br>
+       Expected: The MC output is a `integer` of MC $\geq$ `0` with a status message.
+
+   1. Test case: `calculateMC` when there are no modules in the semester list<br>
+      Expected: The MC output is `0`
 
 1. _{ more test cases …​ }_
 
