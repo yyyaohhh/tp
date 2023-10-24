@@ -47,8 +47,8 @@ public class ModulePlanTest {
     @Test
     public void resetData_withDuplicateSemester_throwsDuplicateSemesterException() {
         // Two persons with the same identity fields
-        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("SEMESTER_1"));
-        ModulePlanSemester duplicateY1s1 = new ModulePlanSemester(new Year("1"), new Semester("SEMESTER_1"));
+        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
+        ModulePlanSemester duplicateY1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
 
 
         List<ModulePlanSemester> newModulePlan = Arrays.asList(y1s1, duplicateY1s1);
@@ -81,7 +81,7 @@ public class ModulePlanTest {
         Module editedCS2040S = new ModuleBuilder()
                 .withCode("CS2040S")
                 .withYear("1")
-                .withSem("SEMESTER_1")
+                .withSem("1")
                 .withGrade("B-").build();
 
         assertTrue(modulePlan.hasModule(editedCS2040S));

@@ -14,7 +14,7 @@ import seedu.address.model.person.Name;
 public class ModuleBuilder {
     public static final String DEFAULT_CODE = "CS2100";
     public static final String DEFAULT_YEAR = "2";
-    public static final String DEFAULT_SEM = "SEMESTER_1";
+    public static final String DEFAULT_SEM = "1";
     public static final String DEFAULT_GRADE = "A";
 
     private ModuleCode code;

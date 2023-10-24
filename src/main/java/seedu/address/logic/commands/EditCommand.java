@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
@@ -38,7 +37,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "CS2103T "
             + PREFIX_YEAR + "2 "
-            + PREFIX_SEMESTER + "SEMESTER_1 "
+            + PREFIX_SEMESTER + "1 "
             + PREFIX_GRADE + "IP";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
