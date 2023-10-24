@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
@@ -26,9 +25,9 @@ public class ModuleUtil {
      */
     public static String getModuleDetails(Module module) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_CODE + module.getModuleCode().toString() + " ");
+        sb.append(module.getModuleCode().toString() + " ");
         sb.append(PREFIX_YEAR + module.getYearTaken().year.toString() + " ");
-        sb.append(PREFIX_SEMESTER + module.getSemesterTaken().semester.toString() + " ");
+        sb.append(PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester() + " ");
         sb.append(PREFIX_GRADE + module.getGrade().toString() + " ");
         return sb.toString();
     }
@@ -38,9 +37,10 @@ public class ModuleUtil {
      */
     public static String getEditModuleDescriptorDetails(EditModuleDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getYear().ifPresent(year -> sb.append(PREFIX_YEAR).append(year.toString()).append(" "));
-        descriptor.getSemester().ifPresent(semester -> sb.append(PREFIX_SEMESTER).append(semester.toString()).append(" "));
-        descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade.toString()).append(" "));
+        descriptor.getYear().ifPresent(year -> sb.append(PREFIX_YEAR).append(year).append(" "));
+        descriptor.getSemester().ifPresent(
+                semester -> sb.append(PREFIX_SEMESTER).append(semester.getSemesterString()).append(" "));
+        descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade).append(" "));
 
         return sb.toString();
     }

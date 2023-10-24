@@ -24,8 +24,8 @@ public class CommandTestUtil {
     public static final String VALID_CODE_CS2101 = "CS2101";
     public static final String VALID_YEAR_CS2040S = "1";
     public static final String VALID_YEAR_CS2101 = "2";
-    public static final String VALID_SEMESTER_CS2040S = "SEMESTER_2";
-    public static final String VALID_SEMESTER_CS2101 = "SEMESTER_1";
+    public static final String VALID_SEMESTER_CS2040S = "2";
+    public static final String VALID_SEMESTER_CS2101 = "1";
     public static final String VALID_GRADE_CS2040S = "A-";
     public static final String VALID_GRADE_CS2101 = "IP";
 
