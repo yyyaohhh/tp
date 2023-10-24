@@ -12,13 +12,13 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 
 /**
- * Adds a person to the address book.
+ * Adds a module to the module plan.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the module plan. \n"
             + "Parameters: "
             + "Code "
             + PREFIX_YEAR + "Year "
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
     private final Module toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Module}
      */
     public AddCommand(Module module) {
         requireNonNull(module);

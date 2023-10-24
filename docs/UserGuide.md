@@ -43,11 +43,7 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add m/MODULE`, `MODULE` is a parameter which can be used as `add m/CFG1002`.
-
-* Items in square brackets are optional.<br>
-  e.g `m/MODULE [s/SEM]` can be used as `m/ALS1010 s/Y1S1` or as `m/ALS1010`.
-
+  e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
