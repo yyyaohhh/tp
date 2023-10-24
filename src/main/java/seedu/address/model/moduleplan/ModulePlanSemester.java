@@ -106,10 +106,19 @@ public class ModulePlanSemester {
     /**
      * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
+     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
      */
-    public Float totalGradePointsByUnits() {
-        return modules.gradePointsWithUnits();
+    public Float totalGradePointsWithUnits() {
+        return modules.findGradePointsWithUnits();
+    }
+
+    /**
+     * Calculates and returns the total modular credits of modules with valid grades in the collection.
+     *
+     * @return The total modular credits of modules with valid grades as a floating-point number.
+     */
+    public Float totalValidMCs() {
+        return modules.findMCsForCAP();
     }
 
     /**
