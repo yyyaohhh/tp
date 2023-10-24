@@ -181,6 +181,15 @@ public class UniqueModuleList implements Iterable<Module> {
         return internalList.iterator();
     }
 
+    /**
+     * Whether the list is empty or not
+     *
+     * @return True if it is empty and false otherwise
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

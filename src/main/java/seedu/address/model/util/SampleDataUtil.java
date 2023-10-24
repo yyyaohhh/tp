@@ -16,7 +16,6 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.tag.Tag;
 
@@ -53,11 +52,6 @@ public class SampleDataUtil {
 
     public static ReadOnlyModulePlan getSampleModulePlan() {
         ModulePlan sampleMp = new ModulePlan();
-
-        sampleMp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
-        sampleMp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
-        sampleMp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
-        sampleMp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
 
         for (Module sampleModule : getSampleModules()) {
             sampleMp.addModule(sampleModule);

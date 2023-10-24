@@ -15,7 +15,7 @@ import seedu.address.model.module.Year;
 /**
  * A semester of the Module Plan timetable.
  */
-public class ModulePlanSemester {
+public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
     private Year year;
     private Semester semester;
@@ -137,6 +137,14 @@ public class ModulePlanSemester {
         return false;
     }
 
+    /**
+     * Whether the semester contains any module.
+     *
+     * @return True if it is empty and false otherwise
+     */
+    public boolean isEmpty() {
+        return modules.isEmpty();
+    }
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
@@ -164,4 +172,13 @@ public class ModulePlanSemester {
         return yearEquals && semesterEquals;
     }
 
+    @Override
+    public int compareTo(ModulePlanSemester o) {
+        int comparedYear = this.year.compareTo(o.year);
+
+        if (comparedYear == 0) {
+            return this.semester.compareTo(o.semester);
+        }
+        return comparedYear;
+    }
 }
