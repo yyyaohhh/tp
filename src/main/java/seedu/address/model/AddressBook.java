@@ -120,10 +120,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
+     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
      */
-    public Float totalGradePointsByUnits() {
-        return modules.gradePointsWithUnits();
+    public Float totalGradePointsWithUnits() {
+        return modules.findGradePointsWithUnits();
     }
 
     //// util methods

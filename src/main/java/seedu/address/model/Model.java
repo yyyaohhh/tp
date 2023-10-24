@@ -95,11 +95,11 @@ public interface Model {
     int totalModularCredits();
 
     /**
-     * Calculates and returns the total grade points weighted by modular credits of all modules.
+     * Calculates and returns the Cumulative Average Point (CAP) for a collection of semesters.
      *
-     * @return The total grade points weighted by modular credits as a floating-point number.
+     * @return The CAP (Cumulative Average Point) as a floating-point number based on the cumulative performance of multiple semesters.
      */
-    Float totalGradePointsByUnits();
+    Float CAP();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ModulePlanSemester> getFilteredModuleList();

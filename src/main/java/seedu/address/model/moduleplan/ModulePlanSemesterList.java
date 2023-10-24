@@ -31,7 +31,6 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     /// semester functions
 
-
     /**
      * Replaces the contents of this list with {@code semesters}.
      * {@code semesters} must not contain duplicate semesters.
@@ -100,7 +99,6 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         internalList.remove(semester);
 
     }
-
 
     //// modules functions
 
@@ -177,8 +175,6 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     }
 
-
-
     /**
      * Finds and returns the module with the specified module code.
      *
@@ -210,19 +206,23 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     }
 
     /**
-     * Calculates the total grade points weighted by the modular credits of all modules in the internal list.
+     * Calculates and returns the overall Cumulative Average Point (CAP) for a collection of modules.
      *
-     * @return The total grade points weighted by modular credits as a floating-point number.
+     * @return The overall CAP (Cumulative Average Point) as a floating-point number.
      */
-    public Float gradePointsWithUnits() {
+    public Float CAP() {
         float gradePoints = 0;
+        float MCs = 0;
         for (int i = 0; i < internalList.size(); i++) {
-            gradePoints += internalList.get(i).totalGradePointsByUnits();
+            gradePoints += internalList.get(i).totalGradePointsWithUnits();
+            MCs += internalList.get(i).totalValidMCs();
         }
-        return gradePoints;
+
+        if (MCs == 0) {
+            return 0f;
+        }
+        return gradePoints / MCs;
     }
-
-
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
