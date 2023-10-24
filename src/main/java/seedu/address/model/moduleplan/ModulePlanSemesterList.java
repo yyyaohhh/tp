@@ -3,6 +3,7 @@ package seedu.address.model.moduleplan;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new DuplicateSemesterException();
         }
         internalList.setAll(semesters);
+        Collections.sort(internalList);
     }
 
     /**
@@ -59,6 +61,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new DuplicateSemesterException();
         }
         internalList.setAll(replacement.internalList);
+        Collections.sort(internalList);
     }
 
     /**
@@ -83,6 +86,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new DuplicateSemesterException();
         }
         internalList.add(semester);
+        Collections.sort(internalList);
     }
 
     /**
@@ -98,11 +102,33 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             throw new SemesterNotFoundException();
         }
         internalList.remove(semester);
+        Collections.sort(internalList);
+    }
 
+    /**
+     * Check if the semester has any modules.
+     *
+     * @param semester The semester to be checked.
+     * @return Whether the semester is empty or not.
+     */
+    public boolean checkIfSemesterEmpty(ModulePlanSemester semester) {
+        requireNonNull(semester);
+
+        if (!containsSemester(semester)) {
+            throw new SemesterNotFoundException();
+        }
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (semester.equals(internalList.get(i))) {
+                return internalList.get(i).isEmpty();
+            }
+        }
+        return false;
     }
 
 
-    //// modules functions
+
+        //// modules functions
 
     /**
      * Returns true if the any of the semesters contains an equivalent module as the given argument.

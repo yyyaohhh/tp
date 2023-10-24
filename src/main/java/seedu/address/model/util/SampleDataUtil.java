@@ -54,11 +54,6 @@ public class SampleDataUtil {
     public static ReadOnlyModulePlan getSampleModulePlan() {
         ModulePlan sampleMp = new ModulePlan();
 
-        sampleMp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
-        sampleMp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
-        sampleMp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
-        sampleMp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
-
         for (Module sampleModule : getSampleModules()) {
             sampleMp.addModule(sampleModule);
         }
