@@ -158,7 +158,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Float totalGradePointsByUnits() {
+        public Float CAP() {
             throw new AssertionError("This method should not be called.");
         }
 

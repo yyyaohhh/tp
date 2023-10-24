@@ -20,7 +20,7 @@ import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing module in the module plan.
  */
 public class EditCommand extends Command {
 

@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 import seedu.address.model.moduleplan.ModulePlan;
 
 /**
- * Clears the address book.
+ * Clears the module plan.
  */
 public class ClearCommand extends Command {
 
