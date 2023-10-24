@@ -135,7 +135,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
                 || key.getSemesterTaken().equals(new Semester("ST2"))) {
             ModulePlanSemester sem = new ModulePlanSemester(key.getYearTaken(), key.getSemesterTaken());
 
-            if(semesters.checkIfSemesterEmpty(sem)) {
+            if (semesters.checkIfSemesterEmpty(sem)) {
                 semesters.removeSemester(sem);
             }
         }

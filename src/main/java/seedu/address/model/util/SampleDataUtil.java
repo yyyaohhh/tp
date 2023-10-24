@@ -16,7 +16,6 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.tag.Tag;
 

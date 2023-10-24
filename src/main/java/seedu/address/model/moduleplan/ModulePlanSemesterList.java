@@ -128,7 +128,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
 
 
-        //// modules functions
+    //// modules functions
 
     /**
      * Returns true if the any of the semesters contains an equivalent module as the given argument.

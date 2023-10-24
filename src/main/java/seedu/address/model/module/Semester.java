@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Represents the semester when a Module is taken in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidSemester(String)}
  */
-public class Semester implements Comparable<Semester>{
+public class Semester implements Comparable<Semester> {
 
     /**
      * An enum to represent possible semesters.

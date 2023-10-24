@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the year of a student when a Module is taken in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidYear(String)}
  */
-public class Year implements Comparable<Year>{
+public class Year implements Comparable<Year> {
     public static final String MESSAGE_CONSTRAINTS = "Year should only contain a number from 0 to 6.";
 
     public static final String VALIDATION_REGEX = "^[0-6]$";
