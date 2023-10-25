@@ -9,31 +9,39 @@ with it using a CLI, and it has a GUI created with JavaFX.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+* [Quick start](#quick-start)
+* [Features](#features)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-   1. To do this, open a command terminal and type `java --version`.
-   2. If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+    1. To do this, open a command terminal and type `java --version`.
+    2. If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ModCraft.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
    ![Ui](images/Ui.png)
+
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `info CS1101S` : Shows Information about the module CS1101S
+    * `info CS1101S` : Shows Information about the module CS1101S
 
-   * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to semester 2 in year 1, and marks it as In Progress.
+    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to semester 2 in year 1, and marks it as In Progress.
 
-   * `delete CS2040S` : Deletes the module CS2040S if present from the list of modules taken
+    * `delete CS2040S` : Deletes the module CS2040S if present from the list of modules taken
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) section below for details of each command.
 
@@ -125,7 +133,7 @@ Examples:
 * `info CS1010*`
 
 ### Calculating the total current CAP:
-Calculates the total current CAP of all modules stored in all years and semesters 
+Calculates the total current CAP of all modules stored in all years and semesters
 using the formula:  
 $\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
 
