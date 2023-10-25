@@ -43,16 +43,9 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-<<<<<<< Updated upstream
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-=======
-  e.g. in `add m/MODULE`, `NAME` is a parameter which can be used as `add m/CFG1002`.
-
 * The grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system)
->>>>>>> Stashed changes
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -70,13 +63,7 @@ Format: `help`
 
 Adds a module to the list of modules taken
 
-<<<<<<< Updated upstream
-Format: `add MODULE [s/SEM]`
-=======
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
-
->>>>>>> Stashed changes
-
 
 **Tip:** The module will be added to the default sem set.
 </box>
@@ -98,8 +85,6 @@ Examples:
 
 * `delete GEA1000`
 * `delete CS2030S`
-
-
 
 ### Finding Information about a module: `info`
 
@@ -181,20 +166,11 @@ _Details coming soon ..._
 
 ## Command summary
 
-<<<<<<< Updated upstream
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
-**delete** | `delete MODULE` <br> e.g., `delete CS2040S`
-**info**   | `info m/MODULE`<br> e.g., `info m/CS3230`
-**calculate CAP**   | `CalculateCAP`
-**calculate MCs**   | `CalculateMC`
-**help**   | `help`
-=======
-| Action     | Format, Examples                                       |
-|------------|--------------------------------------------------------|
-| **add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1` |
-| **delete** | `delete m/MODULE` <br> e.g., `delete m/CS2040S`        |
-| **info**   | `info m/MODULE`<br> e.g., `info m/CS3230`              |
-| **help**   | `help`                                                 |
->>>>>>> Stashed changes
+| Action           | Format, Examples                                       |
+|------------------|--------------------------------------------------------|
+| **add**          | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1` |
+| **delete**       | `delete m/MODULE` <br> e.g., `delete m/CS2040S`        |
+| **info**         | `info m/MODULE`<br> e.g., `info m/CS3230`              |
+| **help**         | `help`                                                 |
+| **CalculateCap** | `CalculateCap`                                         | 
+| **CalculateMC**  | `CalculateMC`                                           |
