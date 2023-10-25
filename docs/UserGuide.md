@@ -181,9 +181,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
+**add**    | `add MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
+**edit**   | `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`<br> e.g., `edit CS2030S g/A+`
 **delete** | `delete MODULE` <br> e.g., `delete CS2040S`
-**info**   | `info m/MODULE`<br> e.g., `info m/CS3230`
+**info**   | `info MODULE`<br> e.g., `info m/CS3230`
 **calculate CAP**   | `CalculateCAP`
 **calculate MCs**   | `CalculateMC`
 **help**   | `help`
