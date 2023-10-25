@@ -43,15 +43,19 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+<<<<<<< Updated upstream
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+=======
+  e.g. in `add m/MODULE`, `NAME` is a parameter which can be used as `add m/CFG1002`.
+
+* The grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system)
+>>>>>>> Stashed changes
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ### Viewing help : `help`
 
@@ -66,16 +70,21 @@ Format: `help`
 
 Adds a module to the list of modules taken
 
+<<<<<<< Updated upstream
 Format: `add MODULE [s/SEM]`
+=======
+Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
-<box type="tip" seamless>
+>>>>>>> Stashed changes
+
 
 **Tip:** The module will be added to the default sem set.
 </box>
 
 Examples:
-* `add MA1521 Y1S1`
-* `add IS1108`
+* `add MA1521 y/1 s/1 g/A`
+* `add IS1108 y/1 s/2 g/CS`
+* `add ST2334 y/2 s/1 g/IP`
 
 ### Deleting a module : `delete`
 
@@ -124,18 +133,31 @@ Exits the program.
 
 Format: `exit`
 
+### Calculating CAP: `CalculateCap`
+
+Calculates the CAP based on the list of modules with a grade that counts to the CAP.
+
+Format: `CalculateCap`
+
+### Calculating MCs: `CalculateMC`
+
+Calculate the number of MCs taken so far based on the list of modules passed.
+
+Format: `CalculateMC`
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ModuleList data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
+ModuleList data is saved automtically as a JSON file `[JAR file location]/data/addressbook.json` 
+Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Modcraft will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v1.3]`
@@ -159,6 +181,7 @@ _Details coming soon ..._
 
 ## Command summary
 
+<<<<<<< Updated upstream
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
@@ -167,3 +190,11 @@ Action     | Format, Examples
 **calculate CAP**   | `CalculateCAP`
 **calculate MCs**   | `CalculateMC`
 **help**   | `help`
+=======
+| Action     | Format, Examples                                       |
+|------------|--------------------------------------------------------|
+| **add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1` |
+| **delete** | `delete m/MODULE` <br> e.g., `delete m/CS2040S`        |
+| **info**   | `info m/MODULE`<br> e.g., `info m/CS3230`              |
+| **help**   | `help`                                                 |
+>>>>>>> Stashed changes
