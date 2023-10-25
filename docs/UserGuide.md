@@ -12,28 +12,30 @@ with it using a CLI, and it has a GUI created with JavaFX.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java 11 or above installed in your Computer.
+   1. To do this, open a command terminal and type `java --version`.
+   2. If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-1. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
+2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ModCraft.
+3. Copy the file to the folder you want to use as the _home folder_ for your ModCraft.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `info CS1101S` : Shows Information about the module CS1101S
 
-   * `add CS2030S Y1S2` : Adds the module CS2030S to semester 2 in year 1
+   * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to semester 2 in year 1, and marks it as In Progress.
 
    * `delete CS2040S` : Deletes the module CS2040S if present from the list of modules taken
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,9 +48,12 @@ with it using a CLI, and it has a GUI created with JavaFX.
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `y/YEAR s/SEM`, `s/SEM y/YEAR` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`and `exit`) will be ignored.<br>
+* Parameters in square brackets denote optional parameters.<br>
+  e.g. `edit [y/YEAR]` means that specifying `YEAR` is optional.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -76,6 +81,21 @@ Format: `add MODULE [s/SEM]`
 Examples:
 * `add MA1521 Y1S1`
 * `add IS1108`
+
+
+### Editing a module: `edit`
+
+Changes an attribute of a module. Useful if you want to update information about a module or have made a mistake in adding.
+
+Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
+
+**Note:** At least one of the optional fields must be provided.
+
+Examples:
+
+* `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
+* `edit CS3230 y/4 s/2`: Moves CS3230 to Year 4 Semester 2.
+
 
 ### Deleting a module : `delete`
 
@@ -161,9 +181,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**add**    | `add m/MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
+**add**    | `add MODULE [s/SEM]`<br> e.g., `add m/CS2106 s/Y3S1`
+**edit**   | `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`<br> e.g., `edit CS2030S g/A+`
 **delete** | `delete MODULE` <br> e.g., `delete CS2040S`
-**info**   | `info m/MODULE`<br> e.g., `info m/CS3230`
+**info**   | `info MODULE`<br> e.g., `info m/CS3230`
 **calculate CAP**   | `CalculateCAP`
 **calculate MCs**   | `CalculateMC`
 **help**   | `help`
