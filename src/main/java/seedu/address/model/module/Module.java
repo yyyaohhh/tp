@@ -22,6 +22,7 @@ public class Module {
     private final Semester semesterTaken;
     private final Grade grade;
     private final ModularCredit modularCredit;
+    private final Prerequisite prerequisite;
 
     /**
      * Every field must be present and not null.
@@ -37,6 +38,7 @@ public class Module {
         this.semesterTaken = semesterTaken;
         this.grade = grade;
         this.modularCredit = modularCredit;
+        this.prerequisite = new Prerequisite();
     }
 
     /**
@@ -53,6 +55,7 @@ public class Module {
         this.description = null;
         this.lecturers = null;
         this.modularCredit = null;
+        this.prerequisite = new Prerequisite();
     }
 
     public ModuleName getName() {
@@ -85,6 +88,10 @@ public class Module {
 
     public ModularCredit getModularCredit() {
         return modularCredit;
+    }
+
+    public Prerequisite getPrerequisite() {
+        return prerequisite;
     }
 
     /**

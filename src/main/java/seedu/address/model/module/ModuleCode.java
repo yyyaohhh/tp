@@ -31,7 +31,10 @@ public class ModuleCode {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Checks if the given input string is a valid module code.
+     *
+     * @param test The input string to be checked.
+     * @return true if the input string is a valid module code, false otherwise.
      */
     public static boolean isValidModuleCode(String test) {
         return test.matches(VALIDATION_REGEX);
