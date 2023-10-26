@@ -235,18 +235,18 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      *
      * @return The overall CAP (Cumulative Average Point) as a floating-point number.
      */
-    public Float CAP() {
+    public Float getCap() {
         float gradePoints = 0;
-        float MCs = 0;
+        float moduleCredits = 0;
         for (int i = 0; i < internalList.size(); i++) {
             gradePoints += internalList.get(i).totalGradePointsWithUnits();
-            MCs += internalList.get(i).totalValidMCs();
+            moduleCredits += internalList.get(i).totalValidMcs();
         }
 
-        if (MCs == 0) {
+        if (moduleCredits == 0) {
             return 0f;
         }
-        return gradePoints / MCs;
+        return gradePoints / moduleCredits;
     }
 
     /**

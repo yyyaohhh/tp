@@ -106,7 +106,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
     /**
      * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
+     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
      */
     public Float totalGradePointsWithUnits() {
         return modules.findGradePointsWithUnits();
@@ -117,8 +117,8 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      *
      * @return The total modular credits of modules with valid grades as a floating-point number.
      */
-    public Float totalValidMCs() {
-        return modules.findMCsForCAP();
+    public Float totalValidMcs() {
+        return modules.findMcsForCap();
     }
 
     /**

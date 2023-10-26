@@ -13,6 +13,9 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.database.Database;
+import seedu.address.database.DatabaseManager;
+import seedu.address.database.DbModuleList;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
@@ -42,6 +45,7 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
+    protected Database database;
     protected Model model;
     protected Config config;
 
@@ -59,7 +63,9 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        model = initModelManager(storage, userPrefs);
+        Database database = new DatabaseManager();
+
+        model = initModelManager(storage, userPrefs, database);
 
         logic = new LogicManager(model, storage);
 
@@ -67,11 +73,13 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, {@code userPrefs} and
+     * {@code database}'s module list. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * If the {@code database}'s module list is not found, a {@code RuntimeException} will be thrown.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Database database) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         /*
@@ -94,7 +102,15 @@ public class MainApp extends Application {
         //TODO implement loading from storage for ModulePlan.
         ReadOnlyModulePlan initialData = SampleDataUtil.getSampleModulePlan();
 
-        return new ModelManager(initialData, userPrefs);
+        DbModuleList dbModuleList;
+        try {
+            dbModuleList = database.readDatabase();
+        } catch (DataLoadingException dle) {
+            logger.severe("Database file at " + database.getDatabaseFilePath() + " could not be loaded.");
+            throw new RuntimeException("Unable to load database file.");
+        }
+
+        return new ModelManager(initialData, userPrefs, dbModuleList);
     }
 
     private void initLogging(Config config) {
