@@ -5,7 +5,7 @@
 ---
 
 
-# ModCraft User Guide
+# Modcraft User Guide
 
 ModCraft is an app that provides a fast and easy way for students to track courses
 to take to meet graduation requirements and plan courses to take. The user interacts
