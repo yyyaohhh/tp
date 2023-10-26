@@ -73,6 +73,10 @@ Adds a module to the list of modules taken in the specified year and semester.
 
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
+<box type="tip" seamless>
+
+**Tip:** The module will be added to the default sem set.
+</box>
 
 Examples:
 * `add MA1521 y/1 s/1 g/A`
