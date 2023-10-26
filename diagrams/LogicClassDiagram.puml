@@ -27,7 +27,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
+LogicManager -right->"1" ModulePlanParser
 AddressBookParser ..> XYZCommand : creates >
 
 XYZCommand -up-|> Command
