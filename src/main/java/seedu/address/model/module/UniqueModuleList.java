@@ -136,7 +136,8 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
-     * Calculates and returns the Cumulative Average Point (CAP) based on the grades and modular credits of all modules in the internal list.
+     * Calculates and returns the Cumulative Average Point (CAP) based on the grades and modular credits of all
+     * modules in the internal list.
      *
      * @return The CAP (Cumulative Average Point) as a floating-point number, or 0.0 if there are no valid grades.
      */
@@ -157,16 +158,16 @@ public class UniqueModuleList implements Iterable<Module> {
      *
      * @return The total modular credits of modules with valid grades as a floating-point number.
      */
-    public float findMCsForCAP() {
+    public float findMcsForCap() {
         Module[] mods = new Module[internalList.size()];
         mods = internalList.toArray(mods);
-        float MCs = 0;
+        float modularCredits = 0;
         for (int i = 0; i < internalList.size(); i++) {
             if (mods[i].getGrade().gradePoint() != null) {
-                MCs += mods[i].getModularCredit().hashCode();
+                modularCredits += mods[i].getModularCredit().hashCode();
             }
         }
-        return MCs;
+        return modularCredits;
     }
 
     /**

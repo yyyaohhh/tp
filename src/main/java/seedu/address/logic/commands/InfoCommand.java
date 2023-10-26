@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.NoSuchElementException;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -19,15 +21,10 @@ public class InfoCommand extends Command {
             + "Parameters: " + "code \n"
             + "Example: " + COMMAND_WORD + " " + "CS1101S ";
     public static final String MESSAGE_INFO_MODULE_SUCCESS = "%1$s: %2$s \n"
-            + "%3$s \n"
+            + "MCs: %3$s \n"
             + "%4$s \n";
-    public static final String MESSAGE_INFO_MODULE_SUCCESS_SAMPLE = "CS1101S : Programming Methodology \n"
-            + "4MCs \n"
-            + "This course introduces the concepts of programming and computational problem solving. "
-            + "Starting from a small core of fundamental abstractions, the course introduces"
-            + " programming as a method for communicating computational processes. \n";
 
-    public static final String MESSAGE_NOT_FOUND_MODULE = "This module is not found.";
+    public static final String MESSAGE_NOT_FOUND_MODULE = "No such module: %1$s";
 
     private final ModuleCode moduleCode;
 
@@ -42,9 +39,17 @@ public class InfoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // TODO: Call a method in model to get the module information
+        String info;
+        try {
+            String name = model.getModuleName(moduleCode).toString();
+            String mc = model.getModularCredit(moduleCode).toString();
+            String description = model.getModuleDescription(moduleCode).toString();
+            info = String.format(MESSAGE_INFO_MODULE_SUCCESS, moduleCode, name, mc, description);
+        } catch (NoSuchElementException e) {
+            throw new CommandException(String.format(MESSAGE_NOT_FOUND_MODULE, moduleCode));
+        }
 
-        return new CommandResult(MESSAGE_INFO_MODULE_SUCCESS_SAMPLE);
+        return new CommandResult(info);
     }
 
     @Override
