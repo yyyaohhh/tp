@@ -78,6 +78,13 @@ public class JsonUtil {
         return Optional.of(jsonFile);
     }
 
+    /**
+     * Returns the JSON object from the resource file or {@code Optional.empty()} object if the file is not found.
+     *
+     * @param filePath cannot be null.
+     * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
+     * @throws DataLoadingException if loading of the JSON file failed.
+     */
     public static <T> Optional<T> readJsonResource(
             String filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
         requireNonNull(filePath);

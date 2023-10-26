@@ -131,8 +131,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Float CAP() {
-        return modulePlan.CAP();
+    public Float getCap() {
+        return modulePlan.getCap();
     }
 
     //=========== DbModuleList ===============================================================================

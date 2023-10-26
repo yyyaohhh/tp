@@ -101,9 +101,9 @@ public interface Model {
     /**
      * Calculates and returns the Cumulative Average Point (CAP) for a collection of semesters.
      *
-     * @return The CAP (Cumulative Average Point) as a floating-point number based on the cumulative performance of multiple semesters.
+     * @return The CAP as a floating-point number based on the cumulative performance of multiple semesters.
      */
-    Float CAP();
+    Float getCap();
 
     /**
      * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
