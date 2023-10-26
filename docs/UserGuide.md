@@ -1,3 +1,9 @@
+
+--- 
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
+---
 # ModCraft User Guide
 
 ModCraft is an app that provides a fast and easy way for students to track courses
