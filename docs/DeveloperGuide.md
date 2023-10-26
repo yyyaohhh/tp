@@ -45,6 +45,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Database`**](#database-component) : Parses data from within the App.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -146,6 +147,15 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+### Database component
+
+**API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
+
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+
+The `Database` component,
+* reads the module information from JSON format to the corresponding `DbModuleList` object.
 
 ### Common classes
 
