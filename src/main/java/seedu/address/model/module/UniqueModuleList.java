@@ -136,18 +136,37 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
-     * Calculates the total grade points weighted by the modular credits of all modules in the internal list.
+     * Calculates and returns the Cumulative Average Point (CAP) based on the grades and modular credits of all modules in the internal list.
      *
-     * @return The total grade points weighted by modular credits as a floating-point number.
+     * @return The CAP (Cumulative Average Point) as a floating-point number, or 0.0 if there are no valid grades.
      */
-    public Float gradePointsWithUnits() {
+    public Float findGradePointsWithUnits() {
         Module[] mods = new Module[internalList.size()];
         mods = internalList.toArray(mods);
         float gradePoints = 0;
         for (int i = 0; i < internalList.size(); i++) {
-            gradePoints += mods[i].getGrade().gradePoint() * mods[i].getModularCredit().hashCode();
+            if (mods[i].getGrade().gradePoint() != null) {
+                gradePoints += mods[i].getGrade().gradePoint() * mods[i].getModularCredit().hashCode();
+            }
         }
         return gradePoints;
+    }
+
+    /**
+     * Calculates and returns the total modular credits of modules with valid grades in the internal list.
+     *
+     * @return The total modular credits of modules with valid grades as a floating-point number.
+     */
+    public float findMCsForCAP() {
+        Module[] mods = new Module[internalList.size()];
+        mods = internalList.toArray(mods);
+        float MCs = 0;
+        for (int i = 0; i < internalList.size(); i++) {
+            if (mods[i].getGrade().gradePoint() != null) {
+                MCs += mods[i].getModularCredit().hashCode();
+            }
+        }
+        return MCs;
     }
 
     /**
@@ -160,6 +179,15 @@ public class UniqueModuleList implements Iterable<Module> {
     @Override
     public Iterator<Module> iterator() {
         return internalList.iterator();
+    }
+
+    /**
+     * Whether the list is empty or not
+     *
+     * @return True if it is empty and false otherwise
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 
     @Override

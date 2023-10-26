@@ -17,11 +17,7 @@ public class CalculateCapCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        int modularCredits = model.totalModularCredits();
-
-        Float gradePointsByUnits = model.totalGradePointsByUnits();
-
-        Float calculatedCapValue = gradePointsByUnits / modularCredits;
+        Float calculatedCapValue = model.CAP();
 
         return new CommandResult(String.format(MESSAGE_CALCULATION_SUCCESS, calculatedCapValue));
     }

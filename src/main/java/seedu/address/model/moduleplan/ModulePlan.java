@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
 
 /**
  * Wraps all data at the address-book level
@@ -28,7 +30,9 @@ public class ModulePlan implements ReadOnlyModulePlan {
         semesters = new ModulePlanSemesterList();
     }
 
-    public ModulePlan() {}
+    public ModulePlan() {
+        loadDefaultSemester();
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -75,6 +79,26 @@ public class ModulePlan implements ReadOnlyModulePlan {
         this.semesters.removeSemester(semester);
     }
 
+    private void loadDefaultSemester() {
+        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
+        ModulePlanSemester y1s2 = new ModulePlanSemester(new Year("1"), new Semester("2"));
+        ModulePlanSemester y2s1 = new ModulePlanSemester(new Year("2"), new Semester("1"));
+        ModulePlanSemester y2s2 = new ModulePlanSemester(new Year("2"), new Semester("2"));
+        ModulePlanSemester y3s1 = new ModulePlanSemester(new Year("3"), new Semester("1"));
+        ModulePlanSemester y3s2 = new ModulePlanSemester(new Year("3"), new Semester("2"));
+        ModulePlanSemester y4s1 = new ModulePlanSemester(new Year("4"), new Semester("1"));
+        ModulePlanSemester y4s2 = new ModulePlanSemester(new Year("4"), new Semester("2"));
+
+        this.semesters.addSemester(y1s1);
+        this.semesters.addSemester(y1s2);
+        this.semesters.addSemester(y2s1);
+        this.semesters.addSemester(y2s2);
+        this.semesters.addSemester(y3s1);
+        this.semesters.addSemester(y3s2);
+        this.semesters.addSemester(y4s1);
+        this.semesters.addSemester(y4s2);
+    }
+
 
     //// module-level operations
 
@@ -87,10 +111,15 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a module to the module plan.
+     * The module must not already exist in the same semester.
      */
     public void addModule(Module m) {
+        ModulePlanSemester sem = new ModulePlanSemester(m.getYearTaken(), m.getSemesterTaken());
+        if (!semesters.containsSemester(sem)) {
+            addSemester(sem);
+        }
+
         semesters.addModule(m);
     }
 
@@ -100,6 +129,17 @@ public class ModulePlan implements ReadOnlyModulePlan {
      */
     public void removeModule(Module key) {
         semesters.removeModule(key);
+
+        // Check for special term
+        if (key.getSemesterTaken().equals(new Semester("ST1"))
+                || key.getSemesterTaken().equals(new Semester("ST2"))) {
+            ModulePlanSemester sem = new ModulePlanSemester(key.getYearTaken(), key.getSemesterTaken());
+
+            if (semesters.checkIfSemesterEmpty(sem)) {
+                semesters.removeSemester(sem);
+            }
+        }
+
     }
 
     /**
@@ -135,12 +175,12 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     /**
-     * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
+     * Calculates and returns the Cumulative Average Point (CAP) for a collection of semesters.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
+     * @return The CAP (Cumulative Average Point) as a floating-point number based on the cumulative performance of multiple semesters.
      */
-    public Float totalGradePointsByUnits() {
-        return semesters.gradePointsWithUnits();
+    public Float CAP() {
+        return semesters.CAP();
     }
 
     //// util methods

@@ -131,8 +131,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Float totalGradePointsByUnits() {
-        return modulePlan.totalGradePointsByUnits();
+    public Float CAP() {
+        return modulePlan.CAP();
     }
 
     //=========== DbModuleList ===============================================================================

@@ -15,7 +15,7 @@ import seedu.address.model.module.Year;
 /**
  * A semester of the Module Plan timetable.
  */
-public class ModulePlanSemester {
+public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
     private Year year;
     private Semester semester;
@@ -106,10 +106,19 @@ public class ModulePlanSemester {
     /**
      * Calculates and returns the total grade points weighted by modular credits of all modules in the collection.
      *
-     * @return The total grade points weighted by modular credits of all modules in the collection as a float.
+     * @return The total grade points weighted by modular credits of all modules in the collection as a floating-point number.
      */
-    public Float totalGradePointsByUnits() {
-        return modules.gradePointsWithUnits();
+    public Float totalGradePointsWithUnits() {
+        return modules.findGradePointsWithUnits();
+    }
+
+    /**
+     * Calculates and returns the total modular credits of modules with valid grades in the collection.
+     *
+     * @return The total modular credits of modules with valid grades as a floating-point number.
+     */
+    public Float totalValidMCs() {
+        return modules.findMCsForCAP();
     }
 
     /**
@@ -128,6 +137,14 @@ public class ModulePlanSemester {
         return false;
     }
 
+    /**
+     * Whether the semester contains any module.
+     *
+     * @return True if it is empty and false otherwise
+     */
+    public boolean isEmpty() {
+        return modules.isEmpty();
+    }
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
@@ -155,4 +172,13 @@ public class ModulePlanSemester {
         return yearEquals && semesterEquals;
     }
 
+    @Override
+    public int compareTo(ModulePlanSemester o) {
+        int comparedYear = this.year.compareTo(o.year);
+
+        if (comparedYear == 0) {
+            return this.semester.compareTo(o.semester);
+        }
+        return comparedYear;
+    }
 }

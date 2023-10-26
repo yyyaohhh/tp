@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
@@ -13,22 +12,22 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 
 /**
- * Adds a person to the address book.
+ * Adds a module to the module plan.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the module plan. \n"
             + "Parameters: "
-            + PREFIX_CODE + "Code "
+            + "Code "
             + PREFIX_YEAR + "Year "
             + PREFIX_SEMESTER + "Semester "
             + PREFIX_GRADE + "Grade \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CODE + "CS2103T "
+            + "CS2103T "
             + PREFIX_YEAR + "2 "
-            + PREFIX_SEMESTER + "SEMESTER_1 "
+            + PREFIX_SEMESTER + "1 "
             + PREFIX_GRADE + "B ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
@@ -37,7 +36,7 @@ public class AddCommand extends Command {
     private final Module toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Module}
      */
     public AddCommand(Module module) {
         requireNonNull(module);
