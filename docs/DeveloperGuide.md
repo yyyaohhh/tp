@@ -159,6 +159,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Edit module feature
+
+#### Implementation
+
+The edit mechanism uses `EditModuleDescriptor` to abstract out the fields to edit. It can be found as a publicly accessible class within `EditCommand`. Currently, it only contains fields for `Year`, `Semester` and `Grade`, which are the only attributes of `Module` that can be edited for now. Besides this, it largely follows the parser and command structure as described in [Logic](#Logic component).
+
+We shall now illustrate how `EditModuleDescriptor` is used.
+
+Here is a *Sequence Diagram* showing the parser in action:
+
+<puml src="diagrams/EditParseSequenceDiagram.puml" width="450" />
+
+And here is a *Sequence Diagram* showing the command being executed:
+
+<puml src="diagrams/EditExecuteSequenceDiagram.puml" width="450" />
+
+As can be seen, this is a helpful class to store fields that need to be edited.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
