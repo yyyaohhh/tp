@@ -16,10 +16,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete CS1101S")
+[-> LogicManager : execute("delete CS2030S")
 activate LogicManager
 
-LogicManager -> ModulePlanParser : parseCommand("delete CS1101S")
+LogicManager -> ModulePlanParser : parseCommand("delete CS2030S")
 activate ModulePlanParser
 
 create DeleteCommandParser
@@ -29,7 +29,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> ModulePlanParser
 deactivate DeleteCommandParser
 
-ModulePlanParser -> DeleteCommandParser : parse("CS1101S")
+ModulePlanParser -> DeleteCommandParser : parse("CS2030S")
 activate DeleteCommandParser
 
 
@@ -65,7 +65,7 @@ deactivate ModulePlanParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteModule("CS1101S")
+DeleteCommand -> Model : deleteModule(CS2030S)
 activate Model
 
 Model --> DeleteCommand
