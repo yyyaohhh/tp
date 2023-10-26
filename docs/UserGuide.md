@@ -1,18 +1,17 @@
---- 
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
-
 # ModCraft User Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 ModCraft is an app that provides a fast and easy way for students to track courses
 to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
-
-<!-- * Table of Contents -->
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
