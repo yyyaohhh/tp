@@ -1,13 +1,15 @@
---- 
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # ModCraft User Guide
 
-ModCraft is an app that provides a fast and easy way for NUS students to track courses
-to take to meet graduation requirements and plan courses to take. The user interacts
+<!-- * Table of Contents -->
+<page-nav-print />
+
+ModCraft is an app that provides a fast and easy way for students to track courses to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
 
 This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
