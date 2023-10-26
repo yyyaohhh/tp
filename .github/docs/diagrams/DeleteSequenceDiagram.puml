@@ -4,10 +4,8 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":ModulePlanParser" as ModulePlanParser LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant ":ParserUtil" as ParserUtil LOGIC_COLOR
-participant ":ModuleCode" as ModuleCode LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -16,56 +14,42 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete CS2030S")
+[-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> ModulePlanParser : parseCommand("delete CS2030S")
-activate ModulePlanParser
+LogicManager -> AddressBookParser : parseCommand("delete 1")
+activate AddressBookParser
 
 create DeleteCommandParser
-ModulePlanParser -> DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> ModulePlanParser
+DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-ModulePlanParser -> DeleteCommandParser : parse("CS2030S")
+AddressBookParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
-
-create ParserUtil
-DeleteCommandParser -> ParserUtil : parseModuleCode("CS1101S")
-activate ParserUtil
-
-create ModuleCode
-ParserUtil -> ModuleCode
-activate ModuleCode
-ModuleCode --> ParserUtil
-deactivate ModuleCode
-
-ParserUtil --> DeleteCommandParser : moduleCode
-deactivate ParserUtil
-
 create DeleteCommand
-DeleteCommandParser -> DeleteCommand : moduleCode
+DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
 
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> ModulePlanParser : d
+DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> ModulePlanParser
+DeleteCommandParser -[hidden]-> AddressBookParser
 destroy DeleteCommandParser
 
-ModulePlanParser --> LogicManager : d
-deactivate ModulePlanParser
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteModule(CS2030S)
+DeleteCommand -> Model : deletePerson(1)
 activate Model
 
 Model --> DeleteCommand
