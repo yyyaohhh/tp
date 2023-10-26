@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -77,6 +78,29 @@ public class JsonUtil {
         return Optional.of(jsonFile);
     }
 
+    public static <T> Optional<T> readJsonResource(
+            String filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+        requireNonNull(filePath);
+
+        ClassLoader classLoader = JsonUtil.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(filePath);
+        if (inputStream == null) {
+            return Optional.empty();
+        }
+        logger.info("JSON file " + filePath + " found.");
+
+        T jsonFile;
+
+        try {
+            jsonFile = fromInputStream(inputStream, classOfObjectToDeserialize);
+        } catch (IOException e) {
+            logger.warning("Error reading from jsonFile file " + inputStream + ": " + e);
+            throw new DataLoadingException(e);
+        }
+
+        return Optional.of(jsonFile);
+    }
+
     /**
      * Saves the Json object to the specified file.
      * Overwrites existing file if it exists, creates a new file if it doesn't.
@@ -99,6 +123,15 @@ public class JsonUtil {
      */
     public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
         return objectMapper.readValue(json, instanceClass);
+    }
+
+    /**
+     * Converts a given input stream of a JSON data to instance of a class
+     * @param <T> The generic type to create an instance of
+     * @return The instance of T with the specified values in the JSON string
+     */
+    public static <T> T fromInputStream(InputStream inputStream, Class<T> instanceClass) throws IOException {
+        return objectMapper.readValue(inputStream, instanceClass);
     }
 
     /**
