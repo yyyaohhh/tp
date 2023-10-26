@@ -1,14 +1,16 @@
-
 --- 
   layout: default.md
   title: "User Guide"
   pageNav: 3
 ---
+
 # ModCraft User Guide
 
-ModCraft is an app that provides a fast and easy way for students to track courses
+ModCraft is an app that provides a fast and easy way for NUS students to track courses
 to take to meet graduation requirements and plan courses to take. The user interacts
-with it using a CLI, and it has a GUI created with JavaFX.
+with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
+
+This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -30,7 +32,7 @@ with it using a CLI, and it has a GUI created with JavaFX.
 3. Copy the file to the folder you want to use as the _home folder_ for your ModCraft.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -121,7 +123,7 @@ Examples:
 
 Find the information about a certain module by module code.
 
-Format: `info m/MODULE`
+Format: `info MODULE`
 
 * To search for modules with variants add a `*` at the end of the module name.
 
@@ -149,17 +151,6 @@ Exits the program.
 
 Format: `exit`
 
-### Calculating CAP: `CalculateCap`
-
-Calculates the CAP based on the list of modules with a grade that counts to the CAP.
-
-Format: `CalculateCap`
-
-### Calculating MCs: `CalculateMC`
-
-Calculate the number of MCs taken so far based on the list of modules passed.
-
-Format: `CalculateMC`
 
 ### Saving the data
 
@@ -202,7 +193,13 @@ _Details coming soon ..._
 | **add**          | `add MODULE_CODE y/YEAR s/SEMESTER g/GRADE`<br> e.g., `add CS2106 y/3 s/1 g/IP`     |
 | **delete**       | `delete MODULE_CODE` <br> e.g., `delete CS2040S`                                    |
 | **edit**         | `edit MODULE_CODE [y/YEAR] [s/SEMESTER] [g/GRADE]` <br> e.g., `edit MA2001 y/1 s/2` |
-| **info**         | `info MODULE_CODE`<br> e.g., `info m/CS3230`                                        |
+| **info**         | `info MODULE_CODE`<br> e.g., `info CS3230`                                          |
 | **CalculateCap** | `CalculateCap`                                                                      | 
 | **CalculateMC**  | `CalculateMC`                                                                       |
 | **help**         | `help`                                                                              |
+
+
+## Glossary
+
+- Command Line Interface: A display that allows you to type commands to interact with the application.
+- Graphical User Interface: A user-friendly display that allows you to see the effects of your actions in the application. 

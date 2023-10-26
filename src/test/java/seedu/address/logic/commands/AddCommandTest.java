@@ -158,7 +158,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Float CAP() {
+        public Float getCap() {
             throw new AssertionError("This method should not be called.");
         }
 

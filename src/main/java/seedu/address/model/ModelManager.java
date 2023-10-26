@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.database.DbModuleList;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
@@ -23,21 +28,23 @@ public class ModelManager implements Model {
 
     private final ModulePlan modulePlan;
     private final UserPrefs userPrefs;
+    private final DbModuleList dbModuleList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(modulePlan, userPrefs);
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, DbModuleList dbModuleList) {
+        requireAllNonNull(modulePlan, userPrefs, dbModuleList);
 
         logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
 
         this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.dbModuleList = new DbModuleList(dbModuleList);
     }
 
     public ModelManager() {
-        this(new ModulePlan(), new UserPrefs());
+        this(new ModulePlan(), new UserPrefs(), new DbModuleList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -124,8 +131,30 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Float CAP() {
-        return modulePlan.CAP();
+    public Float getCap() {
+        return modulePlan.getCap();
+    }
+
+    //=========== DbModuleList ===============================================================================
+
+    @Override
+    public ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException {
+        return dbModuleList.getModuleName(moduleCode);
+    }
+
+    @Override
+    public Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException {
+        return dbModuleList.getModuleDescription(moduleCode);
+    }
+
+    @Override
+    public ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException {
+        return dbModuleList.getModularCredit(moduleCode);
+    }
+
+    @Override
+    public boolean isValidModuleCode(ModuleCode moduleCode) {
+        return dbModuleList.isValidModuleCode(moduleCode);
     }
 
     //=========== Filtered Person List Accessors =============================================================
