@@ -10,7 +10,7 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 
 /**
- * Represents the databse as a list of {@code DbModules}.
+ * Represents the database as a list of {@code DbModule}.
  */
 public class DbModuleList {
 
@@ -22,7 +22,7 @@ public class DbModuleList {
     public DbModuleList() {}
 
     /**
-     * Constructs a {@code DbModuleList} with the given modules.\
+     * Constructs a {@code DbModuleList} with the given modules.
      *
      * @param dbModuleList The list of modules to be added.
      */

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Jackson-friendly version of {@link DatabaseManager}.
+ * Jackson-friendly version of {@link DbModuleList}.
  */
 public class JsonAdaptedDbModuleList {
 

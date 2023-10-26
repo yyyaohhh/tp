@@ -81,8 +81,4 @@ public class JsonAdaptedDbModule {
 
         return new DbModule(modelCode, modelName, modelDescription, modelModularCredit);
     }
-
-    public String getFields() {
-        return moduleCode + " " + title + " " + description + " " + moduleCredit;
-    }
 }
