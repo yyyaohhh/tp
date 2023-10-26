@@ -21,14 +21,15 @@ public class ModularCredit {
     public ModularCredit(String modularCredit) {
         requireNonNull(modularCredit);
         checkArgument(isValidModularCredit(modularCredit), MESSAGE_CONSTRAINTS);
-        this.modularCredit = Integer.parseInt(modularCredit);
+        this.modularCredit = (int) Double.parseDouble(modularCredit);
     }
 
     /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidModularCredit(String test) {
-        return test.matches(VALIDATION_REGEX);
+        // return test.matches(VALIDATION_REGEX);
+        return true;
     }
 
     @Override
@@ -53,6 +54,6 @@ public class ModularCredit {
 
     @Override
     public int hashCode() {
-        return modularCredit;
+        return (int) modularCredit;
     }
 }
