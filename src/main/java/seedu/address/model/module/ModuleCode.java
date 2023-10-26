@@ -15,7 +15,7 @@ public class ModuleCode {
     public static final String MESSAGE_CONSTRAINTS = "Module codes should contain a two- or three-letter prefix "
             + "and four digits. Optionally, it can have a one letter suffix";
 
-    public static final String VALIDATION_REGEX = "^[\\p{Upper}]{2,3}[\\p{Digit}]{4}[\\p{Upper}]?$";
+    public static final String VALIDATION_REGEX = "^[\\p{Upper}]{2,4}[\\p{Digit}]{4}[\\p{Upper}]{0,2}$";
 
     private String moduleCode;
 

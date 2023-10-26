@@ -1,12 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
@@ -97,9 +101,35 @@ public interface Model {
     /**
      * Calculates and returns the Cumulative Average Point (CAP) for a collection of semesters.
      *
-     * @return The CAP (Cumulative Average Point) as a floating-point number based on the cumulative performance of multiple semesters.
+     * @return The CAP as a floating-point number based on the cumulative performance of multiple semesters.
      */
-    Float CAP();
+    Float getCap();
+
+    /**
+     * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
+     *
+     * @throws NoSuchElementException if no such module exists in the database.
+     */
+    ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException;
+
+    /**
+     * Returns the {@code Description} of the module with the specified {@code ModuleCode}.
+     *
+     * @throws NoSuchElementException if no such module exists in the database.
+     */
+    Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException;
+
+    /**
+     * Returns the {@code ModularCedit} of the module with the specified {@code ModuleCode}.
+     *
+     * @throws NoSuchElementException if no such module exists in the database.
+     */
+    ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException;
+
+    /**
+     * Checks if the specified {@code ModuleCode} is present in the database.
+     */
+    boolean isValidModuleCode(ModuleCode moduleCode);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ModulePlanSemester> getFilteredModuleList();
