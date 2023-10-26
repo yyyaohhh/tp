@@ -9,7 +9,7 @@
 
 ModCraft is an app that provides a fast and easy way for NUS students to track courses
 to take to meet graduation requirements and plan courses to take. The user interacts
-with it using a CLI, and it has a GUI created with JavaFX.
+with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
 
 This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
 
@@ -203,3 +203,8 @@ Action     | Format, Examples
 **calculate CAP**   | `calculateCAP`
 **calculate MCs**   | `calculateMC`
 **help**   | `help`
+
+## Glossary
+
+- Command Line Interface: A display that allows you to type commands to interact with the application.
+- Graphical User Interface: A user-friendly display that allows you to see the effects of your actions in the application. 
