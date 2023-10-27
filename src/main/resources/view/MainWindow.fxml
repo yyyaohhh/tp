@@ -19,7 +19,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@ModCraft.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -36,6 +36,9 @@
           <children>
             <StackPane fx:id="modulePlanPlaceholder" HBox.hgrow="ALWAYS" />
           </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
         </HBox>
 
         <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200.0" minHeight="200.0" minWidth="340.0" prefHeight="200.0" prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
