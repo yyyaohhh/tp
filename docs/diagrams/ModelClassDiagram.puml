@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+Package "Model                 " as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nModel" as Model
 Class ModelManager
 
@@ -24,7 +24,6 @@ Class "<<interface>>\nReadOnlyModuleData" as ReadOnlyModuleData
 Class ModuleData
 Class UniqueDbModuleList
 Class DbModule
-
 }
 
 Class HiddenOutside #FFFFFF
@@ -43,15 +42,13 @@ ModuleData .up.|> ReadOnlyModuleData
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ModulePlan *--> "1" ModulePlanSemesterList
-ModulePlanSemesterList --> "*all" ModulePlanSemester
+ModulePlanSemesterList --> "~*" ModulePlanSemester
 ModulePlanSemester --> "1" UniqueModuleList
 ModuleData *--> "1" UniqueDbModuleList
 UniqueDbModuleList --> "~* all" DbModule
-UniqueModuleList -> "~* all" Module
+UniqueModuleList -> "~*" Module
 
 ReadOnlyModuleData -[hidden]right--> ModelManager
 ModelManager -[hidden]right--> ReadOnlyModulePlan
 ReadOnlyModulePlan -[hidden]right--> ReadOnlyUserPrefs
-
-ModelManager --> "~* filtered" Module
 @enduml
