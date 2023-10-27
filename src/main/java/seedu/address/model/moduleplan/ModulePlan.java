@@ -35,7 +35,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an ModulePlan using the Modules in the {@code toBeCopied}
      */
     public ModulePlan(ReadOnlyModulePlan toBeCopied) {
         this();
@@ -46,7 +46,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
 
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ModulePlan} with {@code newData}.
      */
     public void resetData(ReadOnlyModulePlan newData) {
         requireNonNull(newData);

@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.database.DbModuleList;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
@@ -28,23 +27,23 @@ public class ModelManager implements Model {
 
     private final ModulePlan modulePlan;
     private final UserPrefs userPrefs;
-    private final DbModuleList dbModuleList;
+    private final ModuleData moduleData;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, DbModuleList dbModuleList) {
-        requireAllNonNull(modulePlan, userPrefs, dbModuleList);
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ModuleData moduleData) {
+        requireAllNonNull(modulePlan, userPrefs, moduleData);
 
         logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
 
         this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.dbModuleList = new DbModuleList(dbModuleList);
+        this.moduleData = new ModuleData(moduleData);
     }
 
     public ModelManager() {
-        this(new ModulePlan(), new UserPrefs(), new DbModuleList());
+        this(new ModulePlan(), new UserPrefs(), new ModuleData());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -135,26 +134,37 @@ public class ModelManager implements Model {
         return modulePlan.getCap();
     }
 
-    //=========== DbModuleList ===============================================================================
+    //=========== ModuleData ===============================================================================
+
+    @Override
+    public void setModuleData(ReadOnlyModuleData moduleData) {
+        requireNonNull(moduleData);
+        this.moduleData.resetData(moduleData);
+    }
+
+    @Override
+    public ReadOnlyModuleData getModuleData() {
+        return moduleData;
+    }
 
     @Override
     public ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException {
-        return dbModuleList.getModuleName(moduleCode);
+        return moduleData.getModuleName(moduleCode);
     }
 
     @Override
     public Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException {
-        return dbModuleList.getModuleDescription(moduleCode);
+        return moduleData.getModuleDescription(moduleCode);
     }
 
     @Override
     public ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException {
-        return dbModuleList.getModularCredit(moduleCode);
+        return moduleData.getModularCredit(moduleCode);
     }
 
     @Override
     public boolean isValidModuleCode(ModuleCode moduleCode) {
-        return dbModuleList.isValidModuleCode(moduleCode);
+        return moduleData.isValidModuleCode(moduleCode);
     }
 
     //=========== Filtered Person List Accessors =============================================================
