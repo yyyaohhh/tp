@@ -9,15 +9,14 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
-import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 
 /**
  * A list of DbModules that enforces uniqueness between its elements and does not allow nulls.
- * A DbModule is considered unique by comparing using {@code DbModule#isSameDbModule(DbModule)}. As such, adding and updating of
- * DbModule uses DbModule#isSameDbModule(DbModule) for equality so as to ensure that the DbModule being added or updated is
- * unique in terms of identity in the UniqueDbModuleList. However, the removal of a DbModule uses DbModule#equals(Object) so
- * as to ensure that the DbModule with exactly the same fields will be removed.
+ * A DbModule is considered unique by comparing using {@code DbModule#isSameDbModule(DbModule)}. As such, adding and
+ * updating of DbModule uses DbModule#isSameDbModule(DbModule) for equality so as to ensure that the DbModule being
+ * added or updated is unique in terms of identity in the UniqueDbModuleList. However, the removal of a DbModule uses
+ * DbModule#equals(Object) so as to ensure that the DbModule with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -49,9 +48,9 @@ public class UniqueDbModuleList implements Iterable<DbModule> {
     }
 
     /**
-     * Replaces the DbModules in the internal list with the DbModules from the provided `UniqueDbModuleList`.
+     * Replaces the dbModules in the internal list with the dbModules from the provided `UniqueDbModuleList`.
      *
-     * @param replacement The `UniqueDbModuleList` containing the DbModules to replace the internal list.
+     * @param replacement The `UniqueDbModuleList` containing the dbModules to replace the internal list.
      * @throws NullPointerException If the provided replacement is null.
      */
     public void setDbModules(UniqueDbModuleList replacement) {
@@ -60,16 +59,16 @@ public class UniqueDbModuleList implements Iterable<DbModule> {
     }
 
     /**
-     * Replaces the contents of this list with {@code DbModules}.
-     * {@code DbModules} must not contain duplicate DbModules.
+     * Replaces the contents of this list with {@code dbModules}.
+     * {@code dbModules} must not contain duplicate dbModules.
      */
-    public void setDbModules(List<DbModule> DbModules) {
-        requireAllNonNull(DbModules);
-        if (!DbModulesAreUnique(DbModules)) {
+    public void setDbModules(List<DbModule> dbModules) {
+        requireAllNonNull(dbModules);
+        if (!dbModulesAreUnique(dbModules)) {
             throw new DuplicateModuleException();
         }
 
-        internalList.setAll(DbModules);
+        internalList.setAll(dbModules);
     }
 
     /**
@@ -137,12 +136,12 @@ public class UniqueDbModuleList implements Iterable<DbModule> {
     }
 
     /**
-     * Returns true if {@code DbModules} contains only unique DbModules.
+     * Returns true if {@code dbModules} contains only unique dbModules.
      */
-    private boolean DbModulesAreUnique(List<DbModule> DbModules) {
-        for (int i = 0; i < DbModules.size() - 1; i++) {
-            for (int j = i + 1; j < DbModules.size(); j++) {
-                if (DbModules.get(i).isSameDbModule(DbModules.get(j))) {
+    private boolean dbModulesAreUnique(List<DbModule> dbModules) {
+        for (int i = 0; i < dbModules.size() - 1; i++) {
+            for (int j = i + 1; j < dbModules.size(); j++) {
+                if (dbModules.get(i).isSameDbModule(dbModules.get(j))) {
                     return false;
                 }
             }
