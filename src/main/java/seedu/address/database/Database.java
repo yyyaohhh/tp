@@ -1,6 +1,7 @@
 package seedu.address.database;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ModuleData;
 
 /**
  * The API of the Database component.
@@ -13,14 +14,14 @@ public interface Database {
     String getDatabaseFilePath();
 
     /**
-     * Returns database information as a {@link DbModuleList}.
+     * Returns database information as a {@link ModuleData} object.
      *
      * @throws DataLoadingException if the data could not be loaded.
      */
-    DbModuleList readDatabase() throws DataLoadingException;
+    ModuleData readDatabase() throws DataLoadingException;
 
     /**
      * @see #readDatabase()
      */
-    DbModuleList readDatabase(String filePath) throws DataLoadingException;
+    ModuleData readDatabase(String filePath) throws DataLoadingException;
 }

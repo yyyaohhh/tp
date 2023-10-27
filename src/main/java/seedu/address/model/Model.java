@@ -106,6 +106,16 @@ public interface Model {
     Float getCap();
 
     /**
+     * Replaces the module data with the data in {@code moduleData}.
+     */
+    public void setModuleData(ReadOnlyModuleData moduleData);
+
+    /**
+     * Returns the module data.
+     */
+    public ReadOnlyModuleData getModuleData();
+
+    /**
      * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
      *
      * @throws NoSuchElementException if no such module exists in the database.

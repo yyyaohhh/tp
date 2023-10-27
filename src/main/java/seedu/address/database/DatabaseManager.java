@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.ModuleData;
 
 /**
  * Manages reading of module information from database file.
@@ -25,20 +26,20 @@ public class DatabaseManager implements Database {
     }
 
     @Override
-    public DbModuleList readDatabase() throws DataLoadingException {
+    public ModuleData readDatabase() throws DataLoadingException {
         return readDatabase(this.filePath);
     }
 
     @Override
-    public DbModuleList readDatabase(String filePath) throws DataLoadingException {
+    public ModuleData readDatabase(String filePath) throws DataLoadingException {
         requireNonNull(filePath);
         logger.fine("Attempting to parse module information: " + filePath);
 
-        Optional<JsonAdaptedDbModuleList> jsonDatabaseOptional = JsonUtil.readJsonResource(
-                "database/moduleinfo.json", JsonAdaptedDbModuleList.class);
+        Optional<JsonSerializableModuleData> jsonDatabaseOptional = JsonUtil.readJsonResource(
+                "database/moduleinfo.json", JsonSerializableModuleData.class);
 
         try {
-            return jsonDatabaseOptional.get().toDbModuleList();
+            return jsonDatabaseOptional.get().toModelType();
         } catch (NoSuchElementException nsee) {
             throw new DataLoadingException(nsee);
         } catch (IllegalValueException ive) {

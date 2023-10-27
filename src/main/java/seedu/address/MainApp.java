@@ -15,9 +15,9 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.database.Database;
 import seedu.address.database.DatabaseManager;
-import seedu.address.database.DbModuleList;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.model.ModuleData;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -102,15 +102,15 @@ public class MainApp extends Application {
         //TODO implement loading from storage for ModulePlan.
         ReadOnlyModulePlan initialData = SampleDataUtil.getSampleModulePlan();
 
-        DbModuleList dbModuleList;
+        ModuleData moduleData;
         try {
-            dbModuleList = database.readDatabase();
+            moduleData = database.readDatabase();
         } catch (DataLoadingException dle) {
             logger.severe("Database file at " + database.getDatabaseFilePath() + " could not be loaded.");
             throw new RuntimeException("Unable to load database file.");
         }
 
-        return new ModelManager(initialData, userPrefs, dbModuleList);
+        return new ModelManager(initialData, userPrefs, moduleData);
     }
 
     private void initLogging(Config config) {
