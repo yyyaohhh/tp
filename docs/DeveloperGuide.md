@@ -124,19 +124,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the module plan of each semester i.e., all `ModulePlanSemester` in one `ModulePlanSemesterList`.
-* stores the module plan data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
-* each module plan of a semester contains a `Semester` and a `Year` for identification and stores a `UniqueModuleList`.
-* stores the currently 'selected' `Module` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the module plan data i.e., all `Module` objects (which are contained in `UniqueModuleList` objects).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * stores a `ModuleData` object that represents the information on all modules. This is exposed to the outside as a `ReadOnlyModuleData` object.
 * does not depend on any of the other four components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `ModulePlan` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+**Note:** The module plan data is split into different semesters (e.g. Y1S1, Y1S2, Y2S1, etc). Instead of one `UniqueModuleList` storing all of the User's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters.
 
 </box>
 
@@ -161,6 +156,10 @@ The `Storage` component,
 The `Database` component,
 * reads the module information from JSON format to the corresponding `ModuleData` object.
 * depends on some classes in the `Model` component (because the `Database` component's job is to retrieve objects that belong to the `Model`)
+
+<box type="info" seamless>
+
+**Note:** The module data is stored within the resource folder. In the case where the data cannot be read successfully, a `RuntimeException` is deliberately triggered to forcefully halt the application's execution. This is necessary because all features are reliant on the module data.
 
 ### Common classes
 
