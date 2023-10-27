@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete CS1231S`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete CS2030S`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -154,10 +154,11 @@ The `Storage` component,
 
 **API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/DatabaseClassDiagram.puml" width="550" />
 
 The `Database` component,
-* reads the module information from JSON format to the corresponding `DbModuleList` object.
+* reads the module information from JSON format to the corresponding `ModuleData` object.
+* depends on some classes in the `Model` component (because the `Database` component's job is to retrieve objects that belong to the `Model`)
 
 ### Common classes
 
