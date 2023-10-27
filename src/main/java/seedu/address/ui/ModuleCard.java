@@ -2,16 +2,12 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.module.Module;
-import seedu.address.model.moduleplan.ModulePlanSemester;
 
 /**
- * TODO: JavaDoc
+ * An UI component that displays information of a {@code Module}.
  */
 public class ModuleCard extends UiPart<Region> {
 
@@ -28,7 +24,9 @@ public class ModuleCard extends UiPart<Region> {
     private Label grade;
 
 
-
+    /**
+     * Creates a {@code ModuleCard} with the given {@code Module} to display.
+     */
     public ModuleCard(Module module) {
         super(FXML);
 
