@@ -34,7 +34,7 @@ activate DeleteCommandParser
 
 
 create ParserUtil
-DeleteCommandParser -> ParserUtil : parseModuleCode("CS1101S")
+DeleteCommandParser -> ParserUtil : parseModuleCode("CS2030S")
 activate ParserUtil
 
 create ModuleCode
