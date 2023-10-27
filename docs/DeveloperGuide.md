@@ -118,17 +118,19 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="diagrams/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
+<puml src="diagrams/ModuleClassDiagram.puml" width="450" />
 
 The `Model` component,
 
 * stores the module plan of each semester i.e., all `ModulePlanSemester` in one `ModulePlanSemesterList`.
-* * stores the module plan data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
+* stores the module plan data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
 * each module plan of a semester contains a `Semester` and a `Year` for identification and stores a `UniqueModuleList`.
 * stores the currently 'selected' `Module` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+* stores a `ModuleData` object that represents the information on all modules. This is exposed to the outside as a `ReadOnlyModuleData` object.
+* does not depend on any of the other four components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
