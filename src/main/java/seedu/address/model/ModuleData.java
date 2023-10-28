@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,6 +12,7 @@ import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.UniqueDbModuleList;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Represents the database as a list of {@code DbModule}s.
@@ -96,9 +96,9 @@ public class ModuleData implements ReadOnlyModuleData {
      *
      * @param moduleCode The {@code ModuleCode} to be matched with.
      * @return The matching {@code DbModule}.
-     * @throws NoSuchElementException if no such module exists in the database.
+     * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public DbModule getDbModule(ModuleCode moduleCode) throws NoSuchElementException {
+    public DbModule getDbModule(ModuleCode moduleCode) throws ModuleNotFoundException {
         requireNonNull(moduleCode);
         return modules.findDbModule(moduleCode);
     }
@@ -108,9 +108,9 @@ public class ModuleData implements ReadOnlyModuleData {
      *
      * @param moduleCode The {@code ModuleCode} to be matched with.
      * @return The matching {@code ModuleName}.
-     * @throws NoSuchElementException if no such module exists in the database.
+     * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException {
+    public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
         return getDbModule(moduleCode).getName();
     }
 
@@ -119,9 +119,9 @@ public class ModuleData implements ReadOnlyModuleData {
      *
      * @param moduleCode The {@code ModuleCode} to be matched with.
      * @return The matching {@code Description}.
-     * @throws NoSuchElementException if no such module exists in the database.
+     * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException {
+    public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
         return getDbModule(moduleCode).getDescription();
     }
 
@@ -130,9 +130,9 @@ public class ModuleData implements ReadOnlyModuleData {
      *
      * @param moduleCode The {@code ModuleCode} to be matched with.
      * @return The matching {@code ModularCredit}.
-     * @throws NoSuchElementException if no such module exists in the database.
+     * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException {
+    public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
         return getDbModule(moduleCode).getModularCredit();
     }
 
@@ -142,7 +142,7 @@ public class ModuleData implements ReadOnlyModuleData {
      * @param moduleCode The {@code ModuleCode} to be matched with.
      * @return True if the {@code ModuleCode} exists in the database, false otherwise.
      */
-    public boolean isValidModuleCode(ModuleCode moduleCode) {
+    public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
         for (DbModule module : modules) {
             if (module.getModuleCode().equals(moduleCode)) {
                 return true;

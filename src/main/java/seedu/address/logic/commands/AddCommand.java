@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Adds a module to the module plan.
@@ -47,14 +48,30 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-
-        if (model.hasModule(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
-
+        // Database check
+        if (!model.checkDbValidModule(toAdd)) {
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_MODULE_CODE, toAdd.getModuleCode()));
         }
 
-        model.addModule(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        // Module plan duplicate check
+        if (model.hasModule(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
+        }
+
+        // Populating module details from database
+        ModuleCode moduleCode = toAdd.getModuleCode();
+        Module newModule = new Module(moduleCode,
+                                      toAdd.getYearTaken(),
+                                      toAdd.getSemesterTaken(),
+                                      toAdd.getGrade(),
+                                      model.getDbModuleName(moduleCode),
+                                      model.getDbModuleDescription(moduleCode),
+                                      model.getDbModularCredit(moduleCode));
+
+        // Add to module plan and return success message
+        model.addModule(newModule);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newModule)));
     }
 
     @Override
