@@ -16,7 +16,6 @@ Module -up-> "*" Tag
 
 Module *--> ModuleCode
 Module *--> Grade
-Module *--> Lecturer
 Module *--> ModuleCredit
 Module *--> Semester
 Module *--> Year
