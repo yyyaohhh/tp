@@ -1,14 +1,8 @@
-package seedu.address.database;
+package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
-import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
 
 /**
  * Represents a Module in the system.
@@ -26,7 +20,6 @@ public class DbModule {
     /**
      * Every field must be present and not null.
      */
-    @JsonCreator
     public DbModule(ModuleCode moduleCode, ModuleName name, Description description, ModularCredit modularCredit) {
         requireAllNonNull(name, moduleCode, description);
         this.moduleName = name;
@@ -49,6 +42,19 @@ public class DbModule {
 
     public ModularCredit getModularCredit() {
         return modularCredit;
+    }
+
+    /**
+     * Checks if two modules are the same module.
+     * @param otherModule the other module to check.
+     * @return true if the modules are the same, false otherwise.
+     */
+    public boolean isSameDbModule(DbModule otherModule) {
+        if (otherModule == this) {
+            return true;
+        }
+
+        return otherModule != null && otherModule.getModuleCode().equals(getModuleCode());
     }
 
     @Override

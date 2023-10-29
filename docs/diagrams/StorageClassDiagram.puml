@@ -19,7 +19,6 @@ Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedModule
-'Class JsonAdaptedTag
 }
 
 }
@@ -39,6 +38,5 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedModule
 
-'JsonAdaptedModule --> "*" JsonAdaptedTag
 
 @enduml
