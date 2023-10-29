@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import org.junit.jupiter.api.Test;
@@ -31,12 +32,12 @@ import seedu.address.testutil.ModuleBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
 
     @Test
     public void execute_allFieldsSpecified_success() {
         ModuleCode moduleCode = new ModuleCode(VALID_CODE_CS2040S);
-        Module module = model.findModuleUsingCode(moduleCode);
+        Module module = model.getModule(moduleCode);
 
         Module editedModule = new ModuleBuilder().withCode(VALID_CODE_CS2040S).build();
 
@@ -45,7 +46,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
-        Model expectedModel = new ModelManager(new ModulePlan(getTypicalModulePlan()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModulePlan(getTypicalModulePlan()), new UserPrefs(), getTypicalModuleData());
         expectedModel.setModule(module, editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -54,7 +55,7 @@ public class EditCommandTest {
     @Test
     public void execute_someFieldsSpecified_success() {
         ModuleCode moduleCode = new ModuleCode(VALID_CODE_CS2040S);
-        Module module = model.findModuleUsingCode(moduleCode);
+        Module module = model.getModule(moduleCode);
 
         ModuleBuilder moduleInList = new ModuleBuilder(module);
         Module editedModule = moduleInList
@@ -66,7 +67,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
-        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()), new UserPrefs(), getTypicalModuleData());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -75,11 +76,11 @@ public class EditCommandTest {
         ModuleCode moduleCode = new ModuleCode(VALID_CODE_CS2040S);
 
         EditCommand editCommand = new EditCommand(moduleCode, new EditModuleDescriptor());
-        Module editedModule = model.findModuleUsingCode(moduleCode);
+        Module editedModule = model.getModule(moduleCode);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
-        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()), new UserPrefs(), getTypicalModuleData());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ import seedu.address.testutil.TypicalModules;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs());
+    private Model model = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -34,7 +35,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
                 Messages.format(moduleToDelete));
 
-        ModelManager expectedModel = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         expectedModel.deleteModule(moduleToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

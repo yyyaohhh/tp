@@ -42,7 +42,7 @@ public class ModuleData implements ReadOnlyModuleData {
      *
      * @param toBeCopied The list of {@code DbModule}s to be added.
      */
-    public ModuleData(ModuleData toBeCopied) {
+    public ModuleData(ReadOnlyModuleData toBeCopied) {
         this();
         resetData(toBeCopied);
     }

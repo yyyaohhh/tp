@@ -32,7 +32,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ModuleData moduleData) {
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ReadOnlyModuleData moduleData) {
         requireAllNonNull(modulePlan, userPrefs, moduleData);
 
         logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
@@ -104,6 +104,7 @@ public class ModelManager implements Model {
         requireNonNull(module);
         modulePlan.removeModule(module);
     }
+
     @Override
     public void addModule(Module module) {
         requireNonNull(module);

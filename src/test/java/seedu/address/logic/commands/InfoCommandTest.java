@@ -23,7 +23,7 @@ public class InfoCommandTest {
     @Test
     public void execute_sampleMessage_success() {
         ModuleCode moduleCode = new ModuleCode("CS1101S");
-        String expectedMessage = InfoCommand.MESSAGE_INFO_MODULE_SUCCESS_SAMPLE;
+        String expectedMessage = String.format(InfoCommand.MESSAGE_INFO_MODULE_SUCCESS, moduleCode);
 
         assertCommandSuccess(new InfoCommand(moduleCode), model, expectedMessage, expectedModel);
     }

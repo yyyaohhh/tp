@@ -81,23 +81,13 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     private void loadDefaultSemester() {
-        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
-        ModulePlanSemester y1s2 = new ModulePlanSemester(new Year("1"), new Semester("2"));
-        ModulePlanSemester y2s1 = new ModulePlanSemester(new Year("2"), new Semester("1"));
-        ModulePlanSemester y2s2 = new ModulePlanSemester(new Year("2"), new Semester("2"));
-        ModulePlanSemester y3s1 = new ModulePlanSemester(new Year("3"), new Semester("1"));
-        ModulePlanSemester y3s2 = new ModulePlanSemester(new Year("3"), new Semester("2"));
-        ModulePlanSemester y4s1 = new ModulePlanSemester(new Year("4"), new Semester("1"));
-        ModulePlanSemester y4s2 = new ModulePlanSemester(new Year("4"), new Semester("2"));
-
-        this.semesters.addSemester(y1s1);
-        this.semesters.addSemester(y1s2);
-        this.semesters.addSemester(y2s1);
-        this.semesters.addSemester(y2s2);
-        this.semesters.addSemester(y3s1);
-        this.semesters.addSemester(y3s2);
-        this.semesters.addSemester(y4s1);
-        this.semesters.addSemester(y4s2);
+        for (int y = 1; y <= 4; y++) {
+            for (int s = 1; s <= 2; s++) {
+                Year year = new Year(Integer.toString(y));
+                Semester sem = new Semester(Integer.toString(s));
+                this.semesters.addSemester(new ModulePlanSemester(year, sem));
+            }
+        }
     }
 
 
