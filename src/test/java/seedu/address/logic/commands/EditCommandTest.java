@@ -101,7 +101,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new HelpCommand()));
 
         // different module code -> returns false
         assertFalse(standardCommand.equals(new EditCommand(new ModuleCode(VALID_CODE_CS2101), DESC_CS2040S)));

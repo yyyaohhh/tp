@@ -50,12 +50,12 @@ public class ModuleName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Name)) {
+        if (!(other instanceof ModuleName)) {
             return false;
         }
 
-        seedu.address.model.person.Name otherName = (seedu.address.model.person.Name) other;
-        return moduleName.equals(otherName.fullName);
+        ModuleName otherName = (ModuleName) other;
+        return moduleName.equals(otherName.moduleName);
     }
 
     @Override
