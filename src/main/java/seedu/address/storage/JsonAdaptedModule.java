@@ -1,18 +1,11 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.Grade;
-import seedu.address.model.module.Lecturer;
 import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
@@ -32,7 +25,6 @@ public class JsonAdaptedModule {
     private final String grade;
     private final String name;
     private final String description;
-    private final List<JsonAdaptedLecturer> lecturers = new ArrayList<>();
     private final String modularCredit;
 
     /**
@@ -46,7 +38,6 @@ public class JsonAdaptedModule {
                              @JsonProperty("grade") String grade,
                              @JsonProperty("name") String name,
                              @JsonProperty("description") String description,
-                             @JsonProperty("lecturers") List<JsonAdaptedLecturer> lecturers,
                              @JsonProperty("modularCredit") String modularCredit) {
         this.code = code;
         this.year = year;
@@ -54,9 +45,6 @@ public class JsonAdaptedModule {
         this.grade = grade;
         this.name = name;
         this.description = description;
-        if (lecturers != null) {
-            this.lecturers.addAll(lecturers);
-        }
         this.modularCredit = modularCredit;
     }
     /**
@@ -69,9 +57,6 @@ public class JsonAdaptedModule {
         grade = source.getGrade().toString();
         name = source.getName().toString();
         description = source.getDescription().toString();
-        lecturers.addAll(source.getLecturers().stream()
-                .map(JsonAdaptedLecturer::new)
-                .collect(Collectors.toList()));
         modularCredit = source.getModularCredit().toString();
     }
 
@@ -134,11 +119,6 @@ public class JsonAdaptedModule {
         }
         final Description modelDescription = new Description(description);
 
-        final List<Lecturer> moduleLecturers = new ArrayList<>();
-        for (JsonAdaptedLecturer lecturer : lecturers) {
-            moduleLecturers.add(lecturer.toModelType());
-        }
-
         if (modularCredit == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
@@ -148,9 +128,8 @@ public class JsonAdaptedModule {
         }
         final ModularCredit modelModularCredit = new ModularCredit(modularCredit);
 
-        final Set<Lecturer> modelLecturer = new HashSet<>(moduleLecturers);
         return new Module(modelCode, modelYear, modelSem, modelGrade, modelName, modelDescription,
-                modelLecturer, modelModularCredit);
+                modelModularCredit);
     }
 
 }

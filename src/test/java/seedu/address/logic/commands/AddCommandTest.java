@@ -18,9 +18,14 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyModuleData;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
@@ -131,7 +136,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public boolean hasModule(Module module) {
             throw new AssertionError("This method should not be called.");
@@ -148,7 +152,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Module findModuleUsingCode(ModuleCode code) {
+        public Module getModule(ModuleCode code) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -159,6 +163,41 @@ public class AddCommandTest {
 
         @Override
         public Float getCap() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setModuleData(ReadOnlyModuleData moduleData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyModuleData getModuleData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkDbValidModule(Module module) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
             throw new AssertionError("This method should not be called.");
         }
 

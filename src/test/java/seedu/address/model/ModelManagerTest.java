@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 
@@ -98,13 +99,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ModulePlan modulePlan = TypicalModules.getTypicalModulePlan();
+        ModulePlan modulePlan = getTypicalModulePlan();
         ModulePlan differentModulePlan = new ModulePlan();
         UserPrefs userPrefs = new UserPrefs();
+        ModuleData moduleData = getTypicalModuleData();
 
         // same values -> returns true
-        modelManager = new ModelManager(modulePlan, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(modulePlan, userPrefs);
+        modelManager = new ModelManager(modulePlan, userPrefs, moduleData);
+        ModelManager modelManagerCopy = new ModelManager(modulePlan, userPrefs, moduleData);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -117,13 +119,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentModulePlan, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentModulePlan, userPrefs, moduleData)));
 
 
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs, moduleData)));
     }
 }

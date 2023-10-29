@@ -2,9 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.NoSuchElementException;
-
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleCode;
@@ -24,8 +23,6 @@ public class InfoCommand extends Command {
             + "MCs: %3$s \n"
             + "%4$s \n";
 
-    public static final String MESSAGE_NOT_FOUND_MODULE = "No such module: %1$s";
-
     private final ModuleCode moduleCode;
 
     /**
@@ -39,17 +36,19 @@ public class InfoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        String info;
-        try {
-            String name = model.getModuleName(moduleCode).toString();
-            String mc = model.getModularCredit(moduleCode).toString();
-            String description = model.getModuleDescription(moduleCode).toString();
-            info = String.format(MESSAGE_INFO_MODULE_SUCCESS, moduleCode, name, mc, description);
-        } catch (NoSuchElementException e) {
-            throw new CommandException(String.format(MESSAGE_NOT_FOUND_MODULE, moduleCode));
+        // Database check
+        if (!model.checkDbValidModuleCode(moduleCode)) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MODULE_CODE, moduleCode));
         }
 
-        return new CommandResult(info);
+        // Retrieve module information from database
+        String name = model.getDbModuleName(moduleCode).toString();
+        String mc = model.getDbModularCredit(moduleCode).toString();
+        String description = model.getDbModuleDescription(moduleCode).toString();
+
+        // Return success message
+        return new CommandResult(
+                String.format(MESSAGE_INFO_MODULE_SUCCESS, moduleCode, name, mc, description));
     }
 
     @Override
