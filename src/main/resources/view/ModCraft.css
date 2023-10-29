@@ -250,7 +250,7 @@
     -fx-background-radius: 30 30 30 30;
     -fx-border-color: #f58e07;
     -fx-border-width: 2;
-    -fx-border-insets 5;
+    -fx-border-insets: 0 10 0 0
 }
 
 #commandTypeLabel {
@@ -315,8 +315,4 @@
     -fx-font-size: 14;
 }
 
-#modulePlanCardPane {
-    -fx-background-color: #f2f2f2;
-
-}
 
