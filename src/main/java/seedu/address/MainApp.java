@@ -22,11 +22,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ModuleData;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonModulePlanStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ModulePlanStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -60,8 +61,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ModulePlanStorage modulePlanStorage = new JsonModulePlanStorage(userPrefs.getModulePlanFilePath());
+        storage = new StorageManager(modulePlanStorage, userPrefsStorage);
 
         Database database = new DatabaseManager();
 
@@ -80,27 +81,22 @@ public class MainApp extends Application {
      * If the {@code database}'s module list is not found, a {@code RuntimeException} will be thrown.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Database database) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getModulePlanFilePath());
 
-        /*
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyModulePlan> modulePlanOptional;
+        ReadOnlyModulePlan initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            modulePlanOptional = storage.readModulePlan();
+            if (!modulePlanOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getModulePlanFilePath()
+                        + " populated with a sample ModulePlan.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = modulePlanOptional.orElseGet(SampleDataUtil::getSampleModulePlan);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getModulePlanFilePath() + " could not be loaded."
+                    + " Will be starting with an empty ModulePlan.");
+            initialData = new ModulePlan();
         }
-        */
-
-        //TODO implement loading from storage for ModulePlan.
-        ReadOnlyModulePlan initialData = SampleDataUtil.getSampleModulePlan();
 
         ModuleData moduleData;
         try {

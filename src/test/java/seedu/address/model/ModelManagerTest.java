@@ -38,14 +38,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setModulePlanFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setModulePlanFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -63,14 +63,14 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setModulePlanFilePath(null));
     }
 
     @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setModulePlanFilePath(path);
+        assertEquals(path, modelManager.getModulePlanFilePath());
     }
 
     @Test
@@ -86,8 +86,6 @@ public class ModelManagerTest {
     @Test
     public void hasModule_moduleInModulePlan_returnsTrue() {
         ModulePlanSemester m = new ModulePlanSemester(CS2101.getYearTaken(), CS2101.getSemesterTaken());
-        ModulePlan mp = (ModulePlan) modelManager.getModulePlan();
-        mp.addSemester(m);
         modelManager.addModule(CS2101);
         assertTrue(modelManager.hasModule(CS2101));
     }
@@ -125,7 +123,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setModulePlanFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs, moduleData)));
     }
 }

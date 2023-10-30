@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.DbModule;
 import seedu.address.model.module.Module;
@@ -9,10 +11,6 @@ import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A utility class containing a list of {@code Module} objects to be used in tests.
@@ -52,9 +50,9 @@ public class TypicalModules {
             .withYear("2")
             .withSem("1")
             .withGrade("IP")
-            .withName("Linear Algebra I")
+            .withName("Effective Communication for Computing Professionals")
             .withModularCredit("4")
-            .withDescription("This course is a first course in linear algebra.")
+            .withDescription("This course aims to equip students with the skills needed to communicate.")
             .build();
     public static final Module GEA1000 = new ModuleBuilder()
             .withCode("GEA1000")
@@ -74,28 +72,27 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about computer organisation")
             .build();
+
+    public static final Module CS2106 = new ModuleBuilder()
+            .withCode("CS2106")
+            .withYear("2")
+            .withSem("2")
+            .withGrade("B")
+            .withName("Introduction to Operating Systems")
+            .withModularCredit("4")
+            .withDescription("Learn about operating systems")
+            .build();
     //Add more
 
     private TypicalModules() {}
 
-    /**
-     * Returns an {@code AddressBook} with all the typical modules.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Module module : getTypicalModules()) {
-            ab.addModule(module);
-        }
-        return ab;
-    }
-
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan mp = new ModulePlan();
 
-        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
-        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
-        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
-        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
+//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
+//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
+//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
+//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
 
         for (Module module : getTypicalModules()) {
             mp.addModule(module);

@@ -151,7 +151,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
      * @return The module with the specified module code.
      * @throws ModuleNotFoundException if no such module exists.
      */
-    public Module getModule(ModuleCode moduleCode) throws ModuleNotFoundException {
+    public Module getModule(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
         return semesters.findModule(moduleCode);
     }
