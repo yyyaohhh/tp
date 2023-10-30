@@ -71,14 +71,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getModulePlanFilePath() {
+        return userPrefs.getModulePlanFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setModulePlanFilePath(Path modulePlanFilePath) {
+        requireNonNull(modulePlanFilePath);
+        userPrefs.setModulePlanFilePath(modulePlanFilePath);
     }
 
     //=========== ModulePlan ================================================================================

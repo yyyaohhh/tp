@@ -53,7 +53,7 @@ public class JsonAdaptedModule {
     public JsonAdaptedModule(Module source) {
         code = source.getModuleCode().toString();
         year = source.getYearTaken().toString();
-        sem = source.getSemesterTaken().toString();
+        sem = source.getSemesterTaken().getSemesterString();
         grade = source.getGrade().toString();
         name = source.getName().toString();
         description = source.getDescription().toString();

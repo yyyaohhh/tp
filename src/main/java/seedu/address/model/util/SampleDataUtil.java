@@ -36,14 +36,6 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Module sampleModule : getSampleModules()) {
-            sampleAb.addModule(sampleModule);
-        }
-        return sampleAb;
-    }
-
     public static ReadOnlyModulePlan getSampleModulePlan() {
         ModulePlan sampleMp = new ModulePlan();
 
