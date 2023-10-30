@@ -89,7 +89,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      * @return The module with the specified module code, or null if not found.
      * @throws NullPointerException If the provided module code is null.
      */
-    public Module findUsingCode(ModuleCode code) {
+    public Module getModule(ModuleCode code) {
         requireNonNull(code);
         return modules.find(code);
     }

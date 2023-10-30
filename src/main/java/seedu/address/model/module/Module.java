@@ -2,8 +2,6 @@ package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Set;
-
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -17,7 +15,6 @@ public class Module {
 
     // Data fields
     private final Description description;
-    private final Set<Lecturer> lecturers;
     private final Year yearTaken;
     private final Semester semesterTaken;
     private final Grade grade;
@@ -27,12 +24,11 @@ public class Module {
      * Every field must be present and not null.
      */
     public Module(ModuleCode moduleCode, Year yearTaken, Semester semesterTaken, Grade grade, ModuleName name,
-                   Description description, Set<Lecturer> lecturers, ModularCredit modularCredit) {
-        requireAllNonNull(name, moduleCode, description, lecturers, yearTaken, semesterTaken, grade);
+                   Description description, ModularCredit modularCredit) {
+        requireAllNonNull(name, moduleCode, description, yearTaken, semesterTaken, grade);
         this.moduleName = name;
         this.moduleCode = moduleCode;
         this.description = description;
-        this.lecturers = lecturers;
         this.yearTaken = yearTaken;
         this.semesterTaken = semesterTaken;
         this.grade = grade;
@@ -51,7 +47,6 @@ public class Module {
         // Temporary until we get back-end setup
         this.moduleName = null;
         this.description = null;
-        this.lecturers = null;
         this.modularCredit = null;
     }
 
@@ -65,10 +60,6 @@ public class Module {
 
     public Description getDescription() {
         return description;
-    }
-
-    public Set<Lecturer> getLecturers() {
-        return lecturers;
     }
 
     public Year getYearTaken() {

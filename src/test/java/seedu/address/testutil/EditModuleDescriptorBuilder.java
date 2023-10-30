@@ -5,8 +5,6 @@ import seedu.address.model.module.Grade;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 
 /**
  * A utility class to help with building EditModuleDescriptor objects.
@@ -32,11 +30,6 @@ public class EditModuleDescriptorBuilder {
         descriptor.setSemester(module.getSemesterTaken());
         descriptor.setGrade(module.getGrade());
     }
-
-    /**
-     * Sets the {@code Year} of the {@code EditModuleDescriptor} that we are building.
-     */
-
 
     /**
      * Sets the {@code Year} of the {@code EditModuleDescriptor} that we are building.

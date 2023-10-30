@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -15,6 +14,7 @@ import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
@@ -32,7 +32,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ModuleData moduleData) {
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ReadOnlyModuleData moduleData) {
         requireAllNonNull(modulePlan, userPrefs, moduleData);
 
         logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
@@ -93,7 +93,6 @@ public class ModelManager implements Model {
         return modulePlan;
     }
 
-
     @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
@@ -105,12 +104,12 @@ public class ModelManager implements Model {
         requireNonNull(module);
         modulePlan.removeModule(module);
     }
+
     @Override
     public void addModule(Module module) {
         requireNonNull(module);
         modulePlan.addModule(module);
     }
-
 
     @Override
     public void setModule(Module target, Module editedModule) {
@@ -119,9 +118,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Module findModuleUsingCode(ModuleCode code) {
-        requireAllNonNull(code);
-        return modulePlan.findUsingCode(code);
+    public Module getModule(ModuleCode code) throws ModuleNotFoundException {
+        requireNonNull(code);
+        return modulePlan.getModule(code);
     }
 
     @Override
@@ -148,23 +147,28 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException {
-        return moduleData.getModuleName(moduleCode);
+    public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
+        return moduleData.getDbModuleName(moduleCode);
     }
 
     @Override
-    public Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException {
-        return moduleData.getModuleDescription(moduleCode);
+    public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
+        return moduleData.getDbModuleDescription(moduleCode);
     }
 
     @Override
-    public ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException {
-        return moduleData.getModularCredit(moduleCode);
+    public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
+        return moduleData.getDbModularCredit(moduleCode);
     }
 
     @Override
-    public boolean isValidModuleCode(ModuleCode moduleCode) {
-        return moduleData.isValidModuleCode(moduleCode);
+    public boolean checkDbValidModule(Module module) {
+        return checkDbValidModuleCode(module.getModuleCode());
+    }
+
+    @Override
+    public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+        return moduleData.checkDbValidModuleCode(moduleCode);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -10,10 +10,11 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameModule comparison)
  */
 public class ModulePlan implements ReadOnlyModulePlan {
 
@@ -55,7 +56,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
 
     /**
      * Replaces the contents of the module list with {@code modules}.
-     * {@code modules} must not contain duplicate persons.
+     * {@code modules} must not contain duplicate modules.
      */
     public void setSemesters(List<ModulePlanSemester> modules) {
         this.semesters.setSemesters(modules);
@@ -80,30 +81,20 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     private void loadDefaultSemester() {
-        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
-        ModulePlanSemester y1s2 = new ModulePlanSemester(new Year("1"), new Semester("2"));
-        ModulePlanSemester y2s1 = new ModulePlanSemester(new Year("2"), new Semester("1"));
-        ModulePlanSemester y2s2 = new ModulePlanSemester(new Year("2"), new Semester("2"));
-        ModulePlanSemester y3s1 = new ModulePlanSemester(new Year("3"), new Semester("1"));
-        ModulePlanSemester y3s2 = new ModulePlanSemester(new Year("3"), new Semester("2"));
-        ModulePlanSemester y4s1 = new ModulePlanSemester(new Year("4"), new Semester("1"));
-        ModulePlanSemester y4s2 = new ModulePlanSemester(new Year("4"), new Semester("2"));
-
-        this.semesters.addSemester(y1s1);
-        this.semesters.addSemester(y1s2);
-        this.semesters.addSemester(y2s1);
-        this.semesters.addSemester(y2s2);
-        this.semesters.addSemester(y3s1);
-        this.semesters.addSemester(y3s2);
-        this.semesters.addSemester(y4s1);
-        this.semesters.addSemester(y4s2);
+        for (int y = 1; y <= 4; y++) {
+            for (int s = 1; s <= 2; s++) {
+                Year year = new Year(Integer.toString(y));
+                Semester sem = new Semester(Integer.toString(s));
+                this.semesters.addSemester(new ModulePlanSemester(year, sem));
+            }
+        }
     }
 
 
     //// module-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the address book.
      */
     public boolean hasModule(Module m) {
         requireNonNull(m);
@@ -143,9 +134,9 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
@@ -154,15 +145,15 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     /**
-     * Finds and returns a module using its module code from the internal list of modules.
+     * Returns a module with the specified {@code moduleCode} from the internal list of semesters.
      *
-     * @param code The module code to search for.
-     * @return The module with the specified module code, or null if not found.
-     * @throws NullPointerException If the provided module code is null.
+     * @param moduleCode The module code to search for.
+     * @return The module with the specified module code.
+     * @throws ModuleNotFoundException if no such module exists.
      */
-    public Module findUsingCode(ModuleCode code) {
-        requireNonNull(code);
-        return semesters.findModule(code);
+    public Module getModule(ModuleCode moduleCode) throws ModuleNotFoundException {
+        requireNonNull(moduleCode);
+        return semesters.findModule(moduleCode);
     }
 
     /**
