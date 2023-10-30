@@ -51,15 +51,18 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 ModulePlan *--> "1" ModulePlanSemesterList
 ModulePlanSemesterList --> "~*" ModulePlanSemester
-ModulePlanSemester -> "1" UniqueModuleList
-ModuleData -> "1" UniqueModuleList
+ModulePlanSemester *-> "1" UniqueModuleList
+ModuleData *--> "1" UniqueModuleList
 UniqueModuleList -> "~*" Module
 
-Module -> "1" ModuleCode
-Module --> "1" ModuleName
-Module --> "1" ModularCredit
+ModulePlanSemester --> "1" Year
+ModulePlanSemester --> "1" Semester
+
+Module *-> "1" ModuleCode
+Module *--> "1" ModuleName
+Module *--> "1" ModularCredit
 Module --> "0..1" Grade
-Module --> "1" Description
+Module *--> "1" Description
 Module --> "0..1" Year
 Module --> "0..1" Semester
 
