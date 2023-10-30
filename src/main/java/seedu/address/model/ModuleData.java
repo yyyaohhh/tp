@@ -100,7 +100,11 @@ public class ModuleData implements ReadOnlyModuleData {
      */
     public Module getModule(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
-        return modules.find(moduleCode);
+        Module module = modules.find(moduleCode);
+        if (module == null) {
+            throw new ModuleNotFoundException();
+        }
+        return module;
     }
 
     /**
