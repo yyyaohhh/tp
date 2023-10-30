@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null, null, null, null));
     }
 
     @Test
@@ -45,9 +46,9 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validModule).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validModule)),
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded );
+        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
     }
 
     @Test
@@ -176,17 +177,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
         public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
         public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
         public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,6 +197,11 @@ public class AddCommandTest {
         @Override
         public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Module getModuleFromDb(ModuleCode moduleCode) {
+            return getTypicalModuleData().getModule(moduleCode);
         }
 
         @Override

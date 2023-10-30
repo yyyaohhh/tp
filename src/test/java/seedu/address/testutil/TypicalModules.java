@@ -98,10 +98,6 @@ public class TypicalModules {
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan mp = new ModulePlan();
 
-//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
-//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
-//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
-//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
 
         for (Module module : getTypicalModules()) {
             mp.addModule(module);
@@ -109,19 +105,31 @@ public class TypicalModules {
         return mp;
     }
 
-    public static ModuleData getTypicalModuleData() {
+    public static ModuleData getTypicalModuleDataFromDB() {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
+            System.out.println(m);
             Module module = new Module(
                     m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
             moduleData.addModule(module);
         }
         return moduleData;
     }
+    public static ModuleData getTypicalModuleData() {
+        ModuleData moduleData = new ModuleData();
+
+        for (Module m : getTypicalModules()) {
+            Module module = new Module(
+                    m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(),
+                    m.getGrade(), m.getName(), m.getDescription(), m.getModularCredit());
+            moduleData.addModule(module);
+        }
+        return moduleData;
+    }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2101, GEA1000));
+        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2100, GEA1000));
     }
 
     public static ModuleData getTypicalModuleDataMore() {
