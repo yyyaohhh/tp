@@ -4,51 +4,51 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Package "Model                 " as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nModel" as Model
-Class AddressBook
 Class ModelManager
+
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class ReadOnlyUserPrefs
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class "<<interface>>\nReadOnlyModulePan" as ReadOnlyModulePlan
+Class ReadOnlyModulePlan
+Class ModulePlan
+Class ModulePlanSemesterList
+Class ModulePlanSemester
+Class UniqueModuleList
+Class Module
 
-Class I #FFFFFF
+Class "<<interface>>\nReadOnlyModuleData" as ReadOnlyModuleData
+Class ModuleData
+Class UniqueDbModuleList
+Class DbModule
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModulePlan .up.|> ReadOnlyModulePlan
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+Model ..> ReadOnlyUserPrefs
+Model ..> ReadOnlyModulePlan
+Model ..> ReadOnlyModuleData
+ModelManager --> "1" ModulePlan
+ModelManager --> "1" UserPrefs
+ModelManager --> "1" ModuleData
+ModuleData .up.|> ReadOnlyModuleData
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModulePlan *--> "1" ModulePlanSemesterList
+ModulePlanSemesterList --> "~*" ModulePlanSemester
+ModulePlanSemester --> "1" UniqueModuleList
+ModuleData *--> "1" UniqueDbModuleList
+UniqueDbModuleList --> "~* all" DbModule
+UniqueModuleList -> "~*" Module
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager --> "~* filtered" Person
+ReadOnlyModuleData -[hidden]right--> ModelManager
+ModelManager -[hidden]right--> ReadOnlyModulePlan
+ReadOnlyModulePlan -[hidden]right--> ReadOnlyUserPrefs
 @enduml

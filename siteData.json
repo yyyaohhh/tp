@@ -40,7 +40,7 @@
       "src": "DeveloperGuide.md",
       "title": "Developer Guide",
       "headings": {
-        "ab-3-developer-guide": "AB-3 Developer Guide",
+        "modcraft-developer-guide": "MODCRAFT Developer Guide",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -49,8 +49,10 @@
         "logic-component": "Logic component",
         "model-component": "Model component",
         "storage-component": "Storage component",
+        "database-component": "Database component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
+        "edit-module-feature": "Edit module feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
@@ -107,12 +109,15 @@
     },
     {
       "src": "UserGuide.md",
+      "title": "User Guide",
       "headings": {
         "modcraft-user-guide": "ModCraft User Guide",
+        "table-of-contents": "Table of Contents",
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
         "adding-a-module-add": "Adding a module: add",
+        "editing-a-module-edit": "Editing a module: edit",
         "deleting-a-module-delete": "Deleting a module : delete",
         "finding-information-about-a-module-info": "Finding Information about a module: info",
         "calculating-the-total-current-cap": "Calculating the total current CAP:",
@@ -123,7 +128,8 @@
         "archiving-data-files-coming-in-v1-3": "Archiving data files [coming in v1.3]",
         "faq": "FAQ",
         "known-issues": "Known issues",
-        "command-summary": "Command summary"
+        "command-summary": "Command summary",
+        "glossary": "Glossary"
       },
       "headingKeywords": {}
     },
@@ -131,7 +137,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "modcraft": "ModCraft"
       },
       "headingKeywords": {}
     },
