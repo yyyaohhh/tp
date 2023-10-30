@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Displays information of a module identified using it's module code.
@@ -19,13 +21,12 @@ public class InfoCommand extends Command {
             + ": Shows information on the module identified by the module code. \n"
             + "Parameters: " + "code \n"
             + "Example: " + COMMAND_WORD + " " + "CS1101S ";
-    public static final String MESSAGE_INFO_MODULE_SUCCESS = "%1$s: %2$s \n"
-            + "MCs: %3$s \n"
-            + "%4$s \n";
 
     private final ModuleCode moduleCode;
 
     /**
+     * Creates an InfoCommand to show information of the specified module.
+     *
      * @param moduleCode of the module to be shown
      */
     public InfoCommand(ModuleCode moduleCode) {
@@ -36,19 +37,15 @@ public class InfoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Database check
-        if (!model.checkDbValidModuleCode(moduleCode)) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MODULE_CODE, moduleCode));
+        Module module;
+        try {
+            module = model.getModuleFromDb(moduleCode);
+        } catch (ModuleNotFoundException mnfe) {
+            throw new CommandException(String.format(MESSAGE_INVALID_MODULE_CODE, moduleCode));
         }
 
-        // Retrieve module information from database
-        String name = model.getDbModuleName(moduleCode).toString();
-        String mc = model.getDbModularCredit(moduleCode).toString();
-        String description = model.getDbModuleDescription(moduleCode).toString();
-
         // Return success message
-        return new CommandResult(
-                String.format(MESSAGE_INFO_MODULE_SUCCESS, moduleCode, name, mc, description));
+        return new CommandResult(module.toInfoString());
     }
 
     @Override

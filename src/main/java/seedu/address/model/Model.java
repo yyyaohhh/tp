@@ -5,11 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
@@ -66,14 +63,15 @@ public interface Model {
 
     /**
      * Deletes the given module.
-     *
-     * @throws ModuleNotFoundException if the module does not exist in the address book.
+     * {@code module} must already exist in the module plan.
      */
-    void deleteModule(Module module) throws ModuleNotFoundException;
+    void deleteModule(Module module);
 
     /**
      * Adds the given module.
      * {@code module} must not already exist in the address book.
+     *
+     * @throws DuplicateModuleException if the module already exists in the module plan.
      */
     void addModule(Module module);
 
@@ -89,7 +87,7 @@ public interface Model {
      *
      * @throws ModuleNotFoundException if no such module exists in the module plan.
      */
-    Module getModule(ModuleCode moduleCode) throws ModuleNotFoundException;
+    Module getModule(ModuleCode moduleCode);
 
     /**
      * Calculates and returns the total modular credits of all modules in the address book.
@@ -116,35 +114,30 @@ public interface Model {
     public ReadOnlyModuleData getModuleData();
 
     /**
-     * Checks if the specified {@code Module} is present in the database by verifying its {@code ModuleCode}.
+     * Checks if the specified {@code module} is present in the database.
+     * This method checks for equality based on module code.
+     *
+     * @param module The module to search for.
+     * @return True if the module is present in the database, false otherwise.
      */
     boolean checkDbValidModule(Module module);
 
     /**
-     * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
+     * Checks if the specified {@code moduleCode} is present in the database.
      *
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException;
-
-    /**
-     * Returns the {@code Description} of the module with the specified {@code ModuleCode}.
-     *
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException;
-
-    /**
-     * Returns the {@code ModularCedit} of the module with the specified {@code ModuleCode}.
-     *
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException;
-
-    /**
-     * Checks if the specified {@code ModuleCode} is present in the database.
+     * @param moduleCode The module code to search for.
+     * @return True if the module code is present in the database, false otherwise.
      */
     boolean checkDbValidModuleCode(ModuleCode moduleCode);
+
+    /**
+     * Returns the module with the specified {@code moduleCode} from the database.
+     *
+     * @param moduleCode The module code to search for.
+     * @return The module with the specified module code.
+     * @throws ModuleNotFoundException if no such module exists in the database.
+     */
+    public Module getModuleFromDb(ModuleCode moduleCode);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ModulePlanSemester> getFilteredModuleList();
