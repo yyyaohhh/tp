@@ -1,7 +1,5 @@
 package seedu.address.model.util;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.Grade;
 import seedu.address.model.module.ModularCredit;
