@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ModuleData;
-import seedu.address.model.module.DbModule;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
@@ -82,7 +81,17 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about operating systems")
             .build();
+
+    public static final Module CS1101S = new ModuleBuilder()
+            .withCode("CS1101S")
+            .withYear("1")
+            .withSem("1")
+            .withName("Programming Methodology")
+            .withModularCredit("4")
+            .withDescription("Introductory course to computing.")
+            .build();
     //Add more
+
 
     private TypicalModules() {}
 
@@ -104,15 +113,28 @@ public class TypicalModules {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
-            DbModule dbModule = new DbModule(
+            Module module = new Module(
                     m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addDbModule(dbModule);
+            moduleData.addModule(module);
         }
         return moduleData;
     }
 
     public static List<Module> getTypicalModules() {
         return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2101, GEA1000));
+    }
+
+    public static ModuleData getTypicalModuleDataMore() {
+
+        ModuleData moduleData = new ModuleData();
+
+        for (Module m : getTypicalModules()) {
+            Module module = new Module(
+                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
+            moduleData.addModule(module);
+        }
+        moduleData.addModule(CS1101S);
+        return moduleData;
     }
 
 }
