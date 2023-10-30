@@ -12,7 +12,7 @@ public class ModuleCode {
     Refer to https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system or
     https://www.nus.edu.sg/registrar/docs/info/nusbulletin/AY201213_GeneralInformation.pdf.
      */
-    public static final String MESSAGE_CONSTRAINTS = 
+    public static final String MESSAGE_CONSTRAINTS =
             "Module codes should contain a two- to four-letter prefix and four digits.\n"
             + "Optionally, it can have a one- or two-letter suffix\n"
             + "Examples: CS2103T, LLJ5094CV, GESS1025";

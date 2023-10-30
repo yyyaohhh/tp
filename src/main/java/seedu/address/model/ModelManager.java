@@ -9,12 +9,9 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.exceptions.ModuleNotFoundException;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
@@ -108,6 +105,9 @@ public class ModelManager implements Model {
     @Override
     public void addModule(Module module) {
         requireNonNull(module);
+        if (modulePlan.hasModule(module)) {
+            throw new DuplicateModuleException();
+        }
         modulePlan.addModule(module);
     }
 
@@ -118,7 +118,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Module getModule(ModuleCode code) throws ModuleNotFoundException {
+    public Module getModule(ModuleCode code) {
         requireNonNull(code);
         return modulePlan.getModule(code);
     }
@@ -136,6 +136,11 @@ public class ModelManager implements Model {
     //=========== ModuleData ===============================================================================
 
     @Override
+    public Module getModuleFromDb(ModuleCode moduleCode) {
+        return moduleData.getModule(moduleCode);
+    }
+
+    @Override
     public void setModuleData(ReadOnlyModuleData moduleData) {
         requireNonNull(moduleData);
         this.moduleData.resetData(moduleData);
@@ -144,21 +149,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyModuleData getModuleData() {
         return moduleData;
-    }
-
-    @Override
-    public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return moduleData.getDbModuleName(moduleCode);
-    }
-
-    @Override
-    public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return moduleData.getDbModuleDescription(moduleCode);
-    }
-
-    @Override
-    public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return moduleData.getDbModularCredit(moduleCode);
     }
 
     @Override

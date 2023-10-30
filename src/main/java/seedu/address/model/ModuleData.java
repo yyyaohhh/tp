@@ -6,20 +6,20 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.module.DbModule;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModularCredit;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.UniqueDbModuleList;
+import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
- * Represents the database as a list of {@code DbModule}s.
+ * Represents the database as a list of {@code Module}s.
  */
 public class ModuleData implements ReadOnlyModuleData {
 
-    private final UniqueDbModuleList modules;
+    private final UniqueModuleList modules;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,7 +29,7 @@ public class ModuleData implements ReadOnlyModuleData {
      *   among constructors.
      */
     {
-        modules = new UniqueDbModuleList();
+        modules = new UniqueModuleList();
     }
 
     /**
@@ -38,9 +38,9 @@ public class ModuleData implements ReadOnlyModuleData {
     public ModuleData() {}
 
     /**
-     * Creates a ModuleData using the DbModules in the {@code toBeCopied}.
+     * Creates a ModuleData using the Modules in the {@code toBeCopied}.
      *
-     * @param toBeCopied The list of {@code DbModule}s to be added.
+     * @param toBeCopied The list of {@code Module}s to be added.
      */
     public ModuleData(ReadOnlyModuleData toBeCopied) {
         this();
@@ -56,51 +56,51 @@ public class ModuleData implements ReadOnlyModuleData {
      */
     public void resetData(ReadOnlyModuleData newData) {
         requireNonNull(newData);
-        setDbModules(newData.getDbModuleList());
+        setModules(newData.getModuleList());
     }
 
     /**
-     * Replaces the contents of the module list with {@code dbModules}.
-     * {@code dbModules} must not contain duplicates.
+     * Replaces the contents of the module list with {@code modules}.
+     * {@code modules} must not contain duplicates.
      *
-     * @param dbModules The list of {@code DbModule}s to be added.
+     * @param modules The list of modules to be added.
      */
-    public void setDbModules(List<DbModule> dbModules) {
-        this.modules.setDbModules(dbModules);
+    public void setModules(List<Module> modules) {
+        this.modules.setModules(modules);
     }
 
-    /// dbModule-level operations ---------------------------------------------------------------------------
+    /// module-level operations ---------------------------------------------------------------------------
 
     /**
-     * Returns true if a module with the same identity as {@code dbModule} exists in the module data.
+     * Returns true if a module with the same identity as {@code module} exists in the module data.
      *
-     * @param dbModule The {@code DbModule} to be checked.
-     * @return True if the {@code DbModule} exists in the module data, false otherwise.
+     * @param module The module to be checked.
+     * @return True if the module exists in the module data, false otherwise.
      */
-    public boolean hasDbModule(DbModule dbModule) {
-        requireNonNull(dbModule);
-        return modules.contains(dbModule);
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modules.contains(module);
     }
 
     /**
-     * Adds the given {@DbModule} to the list.
+     * Adds the given {@code module} to the list.
      *
-     * @param module The {@code DbModule} to be added.
+     * @param module The module to be added.
      */
-    public void addDbModule(DbModule module) {
+    public void addModule(Module module) {
         modules.add(module);
     }
 
     /**
-     * Finds the {@code DbModule} which matches the specified {@code ModuleCode}.
+     * Finds the {@code Module} which matches the specified {@code ModuleCode}.
      *
      * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code DbModule}.
+     * @return The matching {@code Module}.
      * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public DbModule getDbModule(ModuleCode moduleCode) throws ModuleNotFoundException {
+    public Module getModule(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
-        return modules.findDbModule(moduleCode);
+        return modules.find(moduleCode);
     }
 
     /**
@@ -110,8 +110,8 @@ public class ModuleData implements ReadOnlyModuleData {
      * @return The matching {@code ModuleName}.
      * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getDbModule(moduleCode).getName();
+    public ModuleName getDbModuleName(ModuleCode moduleCode) {
+        return getModule(moduleCode).getName();
     }
 
     /**
@@ -122,7 +122,7 @@ public class ModuleData implements ReadOnlyModuleData {
      * @throws ModuleNotFoundException if no such module exists in the database.
      */
     public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getDbModule(moduleCode).getDescription();
+        return getModule(moduleCode).getDescription();
     }
 
     /**
@@ -133,7 +133,7 @@ public class ModuleData implements ReadOnlyModuleData {
      * @throws ModuleNotFoundException if no such module exists in the database.
      */
     public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getDbModule(moduleCode).getModularCredit();
+        return getModule(moduleCode).getModularCredit();
     }
 
     /**
@@ -143,7 +143,7 @@ public class ModuleData implements ReadOnlyModuleData {
      * @return True if the {@code ModuleCode} exists in the database, false otherwise.
      */
     public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
-        for (DbModule module : modules) {
+        for (Module module : modules) {
             if (module.getModuleCode().equals(moduleCode)) {
                 return true;
             }
@@ -161,7 +161,7 @@ public class ModuleData implements ReadOnlyModuleData {
     }
 
     @Override
-    public ObservableList<DbModule> getDbModuleList() {
+    public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
 

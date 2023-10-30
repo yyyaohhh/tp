@@ -32,7 +32,7 @@ public class JsonSerializableModuleData {
     public ModuleData toModelType() throws IllegalValueException {
         ModuleData moduleData = new ModuleData();
         for (JsonAdaptedDbModule m : modules) {
-            moduleData.addDbModule(m.toModelType());
+            moduleData.addModule(m.toModelType());
         }
         return moduleData;
     }

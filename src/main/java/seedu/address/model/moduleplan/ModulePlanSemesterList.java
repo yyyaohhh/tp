@@ -209,6 +209,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     public Module findModule(ModuleCode code) {
         for (int i = 0; i < internalList.size(); i++) {
+            System.out.println("internalList count: " + i);
             Module m = internalList.get(i).getModule(code);
             if (m != null) {
                 return m;
