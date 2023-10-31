@@ -57,6 +57,10 @@ public class AddCommand extends Command {
         this.grade = grade;
     }
 
+    /**
+     * For Testing purposes only
+     * @param validModule
+     */
     public AddCommand(Module validModule) {
         requireNonNull(validModule);
         this.moduleCode = validModule.getModuleCode();

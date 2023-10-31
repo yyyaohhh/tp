@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_MODULE_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2030S;
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.*;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
@@ -50,14 +51,38 @@ public class AddCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
     }
+    @Test
+    public void execute_moduleInDataNotInPlan_addSuccessful() throws Exception {
+        //In ModuleData and not in ModulePlan
+        ModelStubWithModule modelStub = new ModelStubWithModule(CS2100);
+        Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
+
+        CommandResult commandResult = new AddCommand(validModule).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(new Module[]{CS2100, validModule}), modelStub.modulesAdded);
+    }
 
     @Test
-    public void execute_duplicateModule_throwsCommandException() {
+    public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException()  {
+        //Not in ModuleData and ModulePlan (Module Not Found)
+        ModelStubWithModule modelStub = new ModelStubWithModule(CS2030S);
+
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(CS1101S.getModuleCode()));
+    }
+
+
+    @Test
+    public void execute_duplicateModule_throwsCommandException() throws Exception {
+        //Both in ModuleData and ModulePlan
         Module validModule = new ModuleBuilder().build();
         AddCommand addCommand = new AddCommand(validModule);
-        ModelStub modelStub = new ModelStubWithModule(validModule);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MODULE, () -> addCommand.execute(modelStub));
+        ModelStubWithModule modelStub = new ModelStubWithModule(validModule);
+        
+        assertThrows(CommandException.class,
+                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()),
+                () -> addCommand.execute(modelStub));
     }
 
 
@@ -84,7 +109,9 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(CS2030S);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + CS2030S + "}";
+        String expected = AddCommand.class.getCanonicalName() + "{moduleCode=" + CS2030S.getModuleCode()
+                + ", year=" + CS2030S.getYearTaken() + ", semester=" + CS2030S.getSemesterTaken()
+                + ", grade=" + CS2030S.getGrade() + "}";
         assertEquals(expected, addCommand.toString());
     }
 
@@ -211,25 +238,38 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single module.
      */
     private class ModelStubWithModule extends ModelStub {
         private final Module module;
+        final ArrayList<Module> modulesAdded = new ArrayList<>();
+
 
         ModelStubWithModule(Module module) {
             requireNonNull(module);
             this.module = module;
+            modulesAdded.add(module);
+        }
+
+        @Override
+        public void addModule(Module module) {
+            if (modulesAdded.contains(module)) {
+                throw new DuplicateModuleException();
+            }
+            modulesAdded.add(module);
         }
 
         @Override
         public boolean hasModule(Module module) {
             requireNonNull(module);
-            return this.module.isSameModule(module);
+            return modulesAdded.stream().anyMatch(module::isSameModule);
         }
+
+
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the Module being added.
      */
     private class ModelStubAcceptingModuleAdded extends ModelStub {
         final ArrayList<Module> modulesAdded = new ArrayList<>();
