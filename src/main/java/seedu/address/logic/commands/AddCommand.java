@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Grade;
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_SEMESTER + "1 "
             + PREFIX_GRADE + "B ";
 
-    public static final String MESSAGE_SUCCESS = "New module added: %1$s";
+    public static final String MESSAGE_ADD_MODULE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "%1$s has already been added.";
 
     private final ModuleCode moduleCode;
@@ -54,6 +55,18 @@ public class AddCommand extends Command {
         this.year = year;
         this.semester = semester;
         this.grade = grade;
+    }
+
+    /**
+     * For Testing purposes only
+     * @param validModule
+     */
+    public AddCommand(Module validModule) {
+        requireNonNull(validModule);
+        this.moduleCode = validModule.getModuleCode();
+        this.year = validModule.getYearTaken();
+        this.semester = validModule.getSemesterTaken();
+        this.grade = validModule.getGrade();
     }
 
     @Override
@@ -74,8 +87,7 @@ public class AddCommand extends Command {
         } catch (DuplicateModuleException dme) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, moduleCode));
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCode));
+        return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, Messages.format(newModule)));
     }
 
     @Override
