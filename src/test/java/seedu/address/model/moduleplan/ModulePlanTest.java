@@ -63,7 +63,7 @@ public class ModulePlanTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasModule_moduleNotInModulePlan_returnsFalse() {
         assertFalse(modulePlan.hasModule(GEA1000));
     }
 

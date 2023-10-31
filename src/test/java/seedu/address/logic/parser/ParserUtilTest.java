@@ -1,191 +1,197 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.module.Description;
+import seedu.address.model.module.Grade;
+import seedu.address.model.module.ModularCredit;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ParserUtilTest {
-    // private static final String INVALID_NAME = "R@chel";
-    // private static final String INVALID_PHONE = "+651234";
-    // private static final String INVALID_ADDRESS = " ";
-    // private static final String INVALID_EMAIL = "example.com";
-    // private static final String INVALID_TAG = "#friend";
+     private static final String INVALID_CODE = "123";
+     private static final String INVALID_MC = "1000";
+     private static final String INVALID_DESCRIPTION = "Hi";
+     private static final String INVALID_YEAR = "-4";
+     private static final String INVALID_SEMESTER = "5";
+     private static final String INVALID_GRADE = "Y";
+     private static final String INVALID_NAME = "qwer123";
 
-    // private static final String VALID_NAME = "Rachel Walker";
-    // private static final String VALID_PHONE = "123456";
-    // private static final String VALID_ADDRESS = "123 Main Street #0505";
-    // private static final String VALID_EMAIL = "rachel@example.com";
-    // private static final String VALID_TAG_1 = "friend";
-    // private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_CODE = "CS2030S";
+    private static final String VALID_MC = "4";
+    private static final String VALID_DESCRIPTION = "This course is a follow up to CS1010.";
+    private static final String VALID_YEAR = "1";
+    private static final String VALID_SEMESTER = "2";
+    private static final String VALID_GRADE = "A";
+    private static final String VALID_NAME = "Programming Methodology II";
 
-    // private static final String WHITESPACE = " \t\r\n";
+    private static final String WHITESPACE = " \t\r\n";
 
-    // @Test
-    // public void parseIndex_invalidInput_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
-    // }
+     @Test
+     public void parseCode_null_throwsNullPointerException() {
+         assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));
+     }
 
-    // @Test
-    // public void parseIndex_outOfRangeInput_throwsParseException() {
-    //     assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-    //         -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
-    // }
+     @Test
+     public void parseCode_invalidValue_throwsParseException() {
+         assertThrows(ParseException.class, () -> ParserUtil.parseModuleCode(INVALID_CODE));
+     }
 
-    // @Test
-    // public void parseIndex_validInput_success() throws Exception {
-    //     // No whitespaces
-    //     assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+     @Test
+     public void parseCode_validValueWithoutWhitespace_returnsName() throws Exception {
+         ModuleCode expectedCode = new ModuleCode(VALID_CODE);
+         assertEquals(expectedCode, ParserUtil.parseModuleCode(VALID_CODE));
+     }
 
-    //     // Leading and trailing whitespaces
-    //     assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
-    // }
+     @Test
+     public void parseCode_validValueWithWhitespace_returnsTrimmedCode() throws Exception {
+         String codeWithWhitespace = WHITESPACE + VALID_CODE + WHITESPACE;
+         ModuleCode expectedCode = new ModuleCode(VALID_CODE);
+         assertEquals(expectedCode, ParserUtil.parseModuleCode(codeWithWhitespace));
+     }
 
-    // @Test
-    // public void parseName_null_throwsNullPointerException() {
-    //     assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
-    // }
+     @Test
+     public void parseMC_null_throwsNullPointerException() {
+         assertThrows(NullPointerException.class, () -> ParserUtil.parseModularCredit((String) null));
+     }
 
-    // @Test
-    // public void parseName_invalidValue_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
-    // }
+//     @Test
+//     public void parseMC_invalidValue_throwsParseException() {
+//         assertThrows(ParseException.class, () -> ParserUtil.parseModularCredit(INVALID_MC));
+//     }
 
-    // @Test
-    // public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-    //     Name expectedName = new Name(VALID_NAME);
-    //     assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
-    // }
+     @Test
+     public void parseMC_validValueWithoutWhitespace_returnsMC() throws Exception {
+         ModularCredit expectedMC = new ModularCredit(VALID_MC);
+         assertEquals(expectedMC, ParserUtil.parseModularCredit(VALID_MC));
+     }
 
-    // @Test
-    // public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-    //     String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-    //     Name expectedName = new Name(VALID_NAME);
-    //     assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
-    // }
+     @Test
+     public void parseMC_validValueWithWhitespace_returnsTrimmedMC() throws Exception {
+         String MCWithWhitespace = WHITESPACE + VALID_MC + WHITESPACE;
+         ModularCredit expectedMC = new ModularCredit(VALID_MC);
+         assertEquals(expectedMC, ParserUtil.parseModularCredit(MCWithWhitespace));
+     }
 
-    // @Test
-    // public void parsePhone_null_throwsNullPointerException() {
-    //     assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
-    // }
+     @Test
+     public void parseDescription_null_throwsNullPointerException() {
+         assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+     }
 
-    // @Test
-    // public void parsePhone_invalidValue_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
-    // }
+//     @Test
+//     public void parseDescription_invalidValue_throwsParseException() {
+//         assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
+//     }
 
-    // @Test
-    // public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-    //     Phone expectedPhone = new Phone(VALID_PHONE);
-    //     assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
-    // }
+     @Test
+     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
+         Description expectedDescription = new Description(VALID_DESCRIPTION);
+         assertEquals(expectedDescription, ParserUtil.parseDescription(VALID_DESCRIPTION));
+     }
 
-    // @Test
-    // public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-    //     String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-    //     Phone expectedPhone = new Phone(VALID_PHONE);
-    //     assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
-    // }
+     @Test
+     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+         String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+         Description expectedDescription = new Description(VALID_DESCRIPTION);
+         assertEquals(expectedDescription, ParserUtil.parseDescription(descriptionWithWhitespace));
+     }
 
-    // @Test
-    // public void parseAddress_null_throwsNullPointerException() {
-    //     assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    // }
+     @Test
+     public void parseYear_null_throwsNullPointerException() {
+         assertThrows(NullPointerException.class, () -> ParserUtil.parseYear((String) null));
+     }
 
-    // @Test
-    // public void parseAddress_invalidValue_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    // }
+     @Test
+     public void parseYear_invalidValue_throwsParseException() {
+         assertThrows(ParseException.class, () -> ParserUtil.parseYear(INVALID_YEAR));
+     }
 
-    // @Test
-    // public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-    //     Address expectedAddress = new Address(VALID_ADDRESS);
-    //     assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-    // }
+     @Test
+     public void parseYear_validValueWithoutWhitespace_returnsYear() throws Exception {
+         Year expectedYear = new Year(VALID_YEAR);
+         assertEquals(expectedYear, ParserUtil.parseYear(VALID_YEAR));
+     }
 
-    // @Test
-    // public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-    //     String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-    //     Address expectedAddress = new Address(VALID_ADDRESS);
-    //     assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    // }
+     @Test
+     public void parseYear_validValueWithWhitespace_returnsTrimmedYear() throws Exception {
+         String yearWithWhitespace = WHITESPACE + VALID_YEAR + WHITESPACE;
+         Year expectedYear = new Year(VALID_YEAR);
+         assertEquals(expectedYear, ParserUtil.parseYear(yearWithWhitespace));
+     }
 
-    // @Test
-    // public void parseEmail_null_throwsNullPointerException() {
-    //     assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
-    // }
+     @Test
+     public void parseSemester_null_throwsNullPointerException() {
+         assertThrows(NullPointerException.class, () -> ParserUtil.parseSemester(null));
+     }
 
-    // @Test
-    // public void parseEmail_invalidValue_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
-    // }
+     @Test
+     public void parseSemester_invalidValue_throwsParseException() {
+         assertThrows(ParseException.class, () -> ParserUtil.parseSemester(INVALID_SEMESTER));
+     }
 
-    // @Test
-    // public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-    //     Email expectedEmail = new Email(VALID_EMAIL);
-    //     assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
-    // }
+     @Test
+     public void parseSemester_validValueWithoutWhitespace_returnsSemester() throws Exception {
+         Semester expectedSemester = new Semester(VALID_SEMESTER);
+         assertEquals(expectedSemester, ParserUtil.parseSemester(VALID_SEMESTER));
+     }
 
-    // @Test
-    // public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-    //     String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-    //     Email expectedEmail = new Email(VALID_EMAIL);
-    //     assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-    // }
+     @Test
+     public void parseSemester_validValueWithWhitespace_returnsTrimmedSemester() throws Exception {
+         String semesterWithWhitespace = WHITESPACE + VALID_SEMESTER + WHITESPACE;
+         Semester expectedSemester = new Semester(VALID_SEMESTER);
+         assertEquals(expectedSemester, ParserUtil.parseSemester(semesterWithWhitespace));
+     }
 
-    // @Test
-    // public void parseTag_null_throwsNullPointerException() {
-    //     assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
-    // }
+    @Test
+    public void parseGrade_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade((String) null));
+    }
 
-    // @Test
-    // public void parseTag_invalidValue_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
-    // }
+    @Test
+    public void parseGrade_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGrade(INVALID_GRADE));
+    }
 
-    // @Test
-    // public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-    //     Tag expectedTag = new Tag(VALID_TAG_1);
-    //     assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
-    // }
+    @Test
+    public void parseGrade_validValueWithoutWhitespace_returnsGrade() throws Exception {
+        Grade expectedGrade = new Grade(VALID_GRADE);
+        assertEquals(expectedGrade, ParserUtil.parseGrade(VALID_GRADE));
+    }
 
-    // @Test
-    // public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-    //     String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-    //     Tag expectedTag = new Tag(VALID_TAG_1);
-    //     assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
-    // }
+    @Test
+    public void parseGrade_validValueWithWhitespace_returnsTrimmedGrade() throws Exception {
+        String gradeWithWhitespace = WHITESPACE + VALID_GRADE + WHITESPACE;
+        Grade expectedGrade = new Grade(VALID_GRADE);
+        assertEquals(expectedGrade, ParserUtil.parseGrade(gradeWithWhitespace));
+    }
 
-    // @Test
-    // public void parseTags_null_throwsNullPointerException() {
-    //     assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
-    // }
+    @Test
+    public void parseName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleName((String) null));
+    }
 
-    // @Test
-    // public void parseTags_collectionWithInvalidTags_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
-    // }
+//    @Test
+//    public void parseName_invalidValue_throwsParseException() {
+//        assertThrows(ParseException.class, () -> ParserUtil.parseModuleName(INVALID_NAME));
+//    }
 
-    // @Test
-    // public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-    //     assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
-    // }
+    @Test
+    public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
+        ModuleName expectedName = new ModuleName(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseModuleName(VALID_NAME));
+    }
 
-    // @Test
-    // public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-    //     Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-    //     Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
-
-    //     assertEquals(expectedTagSet, actualTagSet);
-    // }
+    @Test
+    public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        ModuleName expectedName = new ModuleName(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseModuleName(nameWithWhitespace));
+    }
 }
