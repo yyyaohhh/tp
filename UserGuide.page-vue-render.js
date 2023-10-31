@@ -149,6 +149,6 @@ with(this){return _c('h2',{attrs:{"id":"glossary"}},[_v("Glossary"),_c('a',{stat
 with(this){return _c('ul',[_c('li',[_v("Command Line Interface: A display that allows you to type commands to interact with the application.")]),_v(" "),_c('li',[_v("Graphical User Interface: A user-friendly display that allows you to see the effects of your actions in the application.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Mon, 30 Oct 2023, 9:27:04 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Tue, 31 Oct 2023, 13:42:25 GMT+8]")])])])}
 }];
   
