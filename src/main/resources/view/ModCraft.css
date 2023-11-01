@@ -307,10 +307,6 @@
     -fx-background-color: #f2f2f2;
 }
 
-#module .scroll-bar:vertical {
-    -fx-scale-x: 0;
-}
-
 
 #modules #moduleCode {
     -fx-text-fill: white;

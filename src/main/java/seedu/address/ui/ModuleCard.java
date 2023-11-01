@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.module.Grade;
 import seedu.address.model.module.Module;
 
 /**
@@ -34,6 +35,10 @@ public class ModuleCard extends UiPart<Region> {
 
         moduleCode.setText(this.module.getModuleCode().toString());
         grade.setText(this.module.getGrade().toString());
+
+        // Set label colour according to the grade.
+        grade.setStyle("-fx-background-color: " + this.module.getGrade().getColourCode() + ";");
+
 
     }
 

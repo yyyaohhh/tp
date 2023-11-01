@@ -21,32 +21,34 @@ public class Grade {
         // modular-system
         // https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/
         // continuation-and-graduation-requirements
-        A_PLUS("A+", 5.0f),
-        A("A", 5.0f),
-        A_MINUS("A-", 4.5f),
-        B_PLUS("B+", 4.0f),
-        B("B", 3.5f),
-        B_MINUS("B-", 3.0f),
-        C_PLUS("C+", 2.5f),
-        C("C", 2.0f),
-        D_PLUS("D+", 1.5f),
-        D("D", 1.0f),
-        F("F", 0.0f),
-        EXEMPTED("EXE", null),
-        INCOMPLETE("IC", null),
-        IN_PROGRESS("IP", null),
-        WITHDRAWN("W", null),
-        COMPLETED_SATISFACTORY("CS", null),
-        COMPLETED_UNSATISFACTORY("CU", null),
-        SATISFACTORY("S", null),
-        UNSATISFACTORY("U", null);
+        A_PLUS("A+", 5.0f, "green"),
+        A("A", 5.0f, "green"),
+        A_MINUS("A-", 4.5f, "green"),
+        B_PLUS("B+", 4.0f, "green"),
+        B("B", 3.5f, "green"),
+        B_MINUS("B-", 3.0f, "green"),
+        C_PLUS("C+", 2.5f, "green"),
+        C("C", 2.0f, "green"),
+        D_PLUS("D+", 1.5f, "green"),
+        D("D", 1.0f, "green"),
+        F("F", 0.0f, "red"),
+        EXEMPTED("EXE", null, "blue"),
+        INCOMPLETE("IC", null, "orange"),
+        IN_PROGRESS("IP", null, "gray"),
+        WITHDRAWN("W", null, "silver"),
+        COMPLETED_SATISFACTORY("CS", null, "green"),
+        COMPLETED_UNSATISFACTORY("CU", null, "red"),
+        SATISFACTORY("S", null, "green"),
+        UNSATISFACTORY("U", null, "red");
 
         private final String grade;
         private final Float gradePoint;
+        private final String colourCode;
 
-        GradeEnum(String grade, Float gradePoint) {
+        GradeEnum(String grade, Float gradePoint, String colourCode) {
             this.grade = grade;
             this.gradePoint = gradePoint;
+            this.colourCode = colourCode;
         }
 
         /**
@@ -69,6 +71,10 @@ public class Grade {
 
         public Float getGradePoint() {
             return this.gradePoint;
+        }
+
+        public String getColourCode() {
+            return this.colourCode;
         }
     }
 
@@ -105,6 +111,8 @@ public class Grade {
     public Float gradePoint() {
         return grade.getGradePoint();
     }
+
+    public String getColourCode() { return grade.getColourCode(); }
 
     @Override
     public boolean equals(Object other) {
