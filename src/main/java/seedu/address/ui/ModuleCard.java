@@ -33,7 +33,6 @@ public class ModuleCard extends UiPart<Region> {
         this.module = module;
 
         moduleCode.setText(this.module.getModuleCode().toString());
-
         grade.setText(this.module.getGrade().toString());
 
     }
