@@ -6,10 +6,7 @@ import java.util.List;
 
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.Semester;
-import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
 
 /**
  * A utility class containing a list of {@code Module} objects to be used in tests.
