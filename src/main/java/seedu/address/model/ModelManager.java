@@ -124,7 +124,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return modulePlan.totalModularCredits();
     }
 

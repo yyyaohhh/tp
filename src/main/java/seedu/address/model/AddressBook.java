@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @return The total modular credits of all modules in the collection.
      */
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return modules.modularCredits();
     }
 

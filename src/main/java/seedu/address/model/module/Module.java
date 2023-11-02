@@ -112,6 +112,10 @@ public class Module {
         return String.format(MESSAGE_INFO, moduleCode, moduleName, modularCredit, description);
     }
 
+    public float getMcValue() {
+        return modularCredit.getValue();
+    }
+
     /**
      * Checks if two modules are the same module.
      * @param otherModule the other module to check.

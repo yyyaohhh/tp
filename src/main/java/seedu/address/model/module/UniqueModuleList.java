@@ -125,12 +125,12 @@ public class UniqueModuleList implements Iterable<Module> {
      *
      * @return The total modular credits of all modules in the internal list.
      */
-    public int modularCredits() {
+    public float modularCredits() {
         Module[] mods = new Module[internalList.size()];
         mods = internalList.toArray(mods);
-        int modularCredits = 0;
+        float modularCredits = 0;
         for (int i = 0; i < internalList.size(); i++) {
-            modularCredits += mods[i].getModularCredit().hashCode();
+            modularCredits += mods[i].getMcValue();
         }
         return modularCredits;
     }
@@ -147,7 +147,7 @@ public class UniqueModuleList implements Iterable<Module> {
         float gradePoints = 0;
         for (int i = 0; i < internalList.size(); i++) {
             if (mods[i].getGrade().gradePoint() != null) {
-                gradePoints += mods[i].getGrade().gradePoint() * mods[i].getModularCredit().hashCode();
+                gradePoints += mods[i].getGrade().gradePoint() * mods[i].getMcValue();
             }
         }
         return gradePoints;
@@ -164,7 +164,7 @@ public class UniqueModuleList implements Iterable<Module> {
         float modularCredits = 0;
         for (int i = 0; i < internalList.size(); i++) {
             if (mods[i].getGrade().gradePoint() != null) {
-                modularCredits += mods[i].getModularCredit().hashCode();
+                modularCredits += mods[i].getMcValue();
             }
         }
         return modularCredits;

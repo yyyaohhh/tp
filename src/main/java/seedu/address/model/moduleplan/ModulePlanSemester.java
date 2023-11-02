@@ -99,7 +99,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      *
      * @return The total modular credits of all modules in the collection.
      */
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return modules.modularCredits();
     }
 

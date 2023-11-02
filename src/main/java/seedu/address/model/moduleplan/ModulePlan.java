@@ -133,7 +133,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
      *
      * @return The total modular credits of all modules in the collection.
      */
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return semesters.modularCredits();
     }
 
