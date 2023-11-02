@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
 import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
@@ -81,6 +82,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void addSemester(ModulePlanSemester semester) {
         requireNonNull(semester);
 
+
         if (containsSemester(semester)) {
             throw new DuplicateSemesterException();
         }
@@ -147,10 +149,20 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void addModule(Module toAdd) {
         requireNonNull(toAdd);
 
-        int index = findSemester(toAdd);
-        if (index == -1) {
-            throw new ModuleNotFoundException();
+        if (containsModule(toAdd)) {
+            throw new DuplicateModuleException();
         }
+
+        int index = findSemester(toAdd);
+
+        if (index == -1) {
+            ModulePlanSemester sem = new ModulePlanSemester(toAdd.getYearTaken(), toAdd.getSemesterTaken());
+            addSemester(sem);
+
+            index = findSemester(toAdd);
+        }
+
+        assert index != -1;
 
         internalList.get(index).addModule(toAdd);
         refreshList(index);
@@ -167,9 +179,18 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         int indexTarget = findSemester(target);
         int indexEdit = findSemester(editedModule);
 
-        if (indexTarget == -1 || indexEdit == -1) {
+        if (indexTarget == -1) {
             throw new ModuleNotFoundException();
         }
+
+        if (indexEdit == -1) {
+            ModulePlanSemester sem = new ModulePlanSemester(editedModule.getYearTaken(), editedModule.getSemesterTaken());
+            addSemester(sem);
+
+            indexEdit = findSemester(editedModule);
+        }
+
+        assert indexTarget != -1 && indexEdit != -1;
 
         if (indexTarget == indexEdit) {
             internalList.get(indexTarget).setModule(target, editedModule);
@@ -195,6 +216,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         if (index == -1) {
             throw new ModuleNotFoundException();
         }
+
         internalList.get(index).removeModule(toRemove);
         refreshList(index);
 
@@ -290,7 +312,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     private int findSemester(Module m) {
         for (int i = 0; i < internalList.size(); i++) {
-            if (internalList.get(i).checkModuleInSemester(m)) {
+            if (internalList.get(i).checkModuleBelongToSemester(m)) {
                 return i;
             }
         }

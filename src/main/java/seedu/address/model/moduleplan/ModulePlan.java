@@ -106,11 +106,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
      * The module must not already exist in the same semester.
      */
     public void addModule(Module m) {
-        ModulePlanSemester sem = new ModulePlanSemester(m.getYearTaken(), m.getSemesterTaken());
-        if (!semesters.containsSemester(sem)) {
-            addSemester(sem);
-        }
-
         semesters.addModule(m);
     }
 

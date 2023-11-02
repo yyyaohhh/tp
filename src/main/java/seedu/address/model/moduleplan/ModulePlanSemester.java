@@ -127,7 +127,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      * @param m The module code to check for.
      * @return Whether the module is among the modules in this semester or not.
      */
-    public boolean checkModuleInSemester(Module m) {
+    public boolean checkModuleBelongToSemester(Module m) {
         boolean equalYear = this.year.equals(m.getYearTaken());
         boolean equalSemester = this.semester.equals(m.getSemesterTaken());
 
