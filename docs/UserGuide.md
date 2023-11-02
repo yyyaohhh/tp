@@ -202,7 +202,7 @@ _Details coming soon ..._
 | **delete**       | `delete MODULE_CODE` <br> e.g., `delete CS2040S`                                    |
 | **edit**         | `edit MODULE_CODE [y/YEAR] [s/SEMESTER] [g/GRADE]` <br> e.g., `edit MA2001 y/1 s/2` |
 | **info**         | `info MODULE_CODE`<br> e.g., `info CS3230`                                          |
-| **calculateCAP** | `calculateCap`                                                                      | 
+| **calculateCAP** | `calculateCAP`                                                                      | 
 | **calculateMC**  | `calculateMC`                                                                       |
 | **help**         | `help`                                                                              |
 
