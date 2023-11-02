@@ -17,18 +17,13 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModulePlan implements ReadOnlyModulePlan {
 
     private final ModulePlanSemesterList semesters;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
     {
         semesters = new ModulePlanSemesterList();
     }
 
+    /**
+     * Creates a new empty ModulePlan.
+     */
     public ModulePlan() {
     }
 
@@ -90,7 +85,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
 
     /**
      * Adds a module to the module plan.
-     * The module must not already exist in the same semester.
      */
     public void addModule(Module m) {
         semesters.addModule(m);
@@ -98,7 +92,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
      */
     public void removeModule(Module key) {
         semesters.removeModule(key);
@@ -107,12 +100,9 @@ public class ModulePlan implements ReadOnlyModulePlan {
 
     /**
      * Replaces the given module {@code target} in the list with {@code editedModule}.
-     * {@code target} must exist in the address book.
-     * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
-
         semesters.setModules(target, editedModule);
     }
 

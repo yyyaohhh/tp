@@ -48,6 +48,9 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     private final ObservableList<ModulePlanSemester> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Loads the default semesters in when ever a new instance is created.
+     */
     public ModulePlanSemesterList() {
         loadDefaultSemester();
     }
@@ -55,6 +58,9 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     /// semester functions
 
+    /**
+     * Adds all default semester to the internal list.
+     */
     private void loadDefaultSemester() {
         for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
             addSemester(m);
@@ -68,33 +74,33 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     public void setSemesters(List<ModulePlanSemester> semesters) {
         requireAllNonNull(semesters);
-
         if (!semestersAreUnique(semesters)) {
             throw new DuplicateSemesterException();
         }
+
         internalList.setAll(semesters);
         Collections.sort(internalList);
     }
 
     /**
      * Replaces the semesters in the internal list with the semesters from
-     * the provided `UniModulePlanSemesterListqueModuleList`.
+     * the provided `ModulePlanSemesterList`.
      *
      * @param replacement The `ModulePlanSemesterList` containing the semesters to replace the internal list.
-     * @throws NullPointerException If the provided replacement is null.
+     * @throws DuplicateSemesterException If the semesters are not unique.
      */
     public void setSemesters(ModulePlanSemesterList replacement) {
         requireNonNull(replacement);
-
         if (!semestersAreUnique(replacement.internalList)) {
             throw new DuplicateSemesterException();
         }
+
         internalList.setAll(replacement.internalList);
         Collections.sort(internalList);
     }
 
     /**
-     * Returns true if the list contains an equivalent module as the given argument.
+     * Returns true if the list contains an equivalent semester as the given argument.
      */
     public boolean containsSemester(ModulePlanSemester toCheck) {
         requireNonNull(toCheck);
@@ -110,7 +116,6 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     public void addSemester(ModulePlanSemester semester) {
         requireNonNull(semester);
-
         if (containsSemester(semester)) {
             throw new DuplicateSemesterException();
         }
@@ -127,10 +132,10 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     public void removeSemester(ModulePlanSemester semester) {
         requireNonNull(semester);
-
         if (!containsSemester(semester)) {
             throw new SemesterNotFoundException();
         }
+
         internalList.remove(semester);
         Collections.sort(internalList);
     }
@@ -172,7 +177,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     //// modules functions
 
     /**
-     * Returns true if the any of the semesters contains an equivalent module as the given argument.
+     * Returns true if any of the semesters contains an equivalent module as the given argument.
      */
     public boolean containsModule(Module toCheck) {
         requireNonNull(toCheck);
@@ -186,24 +191,22 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     /**
      * Adds a module to the correct semester.
-     * The module must not already exist in that semester.
+     * The module must not already exist in any semesters.
+     * If the semester of the module is not in the module plan, it is added.
      */
     public void addModule(Module toAdd) {
         requireNonNull(toAdd);
-
         if (containsModule(toAdd)) {
             throw new DuplicateModuleException();
         }
 
+        //Verifies the semester
         int index = findSemester(toAdd);
-
         if (index == -1) {
             ModulePlanSemester sem = new ModulePlanSemester(toAdd.getYearTaken(), toAdd.getSemesterTaken());
             addSemester(sem);
-
             index = findSemester(toAdd);
         }
-
         assert index != -1;
 
         internalList.get(index).addModule(toAdd);
@@ -214,25 +217,22 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      * Replaces the module {@code target} in the list with {@code editedmodule}.
      * {@code target} must exist in the that semester.
      * The module identity of {@code editedmodule} must not be the same as another existing module in the list.
+     * If the semester of the {@code editedmodule} is not in the module plan, it is added.
      */
     public void setModules(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
 
         int indexTarget = findSemester(target);
         int indexEdit = findSemester(editedModule);
-
         if (indexTarget == -1) {
             throw new ModuleNotFoundException();
         }
-
         if (indexEdit == -1) {
             ModulePlanSemester sem = new ModulePlanSemester(editedModule.getYearTaken(),
                     editedModule.getSemesterTaken());
             addSemester(sem);
-
             indexEdit = findSemester(editedModule);
         }
-
         assert indexTarget != -1 && indexEdit != -1;
 
         if (indexTarget == indexEdit) {
@@ -244,18 +244,17 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
             refreshList(indexTarget);
             refreshList(indexEdit);
         }
-
     }
 
     /**
      * Removes the equivalent module from the appropriate semester.
      * The module must exist in the list.
+     * Removes ModulePlanSemester if it is empty and not in default semesters.
      */
     public void removeModule(Module toRemove) {
         requireNonNull(toRemove);
 
         int index = findSemester(toRemove);
-
         if (index == -1) {
             throw new ModuleNotFoundException();
         }
@@ -263,12 +262,10 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         internalList.get(index).removeModule(toRemove);
         refreshList(index);
 
-        // Removes ModulePlanSemester if it is empty and not in default semesters.\
         ModulePlanSemester sem = new ModulePlanSemester(toRemove.getYearTaken(), toRemove.getSemesterTaken());
         if (checkIfSemesterEmpty(sem) && !inDefaultSemesters(sem)) {
             removeSemester(sem);
         }
-
     }
 
     /**
@@ -280,7 +277,6 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     public Module findModule(ModuleCode code) {
         for (int i = 0; i < internalList.size(); i++) {
-            System.out.println("internalList count: " + i);
             Module m = internalList.get(i).getModule(code);
             if (m != null) {
                 return m;
@@ -358,7 +354,11 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         return internalList.toString();
     }
 
-
+    /**
+     * Finds the index of the semester the {@code m} belongs to.
+     *
+     * @return The index if it is found and -1 otherwise.
+     */
     private int findSemester(Module m) {
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).checkModuleBelongToSemester(m)) {
@@ -368,13 +368,16 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         return -1;
     }
 
+    /**
+     * Refreshes the list so the UI can pick up on internal changes.
+     */
     private void refreshList(int index) {
         ModulePlanSemester temp = internalList.get(index);
         internalList.set(index, temp);
     }
 
     /**
-     * Returns true if {@code msodules} contains only unique modules.
+     * Returns true if {@code modules} contains only unique modules.
      */
     private boolean semestersAreUnique(List<ModulePlanSemester> semesters) {
         for (int i = 0; i < semesters.size() - 1; i++) {

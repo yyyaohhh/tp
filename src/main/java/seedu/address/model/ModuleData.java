@@ -20,14 +20,6 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModuleData implements ReadOnlyModuleData {
 
     private final UniqueModuleList modules;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
     {
         modules = new UniqueModuleList();
     }

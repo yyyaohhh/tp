@@ -27,12 +27,13 @@ public class ModelManager implements Model {
     private final ModuleData moduleData;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given modulePlan, userPrefs and moduleData.
      */
     public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ReadOnlyModuleData moduleData) {
         requireAllNonNull(modulePlan, userPrefs, moduleData);
 
-        logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
+        logger.fine("Initializing with module plan: " + modulePlan + " user prefs " + userPrefs
+                + " and module data " + moduleData);
 
         this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -161,11 +162,10 @@ public class ModelManager implements Model {
         return moduleData.checkDbValidModuleCode(moduleCode);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== ModulePlanSemesterList Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
-     * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<ModulePlanSemester> getFilteredModuleList() {
