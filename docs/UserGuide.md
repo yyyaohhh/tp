@@ -105,7 +105,7 @@ Examples:
 
 ### Editing a module: `edit`
 
-Changes an attribute of a module. Useful if you want to update information about a module or have made a mistake in adding.
+Changes an attribute of a module, if it exists. Useful if you want to update information about a module or have made a mistake in adding.
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
@@ -115,21 +115,17 @@ Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 </box>
 
 Examples:
-
 * `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
 * `edit CS3230 y/4 s/2`: Moves CS3230 to Year 4 Semester 2.
 
 
 ### Deleting a module : `delete`
 
-Deletes a module from the list of taken modules if it exists.
+Removes the module from whichever semester the module is taken, if it exists.
 
 Format: `delete MODULE`
 
-* Removes the module from whichever semester the module is taken.
-
 Examples:
-
 * `delete GEA1000`
 * `delete CS2030S`
 
@@ -139,11 +135,9 @@ Retrieves information about a certain module by module code.
 
 Format: `info MODULE`
 
-* To search for modules with variants add a `*` at the end of the module name.
-
 Examples:
 * `info CS2019`
-* `info CS1010*`
+* `info CS1010`
 
 ### Calculating the total current CAP:
 Calculates the total current CAP of all modules stored in all years and semesters
