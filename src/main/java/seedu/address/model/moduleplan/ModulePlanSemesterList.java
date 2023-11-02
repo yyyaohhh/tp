@@ -3,6 +3,7 @@ package seedu.address.model.moduleplan;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +30,20 @@ import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
  * Supports a minimal set of list operations.
  */
 public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
+
+    private static final List<ModulePlanSemester> DEFAULT_SEMESTERS = new ArrayList<>() {
+        {
+            for (int y = 1; y <= 4; y++) {
+                for (int s = 1; s <= 2; s++) {
+                    Year year = new Year(Integer.toString(y));
+                    Semester sem = new Semester(Integer.toString(s));
+                    ModulePlanSemester m = new ModulePlanSemester(year, sem);
+                    add(m);
+                }
+            }
+        }
+    };
+
     private final ObservableList<ModulePlanSemester> internalList = FXCollections.observableArrayList();
     private final ObservableList<ModulePlanSemester> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -41,12 +56,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     /// semester functions
 
     private void loadDefaultSemester() {
-        for (int y = 1; y <= 4; y++) {
-            for (int s = 1; s <= 2; s++) {
-                Year year = new Year(Integer.toString(y));
-                Semester sem = new Semester(Integer.toString(s));
-                addSemester(new ModulePlanSemester(year, sem));
-            }
+        for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
+            addSemester(m);
         }
     }
 
@@ -125,21 +136,34 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     }
 
     /**
-     * Check if the semester has any modules.
+     * Checks if the semester has any modules.
      *
-     * @param semester The semester to be checked.
+     * @param toCheck The semester to be checked.
      * @return Whether the semester is empty or not.
      */
-    private boolean checkIfSemesterEmpty(ModulePlanSemester semester) {
-        requireNonNull(semester);
-
-        if (!containsSemester(semester)) {
+    private boolean checkIfSemesterEmpty(ModulePlanSemester toCheck) {
+        if (!containsSemester(toCheck)) {
             throw new SemesterNotFoundException();
         }
 
         for (int i = 0; i < internalList.size(); i++) {
-            if (semester.equals(internalList.get(i))) {
+            if (toCheck.equals(internalList.get(i))) {
                 return internalList.get(i).isEmpty();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the semester is one of the default semesters.
+     *
+     * @param toCheck The semester to be checked.
+     * @return Whether the semester is in @code DEFAULT_SEMESTERS} or not.
+     */
+    private boolean inDefaultSemesters(ModulePlanSemester toCheck) {
+        for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
+            if (m.equals(toCheck)) {
+                return true;
             }
         }
         return false;
@@ -239,15 +263,12 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         internalList.get(index).removeModule(toRemove);
         refreshList(index);
 
-        // Check for special term
-        if (toRemove.getSemesterTaken().equals(new Semester("ST1"))
-                || toRemove.getSemesterTaken().equals(new Semester("ST2"))) {
-            ModulePlanSemester sem = new ModulePlanSemester(toRemove.getYearTaken(), toRemove.getSemesterTaken());
-
-            if (checkIfSemesterEmpty(sem)) {
-                removeSemester(sem);
-            }
+        // Removes ModulePlanSemester if it is empty and not in default semesters.\
+        ModulePlanSemester sem = new ModulePlanSemester(toRemove.getYearTaken(), toRemove.getSemesterTaken());
+        if (checkIfSemesterEmpty(sem) && !inDefaultSemesters(sem)) {
+            removeSemester(sem);
         }
+
     }
 
     /**
