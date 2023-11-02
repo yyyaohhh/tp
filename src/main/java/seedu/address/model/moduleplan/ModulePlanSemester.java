@@ -151,6 +151,9 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
     @Override
     public String toString() {
+        if (year.equals(Year.YEAR_0)) {
+            return "Adv Placement";
+        }
         return "Year " + year.toString() + " " + semester.toString();
     }
 
