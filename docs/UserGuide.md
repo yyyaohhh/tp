@@ -40,11 +40,11 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `info CS1101S` : Shows Information about the module CS1101S
+    * `info CS1101S` : Shows Information about the module CS1101S.
 
     * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to semester 2 in year 1, and marks it as In Progress.
 
-    * `delete CS2040S` : Deletes the module CS2040S if present from the list of modules taken
+    * `delete CS2040S` : Deletes the module CS2040S if present from the list of modules taken.
 
     * `exit` : Exits the app.
 
@@ -56,6 +56,7 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 **Notes about the command format:**<br>
 
+* All commands are **case-sensitive**.
 
 * Words in `UPPER_CASE` are compulsory parameters to be supplied by the user.<br>
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
@@ -63,7 +64,7 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 * Parameters in square brackets denote optional parameters.<br>
   e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if `y/` is keyed in by the user, `YEAR` has to be specified.
 
-* When passing in grades as parameters, the grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system)
+* When passing in grades as parameters, the grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).
 
 * Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -131,7 +132,7 @@ Examples:
 
 ### Finding Information about a module: `info`
 
-Find the information about a certain module by module code.
+Retrieves information about a certain module by module code.
 
 Format: `info MODULE`
 
@@ -169,12 +170,12 @@ There is no need to save manually.
 
 ### Editing the data file
 
-ModuleList data is saved automtically as a JSON file `[JAR file location]/data/addressbook.json`
+ModuleList data is saved automtically as a JSON file `[JAR file location]/data/moduleplan.json`
 Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Modcraft will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v1.3]`
@@ -186,7 +187,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModCraft home folder.
+**A**: Install the app in the other computer and overwrite the default data file it creates with the file that contains the data of your previous ModCraft home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -204,8 +205,8 @@ _Details coming soon ..._
 | **delete**       | `delete MODULE_CODE` <br> e.g., `delete CS2040S`                                    |
 | **edit**         | `edit MODULE_CODE [y/YEAR] [s/SEMESTER] [g/GRADE]` <br> e.g., `edit MA2001 y/1 s/2` |
 | **info**         | `info MODULE_CODE`<br> e.g., `info CS3230`                                          |
-| **CalculateCap** | `CalculateCap`                                                                      | 
-| **CalculateMC**  | `CalculateMC`                                                                       |
+| **calculateCAP** | `calculateCap`                                                                      | 
+| **calculateMC**  | `calculateMC`                                                                       |
 | **help**         | `help`                                                                              |
 
 
