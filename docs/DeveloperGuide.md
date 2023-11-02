@@ -118,7 +118,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+
+<puml src="diagrams/ModuleClassDiagram.puml" width="450" />
 
 The `Model` component,
 
@@ -149,7 +151,7 @@ The `Storage` component,
 
 **API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
 
-<puml src="diagrams/DatabaseClassDiagram.puml" width="250" />
+<puml src="diagrams/DatabaseClassDiagram.puml" width="550" />
 
 The `Database` component,
 * reads the module information from JSON format to the corresponding `ModuleData` object.
@@ -158,8 +160,6 @@ The `Database` component,
 <box type="info" seamless>
 
 **Note:** The module data is stored within the resource folder. In the case where the data cannot be read successfully, a `RuntimeException` is deliberately triggered to forcefully halt the application's execution. This is necessary because all features are reliant on the module data.
-
-</box>
 
 ### Common classes
 
