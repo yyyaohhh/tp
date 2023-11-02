@@ -26,6 +26,9 @@ public class DeleteCommand extends Command {
 
     private final ModuleCode toDelete;
 
+    /**
+     * Creates an DeleteCommand to delete the specified {@code Module}
+     */
     public DeleteCommand(ModuleCode toDelete) {
         requireNonNull(toDelete);
         this.toDelete = toDelete;
