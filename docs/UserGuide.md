@@ -58,10 +58,10 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 * All commands are **case-sensitive**.
 
-* Words in `UPPER_CASE` are compulsory parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are **compulsory parameters** to be supplied by the user.<br>
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
 
-* Parameters in square brackets denote optional parameters.<br>
+* Parameters in square brackets denote **optional parameters**.<br>
   e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if `y/` is keyed in by the user, `YEAR` has to be specified.
 
 * When passing in grades as parameters, the grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).
@@ -69,14 +69,17 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 * Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Parameters can come with a prefix (like `y/` in `y/YEAR`) or without a prefix (like `MODULE`).
+* Parameters can come with a **prefix** (like `y/` in `y/YEAR`) or without a prefix (like `MODULE`).
 
-* All commands will have at most one parameter without a prefix. Parameters without a prefix should come before any parameters that contain a prefix. ModCraft will parse all input between the command and the first prefix as the parameter without the prefix.<br>
+* All commands will have at most one parameter without a prefix. Parameters without a prefix should come before any parameters that come with a prefix. ModCraft will parse all input between the command and the first prefix as the parameter without the prefix.<br>
   e.g. For `add MODULE y/YEAR s/SEM g/GRADE`, when you key in `add CS2101 CS2103T y/1 s/1 g/A`, ModCraft will read it as you trying to specify `CS2101 CS2103T` as `MODULE`.
+
+* Parameters with a prefix can be specified in any order among themselves.<br>
+  e.g. `add CS2030S y/1 s/2 g/IP` is the same as `add CS2030S s/2 g/IP y/1`.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
