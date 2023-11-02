@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ModuleData;
-import seedu.address.model.module.DbModule;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
@@ -82,17 +81,23 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about operating systems")
             .build();
+
+    public static final Module CS1101S = new ModuleBuilder()
+            .withCode("CS1101S")
+            .withYear("1")
+            .withSem("1")
+            .withName("Programming Methodology")
+            .withModularCredit("4")
+            .withDescription("Introductory course to computing.")
+            .build();
     //Add more
+
 
     private TypicalModules() {}
 
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan mp = new ModulePlan();
 
-//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
-//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
-//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
-//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
 
         for (Module module : getTypicalModules()) {
             mp.addModule(module);
@@ -100,19 +105,44 @@ public class TypicalModules {
         return mp;
     }
 
+    public static ModuleData getTypicalModuleDataFromDB() {
+        ModuleData moduleData = new ModuleData();
+
+        for (Module m : getTypicalModules()) {
+            System.out.println(m);
+            Module module = new Module(
+                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
+            moduleData.addModule(module);
+        }
+        return moduleData;
+    }
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
-            DbModule dbModule = new DbModule(
-                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addDbModule(dbModule);
+            Module module = new Module(
+                    m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(),
+                    m.getGrade(), m.getName(), m.getDescription(), m.getModularCredit());
+            moduleData.addModule(module);
         }
         return moduleData;
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2101, GEA1000));
+        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2100, GEA1000));
+    }
+
+    public static ModuleData getTypicalModuleDataMore() {
+
+        ModuleData moduleData = new ModuleData();
+
+        for (Module m : getTypicalModules()) {
+            Module module = new Module(
+                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
+            moduleData.addModule(module);
+        }
+        moduleData.addModule(CS1101S);
+        return moduleData;
     }
 
 }
