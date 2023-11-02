@@ -17,7 +17,7 @@ public class CalculateMcCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        int modularCredits = model.totalModularCredits();
+        float modularCredits = model.totalModularCredits();
 
         return new CommandResult(String.format(MESSAGE_CALCULATION_SUCCESS, modularCredits));
     }

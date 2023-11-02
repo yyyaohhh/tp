@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2040S;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2030S;
 
@@ -18,6 +17,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.InfoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
@@ -71,6 +71,11 @@ public class ModulePlanParserTest {
     @Test
     public void parseCommand_calculateMc() throws Exception {
         assertTrue(parser.parseCommand(CalculateMcCommand.COMMAND_WORD) instanceof CalculateMcCommand);
+    }
+
+    @Test
+    public void parseCommand_info() throws Exception {
+        assertTrue(parser.parseCommand(InfoCommand.COMMAND_WORD) instanceof InfoCommand);
     }
 
     @Test

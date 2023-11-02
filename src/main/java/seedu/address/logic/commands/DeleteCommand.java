@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
     private final ModuleCode toDelete;
 
     public DeleteCommand(ModuleCode toDelete) {
+        requireNonNull(toDelete);
         this.toDelete = toDelete;
     }
 
@@ -42,6 +43,7 @@ public class DeleteCommand extends Command {
 
         // Retrieve module from module plan
         Module targetMod;
+
         try {
             targetMod = model.getModule(toDelete);
         } catch (ModuleNotFoundException e) {

@@ -6,10 +6,7 @@ import java.util.List;
 
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.Semester;
-import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
 
 /**
  * A utility class containing a list of {@code Module} objects to be used in tests.
@@ -89,6 +86,26 @@ public class TypicalModules {
             .withName("Programming Methodology")
             .withModularCredit("4")
             .withDescription("Introductory course to computing.")
+            .build();
+
+    public static final Module IS6000 = new ModuleBuilder()
+            .withCode("IS6000")
+            .withYear("4")
+            .withSem("2")
+            .withGrade("IP")
+            .withName("Topics in Information Systems and Analytics Research")
+            .withModularCredit("0")
+            .withDescription("A 0 MC module")
+            .build();
+
+    public static final Module IND5005A = new ModuleBuilder()
+            .withCode("IND5005A")
+            .withYear("4")
+            .withSem("2")
+            .withGrade("IP")
+            .withName("Professional Career Development")
+            .withModularCredit(".5")
+            .withDescription("A .5 MC module")
             .build();
     //Add more
 

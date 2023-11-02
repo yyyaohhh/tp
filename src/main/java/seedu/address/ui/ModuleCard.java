@@ -33,8 +33,11 @@ public class ModuleCard extends UiPart<Region> {
         this.module = module;
 
         moduleCode.setText(this.module.getModuleCode().toString());
-
         grade.setText(this.module.getGrade().toString());
+
+        // Set label colour according to the grade.
+        grade.setStyle("-fx-background-color: " + this.module.getGrade().getColourCode() + ";");
+
 
     }
 

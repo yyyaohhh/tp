@@ -8,8 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidYear(String)}
  */
 public class Year implements Comparable<Year> {
-    public static final String MESSAGE_CONSTRAINTS = "Year should only contain a number from 0 to 6.";
 
+    public static final Year YEAR_0 = new Year("0");
+
+    public static final String MESSAGE_CONSTRAINTS = "Year should only contain a number from 0 to 6.";
     public static final String VALIDATION_REGEX = "^[0-6]$";
 
     public final Integer year;

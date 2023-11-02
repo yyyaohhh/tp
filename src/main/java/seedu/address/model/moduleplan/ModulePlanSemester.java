@@ -99,7 +99,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      *
      * @return The total modular credits of all modules in the collection.
      */
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return modules.modularCredits();
     }
 
@@ -127,7 +127,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      * @param m The module code to check for.
      * @return Whether the module is among the modules in this semester or not.
      */
-    public boolean checkModuleInSemester(Module m) {
+    public boolean checkModuleBelongToSemester(Module m) {
         boolean equalYear = this.year.equals(m.getYearTaken());
         boolean equalSemester = this.semester.equals(m.getSemesterTaken());
 
@@ -151,6 +151,9 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
     @Override
     public String toString() {
+        if (year.equals(Year.YEAR_0)) {
+            return "Adv Placement";
+        }
         return "Year " + year.toString() + " " + semester.toString();
     }
 

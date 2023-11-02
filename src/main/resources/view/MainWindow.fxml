@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="ModCraft" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="700.0" minWidth="450" onCloseRequest="#handleExit" title="ModCraft" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/modcraft.png" />
   </icons>
   <scene>
     <Scene>
@@ -32,7 +32,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-        <HBox fx:id="modulePlanList" minHeight="200.0" prefHeight="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <HBox fx:id="modulePlanList" minHeight="330.0" prefHeight="330.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <children>
             <StackPane fx:id="modulePlanPlaceholder" HBox.hgrow="ALWAYS" />
           </children>

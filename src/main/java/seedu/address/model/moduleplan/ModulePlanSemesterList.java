@@ -3,6 +3,7 @@ package seedu.address.model.moduleplan;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
 import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
@@ -26,11 +30,37 @@ import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
  * Supports a minimal set of list operations.
  */
 public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
+
+    private static final List<ModulePlanSemester> DEFAULT_SEMESTERS = new ArrayList<>() {
+        {
+            for (int y = 1; y <= 4; y++) {
+                for (int s = 1; s <= 2; s++) {
+                    Year year = new Year(Integer.toString(y));
+                    Semester sem = new Semester(Integer.toString(s));
+                    ModulePlanSemester m = new ModulePlanSemester(year, sem);
+                    add(m);
+                }
+            }
+        }
+    };
+
     private final ObservableList<ModulePlanSemester> internalList = FXCollections.observableArrayList();
     private final ObservableList<ModulePlanSemester> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    public ModulePlanSemesterList() {
+        loadDefaultSemester();
+    }
+
+
     /// semester functions
+
+    private void loadDefaultSemester() {
+        for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
+            addSemester(m);
+        }
+    }
+
 
     /**
      * Replaces the contents of this list with {@code semesters}.
@@ -84,6 +114,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         if (containsSemester(semester)) {
             throw new DuplicateSemesterException();
         }
+
         internalList.add(semester);
         Collections.sort(internalList);
     }
@@ -105,21 +136,34 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     }
 
     /**
-     * Check if the semester has any modules.
+     * Checks if the semester has any modules.
      *
-     * @param semester The semester to be checked.
+     * @param toCheck The semester to be checked.
      * @return Whether the semester is empty or not.
      */
-    public boolean checkIfSemesterEmpty(ModulePlanSemester semester) {
-        requireNonNull(semester);
-
-        if (!containsSemester(semester)) {
+    private boolean checkIfSemesterEmpty(ModulePlanSemester toCheck) {
+        if (!containsSemester(toCheck)) {
             throw new SemesterNotFoundException();
         }
 
         for (int i = 0; i < internalList.size(); i++) {
-            if (semester.equals(internalList.get(i))) {
+            if (toCheck.equals(internalList.get(i))) {
                 return internalList.get(i).isEmpty();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the semester is one of the default semesters.
+     *
+     * @param toCheck The semester to be checked.
+     * @return Whether the semester is in @code DEFAULT_SEMESTERS} or not.
+     */
+    private boolean inDefaultSemesters(ModulePlanSemester toCheck) {
+        for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
+            if (m.equals(toCheck)) {
+                return true;
             }
         }
         return false;
@@ -147,10 +191,20 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void addModule(Module toAdd) {
         requireNonNull(toAdd);
 
-        int index = findSemester(toAdd);
-        if (index == -1) {
-            throw new ModuleNotFoundException();
+        if (containsModule(toAdd)) {
+            throw new DuplicateModuleException();
         }
+
+        int index = findSemester(toAdd);
+
+        if (index == -1) {
+            ModulePlanSemester sem = new ModulePlanSemester(toAdd.getYearTaken(), toAdd.getSemesterTaken());
+            addSemester(sem);
+
+            index = findSemester(toAdd);
+        }
+
+        assert index != -1;
 
         internalList.get(index).addModule(toAdd);
         refreshList(index);
@@ -167,9 +221,19 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         int indexTarget = findSemester(target);
         int indexEdit = findSemester(editedModule);
 
-        if (indexTarget == -1 || indexEdit == -1) {
+        if (indexTarget == -1) {
             throw new ModuleNotFoundException();
         }
+
+        if (indexEdit == -1) {
+            ModulePlanSemester sem = new ModulePlanSemester(editedModule.getYearTaken(),
+                    editedModule.getSemesterTaken());
+            addSemester(sem);
+
+            indexEdit = findSemester(editedModule);
+        }
+
+        assert indexTarget != -1 && indexEdit != -1;
 
         if (indexTarget == indexEdit) {
             internalList.get(indexTarget).setModule(target, editedModule);
@@ -195,8 +259,15 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         if (index == -1) {
             throw new ModuleNotFoundException();
         }
+
         internalList.get(index).removeModule(toRemove);
         refreshList(index);
+
+        // Removes ModulePlanSemester if it is empty and not in default semesters.\
+        ModulePlanSemester sem = new ModulePlanSemester(toRemove.getYearTaken(), toRemove.getSemesterTaken());
+        if (checkIfSemesterEmpty(sem) && !inDefaultSemesters(sem)) {
+            removeSemester(sem);
+        }
 
     }
 
@@ -223,8 +294,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      *
      * @return The total modular credits of all modules in the internal list.
      */
-    public int modularCredits() {
-        int modularCredits = 0;
+    public float modularCredits() {
+        float modularCredits = 0;
         for (int i = 0; i < internalList.size(); i++) {
             modularCredits += internalList.get(i).totalModularCredits();
         }
@@ -290,7 +361,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     private int findSemester(Module m) {
         for (int i = 0; i < internalList.size(); i++) {
-            if (internalList.get(i).checkModuleInSemester(m)) {
+            if (internalList.get(i).checkModuleBelongToSemester(m)) {
                 return i;
             }
         }

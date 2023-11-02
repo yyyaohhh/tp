@@ -74,6 +74,10 @@ public class Module {
 
     public Module fillUserInputs(Year yearTaken, Semester semesterTaken, Grade grade) {
         requireAllNonNull(yearTaken, semesterTaken, grade);
+        if (yearTaken.equals(Year.YEAR_0)) {
+            semesterTaken = new Semester("1");
+        }
+
         return new Module(moduleCode, yearTaken, semesterTaken, grade, moduleName, description, modularCredit);
     }
 
@@ -107,6 +111,10 @@ public class Module {
 
     public String toInfoString() {
         return String.format(MESSAGE_INFO, moduleCode, moduleName, modularCredit, description);
+    }
+
+    public float getMcValue() {
+        return modularCredit.getValue();
     }
 
     /**

@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ModularCredit {
     public static final String MESSAGE_CONSTRAINTS = "Modular credits should be a non-negative integer.";
 
-    public static final String VALIDATION_REGEX = "^[\\p{Digit}]+$";
+    public static final String VALIDATION_REGEX = "^[\\p{Digit}]*[.]?[\\p{Digit}]+$";
 
-    private int modularCredit;
+    private float modularCredit;
 
     /**
      * Constructs a {@code ModularCredit}.
@@ -21,15 +21,14 @@ public class ModularCredit {
     public ModularCredit(String modularCredit) {
         requireNonNull(modularCredit);
         checkArgument(isValidModularCredit(modularCredit), MESSAGE_CONSTRAINTS);
-        this.modularCredit = (int) Double.parseDouble(modularCredit);
+        this.modularCredit = Float.parseFloat(modularCredit);
     }
 
     /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidModularCredit(String test) {
-        // return test.matches(VALIDATION_REGEX);
-        return true;
+         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -52,8 +51,12 @@ public class ModularCredit {
         return modularCredit == otherModularCredit.modularCredit;
     }
 
+    public float getValue() {
+        return modularCredit;
+    }
+
     @Override
     public int hashCode() {
-        return (int) modularCredit;
+        return ((Float) modularCredit).hashCode();
     }
 }
