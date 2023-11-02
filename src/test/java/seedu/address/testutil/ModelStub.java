@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
-
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
@@ -110,11 +108,12 @@ public class ModelStub implements Model {
 
     @Override
     public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
-        return getTypicalModuleData().checkDbValidModuleCode(moduleCode);
+        throw new AssertionError("This method should not be called.");
     }
+
     @Override
     public Module getModuleFromDb(ModuleCode moduleCode) {
-        return getTypicalModuleData().getModule(moduleCode);
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
