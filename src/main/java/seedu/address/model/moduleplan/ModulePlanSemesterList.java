@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
@@ -31,7 +33,23 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     private final ObservableList<ModulePlanSemester> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    public ModulePlanSemesterList() {
+        loadDefaultSemester();
+    }
+
+
     /// semester functions
+
+    private void loadDefaultSemester() {
+        for (int y = 1; y <= 4; y++) {
+            for (int s = 1; s <= 2; s++) {
+                Year year = new Year(Integer.toString(y));
+                Semester sem = new Semester(Integer.toString(s));
+                addSemester(new ModulePlanSemester(year, sem));
+            }
+        }
+    }
+
 
     /**
      * Replaces the contents of this list with {@code semesters}.
@@ -82,10 +100,10 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void addSemester(ModulePlanSemester semester) {
         requireNonNull(semester);
 
-
         if (containsSemester(semester)) {
             throw new DuplicateSemesterException();
         }
+
         internalList.add(semester);
         Collections.sort(internalList);
     }
@@ -112,7 +130,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      * @param semester The semester to be checked.
      * @return Whether the semester is empty or not.
      */
-    public boolean checkIfSemesterEmpty(ModulePlanSemester semester) {
+    private boolean checkIfSemesterEmpty(ModulePlanSemester semester) {
         requireNonNull(semester);
 
         if (!containsSemester(semester)) {
@@ -184,7 +202,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         }
 
         if (indexEdit == -1) {
-            ModulePlanSemester sem = new ModulePlanSemester(editedModule.getYearTaken(), editedModule.getSemesterTaken());
+            ModulePlanSemester sem = new ModulePlanSemester(editedModule.getYearTaken(),
+                    editedModule.getSemesterTaken());
             addSemester(sem);
 
             indexEdit = findSemester(editedModule);
@@ -220,6 +239,15 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         internalList.get(index).removeModule(toRemove);
         refreshList(index);
 
+        // Check for special term
+        if (toRemove.getSemesterTaken().equals(new Semester("ST1"))
+                || toRemove.getSemesterTaken().equals(new Semester("ST2"))) {
+            ModulePlanSemester sem = new ModulePlanSemester(toRemove.getYearTaken(), toRemove.getSemesterTaken());
+
+            if (checkIfSemesterEmpty(sem)) {
+                removeSemester(sem);
+            }
+        }
     }
 
     /**

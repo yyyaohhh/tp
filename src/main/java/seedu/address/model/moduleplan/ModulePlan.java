@@ -8,8 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.Semester;
-import seedu.address.model.module.Year;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
@@ -32,7 +30,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     public ModulePlan() {
-        loadDefaultSemester();
     }
 
     /**
@@ -44,7 +41,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     //// list overwrite operations
-
 
     /**
      * Resets the existing data of this {@code ModulePlan} with {@code newData}.
@@ -80,15 +76,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
         this.semesters.removeSemester(semester);
     }
 
-    private void loadDefaultSemester() {
-        for (int y = 1; y <= 4; y++) {
-            for (int s = 1; s <= 2; s++) {
-                Year year = new Year(Integer.toString(y));
-                Semester sem = new Semester(Integer.toString(s));
-                this.semesters.addSemester(new ModulePlanSemester(year, sem));
-            }
-        }
-    }
 
 
     //// module-level operations
@@ -115,17 +102,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
      */
     public void removeModule(Module key) {
         semesters.removeModule(key);
-
-        // Check for special term
-        if (key.getSemesterTaken().equals(new Semester("ST1"))
-                || key.getSemesterTaken().equals(new Semester("ST2"))) {
-            ModulePlanSemester sem = new ModulePlanSemester(key.getYearTaken(), key.getSemesterTaken());
-
-            if (semesters.checkIfSemesterEmpty(sem)) {
-                semesters.removeSemester(sem);
-            }
-        }
-
     }
 
 

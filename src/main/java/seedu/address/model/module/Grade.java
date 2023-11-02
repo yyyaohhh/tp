@@ -112,7 +112,9 @@ public class Grade {
         return grade.getGradePoint();
     }
 
-    public String getColourCode() { return grade.getColourCode(); }
+    public String getColourCode() {
+        return grade.getColourCode();
+    }
 
     @Override
     public boolean equals(Object other) {
