@@ -79,6 +79,26 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about operating systems")
             .build();
+
+    public static final Module IS6000 = new ModuleBuilder()
+            .withCode("IS6000")
+            .withYear("4")
+            .withSem("2")
+            .withGrade("IP")
+            .withName("Topics in Information Systems and Analytics Research")
+            .withModularCredit("0")
+            .withDescription("A 0 MC module")
+            .build();
+
+    public static final Module IND5005A = new ModuleBuilder()
+            .withCode("IND5005A")
+            .withYear("4")
+            .withSem("2")
+            .withGrade("IP")
+            .withName("Professional Career Development")
+            .withModularCredit(".5")
+            .withDescription("A .5 MC module")
+            .build();
     //Add more
 
     private TypicalModules() {}

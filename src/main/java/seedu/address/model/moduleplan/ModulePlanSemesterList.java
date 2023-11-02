@@ -273,8 +273,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      *
      * @return The total modular credits of all modules in the internal list.
      */
-    public int modularCredits() {
-        int modularCredits = 0;
+    public float modularCredits() {
+        float modularCredits = 0;
         for (int i = 0; i < internalList.size(); i++) {
             modularCredits += internalList.get(i).totalModularCredits();
         }

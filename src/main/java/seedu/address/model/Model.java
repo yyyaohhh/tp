@@ -94,7 +94,7 @@ public interface Model {
      *
      * @return The total modular credits of all modules in the address book.
      */
-    int totalModularCredits();
+    float totalModularCredits();
 
     /**
      * Calculates and returns the Cumulative Average Point (CAP) for a collection of semesters.
