@@ -9,7 +9,7 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
-ModCraft is an app that provides a fast and easy way for students to track courses to take to meet graduation requirements and plan courses to take. The user interacts
+ModCraft is an app that provides a fast and easy way for university students to track courses to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
 
 This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
@@ -34,7 +34,7 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 3. Copy the file to the folder you want to use as the _home folder_ for your ModCraft.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
+   A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -57,16 +57,21 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 **Notes about the command format:**<br>
 
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are compulsory parameters to be supplied by the user.<br>
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
 
-* The grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system)
-
 * Parameters in square brackets denote optional parameters.<br>
-  e.g. `edit [y/YEAR]` means that specifying `YEAR` is optional.
+  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if `y/` is keyed in by the user, `YEAR` has to be specified.
+
+* When passing in grades as parameters, the grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system)
 
 * Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Parameters can come with a prefix (like `y/` in `y/YEAR`) or without a prefix (like `MODULE`).
+
+* All commands will have at most one parameter without a prefix. Parameters without a prefix should come before any parameters that contain a prefix. ModCraft will parse all input between the command and the first prefix as the parameter without the prefix.<br>
+  e.g. For `add MODULE y/YEAR s/SEM g/GRADE`, when you key in `add CS2101 CS2103T y/1 s/1 g/A`, ModCraft will read it as you trying to specify `CS2101 CS2103T` as `MODULE`.
 
 ### Viewing help : `help`
 
@@ -100,7 +105,10 @@ Changes an attribute of a module. Useful if you want to update information about
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
-**Note:** At least one of the optional fields must be provided.
+<box type="tip" seamless>
+
+**Tip:** At least one of the optional fields must be provided.
+</box>
 
 Examples:
 
