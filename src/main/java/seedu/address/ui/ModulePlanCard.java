@@ -29,7 +29,7 @@ public class ModulePlanCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ModulePlanCard} with the given {@code ModulePlanSemester} and index to display.
      */
     public ModulePlanCard(ModulePlanSemester modulePlanSemester) {
         super(FXML);
@@ -40,11 +40,10 @@ public class ModulePlanCard extends UiPart<Region> {
 
         modules.setItems(modulePlanSemester.getModuleList());
         modules.setCellFactory(listView -> new ModulePlanCard.ModuleViewCell());
-
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleCard}.
      */
     class ModuleViewCell extends ListCell<Module> {
         @Override
