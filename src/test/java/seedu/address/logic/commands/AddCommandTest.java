@@ -31,6 +31,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
+import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
 
 public class AddCommandTest {
@@ -118,7 +119,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private class EmptyModelStub extends ModelStub {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -240,7 +241,7 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single module.
      */
-    private class ModelStubWithModule extends ModelStub {
+    private class ModelStubWithModule extends EmptyModelStub {
         private final Module module;
         final ArrayList<Module> modulesAdded = new ArrayList<>();
 
@@ -271,7 +272,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the Module being added.
      */
-    private class ModelStubAcceptingModuleAdded extends ModelStub {
+    private class ModelStubAcceptingModuleAdded extends EmptyModelStub {
         final ArrayList<Module> modulesAdded = new ArrayList<>();
 
         @Override
