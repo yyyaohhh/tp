@@ -48,7 +48,9 @@ public class AddCommandTest {
         ModelStubAcceptingModuleAdded modelStub = new ModelStubAcceptingModuleAdded();
         Module validModule = new ModuleBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validModule).execute(modelStub);
+        AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
+                validModule.getSemesterTaken(), validModule.getGrade());
+        CommandResult commandResult = addCommand.execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
@@ -59,8 +61,10 @@ public class AddCommandTest {
         //In ModuleData and not in ModulePlan
         ModelStubWithModule modelStub = new ModelStubWithModule(CS2100);
         Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
-
-        CommandResult commandResult = new AddCommand(validModule).execute(modelStub);
+        
+        AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
+                validModule.getSemesterTaken(), validModule.getGrade());
+        CommandResult commandResult = addCommand.execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
