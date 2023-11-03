@@ -23,11 +23,14 @@ The project is , optimized for users who prefer typing in CLI.
 
 This project is **currently ongoing** with the following features **implemented**:
 
+* Viewing help
 * Display Information about the module
 * Add taken modules
 * Delete taken modules
 * Edit taken modules
-* Viewing help
+* Calculate MC
+* Calculate CAP
+
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
