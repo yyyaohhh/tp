@@ -97,5 +97,23 @@ public class CommandTestUtil {
     }
 
 
+    public static void assertInfoCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        ModulePlan expectedModulePlan = new ModulePlan(actualModel.getModulePlan());
+        List<ModulePlanSemester> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
+
+        try {
+
+            System.out.println(command.execute(actualModel).getFeedbackToUser());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel).getFeedbackToUser());
+        assertEquals(expectedModulePlan, actualModel.getModulePlan());
+        assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
+    }
+
+
 
 }

@@ -122,17 +122,6 @@ public class TypicalModules {
         return mp;
     }
 
-    public static ModuleData getTypicalModuleDataFromDB() {
-        ModuleData moduleData = new ModuleData();
-
-        for (Module m : getTypicalModules()) {
-            System.out.println(m);
-            Module module = new Module(
-                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addModule(module);
-        }
-        return moduleData;
-    }
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
 
@@ -149,17 +138,5 @@ public class TypicalModules {
         return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2100, GEA1000));
     }
 
-    public static ModuleData getTypicalModuleDataMore() {
-
-        ModuleData moduleData = new ModuleData();
-
-        for (Module m : getTypicalModules()) {
-            Module module = new Module(
-                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addModule(module);
-        }
-        moduleData.addModule(CS1101S);
-        return moduleData;
-    }
 
 }
