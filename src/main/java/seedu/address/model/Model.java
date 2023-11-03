@@ -137,7 +137,7 @@ public interface Model {
      * @return The module with the specified module code.
      * @throws ModuleNotFoundException if no such module exists in the database.
      */
-    public Module getModuleFromDb(ModuleCode moduleCode);
+    Module getModuleFromDb(ModuleCode moduleCode);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ModulePlanSemester> getFilteredModuleList();
