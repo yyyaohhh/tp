@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_MODULE_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.*;
+import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.CS2100;
+import static seedu.address.testutil.TypicalModules.CS1101S;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,7 +21,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyModuleData;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Description;
@@ -67,7 +69,6 @@ public class AddCommandTest {
 
     @Test
     public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException()  {
-        //Not in ModuleData and ModulePlan (Module Not Found)
         ModelStubWithModule modelStub = new ModelStubWithModule(CS2030S);
 
         assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(CS1101S.getModuleCode()));
