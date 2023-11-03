@@ -118,9 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
-<puml src="diagrams/ModuleClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 The `Model` component,
 
@@ -140,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="250" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -160,6 +158,8 @@ The `Database` component,
 <box type="info" seamless>
 
 **Note:** The module data is stored within the resource folder. In the case where the data cannot be read successfully, a `RuntimeException` is deliberately triggered to forcefully halt the application's execution. This is necessary because all features are reliant on the module data.
+
+</box>
 
 ### Common classes
 

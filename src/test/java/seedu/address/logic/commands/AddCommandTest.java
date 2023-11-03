@@ -61,7 +61,7 @@ public class AddCommandTest {
         //In ModuleData and not in ModulePlan
         ModelStubWithModule modelStub = new ModelStubWithModule(CS2100);
         Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
-        
+
         AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
                 validModule.getSemesterTaken(), validModule.getGrade());
         CommandResult commandResult = addCommand.execute(modelStub);
