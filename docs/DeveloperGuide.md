@@ -138,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="250" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -149,7 +149,7 @@ The `Storage` component,
 
 **API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
 
-<puml src="diagrams/DatabaseClassDiagram.puml" width="550" />
+<puml src="diagrams/DatabaseClassDiagram.puml" width="250" />
 
 The `Database` component,
 * reads the module information from JSON format to the corresponding `ModuleData` object.
