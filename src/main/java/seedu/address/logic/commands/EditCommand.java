@@ -99,13 +99,11 @@ public class EditCommand extends Command {
     private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;
 
-        ModuleCode moduleCode = moduleToEdit.getModuleCode();
         Year updatedYear = editModuleDescriptor.getYear().orElse(moduleToEdit.getYearTaken());
         Semester updatedSemester = editModuleDescriptor.getSemester().orElse(moduleToEdit.getSemesterTaken());
         Grade updatedGrade = editModuleDescriptor.getGrade().orElse(moduleToEdit.getGrade());
 
-        return new Module(moduleCode, updatedYear, updatedSemester, updatedGrade,
-                moduleToEdit.getName(), moduleToEdit.getDescription(), moduleToEdit.getModularCredit());
+        return moduleToEdit.fillUserInputs(updatedYear, updatedSemester, updatedGrade);
     }
 
     @Override

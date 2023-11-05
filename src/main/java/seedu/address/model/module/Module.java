@@ -35,6 +35,10 @@ public class Module {
         this.moduleCode = moduleCode;
         this.description = description;
         this.yearTaken = yearTaken;
+        //For advance placement
+        if (yearTaken.equals(Year.YEAR_0)) {
+            semesterTaken = new Semester("1");
+        }
         this.semesterTaken = semesterTaken;
         this.grade = grade;
         this.modularCredit = modularCredit;
@@ -73,9 +77,6 @@ public class Module {
 
     public Module fillUserInputs(Year yearTaken, Semester semesterTaken, Grade grade) {
         requireAllNonNull(yearTaken, semesterTaken, grade);
-        if (yearTaken.equals(Year.YEAR_0)) {
-            semesterTaken = new Semester("1");
-        }
 
         return new Module(moduleCode, yearTaken, semesterTaken, grade, moduleName, description, modularCredit);
     }

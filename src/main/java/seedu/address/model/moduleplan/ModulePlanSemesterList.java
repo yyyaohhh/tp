@@ -222,28 +222,8 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public void setModules(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
 
-        int indexTarget = findSemester(target);
-        int indexEdit = findSemester(editedModule);
-        if (indexTarget == -1) {
-            throw new ModuleNotFoundException();
-        }
-        if (indexEdit == -1) {
-            ModulePlanSemester sem = new ModulePlanSemester(editedModule.getYearTaken(),
-                    editedModule.getSemesterTaken());
-            addSemester(sem);
-            indexEdit = findSemester(editedModule);
-        }
-        assert indexTarget != -1 && indexEdit != -1;
-
-        if (indexTarget == indexEdit) {
-            internalList.get(indexTarget).setModule(target, editedModule);
-            refreshList(indexTarget);
-        } else {
-            internalList.get(indexTarget).removeModule(target);
-            internalList.get(indexEdit).addModule(editedModule);
-            refreshList(indexTarget);
-            refreshList(indexEdit);
-        }
+        removeModule(target);
+        addModule(editedModule);
     }
 
     /**

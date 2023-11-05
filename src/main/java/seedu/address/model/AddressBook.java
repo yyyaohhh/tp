@@ -93,7 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
 
-        modules.setModules(target, editedModule);
+        //modules.setModules(target, editedModule);
     }
 
     /**
