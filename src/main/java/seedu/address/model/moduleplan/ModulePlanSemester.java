@@ -21,14 +21,6 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
     private Semester semester;
 
     private final UniqueModuleList modules;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
     {
         modules = new UniqueModuleList();
     }
@@ -43,7 +35,6 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
     /**
      * Replaces the contents of the module list with {@code modules}.
-     *
      */
     public void setModules(List<Module> modules) {
         this.modules.setModules(modules);
@@ -78,7 +69,6 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
      */
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
-
         modules.setModules(target, editedModule);
     }
 
@@ -145,6 +135,10 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
     public boolean isEmpty() {
         return modules.isEmpty();
     }
+
+    /**
+     * Returns the unmodifiable module list.
+     */
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
