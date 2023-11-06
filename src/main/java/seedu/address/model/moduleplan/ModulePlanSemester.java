@@ -136,6 +136,17 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         return modules.asUnmodifiableObservableList();
     }
 
+    /**
+     * Makes a new copy of ModulePlanSemester.
+     *
+     */
+    public ModulePlanSemester copy() {
+        Year y = new Year(year.toString());
+        Semester s = new Semester(semester.getSemesterString());
+
+        return new ModulePlanSemester(y, s);
+    }
+
     @Override
     public String toString() {
         if (year.equals(Year.YEAR_0)) {

@@ -63,7 +63,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     private void loadDefaultSemester() {
         for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
-            addSemester(m);
+            addSemester(m.copy());
         }
     }
 
