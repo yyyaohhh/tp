@@ -35,10 +35,6 @@ public class Module {
         this.moduleCode = moduleCode;
         this.description = description;
         this.yearTaken = yearTaken;
-        //For advance placement
-        if (yearTaken.equals(Year.YEAR_0)) {
-            semesterTaken = new Semester("1");
-        }
         this.semesterTaken = semesterTaken;
         this.grade = grade;
         this.modularCredit = modularCredit;

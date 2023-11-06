@@ -114,6 +114,11 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         boolean equalYear = this.year.equals(m.getYearTaken());
         boolean equalSemester = this.semester.equals(m.getSemesterTaken());
 
+        //For advance placement
+        if (equalYear && this.year.equals(Year.YEAR_0)) {
+            return true;
+        }
+
         if (equalYear && equalSemester) {
             return true;
         }
@@ -158,6 +163,11 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         ModulePlanSemester otherModulePlanSemester = (ModulePlanSemester) other;
         boolean yearEquals = this.year.equals(otherModulePlanSemester.year);
         boolean semesterEquals = this.semester.equals(otherModulePlanSemester.semester);
+
+        //For advance placement
+        if (yearEquals && this.year.equals(Year.YEAR_0)) {
+            return true;
+        }
 
         return yearEquals && semesterEquals;
     }
