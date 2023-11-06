@@ -72,7 +72,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         // Retieve module from database
         Module newModule;
         try {
@@ -82,12 +81,14 @@ public class AddCommand extends Command {
         }
 
         // Add module with user inputs to module plan
+        Module moduleToAdd;
         try {
-            model.addModule(newModule.fillUserInputs(year, semester, grade));
+            moduleToAdd = newModule.fillUserInputs(year, semester, grade);
+            model.addModule(moduleToAdd);
         } catch (DuplicateModuleException dme) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, moduleCode));
         }
-        return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, Messages.format(newModule)));
+        return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, Messages.format(moduleToAdd)));
     }
 
     @Override

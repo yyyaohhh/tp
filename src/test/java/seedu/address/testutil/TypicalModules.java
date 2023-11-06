@@ -79,15 +79,6 @@ public class TypicalModules {
             .withDescription("Learn about operating systems")
             .build();
 
-    public static final Module CS1101S = new ModuleBuilder()
-            .withCode("CS1101S")
-            .withYear("1")
-            .withSem("1")
-            .withName("Programming Methodology")
-            .withModularCredit("4")
-            .withDescription("Introductory course to computing.")
-            .build();
-
     public static final Module IS6000 = new ModuleBuilder()
             .withCode("IS6000")
             .withYear("4")
@@ -98,45 +89,48 @@ public class TypicalModules {
             .withDescription("A 0 MC module")
             .build();
 
-    public static final Module IND5005A = new ModuleBuilder()
-            .withCode("IND5005A")
-            .withYear("4")
-            .withSem("2")
-            .withGrade("IP")
-            .withName("Professional Career Development")
-            .withModularCredit(".5")
-            .withDescription("A .5 MC module")
-            .build();
-    //Add more
 
 
     private TypicalModules() {}
 
+    private static ModulePlan modulePlan;
     public static ModulePlan getTypicalModulePlan() {
-        ModulePlan mp = new ModulePlan();
+       modulePlan = new ModulePlan();
+       modulePlan.resetData(modulePlan);
 
-
-        for (Module module : getTypicalModules()) {
-            mp.addModule(module);
+        List<Module> list = getTypicalModules();
+        for (Module module : list) {
+            modulePlan.addModule(module);
         }
-        return mp;
+        return modulePlan;
+    }
+
+
+    public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
+        List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
+        ModulePlan mp = getTypicalModulePlan();
+        for (Module excludedModule : exclusionList) {
+            if(mp.hasModule(excludedModule)) {
+                mp.removeModule(excludedModule);
+            }
+        }
+        return new ModulePlan(mp);
+
     }
 
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
-            Module module = new Module(
-                    m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(),
-                    m.getGrade(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addModule(module);
+            Module Module = new Module(
+                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
+            moduleData.addModule(Module);
         }
         return moduleData;
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2100, GEA1000));
+        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, CS2100));
     }
-
 
 }

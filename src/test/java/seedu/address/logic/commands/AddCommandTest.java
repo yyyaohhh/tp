@@ -4,16 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2030S;
-import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.CS1101S;
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.*;
 
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyModuleData;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
@@ -35,8 +33,12 @@ import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
+import seedu.address.testutil.TypicalModules;
 
 public class AddCommandTest {
+
+    private Model model = new ModelManager(getTypicalModulePlanWithout(CS2100),
+            new UserPrefs(), getTypicalModuleData());
 
     @Test
     public void constructor_nullModule_throwsNullPointerException() {
@@ -44,23 +46,32 @@ public class AddCommandTest {
     }
 
     @Test
+    public void getTypical() {
+        ModulePlan p1 = getTypicalModulePlan();
+        ModulePlan p2 = getTypicalModulePlanWithout(CS2100);
+        System.out.println(p1.hasModule(CS2100));
+        System.out.println(p2.hasModule(CS2100));
+        System.out.println(p1.hasModule(CS2030S));
+        System.out.println(p2.hasModule(CS2030S));
+    }
+    @Test
     public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingModuleAdded modelStub = new ModelStubAcceptingModuleAdded();
-        Module validModule = new ModuleBuilder().build();
+        Module toAdd = new ModuleBuilder().build();
+        AddCommand addCommand = new AddCommand(toAdd.getModuleCode(), toAdd.getYearTaken(), toAdd.getSemesterTaken(),
+                toAdd.getGrade());
 
-        AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
-                validModule.getSemesterTaken(), validModule.getGrade());
-        CommandResult commandResult = addCommand.execute(modelStub);
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS,
+                Messages.format(toAdd));
+        System.out.println(expectedMessage);
+        ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
+        assertCommandSuccess(addCommand,model, expectedMessage, expectedModel);
 
-        assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
     }
     @Test
     public void execute_moduleInDataNotInPlan_addSuccessful() throws Exception {
         //In ModuleData and not in ModulePlan
-        ModelStubWithModule modelStub = new ModelStubWithModule(CS2100);
-        Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(CS2100);
+        Module validModule = CS2030S;
 
         AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
                 validModule.getSemesterTaken(), validModule.getGrade());
@@ -73,9 +84,9 @@ public class AddCommandTest {
 
     @Test
     public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException()  {
-        ModelStubWithModule modelStub = new ModelStubWithModule(CS2030S);
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(CS2030S);
 
-        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(CS1101S.getModuleCode()));
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(MA2001.getModuleCode()));
     }
 
 
@@ -84,7 +95,7 @@ public class AddCommandTest {
         //Both in ModuleData and ModulePlan
         Module validModule = new ModuleBuilder().build();
         AddCommand addCommand = new AddCommand(validModule);
-        ModelStubWithModule modelStub = new ModelStubWithModule(validModule);
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
         
         assertThrows(CommandException.class,
                 String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()),
@@ -246,12 +257,13 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single module.
      */
-    private class ModelStubWithModule extends EmptyModelStub {
+    private class ModelStubWithMultipleModule extends EmptyModelStub {
         private final Module module;
         final ArrayList<Module> modulesAdded = new ArrayList<>();
 
 
-        ModelStubWithModule(Module module) {
+
+        ModelStubWithMultipleModule(Module module) {
             requireNonNull(module);
             this.module = module;
             modulesAdded.add(module);
@@ -277,8 +289,12 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the Module being added.
      */
-    private class ModelStubAcceptingModuleAdded extends EmptyModelStub {
+    private class ModelStubAcceptingModuleAdded extends ModelStubWithMultipleModule {
         final ArrayList<Module> modulesAdded = new ArrayList<>();
+
+        ModelStubAcceptingModuleAdded(Module module) {
+            super(module);
+        }
 
         @Override
         public boolean hasModule(Module module) {
