@@ -1,15 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Grade;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Adds a module to the module plan.
@@ -31,30 +38,44 @@ public class AddCommand extends Command {
             + PREFIX_GRADE + "B ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already has already been added.";
+    public static final String MESSAGE_DUPLICATE_MODULE = "%1$s has already been added.";
 
-    private final Module toAdd;
+    private final ModuleCode moduleCode;
+    private final Year year;
+    private final Semester semester;
+    private final Grade grade;
 
     /**
      * Creates an AddCommand to add the specified {@code Module}
      */
-    public AddCommand(Module module) {
-        requireNonNull(module);
-        toAdd = module;
+    public AddCommand(ModuleCode moduleCode, Year year, Semester semester, Grade grade) {
+        requireAllNonNull(moduleCode, year, semester, grade);
+        this.moduleCode = moduleCode;
+        this.year = year;
+        this.semester = semester;
+        this.grade = grade;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-
-        if (model.hasModule(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
-
+        // Retieve module from database
+        Module newModule;
+        try {
+            newModule = model.getModuleFromDb(moduleCode);
+        } catch (ModuleNotFoundException mnfe) {
+            throw new CommandException(String.format(MESSAGE_INVALID_MODULE_CODE, moduleCode));
         }
 
-        model.addModule(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        // Add module with user inputs to module plan
+        try {
+            model.addModule(newModule.fillUserInputs(year, semester, grade));
+        } catch (DuplicateModuleException dme) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, moduleCode));
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCode));
     }
 
     @Override
@@ -69,13 +90,19 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return this.moduleCode.equals(otherAddCommand.moduleCode)
+                && this.year.equals(otherAddCommand.year)
+                && this.semester.equals(otherAddCommand.semester)
+                && this.grade.equals(otherAddCommand.grade);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("moduleCode", moduleCode)
+                .add("year", year)
+                .add("semester", semester)
+                .add("grade", grade)
                 .toString();
     }
 }

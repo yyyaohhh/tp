@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# MODCRAFT Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -45,12 +45,13 @@ The bulk of the app's work is done by the following four components:
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Database`**](#database-component) : Parses data from within the App.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete CS1231S`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete CS2030S`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -71,16 +72,16 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ModulePlanPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `ModulePlanSemester` object residing in the `Model`.
 
 ### Logic component
 
@@ -117,21 +118,18 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 The `Model` component,
 
-* stores the module plan data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
-* stores the currently 'selected' `Module` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the module plan data i.e., all `Module` objects (which are contained in `UniqueModuleList` objects).
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+* stores a `ModuleData` object that represents the information on all modules. This is exposed to the outside as a `ReadOnlyModuleData` object.
+* does not depend on any of the other four components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `ModulePlan` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+**Note:** The module plan data is split into different semesters (e.g. Y1S1, Y1S2, Y2S1, etc). Instead of one `UniqueModuleList` storing all of the User's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters.
 
 </box>
 
@@ -147,6 +145,22 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+### Database component
+
+**API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
+
+<puml src="diagrams/DatabaseClassDiagram.puml" width="250" />
+
+The `Database` component,
+* reads the module information from JSON format to the corresponding `ModuleData` object.
+* depends on some classes in the `Model` component (because the `Database` component's job is to retrieve objects that belong to the `Model`)
+
+<box type="info" seamless>
+
+**Note:** The module data is stored within the resource folder. In the case where the data cannot be read successfully, a `RuntimeException` is deliberately triggered to forcefully halt the application's execution. This is necessary because all features are reliant on the module data.
+
+</box>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -156,6 +170,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
+### Edit module feature
+
+#### Implementation
+
+The edit mechanism uses `EditModuleDescriptor` to abstract out the fields to edit. It can be found as a publicly accessible class within `EditCommand`. Currently, it only contains fields for `Year`, `Semester` and `Grade`, which are the only attributes of `Module` that can be edited for now. Besides this, it largely follows the parser and command structure as described in [Logic](#logic-component).
+
+We shall now illustrate how `EditModuleDescriptor` is used.
+
+Here is a *Sequence Diagram* showing the parser in action:
+
+<puml src="diagrams/EditParseSequenceDiagram.puml" width="450" />
+
+And here is a *Sequence Diagram* showing the command being executed:
+
+<puml src="diagrams/EditExecuteSequenceDiagram.puml" width="450" />
+
+As can be seen, this is a helpful class to store fields that need to be edited.
+
 
 ### \[Proposed\] Undo/redo feature
 

@@ -1,10 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS1101S;
+import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.CS2100;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +23,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
+import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.TypicalModules;
 
@@ -23,10 +35,16 @@ import seedu.address.testutil.TypicalModules;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs());
+    private Model model = new ModelManager(TypicalModules.getTypicalModulePlan(),
+            new UserPrefs(), getTypicalModuleData());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void constructor_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteCommand(null));
+    }
+
+    @Test
+    public void execute_moduleAcceptedByModel_deleteSuccessful() {
         Module moduleToDelete = TypicalModules.CS2040S;
         ModuleCode code = moduleToDelete.getModuleCode();
         DeleteCommand deleteCommand = new DeleteCommand(code);
@@ -34,12 +52,47 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
                 Messages.format(moduleToDelete));
 
-        ModelManager expectedModel = new ModelManager(TypicalModules.getTypicalModulePlan(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         expectedModel.deleteModule(moduleToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_moduleInDataAndInPlan_deleteSuccessful() throws Exception {
+        //In both ModuleData and ModulePlan -> Success
+        ModelStubAcceptingModuleAddedAndDelete modelStub = new ModelStubAcceptingModuleAddedAndDelete();
+        modelStub.addModule(CS2030S);
+        Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
+
+        CommandResult commandResult = new DeleteCommand(validModule.getModuleCode()).execute(modelStub);
+
+        assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, Messages.format(validModule)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(), modelStub.getModulesAdded());
+    }
+
+
+    @Test
+    public void execute_moduleNotInModuleDataNotInModulePlan_throwsModuleNoteFoundException()  {
+        //Not in ModuleData and ModulePlan (Module Not Found) -> Fail
+        ModelStubWithModule modelStub = new ModelStubWithModule(CS1101S);
+
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(CS1101S.getModuleCode()));
+    }
+
+
+    @Test
+    public void execute_missingModule_throwsModuleNotFoundException() {
+        //In ModuleData and not in ModulePlan -> Fail
+        ModelStubAcceptingModuleAddedAndDelete modelStub = new ModelStubAcceptingModuleAddedAndDelete();
+        modelStub.addModule(CS2100);
+        Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
+
+        DeleteCommand deleteCommand = new DeleteCommand(validModule.getModuleCode());
+
+        assertThrows(ModuleNotFoundException.class, () -> deleteCommand.execute(modelStub));
+    }
 
     @Test
     public void equals() {
@@ -63,7 +116,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different module -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
@@ -76,4 +129,91 @@ public class DeleteCommandTest {
         assertEquals(expected, deleteCommand.toString());
     }
 
+    /**
+     * A Model stub that contains a single module.
+     */
+    private class ModelStubWithModule extends ModelStub {
+        private final Module module;
+
+        /**
+         * Initializes a ModelStubWithModule with the given module.
+         *
+         * @param module The module to be associated with the ModelStubWithModule.
+         */
+        ModelStubWithModule(Module module) {
+            requireNonNull(module);
+            this.module = module;
+        }
+
+        @Override
+        public boolean hasModule(Module module) {
+            requireNonNull(module);
+            return this.module.isSameModule(module);
+        }
+
+        @Override
+        public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+            return getTypicalModuleData().checkDbValidModuleCode(moduleCode);
+        }
+
+        @Override
+        public Module getModuleFromDb(ModuleCode moduleCode) {
+            return getTypicalModuleData().getModule(moduleCode);
+        }
+    }
+
+    /**
+     * A Model stub that always accept the module being added.
+     */
+    private class ModelStubAcceptingModuleAddedAndDelete extends ModelStub {
+        private final ArrayList<Module> modulesAdded = new ArrayList<>();
+
+        @Override
+        public void addModule(Module module) {
+            requireNonNull(module);
+            if (modulesAdded.contains(module)) {
+                throw new DuplicateModuleException();
+            }
+            modulesAdded.add(module);
+        }
+
+        @Override
+        public Module getModule(ModuleCode code) {
+            requireNonNull(code);
+            for (int i = 0; i < modulesAdded.size(); i++) {
+                if (modulesAdded.get(i).getModuleCode().equals(code)) {
+                    return modulesAdded.get(i);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public void deleteModule(Module module) {
+            if (!modulesAdded.contains(module)) {
+                throw new ModuleNotFoundException();
+            }
+            modulesAdded.remove(module);
+        }
+
+        @Override
+        public boolean hasModule(Module module) {
+            requireNonNull(module);
+            return modulesAdded.stream().anyMatch(module::isSameModule);
+        }
+
+        @Override
+        public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+            return getTypicalModuleData().checkDbValidModuleCode(moduleCode);
+        }
+
+        @Override
+        public Module getModuleFromDb(ModuleCode moduleCode) {
+            return getTypicalModuleData().getModule(moduleCode);
+        }
+
+        public ArrayList<Module> getModulesAdded() {
+            return this.modulesAdded;
+        }
+    }
 }

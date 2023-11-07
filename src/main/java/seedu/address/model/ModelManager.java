@@ -4,18 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.database.DbModuleList;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
@@ -28,23 +24,24 @@ public class ModelManager implements Model {
 
     private final ModulePlan modulePlan;
     private final UserPrefs userPrefs;
-    private final DbModuleList dbModuleList;
+    private final ModuleData moduleData;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given modulePlan, userPrefs and moduleData.
      */
-    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, DbModuleList dbModuleList) {
-        requireAllNonNull(modulePlan, userPrefs, dbModuleList);
+    public ModelManager(ReadOnlyModulePlan modulePlan, ReadOnlyUserPrefs userPrefs, ReadOnlyModuleData moduleData) {
+        requireAllNonNull(modulePlan, userPrefs, moduleData);
 
-        logger.fine("Initializing with module plan: " + modulePlan + " and user prefs " + userPrefs);
+        logger.fine("Initializing with module plan: " + modulePlan + " user prefs " + userPrefs
+                + " and module data " + moduleData);
 
         this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.dbModuleList = new DbModuleList(dbModuleList);
+        this.moduleData = new ModuleData(moduleData);
     }
 
     public ModelManager() {
-        this(new ModulePlan(), new UserPrefs(), new DbModuleList());
+        this(new ModulePlan(), new UserPrefs(), new ModuleData());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -72,14 +69,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getModulePlanFilePath() {
+        return userPrefs.getModulePlanFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setModulePlanFilePath(Path modulePlanFilePath) {
+        requireNonNull(modulePlanFilePath);
+        userPrefs.setModulePlanFilePath(modulePlanFilePath);
     }
 
     //=========== ModulePlan ================================================================================
@@ -94,7 +91,6 @@ public class ModelManager implements Model {
         return modulePlan;
     }
 
-
     @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
@@ -106,12 +102,15 @@ public class ModelManager implements Model {
         requireNonNull(module);
         modulePlan.removeModule(module);
     }
+
     @Override
     public void addModule(Module module) {
         requireNonNull(module);
+        if (modulePlan.hasModule(module)) {
+            throw new DuplicateModuleException();
+        }
         modulePlan.addModule(module);
     }
-
 
     @Override
     public void setModule(Module target, Module editedModule) {
@@ -120,13 +119,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Module findModuleUsingCode(ModuleCode code) {
-        requireAllNonNull(code);
-        return modulePlan.findUsingCode(code);
+    public Module getModule(ModuleCode code) {
+        requireNonNull(code);
+        return modulePlan.getModule(code);
     }
 
     @Override
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return modulePlan.totalModularCredits();
     }
 
@@ -135,33 +134,38 @@ public class ModelManager implements Model {
         return modulePlan.getCap();
     }
 
-    //=========== DbModuleList ===============================================================================
+    //=========== ModuleData ===============================================================================
 
     @Override
-    public ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException {
-        return dbModuleList.getModuleName(moduleCode);
+    public Module getModuleFromDb(ModuleCode moduleCode) {
+        return moduleData.getModule(moduleCode);
     }
 
     @Override
-    public Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException {
-        return dbModuleList.getModuleDescription(moduleCode);
+    public void setModuleData(ReadOnlyModuleData moduleData) {
+        requireNonNull(moduleData);
+        this.moduleData.resetData(moduleData);
     }
 
     @Override
-    public ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException {
-        return dbModuleList.getModularCredit(moduleCode);
+    public ReadOnlyModuleData getModuleData() {
+        return moduleData;
     }
 
     @Override
-    public boolean isValidModuleCode(ModuleCode moduleCode) {
-        return dbModuleList.isValidModuleCode(moduleCode);
+    public boolean checkDbValidModule(Module module) {
+        return checkDbValidModuleCode(module.getModuleCode());
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+        return moduleData.checkDbValidModuleCode(moduleCode);
+    }
+
+    //=========== ModulePlanSemesterList Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
-     * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<ModulePlanSemester> getFilteredModuleList() {

@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Deletes a module identified using it's module code.
@@ -22,23 +23,38 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + "CS2103T ";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
-    public static final String MESSAGE_NOT_FOUND_MODULE = "This module is not found and has not been deleted.";
 
     private final ModuleCode toDelete;
 
+    /**
+     * Creates an DeleteCommand to delete the specified {@code Module}
+     */
     public DeleteCommand(ModuleCode toDelete) {
+        requireNonNull(toDelete);
         this.toDelete = toDelete;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Module targetMod = model.findModuleUsingCode(toDelete);
 
-        if (!model.hasModule(targetMod)) {
-            throw new CommandException(MESSAGE_NOT_FOUND_MODULE);
+        // Database check
+        if (!model.checkDbValidModuleCode(toDelete)) {
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_MODULE_CODE, toDelete));
         }
 
+        // Retrieve module from module plan
+        Module targetMod;
+
+        try {
+            targetMod = model.getModule(toDelete);
+        } catch (ModuleNotFoundException e) {
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_MODULE_NOT_FOUND, toDelete, COMMAND_WORD));
+        }
+
+        // Delete module from module plan and return success message
         model.deleteModule(targetMod);
         return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, Messages.format(targetMod)));
     }

@@ -18,6 +18,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
  * Edits the details of an existing module in the module plan.
@@ -43,6 +44,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_MODULE_CODE_CHANGE = "Changing module code is not allowed.";
+
     private final ModuleCode moduleCode;
     private final EditModuleDescriptor editModuleDescriptor;
 
@@ -61,15 +63,33 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Module moduleToEdit = model.findModuleUsingCode(moduleCode);
+
+        // Database check
+        if (!model.checkDbValidModuleCode(moduleCode)) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MODULE_CODE, moduleCode));
+        }
+
+        // Retrieve module from module plan
+        Module moduleToEdit;
+        try {
+            moduleToEdit = model.getModule(moduleCode);
+        } catch (ModuleNotFoundException mnfe) {
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_MODULE_NOT_FOUND, moduleCode, COMMAND_WORD));
+        }
+
+        // Edit module
         Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
 
+        // Check for changes
         if (!moduleToEdit.isSameModule(editedModule)) {
             throw new CommandException(MESSAGE_MODULE_CODE_CHANGE);
         }
 
+        // Update module plan and return success message
         model.setModule(moduleToEdit, editedModule);
-        return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule)));
+        return new CommandResult(
+                String.format(MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule)));
     }
 
     /**
@@ -79,12 +99,11 @@ public class EditCommand extends Command {
     private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;
 
-        ModuleCode moduleCode = moduleToEdit.getModuleCode();
         Year updatedYear = editModuleDescriptor.getYear().orElse(moduleToEdit.getYearTaken());
         Semester updatedSemester = editModuleDescriptor.getSemester().orElse(moduleToEdit.getSemesterTaken());
         Grade updatedGrade = editModuleDescriptor.getGrade().orElse(moduleToEdit.getGrade());
 
-        return new Module(moduleCode, updatedYear, updatedSemester, updatedGrade);
+        return moduleToEdit.fillUserInputs(updatedYear, updatedSemester, updatedGrade);
     }
 
     @Override

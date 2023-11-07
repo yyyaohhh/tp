@@ -6,11 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModularCredit;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 
 /**
- * Jackson-friendly version of {@link DbModule}.
+ * Jackson-friendly version of {@link Module} for database conversions.
  */
 public class JsonAdaptedDbModule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module's %s field is missing!";
@@ -21,7 +22,7 @@ public class JsonAdaptedDbModule {
     private final String moduleCredit;
 
     /**
-     * Constructs a {@code JsonAdaptedDatabaseModule} with the given module details.
+     * Constructs a {@code JsonAdaptedDbModule} with the given module details.
      */
     @JsonCreator
     public JsonAdaptedDbModule(@JsonProperty("moduleCode") String moduleCode,
@@ -29,7 +30,6 @@ public class JsonAdaptedDbModule {
                                @JsonProperty("description") String description,
                                @JsonProperty("moduleCredit") String moduleCredit
                                //@JsonProperty("semesterData") String semesterData,
-                               //@JsonProperty("prereqTree") String prereqTree,
                                //@JsonProperty("attributes") String attributes,
                                //@JsonProperty("gradingBasisDescription") String gradingBasisDescription
                                ) {
@@ -40,11 +40,11 @@ public class JsonAdaptedDbModule {
     }
 
     /**
-     * Converts this Jackson-friendly adapted module object into the database's {@code DbModule} object.
+     * Converts this Jackson-friendly adapted module object into a {@Link Module} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted module.
      */
-    public DbModule toModelType() throws IllegalValueException {
+    public Module toModelType() throws IllegalValueException {
 
         if (moduleCode == null) {
             throw new IllegalValueException(
@@ -79,6 +79,6 @@ public class JsonAdaptedDbModule {
         }
         final ModularCredit modelModularCredit = new ModularCredit(moduleCredit);
 
-        return new DbModule(modelCode, modelName, modelDescription, modelModularCredit);
+        return new Module(modelCode, modelName, modelDescription, modelModularCredit);
     }
 }

@@ -17,12 +17,11 @@ public class ModulePlanPanel extends UiPart<Region> {
     private static final String FXML = "ModulePlanPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ModulePlanPanel.class);
 
-    //TODO modify class.
     @FXML
     private ListView<ModulePlanSemester> modulePlanView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ModulePlanPanel} with the given {@code ObservableList}.
      */
     public ModulePlanPanel(ObservableList<ModulePlanSemester> modulePlan) {
         super(FXML);
@@ -32,7 +31,8 @@ public class ModulePlanPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ModulePlanSemester}
+     * using a {@code ModulePlanCard}.
      */
     class ModulePlanViewCell extends ListCell<ModulePlanSemester> {
         @Override

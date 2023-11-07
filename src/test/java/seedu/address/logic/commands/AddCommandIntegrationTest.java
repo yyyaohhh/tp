@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalModulePlan(), new UserPrefs());
+        model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
     }
 
     @Test
     public void execute_newModule_success() {
         Module validModule = new ModuleBuilder().withCode("CS3230").build();
 
-        Model expectedModel = new ModelManager((getTypicalModulePlan()), new UserPrefs());
+        Model expectedModel = new ModelManager((getTypicalModulePlan()), new UserPrefs(), getTypicalModuleData());
         expectedModel.addModule(validModule);
 
         assertCommandSuccess(new AddCommand(validModule), model,

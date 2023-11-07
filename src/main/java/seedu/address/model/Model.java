@@ -1,16 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
@@ -44,12 +41,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getModulePlanFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setModulePlanFilePath(Path addressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -66,13 +63,15 @@ public interface Model {
 
     /**
      * Deletes the given module.
-     * The module must exist in the address book.
+     * {@code module} must already exist in the module plan.
      */
     void deleteModule(Module module);
 
     /**
      * Adds the given module.
      * {@code module} must not already exist in the address book.
+     *
+     * @throws DuplicateModuleException if the module already exists in the module plan.
      */
     void addModule(Module module);
 
@@ -84,19 +83,18 @@ public interface Model {
     void setModule(Module target, Module editedPerson);
 
     /**
-     * Finds and returns a module using its module code.
+     * Returns the module with the specified {@code ModuleCode}.
      *
-     * @param code The module code used to search for the module.
-     * @return The module with the specified module code, or null if not found.
+     * @throws ModuleNotFoundException if no such module exists in the module plan.
      */
-    Module findModuleUsingCode(ModuleCode code);
+    Module getModule(ModuleCode moduleCode);
 
     /**
      * Calculates and returns the total modular credits of all modules in the address book.
      *
      * @return The total modular credits of all modules in the address book.
      */
-    int totalModularCredits();
+    float totalModularCredits();
 
     /**
      * Calculates and returns the Cumulative Average Point (CAP) for a collection of semesters.
@@ -106,30 +104,40 @@ public interface Model {
     Float getCap();
 
     /**
-     * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
-     *
-     * @throws NoSuchElementException if no such module exists in the database.
+     * Replaces the module data with the data in {@code moduleData}.
      */
-    ModuleName getModuleName(ModuleCode moduleCode) throws NoSuchElementException;
+    public void setModuleData(ReadOnlyModuleData moduleData);
 
     /**
-     * Returns the {@code Description} of the module with the specified {@code ModuleCode}.
-     *
-     * @throws NoSuchElementException if no such module exists in the database.
+     * Returns the module data.
      */
-    Description getModuleDescription(ModuleCode moduleCode) throws NoSuchElementException;
+    public ReadOnlyModuleData getModuleData();
 
     /**
-     * Returns the {@code ModularCedit} of the module with the specified {@code ModuleCode}.
+     * Checks if the specified {@code module} is present in the database.
+     * This method checks for equality based on module code.
      *
-     * @throws NoSuchElementException if no such module exists in the database.
+     * @param module The module to search for.
+     * @return True if the module is present in the database, false otherwise.
      */
-    ModularCredit getModularCredit(ModuleCode moduleCode) throws NoSuchElementException;
+    boolean checkDbValidModule(Module module);
 
     /**
-     * Checks if the specified {@code ModuleCode} is present in the database.
+     * Checks if the specified {@code moduleCode} is present in the database.
+     *
+     * @param moduleCode The module code to search for.
+     * @return True if the module code is present in the database, false otherwise.
      */
-    boolean isValidModuleCode(ModuleCode moduleCode);
+    boolean checkDbValidModuleCode(ModuleCode moduleCode);
+
+    /**
+     * Returns the module with the specified {@code moduleCode} from the database.
+     *
+     * @param moduleCode The module code to search for.
+     * @return The module with the specified module code.
+     * @throws ModuleNotFoundException if no such module exists in the database.
+     */
+    Module getModuleFromDb(ModuleCode moduleCode);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ModulePlanSemester> getFilteredModuleList();

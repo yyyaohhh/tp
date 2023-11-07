@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Grade;
-import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
@@ -63,9 +62,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
                     new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
         }
-        Module module = new Module(moduleCode, year, semester, grade);
 
-        return new AddCommand(module);
+        return new AddCommand(moduleCode, year, semester, grade);
     }
 
     /**

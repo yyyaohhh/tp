@@ -4,51 +4,74 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Package "Model                 " as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nModel" as Model
-Class AddressBook
 Class ModelManager
+
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class ReadOnlyUserPrefs
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class "<<interface>>\nReadOnlyModulePan" as ReadOnlyModulePlan
+Class ReadOnlyModulePlan
+Class ModulePlan
+Class ModulePlanSemesterList
+Class ModulePlanSemester
+Class UniqueModuleList
+Class Module
 
-Class I #FFFFFF
+Class Description
+Class ModularCredit
+Class Grade
+Class ModuleCode
+Class ModuleName
+Class Year
+Class Semester
+
+Class "<<interface>>\nReadOnlyModuleData" as ReadOnlyModuleData
+Class ModuleData
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModulePlan .up.|> ReadOnlyModulePlan
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+Model ..> ReadOnlyUserPrefs
+Model ..> ReadOnlyModulePlan
+Model ..> ReadOnlyModuleData
+ModelManager --> "1" ModulePlan
+ModelManager --> "1" UserPrefs
+ModelManager --> "1" ModuleData
+ModelManager ..> Module
+ModelManager ..> ModuleCode
+ModuleData .up.|> ReadOnlyModuleData
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModulePlan *--> "1" ModulePlanSemesterList
+ModulePlanSemesterList --> "~*" ModulePlanSemester
+ModulePlanSemester *-> "1" UniqueModuleList
+ModuleData *--> "1" UniqueModuleList
+UniqueModuleList -> "~*" Module
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+ModulePlanSemester --> "1" Year
+ModulePlanSemester --> "1" Semester
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Module *-> "1" ModuleCode
+Module *--> "1" ModuleName
+Module *--> "1" ModularCredit
+Module --> "0..1" Grade
+Module *--> "1" Description
+Module --> "0..1" Year
+Module --> "0..1" Semester
 
-ModelManager --> "~* filtered" Person
+ReadOnlyModulePlan -[hidden]right--> ReadOnlyModuleData
+ReadOnlyModuleData -[hidden]right--> ModelManager
+ModelManager -[hidden]right--> ReadOnlyUserPrefs
+
+Year -[hidden]right-> Semester
+Semester -[hidden]right-> Grade
+
+
 @enduml

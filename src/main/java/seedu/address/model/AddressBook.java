@@ -93,7 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
 
-        modules.setModules(target, editedModule);
+        //modules.setModules(target, editedModule);
     }
 
     /**
@@ -103,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return The module with the specified module code, or null if not found.
      * @throws NullPointerException If the provided module code is null.
      */
-    public Module findUsingCode(ModuleCode code) {
+    public Module getModule(ModuleCode code) {
         requireNonNull(code);
         return modules.find(code);
     }
@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @return The total modular credits of all modules in the collection.
      */
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         return modules.modularCredits();
     }
 

@@ -1,15 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.module.Module;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
-import seedu.address.model.person.Person;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building ModulePlan objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code ModulePlan ab = new ModulePlanBuilder().withModule(module).build();}
  */
 public class ModulePlanBuilder {
 
