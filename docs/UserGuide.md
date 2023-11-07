@@ -16,11 +16,11 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 This User Guide consists of various visuals to aid your reading. 
 
-<div markdown="1" class="alert alert-primary">:bulb: **Tip:**
+<div class="alert alert-primary" markdown="1">:bulb: **Tip:**
 Tips in boxes like this contain information that may be helpful.
 </div>
 
-<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
+<div class="alert alert-warning" markdown="1">:exclamation: **Caution:**
 Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
 </div>
 
@@ -107,7 +107,7 @@ Adds a module to the list of modules taken in the specified year and semester.
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
 
-<div markdown="1" class="alert alert-primary">:bulb: **Tip:**
+<div class="alert alert-primary" markdown="1">:bulb: **Tip:**
 The module will be added to the default sem set.
 </div>
 
@@ -124,7 +124,7 @@ Changes an attribute of a module, if it exists. Useful if you want to update inf
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
-<div markdown="1" class="alert alert-primary">:bulb: **Tip:**
+<div class="alert alert-primary" markdown="1">:bulb: **Tip:**
 At least one of the optional fields must be provided.
 </div>
 
@@ -188,7 +188,7 @@ Format: `exit`
 
 The module data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`.
 Advanced users are welcome to update data directly by editing that data file.
-<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
+<div class="alert alert-warning" markdown="1">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
