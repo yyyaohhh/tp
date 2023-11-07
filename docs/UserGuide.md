@@ -65,6 +65,8 @@ Warnings in boxes like this contain information that are vital to the running of
 
 ## Features
 
+<br>
+
 **Notes about the command format:**<br>
 
 * All commands are **case-sensitive**.
@@ -182,7 +184,11 @@ Exits the program.
 
 Format: `exit`
 
+<br>
+
 ## Advanced use
+
+<br>
 
 ### Editing the data file
 
@@ -190,7 +196,7 @@ The module data is saved automatically as a JSON file `[JAR file location]/data/
 Advanced users are welcome to update data directly by editing that data file.
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</md>></div>
+</md></div>
 
 
 --------------------------------------------------------------------------------------------------------------------
