@@ -64,13 +64,6 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         modules.remove(key);
     }
 
-    /**
-     * Replaces the given module {@code target} in the list with {@code editedModule}.
-     */
-    public void setModule(Module target, Module editedModule) {
-        requireNonNull(editedModule);
-        modules.setModules(target, editedModule);
-    }
 
     /**
      * Finds and returns a module using its module code from the internal list of modules.
@@ -121,6 +114,11 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         boolean equalYear = this.year.equals(m.getYearTaken());
         boolean equalSemester = this.semester.equals(m.getSemesterTaken());
 
+        //For advance placement
+        if (equalYear && this.year.equals(Year.YEAR_0)) {
+            return true;
+        }
+
         if (equalYear && equalSemester) {
             return true;
         }
@@ -165,6 +163,11 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         ModulePlanSemester otherModulePlanSemester = (ModulePlanSemester) other;
         boolean yearEquals = this.year.equals(otherModulePlanSemester.year);
         boolean semesterEquals = this.semester.equals(otherModulePlanSemester.semester);
+
+        //For advance placement
+        if (yearEquals && this.year.equals(Year.YEAR_0)) {
+            return true;
+        }
 
         return yearEquals && semesterEquals;
     }
