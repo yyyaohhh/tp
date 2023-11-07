@@ -16,11 +16,11 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 This User Guide consists of various visuals to aid your reading. 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="1" class="alert alert-primary">:bulb: **Tip:**
 Tips in boxes like this contain information that may be helpful.
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
 Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
 </div>
 
@@ -28,6 +28,7 @@ Warnings in boxes like this contain information that are vital to the running of
 ## Table of Contents
 * [Quick start](#quick-start)
 * [Features](#features)
+* [Advanced Use](#advanced-use)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
@@ -87,6 +88,8 @@ Warnings in boxes like this contain information that are vital to the running of
 * Parameters with a prefix can be specified in any order among themselves.<br>
   e.g. `add CS2030S y/1 s/2 g/IP` is the same as `add CS2030S s/2 g/IP y/1`.
 
+<br>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -95,6 +98,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<br>
 
 ### Adding a module: `add`
 
@@ -103,7 +107,7 @@ Adds a module to the list of modules taken in the specified year and semester.
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="1" class="alert alert-primary">:bulb: **Tip:**
 The module will be added to the default sem set.
 </div>
 
@@ -112,6 +116,7 @@ Examples:
 * `add IS1108 y/1 s/2 g/CS`
 * `add ST2334 y/2 s/1 g/IP`
 
+<br>
 
 ### Editing a module: `edit`
 
@@ -119,7 +124,7 @@ Changes an attribute of a module, if it exists. Useful if you want to update inf
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="1" class="alert alert-primary">:bulb: **Tip:**
 At least one of the optional fields must be provided.
 </div>
 
@@ -127,6 +132,7 @@ Examples:
 * `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
 * `edit CS3230 y/4 s/2`: Moves CS3230 to Year 4 Semester 2.
 
+<br>
 
 ### Deleting a module : `delete`
 
@@ -138,6 +144,8 @@ Examples:
 * `delete GEA1000`
 * `delete CS2030S`
 
+<br>
+
 ### Finding Information about a module: `info`
 
 Retrieves information about a certain module by module code.
@@ -148,6 +156,8 @@ Examples:
 * `info CS2019`
 * `info CS1010`
 
+<br>
+
 ### Calculating the total current CAP:
 Calculates the total current CAP of all modules stored in all years and semesters
 using the formula:  
@@ -157,10 +167,14 @@ Returns a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
 Format: `calculateCAP`
 
+<br>
+
 ### Calculating the total current Modular Credits (MCs)
 Calculates the total current Modular Credits (MCs) stored in all years and semesters.
 
 Format: `calculateMC`
+
+<br>
 
 ### Exiting the program : `exit`
 
@@ -168,17 +182,13 @@ Exits the program.
 
 Format: `exit`
 
-
-### Saving the data
-
-ModuleList data is saved in the hard disk automatically after any command that changes the data.
-There is no need to save manually.
+## Advanced use
 
 ### Editing the data file
 
-ModuleList data is saved automtically as a JSON file `[JAR file location]/data/moduleplan.json`
+The module data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`.
 Advanced users are welcome to update data directly by editing that data file.
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="1" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
@@ -189,6 +199,10 @@ If your changes to the data file makes its format invalid, ModCraft will discard
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the default data file it creates with the file that contains the data of your previous ModCraft home folder.
+
+**Q**: How do I save the data?<br>
+**A**: The data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
