@@ -12,7 +12,19 @@ pageNav: 3
 ModCraft is an app that provides a fast and easy way for university students to track courses to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
 
-This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
+This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features from the [Table of Contents](#table-of-contents) below.
+
+This User Guide consists of various visuals to aid your reading. 
+
+<box type="tip" seamless>
+
+**Tip:** Tips in boxes like this contain information that may be helpful.
+</box>
+
+<box type="warning" seamless>
+
+**Caution:** Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
