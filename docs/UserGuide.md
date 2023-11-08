@@ -26,12 +26,22 @@ Warnings in boxes like this contain information that are vital to the running of
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-* [Advanced Use](#advanced-use)
-* [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command summary](#command-summary)
+1. [Quick start](#quick-start)
+2. [Features](#features)  
+ 2.1. [Viewing help: `help`](#viewing-help-help)  
+ 2.2. [Adding a module: `add`](#adding-a-module-add)  
+ 2.3. [Editing a module: `edit`](#editing-a-module-edit)  
+ 2.4. [Deleting a module: `delete`](#deleting-a-module-delete)  
+ 2.5. [Finding Information about a module: `info`](#finding-information-about-a-module-info)  
+ 2.6. [Calculating the total current CAP: `calculateCAP`](#calculating-the-total-current-cap-calculatecap)  
+ 2.7. [Calculating the total current Modular Credits (MCs): `calculateMC`](#calculating-the-total-current-modular-credits-mcs-calculatemc)  
+ 2.8. [Exiting the program: `exit`](#exiting-the-program-exit)  
+3. [Advanced Use](#advanced-use)  
+ 3.1. [Editing the data file](#editing-the-data-file)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
+7. [Glossary](#glossary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -92,7 +102,7 @@ Warnings in boxes like this contain information that are vital to the running of
 
 <br>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -136,7 +146,7 @@ Examples:
 
 <br>
 
-### Deleting a module : `delete`
+### Deleting a module: `delete`
 
 Removes the module from whichever semester the module is taken, if it exists.
 
@@ -160,7 +170,7 @@ Examples:
 
 <br>
 
-### Calculating the total current CAP:
+### Calculating the total current CAP: `calculateCAP`
 Calculates the total current CAP of all modules stored in all years and semesters
 using the formula:  
 $\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
@@ -171,14 +181,14 @@ Format: `calculateCAP`
 
 <br>
 
-### Calculating the total current Modular Credits (MCs)
+### Calculating the total current Modular Credits (MCs): `calculateMC`
 Calculates the total current Modular Credits (MCs) stored in all years and semesters.
 
 Format: `calculateMC`
 
 <br>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
