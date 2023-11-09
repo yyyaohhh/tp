@@ -57,17 +57,7 @@ public class AddCommand extends Command {
         this.grade = grade;
     }
 
-    /**
-     * For Testing purposes only
-     * @param validModule
-     */
-    public AddCommand(Module validModule) {
-        requireNonNull(validModule);
-        this.moduleCode = validModule.getModuleCode();
-        this.year = validModule.getYearTaken();
-        this.semester = validModule.getSemesterTaken();
-        this.grade = validModule.getGrade();
-    }
+    
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

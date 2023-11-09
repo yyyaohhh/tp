@@ -34,7 +34,10 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager((getTypicalModulePlan()), new UserPrefs(), getTypicalModuleData());
         expectedModel.addModule(validModule);
 
-        assertCommandSuccess(new AddCommand(validModule), model,
+        AddCommand actualCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
+                validModule.getSemesterTaken(), validModule.getGrade());
+
+        assertCommandSuccess(actualCommand, model,
                 String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 expectedModel);
     }
@@ -42,7 +45,11 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateModule_throwsCommandException() {
         Module moduleInList = model.getModulePlan().getModulePlanSemesterList().get(0).getModuleList().get(0);
-        assertCommandFailure(new AddCommand(moduleInList), model,
+
+        AddCommand actualCommand = new AddCommand(moduleInList.getModuleCode(), moduleInList.getYearTaken(),
+                moduleInList.getSemesterTaken(), moduleInList.getGrade());
+
+        assertCommandFailure(actualCommand, model,
                 AddCommand.MESSAGE_DUPLICATE_MODULE);
     }
 

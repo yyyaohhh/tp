@@ -94,8 +94,9 @@ public class AddCommandTest {
     public void execute_duplicateModule_throwsCommandException() throws Exception {
         //Both in ModuleData and ModulePlan
         Module validModule = new ModuleBuilder().build();
-        AddCommand addCommand = new AddCommand(validModule);
-        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
+
+        AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
+                validModule.getSemesterTaken(), validModule.getGrade());        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
         
         assertThrows(CommandException.class,
                 String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()),
@@ -107,13 +108,17 @@ public class AddCommandTest {
     public void equals() {
         Module cs2030s = new ModuleBuilder().withCode("CS2030S").build();
         Module cs2040s = new ModuleBuilder().withCode("CS2040S").build();
-        AddCommand add2030Command = new AddCommand(cs2030s);
-        AddCommand add2040Command = new AddCommand(cs2040s);
+        AddCommand add2030Command = new AddCommand(cs2030s.getModuleCode(), cs2030s.getYearTaken(),
+                cs2030s.getSemesterTaken(), cs2030s.getGrade());
+        AddCommand add2040Command = new AddCommand(cs2040s.getModuleCode(), cs2040s.getYearTaken(),
+                cs2040s.getSemesterTaken(), cs2040s.getGrade());
 
         //same -> returns true
         assertTrue(add2030Command.equals(add2030Command));
 
-        AddCommand add2030CommandCopy = new AddCommand(cs2030s);
+
+        AddCommand add2030CommandCopy = new AddCommand(cs2030s.getModuleCode(), cs2030s.getYearTaken(),
+                cs2030s.getSemesterTaken(), cs2030s.getGrade());
         assertTrue(add2030Command.equals(add2030CommandCopy));
 
         assertFalse(add2030Command.equals(1));
@@ -125,7 +130,9 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(CS2030S);
+
+        AddCommand addCommand = new AddCommand(CS2030S.getModuleCode(), CS2030S.getYearTaken(),
+                CS2030S.getSemesterTaken(), CS2030S.getGrade());
         String expected = AddCommand.class.getCanonicalName() + "{moduleCode=" + CS2030S.getModuleCode()
                 + ", year=" + CS2030S.getYearTaken() + ", semester=" + CS2030S.getSemesterTaken()
                 + ", grade=" + CS2030S.getGrade() + "}";
