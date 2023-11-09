@@ -21,7 +21,17 @@ ModCraft can serve as a **study planner** for your journey in NUS. With ModCraft
 
 **And many more!**
 
-This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
+This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features from the [Table of Contents](#table-of-contents) below.
+
+This User Guide consists of various visuals to aid your reading. 
+
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+Tips in boxes like this contain information that may be helpful.
+</md></div>
+
+<div class="alert alert-warning"><md>:exclamation: **Caution:**
+Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
+</md></div>
 
 **Note Box**
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
@@ -30,23 +40,26 @@ Provides you with information that is useful to know.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-    * [Viewing help](#viewing-help--help)
-    * [Modules](#modules)
-      * [Adding a module](#adding-a-module-add)
-      * [Editing a module](#editing-a-module-edit)
-      * [Deleting a module](#deleting-a-module--delete)
-      * [Finding information about a module](#finding-information-about-a-module-info)
-    * [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
-    * [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
-    * [Exiting the program](#exiting-the-program--exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command summary](#command-summary)
-* [Glossary](#glossary)
+
+1. [Quick start](#quick-start)
+2. [Features](#features)
+    2.1. [Viewing help](#viewing-help--help)
+    2.2. [Modules](#modules)
+      2.2.1. [Adding a module](#adding-a-module-add)
+      2.2.2. [Editing a module](#editing-a-module-edit)
+      2.2.3. [Deleting a module](#deleting-a-module--delete)
+      2.2.4. [Finding information about a module](#finding-information-about-a-module-info)
+    2.3. [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
+    2.4. [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
+    2.5. [Exiting the program](#exiting-the-program--exit)
+    2.6. [Saving the data](#saving-the-data)
+3. [Advanced Use](#advanced-use)  
+    3.1. [Editing the data file](#editing-the-data-file)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
+7. [Glossary](#glossary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -80,6 +93,8 @@ Provides you with information that is useful to know.
 
 ## Features
 
+<br>
+
 **Notes about the command format:**<br>
 
 * All commands are **case-sensitive**.
@@ -105,7 +120,9 @@ Provides you with information that is useful to know.
 * Parameters with a prefix can be specified in any order among themselves.<br>
   e.g. `add CS2030S y/1 s/2 g/IP` is the same as `add CS2030S s/2 g/IP y/1`.
 
-### Viewing help : `help`
+<br>
+
+### Viewing help: `help`
 
 Shows you a message explaining how to access the help page of ModCraft.
 
@@ -115,7 +132,10 @@ You can copy the URL and paste it into your browser to view [this User Guide](ht
 
 Format: `help`
 
+<br>
+
 ### Modules
+
 The modules in ModCraft are [courses from National University of Singapore (NUS)](https://nusmods.com/courses?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4). The modules have **module code, module title, module description and modular credits**.
 
 Examples:
@@ -154,7 +174,6 @@ Below shows what ModCraft should look like for adding a module to the Special Te
   <img src="images/ImagesForUG/st-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
 
-
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 
 Currently, ModCraft have certain **limitations**.
@@ -168,6 +187,8 @@ Currently, ModCraft have certain **limitations**.
 These features are planned enhancements in future releases.
 
 </md></div>
+
+<br>
 
 ### Adding a module: `add`
 
@@ -187,7 +208,6 @@ Below shows what ModCraft should look like for executing the `add` command.
   <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
 
-
 <box type="tip" seamless>
 
 **Tip:** To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**. 
@@ -196,6 +216,7 @@ For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `CS` or `CU` a
 
 </box>
 
+<br>
 
 ### Editing a module: `edit`
 
@@ -222,8 +243,9 @@ Below shows what ModCraft should look like for executing the `edit` command. The
 
 </box>
 
+<br>
 
-### Deleting a module : `delete`
+### Deleting a module: `delete`
 
 You can remove the module from whichever semester the module is taken, **only if it exists**.
 
@@ -253,9 +275,13 @@ Deleting a module also **deletes all the information associated with the module*
 
 </md></div>
 
+<br>
+
 ### Finding Information about a module: `info`
 
-You can retrieve information about **any** module by its module code, including the modules **not** added to the study plan. The **module code, modular credit and module description** of the module will be displayed.
+You can retrieve information about **any** module by its module code, including the modules **not** added to the study plan. 
+
+The **module code, modular credit and module description** of the module will be displayed.
 
 Format: `info MODULE`
 
@@ -270,9 +296,13 @@ Below shows what ModCraft should look like for executing the `info` command.
   <img src="images/ImagesForUG/info-after.png" alt="After executing info command" style="height:400px; margin:20px;">
 </div>
 
+<br>
+
 ### Calculating the total current CAP: `calculateCAP`
+
 You can calculate the total current CAP of all modules stored in all years and semesters.
 ModCraft will be calculating using the formula:  
+
 $\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
 
 Displays a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
@@ -292,7 +322,10 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 </md></div>
 
+<br>
+
 ### Calculating the total current Modular Credits (MCs): `CalculateMC`
+
 You can calculate the total current Modular Credits (MCs) stored in all years and semesters. Displays a float which is the sum of all MCs.
 
 Format: `calculateMC`
@@ -310,29 +343,31 @@ The result displayed by the `calculateMC` command **includes** the modules with 
 
 </md></div>
 
-### Exiting the program : `exit`
+<br>
+
+### Exiting the program: `exit`
 
 You can exit the program using this command.
 
 Format: `exit`
 
+<br>
 
-### Saving the data
+## Advanced use
 
 ModuleList data is saved in the hard disk automatically after any command you inputted that changes the data.
 There is no need for you to save manually.
 
+<br>
+
 ### Editing the data file
 
-ModuleList data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`
+The module data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`.
+
 Advanced users are welcome to update data directly by editing that data file.
-<box type="warning" seamless>
-
-**Caution:**
+<div class="alert alert-warning"><md>:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</box>
-
-
+</md></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -340,6 +375,10 @@ If your changes to the data file makes its format invalid, ModCraft will discard
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the default data file it creates with the file that contains the data of your previous ModCraft home folder.
+
+**Q**: How do I save the data?<br>
+**A**: The data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -361,6 +400,7 @@ If your changes to the data file makes its format invalid, ModCraft will discard
 | **calculateMC**  | `calculateMC`                                                                                                |
 | **help**         | `help`                                                                                                       |
 
+<br>
 
 ## Glossary
 
