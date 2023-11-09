@@ -12,15 +12,36 @@ pageNav: 3
 ModCraft is an app that provides a fast and easy way for university students to track courses to take to meet graduation requirements and plan courses to take. The user interacts
 with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
 
-This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features.
+This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features from the [Table of Contents](#table-of-contents) below.
+
+This User Guide consists of various visuals to aid your reading. 
+
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+Tips in boxes like this contain information that may be helpful.
+</md></div>
+
+<div class="alert alert-warning"><md>:exclamation: **Caution:**
+Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
+</md></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-* [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command summary](#command-summary)
+1. [Quick start](#quick-start)
+2. [Features](#features)  
+ 2.1. [Viewing help: `help`](#viewing-help-help)  
+ 2.2. [Adding a module: `add`](#adding-a-module-add)  
+ 2.3. [Editing a module: `edit`](#editing-a-module-edit)  
+ 2.4. [Deleting a module: `delete`](#deleting-a-module-delete)  
+ 2.5. [Finding Information about a module: `info`](#finding-information-about-a-module-info)  
+ 2.6. [Calculating the total current CAP: `calculateCAP`](#calculating-the-total-current-cap-calculatecap)  
+ 2.7. [Calculating the total current Modular Credits (MCs): `calculateMC`](#calculating-the-total-current-modular-credits-mcs-calculatemc)  
+ 2.8. [Exiting the program: `exit`](#exiting-the-program-exit)  
+3. [Advanced Use](#advanced-use)  
+ 3.1. [Editing the data file](#editing-the-data-file)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
+7. [Glossary](#glossary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -54,6 +75,8 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 ## Features
 
+<br>
+
 **Notes about the command format:**<br>
 
 * All commands are **case-sensitive**.
@@ -77,7 +100,9 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 * Parameters with a prefix can be specified in any order among themselves.<br>
   e.g. `add CS2030S y/1 s/2 g/IP` is the same as `add CS2030S s/2 g/IP y/1`.
 
-### Viewing help : `help`
+<br>
+
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -85,6 +110,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<br>
 
 ### Adding a module: `add`
 
@@ -92,16 +118,17 @@ Adds a module to the list of modules taken in the specified year and semester.
 
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
-<box type="tip" seamless>
 
-**Tip:** The module will be added to the default sem set.
-</box>
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+The module will be added to the default sem set.
+</md></div>
 
 Examples:
 * `add MA1521 y/1 s/1 g/A`
 * `add IS1108 y/1 s/2 g/CS`
 * `add ST2334 y/2 s/1 g/IP`
 
+<br>
 
 ### Editing a module: `edit`
 
@@ -109,17 +136,17 @@ Changes an attribute of a module, if it exists. Useful if you want to update inf
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
-<box type="tip" seamless>
-
-**Tip:** At least one of the optional fields must be provided.
-</box>
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+At least one of the optional fields must be provided.
+</md></div>
 
 Examples:
 * `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
 * `edit CS3230 y/4 s/2`: Moves CS3230 to Year 4 Semester 2.
 
+<br>
 
-### Deleting a module : `delete`
+### Deleting a module: `delete`
 
 Removes the module from whichever semester the module is taken, if it exists.
 
@@ -128,6 +155,8 @@ Format: `delete MODULE`
 Examples:
 * `delete GEA1000`
 * `delete CS2030S`
+
+<br>
 
 ### Finding Information about a module: `info`
 
@@ -139,7 +168,9 @@ Examples:
 * `info CS2019`
 * `info CS1010`
 
-### Calculating the total current CAP:
+<br>
+
+### Calculating the total current CAP: `calculateCAP`
 Calculates the total current CAP of all modules stored in all years and semesters
 using the formula:  
 $\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
@@ -148,33 +179,34 @@ Returns a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
 Format: `calculateCAP`
 
-### Calculating the total current Modular Credits (MCs)
+<br>
+
+### Calculating the total current Modular Credits (MCs): `calculateMC`
 Calculates the total current Modular Credits (MCs) stored in all years and semesters.
 
 Format: `calculateMC`
 
-### Exiting the program : `exit`
+<br>
+
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
+<br>
 
-### Saving the data
+## Advanced use
 
-ModuleList data is saved in the hard disk automatically after any command that changes the data.
-There is no need to save manually.
+<br>
 
 ### Editing the data file
 
-ModuleList data is saved automtically as a JSON file `[JAR file location]/data/moduleplan.json`
+The module data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`.
 Advanced users are welcome to update data directly by editing that data file.
-<box type="warning" seamless>
-
-**Caution:**
+<div class="alert alert-warning"><md>:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</box>
-
+</md></div>
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -183,6 +215,10 @@ If your changes to the data file makes its format invalid, ModCraft will discard
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the default data file it creates with the file that contains the data of your previous ModCraft home folder.
+
+**Q**: How do I save the data?<br>
+**A**: The data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 

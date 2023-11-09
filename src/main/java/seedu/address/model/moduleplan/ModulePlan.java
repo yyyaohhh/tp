@@ -49,8 +49,8 @@ public class ModulePlan implements ReadOnlyModulePlan {
      * Replaces the contents of the module list with {@code modules}.
      * {@code modules} must not contain duplicate modules.
      */
-    public void setSemesters(List<ModulePlanSemester> modules) {
-        this.semesters.setSemesters(modules);
+    public void setSemesters(List<ModulePlanSemester> semesters) {
+        this.semesters.setSemesters(semesters);
     }
 
     /**
