@@ -57,7 +57,7 @@ public class AddCommand extends Command {
         this.grade = grade;
     }
 
-    
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

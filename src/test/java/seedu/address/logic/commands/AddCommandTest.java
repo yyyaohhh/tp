@@ -44,16 +44,7 @@ public class AddCommandTest {
     public void constructor_nullModule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null, null, null, null));
     }
-
-    @Test
-    public void getTypical() {
-        ModulePlan p1 = getTypicalModulePlan();
-        ModulePlan p2 = getTypicalModulePlanWithout(CS2100);
-        System.out.println(p1.hasModule(CS2100));
-        System.out.println(p2.hasModule(CS2100));
-        System.out.println(p1.hasModule(CS2030S));
-        System.out.println(p2.hasModule(CS2030S));
-    }
+    
     @Test
     public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
         Module toAdd = new ModuleBuilder().build();
