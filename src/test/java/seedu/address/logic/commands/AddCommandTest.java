@@ -44,7 +44,7 @@ public class AddCommandTest {
     public void constructor_nullModule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null, null, null, null));
     }
-    
+
     @Test
     public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
         Module toAdd = new ModuleBuilder().build();
@@ -53,7 +53,6 @@ public class AddCommandTest {
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS,
                 Messages.format(toAdd));
-        System.out.println(expectedMessage);
         ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         assertCommandSuccess(addCommand,model, expectedMessage, expectedModel);
 
