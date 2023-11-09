@@ -33,9 +33,9 @@ Tips in boxes like this contain information that may be helpful.
 Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
 </md></div>
 
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6"><md>:information_source: **Note:**
+<div background-color="#dff0d8" border-color="#d6e9c6"><md>:information_source: **Note:**
 Provides you with information that is useful to know.
-</md></box>
+</md></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -142,9 +142,9 @@ Examples:
 * Module Description: `This course introduces the fundamentals of data structures and algorithms.`
 * Modular Credits: `4`
 
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6"><md>:information_source: **Note:**
+<div background-color="#dff0d8" border-color="#d6e9c6"><md>:information_source: **Note:**
 The module code, module title, module description and modular credits **cannot** be edited.
-</md></box>
+</md></div>
 
 In ModCraft, you can specify the **year, semester and grade** of each module when you are adding or editing your study plan.
 
@@ -205,13 +205,11 @@ Below shows what ModCraft should look like for executing the `add` command.
   <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
 
-<box type="tip" seamless>
-
-**Tip:** To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**. 
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**. 
 
 For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `S` or `U` as `GRADE`.
-
-</box>
+</md></div>
 
 <br>
 
@@ -234,11 +232,9 @@ Below shows what ModCraft should look like for executing the `edit` command. The
   <img src="images/ImagesForUG/edit-after.png" alt="After executing edit command" style="height:400px; margin:20px;">
 </div>
 
-<box type="tip" seamless>
-
-**Tip:** You need to provide at least one of the optional fields (either GRADE or YEAR or SEMESTER).
-
-</box>
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+You need to provide at least one of the optional fields (either GRADE or YEAR or SEMESTER).
+</md></div>
 
 <br>
 
@@ -259,11 +255,11 @@ Below shows what ModCraft should look like for executing the `delete` command. T
   <img src="images/ImagesForUG/delete-after.png" alt="After executing delete command" style="height:400px; margin:20px;">
 </div>
 
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6"><md>:information_source: **Note:**
+<div background-color="#dff0d8" border-color="#d6e9c6"><md>:information_source: **Note:**
 If you are **dropping a module** and retaking it in later semesters, the module dropped should be **deleted** before adding the same module to another semester later on.
 
 ModCraft currently **does not support** retaking failed modules by keeping the failed module in the study plan and adding another copy of the same module for retake.
-</md></box>
+</md></div>
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 
