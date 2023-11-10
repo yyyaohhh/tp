@@ -3,10 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.CS2106;
-import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+import static seedu.address.testutil.TypicalModules.*;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,14 +16,14 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
-public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+public class JsonModulePlanStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonModulePlanStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
+    public void readModulePlan_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readModulePlan(null));
     }
 
@@ -46,22 +44,22 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readModulePlan("notJsonFormatAddressBook.json"));
+        assertThrows(DataLoadingException.class, () -> readModulePlan("notJsonFormatModulePlan.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
+    public void readModulePlan_invalidPersonAddressBook_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readModulePlan("invalidModuleModulePlan.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
+    public void readModulePlan_invalidAndValidPersonAddressBook_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readModulePlan("invalidAndValidModuleModulePlan.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+    public void readAndSaveModulePlan_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempModulePlan.json");
         ModulePlan original = getTypicalModulePlan();
         JsonModulePlanStorage jsonModulePlanStorage = new JsonModulePlanStorage(filePath);
 
@@ -72,7 +70,7 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new ModulePlan(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addModule(CS2100);
+        original.addModule(MA2001);
         original.removeModule(CS2040S);
         jsonModulePlanStorage.saveModulePlan(original, filePath);
         readBack = jsonModulePlanStorage.readModulePlan(filePath).get();
@@ -84,11 +82,9 @@ public class JsonAddressBookStorageTest {
         readBack = jsonModulePlanStorage.readModulePlan().get(); // file path not specified
         assertEquals(original, new ModulePlan(readBack));
 
-
-
     }
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveModulePlan_nullModulePlan_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveModulePlan(null, "SomeFile.json"));
     }
 
@@ -105,7 +101,7 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveModulePLan_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveModulePlan(new ModulePlan(), null));
     }
 }

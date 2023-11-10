@@ -29,14 +29,18 @@ public class CalculateCapCommandTest {
     }
 
     @Test
-    public void execute_zeroModularCredits_zero() {
+    public void execute_calculateCAP_Success() {
         CalculateCapCommand calculateCapCommand = new CalculateCapCommand();
-        Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
-        assertCommandSuccess(calculateCapCommand, model, "", expectedModel);
 
+        String expected = String.format(CalculateCapCommand.MESSAGE_CALCULATION_SUCCESS, model.getCap());
+
+        assertCommandSuccess(calculateCapCommand, model, expected, expectedModel);
+
+        //Test for zero MC modules as well
         model.addModule(IS6000);
-        assertCommandSuccess(calculateCapCommand, model, "", expectedModel);
+        expectedModel.addModule(IS6000);
+        assertCommandSuccess(calculateCapCommand, model, expected, expectedModel);
+
     }
 
 }

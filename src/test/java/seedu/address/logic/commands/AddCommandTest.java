@@ -75,8 +75,9 @@ public class AddCommandTest {
     @Test
     public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException()  {
         ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(CS2030S);
+        Module notInDB = CS3230;
 
-        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(MA2001.getModuleCode()));
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(notInDB.getModuleCode()));
     }
 
 
@@ -86,7 +87,8 @@ public class AddCommandTest {
         Module validModule = new ModuleBuilder().build();
 
         AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
-                validModule.getSemesterTaken(), validModule.getGrade());        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
+                validModule.getSemesterTaken(), validModule.getGrade());
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
         
         assertThrows(CommandException.class,
                 String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()),

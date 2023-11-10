@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
-import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.testutil.TypicalModules.CS2030S;
-import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
-import static seedu.address.testutil.TypicalModules.MA2001;
+import static seedu.address.testutil.TypicalModules.*;
 
 
 import java.util.ArrayList;
@@ -80,7 +75,7 @@ public class DeleteCommandTest {
         ModelStubWithModule modelStub = new ModelStubWithModule(CS2040S);
         modelStub.getModuleFromDb(CS2030S.getModuleCode());
 
-        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(MA2001.getModuleCode()));
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(CS3230.getModuleCode()));
     }
 
 

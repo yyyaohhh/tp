@@ -11,8 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
-import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+import static seedu.address.testutil.TypicalModules.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,13 +35,16 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecified_success() {
-        ModuleCode moduleCode = new ModuleCode(VALID_CODE_CS2040S);
-        Module module = model.getModule(moduleCode);
+        Module module = model.getModule(CS2040S.getModuleCode());
 
-        Module editedModule = new ModuleBuilder().withCode(VALID_CODE_CS2040S).build();
+        Module editedModule = new ModuleBuilder(CS2040S)
+                .withSem("1")
+                .withYear("2")
+                .withGrade("B")
+                .build();
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
-        EditCommand editCommand = new EditCommand(moduleCode, descriptor);
+        EditCommand editCommand = new EditCommand(module.getModuleCode(), descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
@@ -87,14 +89,13 @@ public class EditCommandTest {
 
     @Test
     public void execute_ModuleNotInPlan() {
-        ModuleCode moduleCode = new ModuleCode("PC1101");
+        Module editedModule = MA2001;
 
-        EditCommand editCommand = new EditCommand(moduleCode, new EditModuleDescriptor());
-        Module editedModule = model.getModule(moduleCode);
+        EditCommand editCommand = new EditCommand(editedModule.getModuleCode(), new EditModuleDescriptor());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_MODULE_CODE_CHANGE, Messages.format(editedModule));
+        String expectedMessage = String.format(Messages.MESSAGE_MODULE_NOT_FOUND, editedModule.getModuleCode(), EditCommand.COMMAND_WORD);
 
-
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test

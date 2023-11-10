@@ -15,8 +15,11 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
+import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.TypicalModules;
 
 public class ModelManagerTest {
@@ -116,14 +119,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different modulePlan -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentModulePlan, userPrefs, moduleData)));
-
-
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setModulePlanFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs, moduleData)));
     }
+
 }

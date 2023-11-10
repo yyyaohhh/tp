@@ -123,13 +123,23 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
+
         return this.moduleCode.equals(otherModule.moduleCode)
                 && this.moduleName.equals(otherModule.moduleName)
                 && this.description.equals(otherModule.description)
                 && this.modularCredit.equals(otherModule.modularCredit)
-                && this.yearTaken.equals(otherModule.yearTaken)
-                && this.semesterTaken.equals(otherModule.semesterTaken)
-                && this.grade.equals(otherModule.grade);
+                && isEditableFieldEquals(this.yearTaken, otherModule.yearTaken)
+                && isEditableFieldEquals(this.semesterTaken, otherModule.semesterTaken)
+                && isEditableFieldEquals(this.grade, otherModule.grade);
+    }
+
+    private boolean isEditableFieldEquals(Object thisObj, Object otherObj) {
+        if (thisObj == null && otherObj == null) {
+            return true;
+        } else if (thisObj == null || otherObj == null) {
+            return false;
+        }
+        return thisObj.equals(otherObj);
     }
 
     @Override

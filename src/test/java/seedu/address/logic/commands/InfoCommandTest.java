@@ -15,6 +15,7 @@ import seedu.address.model.module.*;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.testutil.TypicalModules.CS3230;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import javafx.collections.ObservableList;
@@ -59,8 +60,8 @@ public class InfoCommandTest {
     @Test
     public void execute_ModuleNotInData() throws CommandException {
         ModelStub modelStub = new ModelStubWithModules();
-        InfoCommand infoCommand = new InfoCommand(new ModuleCode("PC1101"));
-        assertInfoCommandFailure(infoCommand, modelStub, MESSAGE_INVALID_MODULE_CODE);
+        InfoCommand infoCommand = new InfoCommand(CS3230.getModuleCode());
+        assertInfoCommandFailure(infoCommand, modelStub, String.format(MESSAGE_INVALID_MODULE_CODE, CS3230.getModuleCode()));
     }
 
 
