@@ -121,9 +121,9 @@ public class TypicalModules {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
-            DbModule dbModule = new DbModule(
+            Module Module = new Module(
                     m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addDbModule(dbModule);
+            moduleData.addModule(Module);
         }
         return moduleData;
     }
