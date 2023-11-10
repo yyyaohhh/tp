@@ -6,11 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS1101S;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2030S;
 import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+import static seedu.address.testutil.TypicalModules.MA2001;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +37,7 @@ import seedu.address.testutil.TypicalModules;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalModules.getTypicalModulePlan(),
+    private Model model = new ModelManager(getTypicalModulePlan(),
             new UserPrefs(), getTypicalModuleData());
 
     @Test
@@ -45,7 +47,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_moduleAcceptedByModel_deleteSuccessful() {
-        Module moduleToDelete = TypicalModules.CS2040S;
+        Module moduleToDelete = CS2040S;
         ModuleCode code = moduleToDelete.getModuleCode();
         DeleteCommand deleteCommand = new DeleteCommand(code);
 
@@ -63,10 +65,9 @@ public class DeleteCommandTest {
         //In both ModuleData and ModulePlan -> Success
         ModelStubAcceptingModuleAddedAndDelete modelStub = new ModelStubAcceptingModuleAddedAndDelete();
         modelStub.addModule(CS2030S);
-        Module validModule = modelStub.getModuleFromDb(CS2030S.getModuleCode());
+        Module validModule = CS2030S;
 
         CommandResult commandResult = new DeleteCommand(validModule.getModuleCode()).execute(modelStub);
-
         assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(), modelStub.getModulesAdded());
@@ -74,11 +75,12 @@ public class DeleteCommandTest {
 
 
     @Test
-    public void execute_moduleNotInModuleDataNotInModulePlan_throwsModuleNoteFoundException()  {
+    public void execute_moduleNotInModuleDataNotInModulePlan_throwsModuleNotFoundException()  {
         //Not in ModuleData and ModulePlan (Module Not Found) -> Fail
-        ModelStubWithModule modelStub = new ModelStubWithModule(CS1101S);
+        ModelStubWithModule modelStub = new ModelStubWithModule(CS2040S);
+        modelStub.getModuleFromDb(CS2030S.getModuleCode());
 
-        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(CS1101S.getModuleCode()));
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(MA2001.getModuleCode()));
     }
 
 

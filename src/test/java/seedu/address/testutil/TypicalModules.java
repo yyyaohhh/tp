@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ModuleData;
-import seedu.address.model.module.DbModule;
 import seedu.address.model.module.Module;
 import seedu.address.model.moduleplan.ModulePlan;
 
@@ -90,46 +89,48 @@ public class TypicalModules {
             .withDescription("A 0 MC module")
             .build();
 
-    public static final Module IND5005A = new ModuleBuilder()
-            .withCode("IND5005A")
-            .withYear("4")
-            .withSem("2")
-            .withGrade("IP")
-            .withName("Professional Career Development")
-            .withModularCredit(".5")
-            .withDescription("A .5 MC module")
-            .build();
-    //Add more
+
 
     private TypicalModules() {}
 
+    private static ModulePlan modulePlan;
     public static ModulePlan getTypicalModulePlan() {
-        ModulePlan mp = new ModulePlan();
+       modulePlan = new ModulePlan();
+       modulePlan.resetData(modulePlan);
 
-//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("1")));
-//        mp.addSemester(new ModulePlanSemester(new Year("1"), new Semester("2")));
-//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("1")));
-//        mp.addSemester(new ModulePlanSemester(new Year("2"), new Semester("2")));
-
-        for (Module module : getTypicalModules()) {
-            mp.addModule(module);
+        List<Module> list = getTypicalModules();
+        for (Module module : list) {
+            modulePlan.addModule(module);
         }
-        return mp;
+        return modulePlan;
+    }
+
+
+    public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
+        List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
+        ModulePlan mp = getTypicalModulePlan();
+        for (Module excludedModule : exclusionList) {
+            if(mp.hasModule(excludedModule)) {
+                mp.removeModule(excludedModule);
+            }
+        }
+        return new ModulePlan(mp);
+
     }
 
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
-            DbModule dbModule = new DbModule(
+            Module Module = new Module(
                     m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addDbModule(dbModule);
+            moduleData.addModule(Module);
         }
         return moduleData;
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, MA2001, CS2101, GEA1000));
+        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, CS2100));
     }
 
 }

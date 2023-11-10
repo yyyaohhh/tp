@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2100;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +93,24 @@ public class CommandTestUtil {
         List<ModulePlanSemester> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedModulePlan, actualModel.getModulePlan());
+        assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
+    }
+
+
+    public static void assertInfoCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        ModulePlan expectedModulePlan = new ModulePlan(actualModel.getModulePlan());
+        List<ModulePlanSemester> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
+
+        try {
+
+            System.out.println(command.execute(actualModel).getFeedbackToUser());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel).getFeedbackToUser());
         assertEquals(expectedModulePlan, actualModel.getModulePlan());
         assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
     }
