@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2100;
 import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.CS9999;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
@@ -15,6 +17,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.testutil.TypicalModules;
@@ -29,6 +34,8 @@ public class ModelManagerTest {
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new ModulePlan(), new ModulePlan(modelManager.getModulePlan()));
     }
+
+    //=========== UserPrefs ==================================================================================
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
@@ -60,6 +67,8 @@ public class ModelManagerTest {
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
+
+    //=========== ModulePlan ================================================================================
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
@@ -93,6 +102,63 @@ public class ModelManagerTest {
     @Test
     public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
+    }
+
+    //=========== ModuleData ===============================================================================
+
+    @Test
+    public void setModuleData_nullModuleData_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setModuleData(null));
+    }
+
+    @Test
+    public void getModuleFromDb_validModule_returnsModule() {
+        modelManager.setModuleData(getTypicalModuleData());
+        Module actualModule = modelManager.getModuleFromDb(CS2100.getModuleCode());
+        Module expectedModule = TypicalModules.clearUserInputFields(CS2100);
+        assertEquals(expectedModule, actualModule);
+    }
+
+    @Test 
+    public void getModuleFromDb_invalidModule_throwsIllegalArgumentException() {
+        ModuleCode invalidModuleCode = CS9999.getModuleCode();
+        assertThrows(ModuleNotFoundException.class, () -> modelManager.getModuleFromDb(invalidModuleCode));
+    }
+
+    @Test
+    public void checkDbValidModule_validModule_returnsTrue() {
+        modelManager.setModuleData(getTypicalModuleData());
+        Module validModule = CS2100;
+        assertTrue(modelManager.checkDbValidModule(validModule));
+    }
+
+    @Test
+    public void checkDbValidModule_invalidModule_returnsFalse() {
+        Module invalidModule = CS9999;
+        assertFalse(modelManager.checkDbValidModule(invalidModule));
+    }
+
+    @Test
+    public void checkDbValidModule_nullModule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.checkDbValidModule(null));
+    }
+    
+    @Test
+    public void checkDbValidModuleCode_validModule_returnsTrue() {
+        modelManager.setModuleData(getTypicalModuleData());
+        ModuleCode validModuleCode = CS2100.getModuleCode();
+        assertTrue(modelManager.checkDbValidModuleCode(validModuleCode));
+    }
+
+    @Test
+    public void checkDbValidModuleCode_invalidModule_returnsFalse() {
+        ModuleCode invalidModuleCode = CS9999.getModuleCode();
+        assertFalse(modelManager.checkDbValidModuleCode(invalidModuleCode));
+    }
+
+    @Test
+    public void checkDbValidModuleCode_nullModuleCode_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.checkDbValidModuleCode(null));
     }
 
     @Test

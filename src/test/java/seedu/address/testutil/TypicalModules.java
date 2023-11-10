@@ -89,6 +89,15 @@ public class TypicalModules {
             .withDescription("A 0 MC module")
             .build();
 
+    public static final Module CS9999 = new ModuleBuilder()
+            .withCode("CS9999")
+            .withYear("3")
+            .withSem("1")
+            .withGrade("C")
+            .withName("Invalid Module")
+            .withModularCredit("0")
+            .withDescription("Should not be in modulePlan or moduleDatabase.")
+            .build();
 
 
     private TypicalModules() {}
@@ -122,11 +131,14 @@ public class TypicalModules {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getTypicalModules()) {
-            Module Module = new Module(
-                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addModule(Module);
+            Module module = clearUserInputFields(m);
+            moduleData.addModule(module);
         }
         return moduleData;
+    }
+
+    public static Module clearUserInputFields(Module module) {
+        return new Module(module.getModuleCode(), module.getName(), module.getDescription(), module.getModularCredit());
     }
 
     public static List<Module> getTypicalModules() {
