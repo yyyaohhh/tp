@@ -1,9 +1,9 @@
 package seedu.address.database;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.database.JsonAdaptedDbModule.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.database.JsonAdaptedDbModule.MISSING_FIELD_MESSAGE_FORMAT;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class JsonAdaptedDbModuleTest {
 
     private static final Module VALID_DBMODULE = new Module(CS2040S.getModuleCode(), CS2040S.getName(),
             CS2040S.getDescription(), CS2040S.getModularCredit());
-    
+
     @Test
     public void toModelType_validModuleDetails_returnsModule() throws Exception {
         JsonAdaptedDbModule module = new JsonAdaptedDbModule(

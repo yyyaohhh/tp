@@ -14,7 +14,7 @@ import seedu.address.model.ModuleData;
 import seedu.address.testutil.TypicalModules;
 
 public class JsonSerializableModuleDataTest {
-    
+
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableModuleDataTest");
     private static final Path TYPICAL_MODULES_FILE = TEST_DATA_FOLDER.resolve("typicalModulesModuleData.json");
     private static final Path INVALID_MODULES_FILE = TEST_DATA_FOLDER.resolve("invalidModulesModuleData.json");

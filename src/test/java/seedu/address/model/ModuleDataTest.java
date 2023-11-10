@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalModules.CS2100;
 import static seedu.address.testutil.TypicalModules.CS9999;
-import static seedu.address.testutil.TypicalModules.clearUserInputFields;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import java.util.Arrays;
@@ -23,7 +22,7 @@ import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.testutil.TypicalModules;
 
 public class ModuleDataTest {
-    
+
     private final ModuleData moduleData = new ModuleData();
 
     @Test
@@ -48,7 +47,7 @@ public class ModuleDataTest {
         // Two modules with the same identity fields
         Module duplicateModule = new Module(CS2100.getModuleCode(), CS2100.getName(),
                 CS2100.getDescription(), CS2100.getModularCredit());
-        
+
         List<Module> newModuleData = Arrays.asList(CS2100, duplicateModule);
         ModuleDataStub newData = new ModuleDataStub(newModuleData);
 

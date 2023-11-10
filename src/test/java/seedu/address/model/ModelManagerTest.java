@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2100;
 import static seedu.address.testutil.TypicalModules.CS2101;
 import static seedu.address.testutil.TypicalModules.CS9999;
+import static seedu.address.testutil.TypicalModules.clearUserInputFields;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
@@ -113,11 +114,11 @@ public class ModelManagerTest {
     public void getModuleFromDb_validModule_returnsModule() {
         modelManager.setModuleData(getTypicalModuleData());
         Module actualModule = modelManager.getModuleFromDb(CS2100.getModuleCode());
-        Module expectedModule = TypicalModules.clearUserInputFields(CS2100);
+        Module expectedModule = clearUserInputFields(CS2100);
         assertEquals(expectedModule, actualModule);
     }
 
-    @Test 
+    @Test
     public void getModuleFromDb_invalidModule_throwsIllegalArgumentException() {
         ModuleCode invalidModuleCode = CS9999.getModuleCode();
         assertThrows(ModuleNotFoundException.class, () -> modelManager.getModuleFromDb(invalidModuleCode));
@@ -140,7 +141,7 @@ public class ModelManagerTest {
     public void checkDbValidModule_nullModule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.checkDbValidModule(null));
     }
-    
+
     @Test
     public void checkDbValidModuleCode_validModule_returnsTrue() {
         modelManager.setModuleData(getTypicalModuleData());
