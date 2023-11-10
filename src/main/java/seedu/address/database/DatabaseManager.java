@@ -17,9 +17,10 @@ import seedu.address.model.ModuleData;
  */
 public class DatabaseManager implements Database {
 
+    public static final String DEFAULT_DATABASE_FILEPATH = "database/moduleinfo.json";
+
     private static final Logger logger = LogsCenter.getLogger(DatabaseManager.class);
 
-    public static final String DEFAULT_DATABASE_FILEPATH = "database/moduleinfo.json";
     private String filePath;
 
     public DatabaseManager(String filePath) {
