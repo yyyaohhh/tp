@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+import static seedu.address.testutil.TypicalModules.getTypicalModules;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.testutil.ModuleBuilder;
+import seedu.address.testutil.TypicalModules;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -29,7 +30,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newModule_success() {
-        Module validModule = new ModuleBuilder().withCode("CS3230").build();
+        Module validModule = TypicalModules.CS2106;
 
         Model expectedModel = new ModelManager((getTypicalModulePlan()), new UserPrefs(), getTypicalModuleData());
         expectedModel.addModule(validModule);
@@ -44,13 +45,13 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateModule_throwsCommandException() {
-        Module moduleInList = model.getModulePlan().getModulePlanSemesterList().get(0).getModuleList().get(0);
+        Module moduleInList = getTypicalModules().get(0);
 
         AddCommand actualCommand = new AddCommand(moduleInList.getModuleCode(), moduleInList.getYearTaken(),
                 moduleInList.getSemesterTaken(), moduleInList.getGrade());
 
         assertCommandFailure(actualCommand, model,
-                AddCommand.MESSAGE_DUPLICATE_MODULE);
+                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, moduleInList.getModuleCode()));
     }
 
 }

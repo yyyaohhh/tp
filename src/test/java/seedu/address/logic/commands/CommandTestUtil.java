@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2100;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +83,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the module plan, filtered module list and selected module in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -98,14 +97,15 @@ public class CommandTestUtil {
     }
 
 
+    /**
+     * Executes.
+     */
     public static void assertInfoCommandFailure(Command command, Model actualModel, String expectedMessage) {
         ModulePlan expectedModulePlan = new ModulePlan(actualModel.getModulePlan());
         List<ModulePlanSemester> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
 
         try {
-
             System.out.println(command.execute(actualModel).getFeedbackToUser());
-
         } catch (Exception e) {
             System.out.println(e);
         }

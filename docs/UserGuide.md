@@ -23,7 +23,7 @@ ModCraft can serve as a **study planner** for your journey in NUS. With ModCraft
 
 This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features from the [Table of Contents](#table-of-contents) below.
 
-This User Guide consists of various visuals to aid your reading. 
+This User Guide consists of various visuals to aid your reading.
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 Tips in boxes like this contain information that may be helpful.
@@ -41,17 +41,17 @@ Provides you with information that is useful to know.
 ## Table of Contents
 
 1. [Quick start](#quick-start)
-2. [Features](#features)  
-    2.1. [Viewing help](#viewing-help-help)  
-    2.2. [Modules](#modules)  
-      2.2.1. [Adding a module](#adding-a-module-add)  
-      2.2.2. [Editing a module](#editing-a-module-edit)  
-      2.2.3. [Deleting a module](#deleting-a-module-delete)  
-      2.2.4. [Finding information about a module](#finding-information-about-a-module-info)  
-    2.3. [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)  
-    2.4. [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)  
+2. [Features](#features)
+    2.1. [Viewing help](#viewing-help-help)
+    2.2. [Modules](#modules)
+      2.2.1. [Adding a module](#adding-a-module-add)
+      2.2.2. [Editing a module](#editing-a-module-edit)
+      2.2.3. [Deleting a module](#deleting-a-module-delete)
+      2.2.4. [Finding information about a module](#finding-information-about-a-module-info)
+    2.3. [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
+    2.4. [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
     2.5. [Exiting the program](#exiting-the-program-exit)
-3. [Advanced Use](#advanced-use)  
+3. [Advanced Use](#advanced-use)
     3.1. [Editing the data file](#editing-the-data-file)
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
@@ -150,10 +150,10 @@ In ModCraft, you can specify the **year, semester and grade** of each module whe
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The parameter for Year follows a constraint of `0` to `6`, where Year 0 represents the Advance Placement semester. 
-There is **only one** Advance Placement semester and whenever `y/0` is entered, regardless of the semester entered, the module will be added or edited to the Advance Placement Semester. 
+The parameter for Year follows a constraint of `0` to `6`, where Year 0 represents the Advance Placement semester.
+There is **only one** Advance Placement semester and whenever `y/0` is entered, regardless of the semester entered, the module will be added or edited to the Advance Placement Semester.
 
-The list for the Advance Placement semester and Special Terms 1 and 2 (ST) will only be displayed when there is a module within them. 
+The list for the Advance Placement semester and Special Terms 1 and 2 (ST) will only be displayed when there is a module within them.
 
 </md></div>
 
@@ -189,7 +189,7 @@ These features are planned enhancements in future releases.
 
 ### Adding a module: `add`
 
-You can add a module to your study plan of the list of modules taken in the **specified year and semester**. 
+You can add a module to your study plan of the list of modules taken in the **specified year and semester**.
 
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
@@ -206,7 +206,7 @@ Below shows what ModCraft should look like for executing the `add` command.
 </div>
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
-TTo **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**. 
+TTo **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**.
 
 For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `S` or `U` as `GRADE`.
 </md></div>
@@ -271,7 +271,7 @@ Deleting a module also **deletes all the information associated with the module*
 
 ### Finding Information about a module: `info`
 
-You can retrieve information about **any** module by its module code, including the modules **not** added to the study plan. 
+You can retrieve information about **any** module by its module code, including the modules **not** added to the study plan.
 
 The **module code, modular credit and module description** of the module will be displayed.
 
@@ -281,7 +281,7 @@ Examples:
 * `info CS2109S`
 * `info CS1010`
 
-Below shows what ModCraft should look like for executing the `info` command. 
+Below shows what ModCraft should look like for executing the `info` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/info-before.png" alt="Before executing info command" style="height:400px; margin:20px;">
@@ -293,7 +293,7 @@ Below shows what ModCraft should look like for executing the `info` command.
 ### Calculating the total current CAP: `calculateCAP`
 
 You can calculate the total current CAP of all modules stored in all years and semesters.
-ModCraft will calculate the CAP using the formula:  
+ModCraft will calculate the CAP using the formula:
 
 $\Large\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
 
@@ -388,7 +388,7 @@ There is no need to save manually.
 | **delete**       | `delete MODULE_CODE` <br> e.g., `delete CS2040S`                                                             |
 | **edit**         | `edit MODULE_CODE [y/YEAR] [s/SEMESTER] [g/GRADE]` <br> e.g., `edit MA2001 y/1 s/2`, <br/> `edit MA2001 g/A` |
 | **info**         | `info MODULE_CODE`<br> e.g., `info CS3230`                                                                   |
-| **calculateCAP** | `calculateCAP`                                                                                               | 
+| **calculateCAP** | `calculateCAP`                                                                                               |
 | **calculateMC**  | `calculateMC`                                                                                                |
 | **help**         | `help`                                                                                                       |
 
