@@ -86,6 +86,18 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_ModuleNotInPlan() {
+        ModuleCode moduleCode = new ModuleCode("PC1101");
+
+        EditCommand editCommand = new EditCommand(moduleCode, new EditModuleDescriptor());
+        Module editedModule = model.getModule(moduleCode);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_MODULE_CODE_CHANGE, Messages.format(editedModule));
+
+
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(new ModuleCode(VALID_CODE_CS2040S), DESC_CS2040S);
 

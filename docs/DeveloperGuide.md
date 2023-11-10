@@ -176,7 +176,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The edit mechanism uses `EditModuleDescriptor` to abstract out the fields to edit. It can be found as a publicly accessible class within `EditCommand`. Currently, it only contains fields for `Year`, `Semester` and `Grade`, which are the only attributes of `Module` that can be edited for now. Besides this, it largely follows the parser and command structure as described in [Logic](#Logic component).
+The edit mechanism uses `EditModuleDescriptor` to abstract out the fields to edit. It can be found as a publicly accessible class within `EditCommand`. Currently, it only contains fields for `Year`, `Semester` and `Grade`, which are the only attributes of `Module` that can be edited for now. Besides this, it largely follows the parser and command structure as described in [Logic](#logic-component).
 
 We shall now illustrate how `EditModuleDescriptor` is used.
 
@@ -284,6 +284,16 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Future enhancements**
+
+For our next steps, we plan to add the following features:
+* Check if a module is CS/CU or not, and check if the grade given from user input is valid for that module.
+* Check which semesters a module is offered, and check if the semester given from user input is valid for that module.
+* Check for a module's prerequisites, and check if they are fulfilled before allowing the user to add the module.
+* Check for a module's preclusions, and prevent users from adding modules that are preclusions of each other.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -420,7 +430,7 @@ Use case resumes from step 2.
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-3. Should be able to hold up to 10,000 courses without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1,000,000 courses without a noticeable sluggishness in performance for typical usage.
 
 *{More to be added}*
 

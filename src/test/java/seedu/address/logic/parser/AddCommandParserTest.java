@@ -42,16 +42,19 @@ public class AddCommandParserTest {
         Module expectedModule = new ModuleBuilder(CS2040S).build();
         String moduleCodeString = expectedModule.getModuleCode().toString();
 
+        AddCommand expectedAddCommand = new AddCommand(expectedModule.getModuleCode(), expectedModule.getYearTaken(),
+                expectedModule.getSemesterTaken(), expectedModule.getGrade());
+
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + moduleCodeString + YEAR_DESC_CS2040S
-                + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
+                + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, expectedAddCommand);
 
         System.out.println(moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
                 + GRADE_DESC_CS2040S);
 
         // no whitespace preamble
         assertParseSuccess(parser, moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
-                + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
+                + GRADE_DESC_CS2040S, expectedAddCommand);
     }
 
     @Test

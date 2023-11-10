@@ -56,26 +56,8 @@ public class Module {
         this.grade = null;
     }
 
-    /**
-     * Constructs a {@code Module} with only user input fields.
-     */
-    // public Module(ModuleCode moduleCode, Year year, Semester semester, Grade grade) {
-    //     requireAllNonNull(moduleCode, year, semester, grade);
-    //     this.moduleCode = moduleCode;
-    //     this.yearTaken = year;
-    //     this.semesterTaken = semester;
-    //     this.grade = grade;
-    //     // Temporary until we get back-end setup
-    //     this.moduleName = null;
-    //     this.description = null;
-    //     this.modularCredit = null;
-    // }
-
     public Module fillUserInputs(Year yearTaken, Semester semesterTaken, Grade grade) {
         requireAllNonNull(yearTaken, semesterTaken, grade);
-        if (yearTaken.equals(Year.YEAR_0)) {
-            semesterTaken = new Semester("1");
-        }
 
         return new Module(moduleCode, yearTaken, semesterTaken, grade, moduleName, description, modularCredit);
     }

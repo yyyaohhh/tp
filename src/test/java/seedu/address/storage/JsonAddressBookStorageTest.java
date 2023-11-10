@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.CS2101;
 import static seedu.address.testutil.TypicalModules.CS2106;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -67,6 +65,7 @@ public class JsonAddressBookStorageTest {
         ModulePlan original = getTypicalModulePlan();
         JsonModulePlanStorage jsonModulePlanStorage = new JsonModulePlanStorage(filePath);
 
+
         // Save in new file and read back
         jsonModulePlanStorage.saveModulePlan(original, filePath);
         ReadOnlyModulePlan readBack = jsonModulePlanStorage.readModulePlan(filePath).get();
@@ -85,8 +84,9 @@ public class JsonAddressBookStorageTest {
         readBack = jsonModulePlanStorage.readModulePlan().get(); // file path not specified
         assertEquals(original, new ModulePlan(readBack));
 
-    }
 
+
+    }
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveModulePlan(null, "SomeFile.json"));
