@@ -16,7 +16,7 @@ ModCraft can serve as a **study planner** for your journey in NUS. With ModCraft
 
 * Add in modules you have taken
 * Add in modules you plan to take
-* delete modules you would like to drop
+* Delete modules you would like to drop
 * Update grades of your modules
 
 **And many more!**
@@ -33,26 +33,24 @@ Tips in boxes like this contain information that may be helpful.
 Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
 </md></div>
 
-**Note Box**
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
 Provides you with information that is useful to know.
-</box>
+</md></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
 1. [Quick start](#quick-start)
-2. [Features](#features)
-    2.1. [Viewing help](#viewing-help--help)
-    2.2. [Modules](#modules)
-      2.2.1. [Adding a module](#adding-a-module-add)
-      2.2.2. [Editing a module](#editing-a-module-edit)
-      2.2.3. [Deleting a module](#deleting-a-module--delete)
-      2.2.4. [Finding information about a module](#finding-information-about-a-module-info)
-    2.3. [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
-    2.4. [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
-    2.5. [Exiting the program](#exiting-the-program--exit)
-    2.6. [Saving the data](#saving-the-data)
+2. [Features](#features)  
+    2.1. [Viewing help](#viewing-help-help)  
+    2.2. [Modules](#modules)  
+      2.2.1. [Adding a module](#adding-a-module-add)  
+      2.2.2. [Editing a module](#editing-a-module-edit)  
+      2.2.3. [Deleting a module](#deleting-a-module-delete)  
+      2.2.4. [Finding information about a module](#finding-information-about-a-module-info)  
+    2.3. [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)  
+    2.4. [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)  
+    2.5. [Exiting the program](#exiting-the-program-exit)
 3. [Advanced Use](#advanced-use)  
     3.1. [Editing the data file](#editing-the-data-file)
 4. [FAQ](#faq)
@@ -144,10 +142,9 @@ Examples:
 * Module Description: `This course introduces the fundamentals of data structures and algorithms.`
 * Modular Credits: `4`
 
-**Note Box**
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
-The module code, module title, module description and modular credits **cannot** be edited. 
-</box>
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+The module code, module title, module description and modular credits **cannot** be edited.
+</md></div>
 
 In ModCraft, you can specify the **year, semester and grade** of each module when you are adding or editing your study plan.
 
@@ -182,7 +179,7 @@ Currently, ModCraft have certain **limitations**.
 
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
-* ModCraft **does not** check for the availability of Satisfactory/Unsatisfactory (S/U) options of modules, meaning that you can add a non-SUable module, for example `CS2100` and input its grade as `CS`.
+* ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade, for example `CS2100` and input its grade as `CS`. Likewise, you can add a CS/CU module with a non-CS/CU grade.
 
 These features are planned enhancements in future releases.
 
@@ -208,13 +205,11 @@ Below shows what ModCraft should look like for executing the `add` command.
   <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
 
-<box type="tip" seamless>
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+TTo **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**. 
 
-**Tip:** To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**. 
-
-For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `CS` or `CU` as `GRADE`.
-
-</box>
+For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `S` or `U` as `GRADE`.
+</md></div>
 
 <br>
 
@@ -227,8 +222,8 @@ Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 Examples:
 * `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
 * `edit CS3230 y/4 s/2`: Moves CS3230 to the Year 4 Semester 2 module list.
-* `edit CS2100 y/1`: Moves CS2100 to the Year 1 module list, with **Semester unchanged**. If before edit, the module was in Year 2 Semester 1, after edit it would be in Year 1 Semester 1.
-* `edit CS2101 s/1`: Moves CS2101 to the Semester 1 module list, with **Year unchanged**. If before edit, the module was in Year 1 Semester 2, after edit it would be in Year 1 Semester 1.
+* `edit CS2100 y/1`: Moves CS2100 to the Year 1 module list, with **Semester unchanged**. If before editing, the module was in Year 2 Semester 1, after editing it would be in Year 1 Semester 1.
+* `edit CS2101 s/1`: Moves CS2101 to the Semester 1 module list, with **Year unchanged**. If before editing, the module was in Year 1 Semester 2, after editing it would be in Year 1 Semester 1.
 
 Below shows what ModCraft should look like for executing the `edit` command. The grade of `CS1101S` is being edited to C.
 
@@ -237,11 +232,9 @@ Below shows what ModCraft should look like for executing the `edit` command. The
   <img src="images/ImagesForUG/edit-after.png" alt="After executing edit command" style="height:400px; margin:20px;">
 </div>
 
-<box type="tip" seamless>
-
-**Tip:** You need to provide at least one of the optional fields (either GRADE or YEAR or SEMESTER).
-
-</box>
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+You need to provide at least one of the optional fields (either GRADE or YEAR or SEMESTER).
+</md></div>
 
 <br>
 
@@ -262,12 +255,11 @@ Below shows what ModCraft should look like for executing the `delete` command. T
   <img src="images/ImagesForUG/delete-after.png" alt="After executing delete command" style="height:400px; margin:20px;">
 </div>
 
-**Note Box**
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
-If you are **dropping a module** and retaking it in later semesters, the module dropped should be **deleted** before adding the same module to another semester later on. 
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+If you are **dropping a module** and retaking it in later semesters, the module dropped should be **deleted** before adding the same module to another semester later on.
 
 ModCraft currently **does not support** retaking failed modules by keeping the failed module in the study plan and adding another copy of the same module for retake.
-</box>
+</md></div>
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 
@@ -286,7 +278,7 @@ The **module code, modular credit and module description** of the module will be
 Format: `info MODULE`
 
 Examples:
-* `info CS2019S`
+* `info CS2109S`
 * `info CS1010`
 
 Below shows what ModCraft should look like for executing the `info` command. 
@@ -301,9 +293,9 @@ Below shows what ModCraft should look like for executing the `info` command.
 ### Calculating the total current CAP: `calculateCAP`
 
 You can calculate the total current CAP of all modules stored in all years and semesters.
-ModCraft will be calculating using the formula:  
+ModCraft will calculate the CAP using the formula:  
 
-$\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
+$\Large\frac{\text{sum of all modules: (grade point of that module * Modular Credits of that module)}}{\text{total Modular Credits}}$.
 
 Displays a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
@@ -326,7 +318,7 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 ### Calculating the total current Modular Credits (MCs): `CalculateMC`
 
-You can calculate the total current Modular Credits (MCs) stored in all years and semesters. Displays a float which is the sum of all MCs.
+You can calculate the total current Modular Credits (MCs) stored in all years and semesters using this command. ModCraft displays a float which is the sum of all MCs of modules in the module plan.
 
 Format: `calculateMC`
 
