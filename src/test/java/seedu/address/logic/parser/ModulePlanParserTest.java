@@ -76,7 +76,8 @@ public class ModulePlanParserTest {
 
     @Test
     public void parseCommand_info() throws Exception {
-        assertTrue(parser.parseCommand(InfoCommand.COMMAND_WORD) instanceof InfoCommand);
+        assertTrue(parser.parseCommand(InfoCommand.COMMAND_WORD + " " + CS2030S.getModuleCode())
+                instanceof InfoCommand);
     }
 
     @Test

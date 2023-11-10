@@ -79,6 +79,16 @@ public class TypicalModules {
             .withDescription("Learn about operating systems")
             .build();
 
+    public static final Module CS3230 = new ModuleBuilder()
+            .withCode("CS3230")
+            .withYear("3")
+            .withSem("2")
+            .withGrade("IP")
+            .withName("Design and Analysis of Algorithms")
+            .withModularCredit("4")
+            .withDescription("This course introduces different techniques of designing and analysing algorithms.")
+            .build();
+
     public static final Module IS6000 = new ModuleBuilder()
             .withCode("IS6000")
             .withYear("4")
@@ -102,10 +112,9 @@ public class TypicalModules {
 
     private TypicalModules() {}
 
-    private static ModulePlan modulePlan;
+
     public static ModulePlan getTypicalModulePlan() {
-       modulePlan = new ModulePlan();
-       modulePlan.resetData(modulePlan);
+        ModulePlan modulePlan = new ModulePlan();
 
         List<Module> list = getTypicalModules();
         for (Module module : list) {
@@ -119,7 +128,7 @@ public class TypicalModules {
         List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
         ModulePlan mp = getTypicalModulePlan();
         for (Module excludedModule : exclusionList) {
-            if(mp.hasModule(excludedModule)) {
+            if (mp.hasModule(excludedModule)) {
                 mp.removeModule(excludedModule);
             }
         }
@@ -137,12 +146,16 @@ public class TypicalModules {
         return moduleData;
     }
 
-    public static Module clearUserInputFields(Module module) {
-        return new Module(module.getModuleCode(), module.getName(), module.getDescription(), module.getModularCredit());
+    public static Module clearUserInputFields(Module m) {
+        return new Module(m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
     }
 
     public static List<Module> getTypicalModules() {
         return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, CS2100));
+    }
+
+    public static List<Module> getAllTypicalModules() {
+        return new ArrayList<>(Arrays.asList(CS2040S, CS2030S, MA2001, CS2101, GEA1000, CS2100, CS2106, IS6000));
     }
 
 }

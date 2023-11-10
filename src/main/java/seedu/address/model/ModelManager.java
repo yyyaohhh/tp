@@ -188,7 +188,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return modulePlan.equals(otherModelManager.modulePlan)
-                && userPrefs.equals(otherModelManager.userPrefs);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && moduleData.equals(otherModelManager.moduleData);
     }
 
 }
