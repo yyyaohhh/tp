@@ -56,6 +56,11 @@ public class Module {
         this.grade = null;
     }
 
+    /**
+     * Makes a new Module with the fields Year, Semester and Grade set.
+     *
+     * @return A new Module with the input fields.
+     */
     public Module fillUserInputs(Year yearTaken, Semester semesterTaken, Grade grade) {
         requireAllNonNull(yearTaken, semesterTaken, grade);
 
