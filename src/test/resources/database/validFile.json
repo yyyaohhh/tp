@@ -1,0 +1,19 @@
+{
+    "modules" : [ {
+        "moduleCode" : "CS2030S",
+        "title" : "Programming Methodology II",
+        "description" : "This course is a follow up to CS1010.",
+        "moduleCredit" : "4"
+      }, {
+        "moduleCode" : "CSS2040S",
+        "title" : "Data Structures and Algorithms",
+        "description" : "This course introduces the fundamentals of data structures and algorithms.",
+        "moduleCredit" : "4"
+      }, {
+        "moduleCode" : "CS2100",
+        "title" : "Computer Organisation",
+        "description" : "Learn about computer organisation",
+        "moduleCredit" : "4"
+      } ]
+}
+  
