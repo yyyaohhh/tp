@@ -3,9 +3,14 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2101;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.*;
+import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -15,10 +20,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.storage.JsonModulePlanStorage;
@@ -158,8 +167,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveModulePlan method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + " " +  VALID_CODE_CS2101
-                + YEAR_DESC_CS2101  + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
+        String addCommand = AddCommand.COMMAND_WORD + " " + VALID_CODE_CS2101
+                + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
         Module expectedModule = CS2101;
         ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         expectedModel.addModule(expectedModule);

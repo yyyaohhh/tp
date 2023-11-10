@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GRADE_DESC;
@@ -11,9 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2101;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -110,30 +106,30 @@ public class AddCommandParserTest {
     }
 
     //TODO
-//    @Test
-//    public void parse_compulsoryFieldMissing_failure() {
-//        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-//
-//        // missing year prefix
-//        assertParseFailure(parser,
-//                VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + " " + VALID_YEAR_CS2101 + GRADE_DESC_CS2101,
-//                expectedMessage);
-//
-//        // missing semester prefix
-//        assertParseFailure(parser,
-//                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + VALID_SEMESTER_CS2101 + GRADE_DESC_CS2101,
-//                expectedMessage);
-//
-//        // missing grade prefix
-//        assertParseFailure(parser,
-//                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + VALID_GRADE_CS2101,
-//                expectedMessage);
-//
-//        // all prefixes missing
-//        assertParseFailure(parser,
-//                VALID_CODE_CS2101 + VALID_YEAR_CS2101 + VALID_SEMESTER_CS2101 + VALID_GRADE_CS2101,
-//                expectedMessage);
-//    }
+    //@Test
+    //public void parse_compulsoryFieldMissing_failure() {
+    //    String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+    //
+    //    // missing year prefix
+    //    assertParseFailure(parser,
+    //            VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + " " + VALID_YEAR_CS2101 + GRADE_DESC_CS2101,
+    //            expectedMessage);
+    //
+    //    // missing semester prefix
+    //    assertParseFailure(parser,
+    //            VALID_CODE_CS2101 + YEAR_DESC_CS2101 + VALID_SEMESTER_CS2101 + GRADE_DESC_CS2101,
+    //            expectedMessage);
+    //
+    //    // missing grade prefix
+    //    assertParseFailure(parser,
+    //            VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + VALID_GRADE_CS2101,
+    //            expectedMessage);
+    //
+    //    // all prefixes missing
+    //    assertParseFailure(parser,
+    //            VALID_CODE_CS2101 + VALID_YEAR_CS2101 + VALID_SEMESTER_CS2101 + VALID_GRADE_CS2101,
+    //            expectedMessage);
+    //}
 
     @Test
     public void parse_invalidValue_failure() {

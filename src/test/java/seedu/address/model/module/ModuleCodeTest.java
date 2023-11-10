@@ -17,7 +17,7 @@ public class ModuleCodeTest {
     }
 
     @Test
-    public void isValidModuleCode_Invalid() {
+    public void isValidModuleCode_invalid() {
         // null module code
         assertThrows(NullPointerException.class, () -> ModuleCode.isValidModuleCode(null));
 
@@ -31,7 +31,7 @@ public class ModuleCodeTest {
     }
 
     @Test
-    public void isValidModuleCode_Valid() {
+    public void isValidModuleCode_valid() {
 
         // valid module codes
         assertTrue(ModuleCode.isValidModuleCode("CS2103T"));

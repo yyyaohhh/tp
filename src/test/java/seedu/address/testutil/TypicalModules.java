@@ -105,7 +105,7 @@ public class TypicalModules {
 
 
     public static ModulePlan getTypicalModulePlan() {
-       ModulePlan modulePlan = new ModulePlan();
+        ModulePlan modulePlan = new ModulePlan();
 
         List<Module> list = getTypicalModules();
         for (Module module : list) {
@@ -119,7 +119,7 @@ public class TypicalModules {
         List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
         ModulePlan mp = getTypicalModulePlan();
         for (Module excludedModule : exclusionList) {
-            if(mp.hasModule(excludedModule)) {
+            if (mp.hasModule(excludedModule)) {
                 mp.removeModule(excludedModule);
             }
         }
@@ -131,9 +131,9 @@ public class TypicalModules {
         ModuleData moduleData = new ModuleData();
 
         for (Module m : getAllTypicalModules()) {
-            Module Module = new Module(
+            Module module = new Module(
                     m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addModule(Module);
+            moduleData.addModule(module);
         }
         return moduleData;
     }

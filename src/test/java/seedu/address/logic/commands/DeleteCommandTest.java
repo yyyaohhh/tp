@@ -6,8 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.*;
-
+import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.CS2040S;
+import static seedu.address.testutil.TypicalModules.CS2100;
+import static seedu.address.testutil.TypicalModules.CS3230;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +28,7 @@ import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
-import seedu.address.testutil.TypicalModules;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -70,7 +74,7 @@ public class DeleteCommandTest {
 
 
     @Test
-    public void execute_moduleNotInModuleDataNotInModulePlan_throwsModuleNotFoundException()  {
+    public void execute_moduleNotInModuleDataNotInModulePlan_throwsModuleNotFoundException() {
         //Not in ModuleData and ModulePlan (Module Not Found) -> Fail
         ModelStubWithModule modelStub = new ModelStubWithModule(CS2040S);
         modelStub.getModuleFromDb(CS2030S.getModuleCode());

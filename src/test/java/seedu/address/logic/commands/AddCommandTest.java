@@ -6,13 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.*;
-
+import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.CS2100;
+import static seedu.address.testutil.TypicalModules.CS3230;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlanWithout;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +23,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyModuleData;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
@@ -33,7 +40,7 @@ import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
-import seedu.address.testutil.TypicalModules;
+
 
 public class AddCommandTest {
 
@@ -54,7 +61,7 @@ public class AddCommandTest {
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS,
                 Messages.format(toAdd));
         ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
-        assertCommandSuccess(addCommand,model, expectedMessage, expectedModel);
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
 
     }
     @Test
@@ -73,7 +80,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException()  {
+    public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException() {
         ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(CS2030S);
         Module notInDB = CS3230;
 
@@ -89,10 +96,10 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
                 validModule.getSemesterTaken(), validModule.getGrade());
         ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
-        
+
         assertThrows(CommandException.class,
-                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, validModule.getModuleCode()),
-                () -> addCommand.execute(modelStub));
+                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE,
+                        validModule.getModuleCode()), () -> addCommand.execute(modelStub));
     }
 
 
@@ -258,8 +265,7 @@ public class AddCommandTest {
      */
     private class ModelStubWithMultipleModule extends EmptyModelStub {
         private final Module module;
-        final ArrayList<Module> modulesAdded = new ArrayList<>();
-
+        private final ArrayList<Module> modulesAdded = new ArrayList<>();
 
 
         ModelStubWithMultipleModule(Module module) {

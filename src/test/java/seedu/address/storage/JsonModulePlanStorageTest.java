@@ -3,7 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.*;
+import static seedu.address.testutil.TypicalModules.CS2040S;
+import static seedu.address.testutil.TypicalModules.CS2106;
+import static seedu.address.testutil.TypicalModules.MA2001;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.io.IOException;
 import java.nio.file.Path;

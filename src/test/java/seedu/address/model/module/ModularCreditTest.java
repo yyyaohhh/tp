@@ -1,10 +1,10 @@
 package seedu.address.model.module;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class ModularCreditTest {
     @Test
@@ -17,7 +17,7 @@ public class ModularCreditTest {
     }
 
     @Test
-    public void isValidModularCredit_Invalid() {
+    public void isValidModularCredit_invalid() {
         // null modular credit
         assertThrows(NullPointerException.class, () -> ModularCredit.isValidModularCredit(null));
 
@@ -31,7 +31,7 @@ public class ModularCreditTest {
     }
 
     @Test
-    public void isValidModularCredit_Valid() {
+    public void isValidModularCredit_valid() {
 
         // valid modular credit
         assertTrue(ModularCredit.isValidModularCredit(".5"));

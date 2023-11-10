@@ -8,13 +8,13 @@ import static seedu.address.testutil.TypicalModules.CS2040S;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.module.Description;
 import seedu.address.model.module.Grade;
+import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
-import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 
 public class JsonAdaptedModuleTest {
     private static final String INVALID_CODE = "ABCDE12345ABC";

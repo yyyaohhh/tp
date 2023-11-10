@@ -1,28 +1,31 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
+import static seedu.address.logic.commands.CommandTestUtil.assertInfoCommandFailure;
+import static seedu.address.testutil.TypicalModules.CS3230;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyModuleData;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.module.*;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalModules.CS3230;
-import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
-
-import javafx.collections.ObservableList;
-
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
@@ -31,8 +34,7 @@ import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.TypicalModules;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -58,10 +60,11 @@ public class InfoCommandTest {
     }
 
     @Test
-    public void execute_ModuleNotInData() throws CommandException {
+    public void execute_moduleNotInData() throws CommandException {
         ModelStub modelStub = new ModelStubWithModules();
         InfoCommand infoCommand = new InfoCommand(CS3230.getModuleCode());
-        assertInfoCommandFailure(infoCommand, modelStub, String.format(MESSAGE_INVALID_MODULE_CODE, CS3230.getModuleCode()));
+        assertInfoCommandFailure(infoCommand, modelStub,
+                String.format(MESSAGE_INVALID_MODULE_CODE, CS3230.getModuleCode()));
     }
 
 

@@ -11,7 +11,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.*;
+import static seedu.address.testutil.TypicalModules.CS2040S;
+import static seedu.address.testutil.TypicalModules.MA2001;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +51,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
-        Model expectedModel = new ModelManager(new ModulePlan(getTypicalModulePlan()), new UserPrefs(), getTypicalModuleData());
+        Model expectedModel = new ModelManager(new ModulePlan(getTypicalModulePlan()),
+                new UserPrefs(), getTypicalModuleData());
         expectedModel.setModule(module, editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -69,7 +73,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
-        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()), new UserPrefs(), getTypicalModuleData());
+        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()),
+                new UserPrefs(), getTypicalModuleData());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -82,18 +87,20 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
-        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()), new UserPrefs(), getTypicalModuleData());
+        Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()),
+                new UserPrefs(), getTypicalModuleData());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_ModuleNotInPlan() {
+    public void execute_moduleNotInPlan() {
         Module editedModule = MA2001;
 
         EditCommand editCommand = new EditCommand(editedModule.getModuleCode(), new EditModuleDescriptor());
 
-        String expectedMessage = String.format(Messages.MESSAGE_MODULE_NOT_FOUND, editedModule.getModuleCode(), EditCommand.COMMAND_WORD);
+        String expectedMessage = String.format(Messages.MESSAGE_MODULE_NOT_FOUND,
+                editedModule.getModuleCode(), EditCommand.COMMAND_WORD);
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }

@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.IS6000;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
@@ -12,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.module.Module;
-import seedu.address.testutil.TypicalModules;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for CalculateCapCommand.
@@ -29,7 +26,7 @@ public class CalculateCapCommandTest {
     }
 
     @Test
-    public void execute_calculateCAP_Success() {
+    public void execute_calculateCap_success() {
         CalculateCapCommand calculateCapCommand = new CalculateCapCommand();
 
         String expected = String.format(CalculateCapCommand.MESSAGE_CALCULATION_SUCCESS, model.getCap());
