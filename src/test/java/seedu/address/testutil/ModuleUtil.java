@@ -24,10 +24,10 @@ public class ModuleUtil {
      * Returns the part of command string for the given {@code module}'s details.
      */
     public static String getModuleDetails(Module module) {
-        String sb = module.getModuleCode().toString() + " " +
-            PREFIX_YEAR + module.getYearTaken().year.toString() + " " +
-            PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester() + " " +
-            PREFIX_GRADE + module.getGrade().toString() + " ";
+        String sb = module.getModuleCode().toString()
+            + " " + PREFIX_YEAR + module.getYearTaken().year.toString()
+            + " " + PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester()
+            + " " + PREFIX_GRADE + module.getGrade().toString() + " ";
         return sb;
     }
 
