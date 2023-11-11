@@ -126,6 +126,22 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
     }
 
     /**
+     * Checks if the given semester is the same semesters.
+     *
+     */
+    public boolean checkIfSameSemester(ModulePlanSemester otherModulePlanSemester) {
+        boolean yearEquals = this.year.equals(otherModulePlanSemester.year);
+        boolean semesterEquals = this.semester.equals(otherModulePlanSemester.semester);
+
+        //For advance placement
+        if (yearEquals && this.year.equals(Year.YEAR_0)) {
+            return true;
+        }
+
+        return yearEquals && semesterEquals;
+    }
+
+    /**
      * Whether the semester contains any module.
      *
      * @return True if it is empty and false otherwise
@@ -174,13 +190,10 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         ModulePlanSemester otherModulePlanSemester = (ModulePlanSemester) other;
         boolean yearEquals = this.year.equals(otherModulePlanSemester.year);
         boolean semesterEquals = this.semester.equals(otherModulePlanSemester.semester);
+        boolean modulesEquals = this.modules.equals(otherModulePlanSemester.modules);
 
-        //For advance placement
-        if (yearEquals && this.year.equals(Year.YEAR_0)) {
-            return true;
-        }
 
-        return yearEquals && semesterEquals;
+        return yearEquals && semesterEquals && modulesEquals;
     }
 
     @Override

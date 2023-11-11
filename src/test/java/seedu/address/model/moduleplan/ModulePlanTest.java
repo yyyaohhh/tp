@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalModules.GEA1000;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -23,13 +22,14 @@ import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.TypicalModules;
 
+
 public class ModulePlanTest {
 
     private final ModulePlan modulePlan = new ModulePlan();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), modulePlan.getModulePlanSemesterList());
+        assertEquals(ModulePlanSemesterList.DEFAULT_SEMESTERS, modulePlan.getModulePlanSemesterList());
     }
 
     @Test
@@ -69,14 +69,12 @@ public class ModulePlanTest {
 
     @Test
     public void hasModule_moduleInModulePlan_returnsTrue() {
-        modulePlan.addSemester(new ModulePlanSemester(CS2040S.getYearTaken(), CS2040S.getSemesterTaken()));
         modulePlan.addModule(CS2040S);
         assertTrue(modulePlan.hasModule(CS2040S));
     }
 
     @Test
     public void hasModule_moduleWithSameIdentityFieldsInModulePlan_returnsTrue() {
-        modulePlan.addSemester(new ModulePlanSemester(CS2040S.getYearTaken(), CS2040S.getSemesterTaken()));
         modulePlan.addModule(CS2040S);
         Module editedCS2040S = new ModuleBuilder()
                 .withCode("CS2040S")

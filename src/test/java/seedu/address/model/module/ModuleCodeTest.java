@@ -17,7 +17,7 @@ public class ModuleCodeTest {
     }
 
     @Test
-    public void isValidModuleCode() {
+    public void isValidModuleCode_invalid() {
         // null module code
         assertThrows(NullPointerException.class, () -> ModuleCode.isValidModuleCode(null));
 
@@ -25,12 +25,20 @@ public class ModuleCodeTest {
         assertFalse(ModuleCode.isValidModuleCode("")); // empty string
         assertFalse(ModuleCode.isValidModuleCode(" ")); // spaces only
         assertFalse(ModuleCode.isValidModuleCode("CS50")); // 2 digits
-        assertFalse(ModuleCode.isValidModuleCode("CS2103TT")); // double suffix
         assertFalse(ModuleCode.isValidModuleCode("C2103T")); // prefix too short
+        assertFalse(ModuleCode.isValidModuleCode("C2103TTT")); // 3 postfix
+        assertFalse(ModuleCode.isValidModuleCode("CSCSC2103T")); // 5 postfix
+    }
+
+    @Test
+    public void isValidModuleCode_valid() {
 
         // valid module codes
         assertTrue(ModuleCode.isValidModuleCode("CS2103T"));
         assertTrue(ModuleCode.isValidModuleCode("GEA1000N"));
         assertTrue(ModuleCode.isValidModuleCode("GEA1000"));
+        assertTrue(ModuleCode.isValidModuleCode("LLJ5094CV"));
+        assertTrue(ModuleCode.isValidModuleCode("GESS1025"));
+
     }
 }
