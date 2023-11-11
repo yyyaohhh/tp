@@ -35,11 +35,14 @@ public class Messages {
      * Formats the {@code module} for display to the user.
      */
     public static String format(Module module) {
-        String builder = (module.getModuleCode()) +
-            "; Semester: " +
-            "Y" + module.getYearTaken() + " " + module.getSemesterTaken() +
-            "; Grade: " +
-            module.getGrade();
+        String builder = (module.getModuleCode())
+            + "; Semester: "
+            + "Y"
+            + module.getYearTaken()
+            + " "
+            + module.getSemesterTaken()
+            + "; Grade: "
+            + module.getGrade();
         return builder;
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import seedu.address.logic.commands.InfoCommand;
