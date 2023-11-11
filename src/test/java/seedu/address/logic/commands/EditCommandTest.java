@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2040S;
@@ -16,7 +14,9 @@ import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.MA2001;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.model.Model;

@@ -5,7 +5,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.module.ModuleCode.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalModules.CS2030S;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.DeleteCommand;
 
 /**

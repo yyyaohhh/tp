@@ -2,16 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.assertInfoCommandFailure;
 import static seedu.address.testutil.TypicalModules.CS3230;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;

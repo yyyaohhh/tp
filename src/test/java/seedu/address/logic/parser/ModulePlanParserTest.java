@@ -6,7 +6,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2030S;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CalculateCapCommand;
 import seedu.address.logic.commands.CalculateMcCommand;
