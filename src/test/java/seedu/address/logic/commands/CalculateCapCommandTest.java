@@ -19,6 +19,7 @@ public class CalculateCapCommandTest {
 
     private Model model;
     private Model expectedModel;
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());

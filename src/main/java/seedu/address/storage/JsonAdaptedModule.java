@@ -47,6 +47,7 @@ public class JsonAdaptedModule {
         this.description = description;
         this.modularCredit = modularCredit;
     }
+
     /**
      * Converts a given {@code Module} into this class for Jackson use.
      */
@@ -69,7 +70,7 @@ public class JsonAdaptedModule {
 
         if (code == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
         if (!ModuleCode.isValidModuleCode(code)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
@@ -86,7 +87,7 @@ public class JsonAdaptedModule {
 
         if (sem == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Semester.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Semester.class.getSimpleName()));
         }
         if (!Semester.isValidSemester(sem)) {
             throw new IllegalValueException(Semester.MESSAGE_CONSTRAINTS);
@@ -103,7 +104,7 @@ public class JsonAdaptedModule {
 
         if (name == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
         if (!ModuleName.isValidName(name)) {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
@@ -112,7 +113,7 @@ public class JsonAdaptedModule {
 
         if (description == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -121,7 +122,7 @@ public class JsonAdaptedModule {
 
         if (modularCredit == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
         }
         if (!ModularCredit.isValidModularCredit(modularCredit)) {
             throw new IllegalValueException(ModularCredit.MESSAGE_CONSTRAINTS);
@@ -129,7 +130,7 @@ public class JsonAdaptedModule {
         final ModularCredit modelModularCredit = new ModularCredit(modularCredit);
 
         return new Module(modelCode, modelYear, modelSem, modelGrade, modelName, modelDescription,
-                modelModularCredit);
+            modelModularCredit);
     }
 
 }

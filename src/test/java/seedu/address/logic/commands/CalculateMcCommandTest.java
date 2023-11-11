@@ -15,6 +15,7 @@ import seedu.address.model.UserPrefs;
 public class CalculateMcCommandTest {
     private Model model;
     private Model expectedModel;
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());

@@ -89,12 +89,12 @@ public class MainApp extends Application {
             modulePlanOptional = storage.readModulePlan();
             if (!modulePlanOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getModulePlanFilePath()
-                        + " populated with a sample ModulePlan.");
+                    + " populated with a sample ModulePlan.");
             }
             initialData = modulePlanOptional.orElseGet(SampleDataUtil::getSampleModulePlan);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getModulePlanFilePath() + " could not be loaded."
-                    + " Will be starting with an empty ModulePlan.");
+                + " Will be starting with an empty ModulePlan.");
             initialData = new ModulePlan();
         }
 
@@ -139,7 +139,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+                + " Using default config properties.");
             initializedConfig = new Config();
         }
 
@@ -170,7 +170,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
+                + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 

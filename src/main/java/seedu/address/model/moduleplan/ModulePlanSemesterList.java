@@ -26,7 +26,7 @@ import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
  * As such, adding and updating of module uses ModulePlanSemester#equals(ModulePlanSemester)
  * for equality so as to ensure that the semester being added or updated is
  * unique in terms of identity in the ModulePlanSemesterList.
- *
+ * <p>
  * Supports a minimal set of list operations.
  */
 public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
@@ -46,7 +46,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     private final ObservableList<ModulePlanSemester> internalList = FXCollections.observableArrayList();
     private final ObservableList<ModulePlanSemester> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Loads the default semesters in when ever a new instance is created.

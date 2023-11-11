@@ -42,8 +42,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_invalidCode_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(INVALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(INVALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -51,8 +51,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullCode_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(null, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(null, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -60,8 +60,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_invalidYear_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, INVALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, INVALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = Year.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -69,8 +69,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullYear_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, null, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, null, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Year.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -78,8 +78,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_invalidSemester_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, INVALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, INVALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = Semester.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -87,8 +87,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullSemester_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, null, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, null, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Semester.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -96,8 +96,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_invalidGrade_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, INVALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, INVALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = Grade.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -105,8 +105,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullGrade_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, null,
-                        VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, null,
+                VALID_NAME, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -114,8 +114,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        null, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                null, VALID_DESCRIPTION, VALID_MODULAR_CREDIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -123,8 +123,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, null, VALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, null, VALID_MODULAR_CREDIT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -132,8 +132,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_invalidMC_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, INVALID_MODULAR_CREDIT);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, INVALID_MODULAR_CREDIT);
         String expectedMessage = ModularCredit.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
@@ -141,8 +141,8 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_nullMC_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
-                        VALID_NAME, VALID_DESCRIPTION, null);
+            new JsonAdaptedModule(VALID_CODE, VALID_YEAR, VALID_SEMESTER, VALID_GRADE,
+                VALID_NAME, VALID_DESCRIPTION, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }

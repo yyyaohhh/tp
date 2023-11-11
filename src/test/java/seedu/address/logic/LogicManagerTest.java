@@ -41,14 +41,12 @@ public class LogicManagerTest {
 
     @TempDir
     public Path temporaryFolder;
-
-    private Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
+    private final Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
     private Logic logic;
-
     @BeforeEach
     public void setUp() {
         JsonModulePlanStorage modulePlanStorage =
-                new JsonModulePlanStorage(temporaryFolder.resolve("moduleplan.json"));
+            new JsonModulePlanStorage(temporaryFolder.resolve("moduleplan.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(modulePlanStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -75,13 +73,13 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -94,10 +92,11 @@ public class LogicManagerTest {
      * - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+                                      Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -105,6 +104,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
@@ -113,6 +113,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
@@ -121,10 +122,11 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+                                      String expectedMessage) {
         Model expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -134,10 +136,11 @@ public class LogicManagerTest {
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     *
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+                                      String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
@@ -145,7 +148,7 @@ public class LogicManagerTest {
     /**
      * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
      *
-     * @param e the exception to be thrown by the Storage component
+     * @param e               the exception to be thrown by the Storage component
      * @param expectedMessage the message expected inside exception thrown by the Logic component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
@@ -161,14 +164,14 @@ public class LogicManagerTest {
         };
 
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+            new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(modulePlanStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
         // Triggers the saveModulePlan method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + " " + VALID_CODE_CS2101
-                + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
+            + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
         Module expectedModule = CS2101;
         ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         expectedModel.addModule(expectedModule);

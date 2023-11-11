@@ -33,7 +33,7 @@ public class ModelManager implements Model {
         requireAllNonNull(modulePlan, userPrefs, moduleData);
 
         logger.fine("Initializing with module plan: " + modulePlan + " user prefs " + userPrefs
-                + " and module data " + moduleData);
+            + " and module data " + moduleData);
 
         this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -47,14 +47,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -82,13 +82,13 @@ public class ModelManager implements Model {
     //=========== ModulePlan ================================================================================
 
     @Override
-    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
-        this.modulePlan.resetData(modulePlan);
+    public ReadOnlyModulePlan getModulePlan() {
+        return modulePlan;
     }
 
     @Override
-    public ReadOnlyModulePlan getModulePlan() {
-        return modulePlan;
+    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+        this.modulePlan.resetData(modulePlan);
     }
 
     @Override
@@ -142,14 +142,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setModuleData(ReadOnlyModuleData moduleData) {
-        requireNonNull(moduleData);
-        this.moduleData.resetData(moduleData);
+    public ReadOnlyModuleData getModuleData() {
+        return moduleData;
     }
 
     @Override
-    public ReadOnlyModuleData getModuleData() {
-        return moduleData;
+    public void setModuleData(ReadOnlyModuleData moduleData) {
+        requireNonNull(moduleData);
+        this.moduleData.resetData(moduleData);
     }
 
     @Override
@@ -186,8 +186,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return modulePlan.equals(otherModelManager.modulePlan)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && moduleData.equals(otherModelManager.moduleData);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && moduleData.equals(otherModelManager.moduleData);
     }
 
 }

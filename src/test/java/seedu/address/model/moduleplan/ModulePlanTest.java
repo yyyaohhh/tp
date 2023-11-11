@@ -77,10 +77,10 @@ public class ModulePlanTest {
     public void hasModule_moduleWithSameIdentityFieldsInModulePlan_returnsTrue() {
         modulePlan.addModule(CS2040S);
         Module editedCS2040S = new ModuleBuilder()
-                .withCode("CS2040S")
-                .withYear("1")
-                .withSem("1")
-                .withGrade("B-").build();
+            .withCode("CS2040S")
+            .withYear("1")
+            .withSem("1")
+            .withGrade("B-").build();
 
         assertTrue(modulePlan.hasModule(editedCS2040S));
     }

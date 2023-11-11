@@ -31,6 +31,7 @@ public interface ModulePlanStorage {
 
     /**
      * Saves the given {@link ReadOnlyModulePlan} to the storage.
+     *
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.assertInfoCommandFailure;
 import static seedu.address.testutil.TypicalModules.CS3230;
@@ -35,15 +34,14 @@ import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.TypicalModules;
 
 
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code InfoCommand}.
  */
 public class InfoCommandTest {
 
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private final Model model = new ModelManager();
+    private final Model expectedModel = new ModelManager();
 
     @Test
     public void execute_sampleMessage_success() throws CommandException {
@@ -64,7 +62,7 @@ public class InfoCommandTest {
         ModelStub modelStub = new ModelStubWithModules();
         InfoCommand infoCommand = new InfoCommand(CS3230.getModuleCode());
         assertInfoCommandFailure(infoCommand, modelStub,
-                String.format(MESSAGE_INVALID_MODULE_CODE, CS3230.getModuleCode()));
+            String.format(MESSAGE_INVALID_MODULE_CODE, CS3230.getModuleCode()));
     }
 
 
@@ -76,20 +74,20 @@ public class InfoCommandTest {
         InfoCommand infoSecondCommand = new InfoCommand(secondCode);
 
         // same object -> returns true
-        assertTrue(infoFirstCommand.equals(infoFirstCommand));
+        assertEquals(infoFirstCommand, infoFirstCommand);
 
         // same values -> returns true
         InfoCommand infoFirstCommandCopy = new InfoCommand(firstCode);
-        assertTrue(infoFirstCommand.equals(infoFirstCommandCopy));
+        assertEquals(infoFirstCommand, infoFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(infoFirstCommand.equals(1));
+        assertNotEquals(1, infoFirstCommand);
 
         // null -> returns false
-        assertFalse(infoFirstCommand.equals(null));
+        assertNotEquals(null, infoFirstCommand);
 
         // different person -> returns false
-        assertFalse(infoFirstCommand.equals(infoSecondCommand));
+        assertNotEquals(infoFirstCommand, infoSecondCommand);
     }
 
     @Test
@@ -104,8 +102,6 @@ public class InfoCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class EmptyModelStub extends ModelStub {
-
-
 
 
         @Override
@@ -134,12 +130,12 @@ public class InfoCommandTest {
         }
 
         @Override
-        public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+        public ReadOnlyModulePlan getModulePlan() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyModulePlan getModulePlan() {
+        public void setModulePlan(ReadOnlyModulePlan modulePlan) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -177,9 +173,6 @@ public class InfoCommandTest {
         public Float getCap() {
             throw new AssertionError("This method should not be called.");
         }
-
-
-
 
 
         @Override

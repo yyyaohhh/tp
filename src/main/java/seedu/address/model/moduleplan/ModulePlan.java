@@ -17,6 +17,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModulePlan implements ReadOnlyModulePlan {
 
     private final ModulePlanSemesterList semesters;
+
     {
         semesters = new ModulePlanSemesterList();
     }
@@ -70,7 +71,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
     public void removeSemester(ModulePlanSemester semester) {
         this.semesters.removeSemester(semester);
     }
-
 
 
     //// module-level operations
@@ -141,8 +141,8 @@ public class ModulePlan implements ReadOnlyModulePlan {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("semesters", semesters)
-                .toString();
+            .add("semesters", semesters)
+            .toString();
     }
 
     @Override

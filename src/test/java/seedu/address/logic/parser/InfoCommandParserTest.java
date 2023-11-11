@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class InfoCommandParserTest {
 
-    private InfoCommandParser parser = new InfoCommandParser();
+    private final InfoCommandParser parser = new InfoCommandParser();
 
     @Test
     public void parse_invalidSingleArg_throwsParseException() {

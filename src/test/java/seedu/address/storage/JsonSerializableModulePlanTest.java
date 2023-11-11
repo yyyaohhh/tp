@@ -23,7 +23,7 @@ public class JsonSerializableModulePlanTest {
     @Test
     public void toModelType_typicalModulesFile_success() throws Exception {
         JsonSerializableModulePlan dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULE_FILE,
-                JsonSerializableModulePlan.class).get();
+            JsonSerializableModulePlan.class).get();
         ModulePlan modulePlanFromFile = dataFromFile.toModelType();
         ModulePlan typicalModulesModulePlan = TypicalModules.getTypicalModulePlan();
         assertEquals(modulePlanFromFile, typicalModulesModulePlan);
@@ -32,16 +32,16 @@ public class JsonSerializableModulePlanTest {
     @Test
     public void toModelType_invalidModulesFile_throwsIllegalValueException() throws Exception {
         JsonSerializableModulePlan dataFromFile = JsonUtil.readJsonFile(INVALID_MODULE_FILE,
-                JsonSerializableModulePlan.class).get();
+            JsonSerializableModulePlan.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicateModules_throwsIllegalValueException() throws Exception {
         JsonSerializableModulePlan dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_FILE,
-                JsonSerializableModulePlan.class).get();
+            JsonSerializableModulePlan.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableModulePlan.MESSAGE_DUPLICATE_MODULE,
-                dataFromFile::toModelType);
+            dataFromFile::toModelType);
     }
 
 }

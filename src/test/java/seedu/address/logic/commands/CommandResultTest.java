@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,26 +12,26 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertEquals(commandResult, new CommandResult("feedback"));
+        assertEquals(commandResult, new CommandResult("feedback", false, false));
 
         // same object -> returns true
-        assertTrue(commandResult.equals(commandResult));
+        assertEquals(commandResult, commandResult);
 
         // null -> returns false
-        assertFalse(commandResult.equals(null));
+        assertNotEquals(null, commandResult);
 
         // different types -> returns false
         assertFalse(commandResult.equals(5.0f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
+        assertNotEquals(commandResult, new CommandResult("different"));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertNotEquals(commandResult, new CommandResult("feedback", true, false));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertNotEquals(commandResult, new CommandResult("feedback", false, true));
     }
 
     @Test
@@ -56,8 +55,8 @@ public class CommandResultTest {
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+            + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
+            + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

@@ -18,9 +18,9 @@ public class InfoCommand extends Command {
     public static final String COMMAND_WORD = "info";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows information on the module identified by the module code. \n"
-            + "Parameters: " + "code \n"
-            + "Example: " + COMMAND_WORD + " " + "CS1101S ";
+        + ": Shows information on the module identified by the module code. \n"
+        + "Parameters: " + "code \n"
+        + "Example: " + COMMAND_WORD + " " + "CS1101S ";
 
     private final ModuleCode moduleCode;
 
@@ -66,7 +66,7 @@ public class InfoCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("moduleCode", moduleCode)
-                .toString();
+            .add("moduleCode", moduleCode)
+            .toString();
     }
 }
