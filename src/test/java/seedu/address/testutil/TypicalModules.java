@@ -39,8 +39,6 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("This course is a first course in linear algebra.")
             .build();
-
-    // Manually added
     public static final Module CS2101 = new ModuleBuilder()
             .withCode("CS2101")
             .withYear("2")
@@ -68,7 +66,6 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about computer organisation")
             .build();
-
     public static final Module CS2106 = new ModuleBuilder()
             .withCode("CS2106")
             .withYear("2")
@@ -78,7 +75,6 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about operating systems")
             .build();
-
     public static final Module CS3230 = new ModuleBuilder()
             .withCode("CS3230")
             .withYear("3")
@@ -88,7 +84,6 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("This course introduces different techniques of designing and analysing algorithms.")
             .build();
-
     public static final Module IS6000 = new ModuleBuilder()
             .withCode("IS6000")
             .withYear("4")
@@ -98,7 +93,6 @@ public class TypicalModules {
             .withModularCredit("0")
             .withDescription("A 0 MC module")
             .build();
-
     public static final Module CS9999 = new ModuleBuilder()
             .withCode("CS9999")
             .withYear("3")
@@ -109,20 +103,27 @@ public class TypicalModules {
             .withDescription("Should not be in modulePlan or moduleDatabase.")
             .build();
 
+    // Modules defined based on their presence in modulePlan and moduleData
+    public static final Module MODULE_IN_BOTH = CS2100;
+    public static final Module MODULE_ONLY_DATA = CS2030S;
+    public static final Module MODULE_IN_NEITHER = CS9999;
+
+    // Module with 0 MC
+    public static final Module MODULE_ZERO_MC = IS6000;
 
     private TypicalModules() {}
 
-
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan modulePlan = new ModulePlan();
-
-        List<Module> list = getTypicalModules();
-        for (Module module : list) {
-            modulePlan.addModule(module);
-        }
+        modulePlan.addModule(MODULE_IN_BOTH);
         return modulePlan;
     }
 
+    public static ModulePlan getTypicalModulePlanWith(Module module) {
+        ModulePlan modulePlan = getTypicalModulePlan();
+        modulePlan.addModule(module);
+        return modulePlan;
+    }
 
     public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
         List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
@@ -138,11 +139,8 @@ public class TypicalModules {
 
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
-
-        for (Module m : getTypicalModules()) {
-            Module module = clearUserInputFields(m);
-            moduleData.addModule(module);
-        }
+        moduleData.addModule(MODULE_IN_BOTH);
+        moduleData.addModule(MODULE_ONLY_DATA);
         return moduleData;
     }
 
@@ -155,7 +153,7 @@ public class TypicalModules {
     }
 
     public static List<Module> getAllTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2040S, CS2030S, MA2001, CS2101, GEA1000, CS2100, CS2106, IS6000));
+        return new ArrayList<>(Arrays.asList(CS2040S, CS2030S, MA2001, CS2101, GEA1000, CS2100, CS2106, CS3230, IS6000));
     }
 
 }
