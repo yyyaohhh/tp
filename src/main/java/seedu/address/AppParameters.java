@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
+
 import javafx.application.Application;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
@@ -65,8 +66,6 @@ public class AppParameters {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .add("configPath", configPath)
-            .toString();
+        return new ToStringBuilder(this).add("configPath", configPath).toString();
     }
 }
