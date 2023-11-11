@@ -3,7 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="moduleCardPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="moduleCardPane" alignment="CENTER" maxHeight="-Infinity"
+      maxWidth="-Infinity"
       minHeight="-Infinity" minWidth="-Infinity" prefWidth="130.0"
       xmlns="http://javafx.com/javafx/20.0.1">
     <children>
