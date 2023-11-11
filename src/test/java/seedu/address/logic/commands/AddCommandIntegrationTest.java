@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.ModuleUtil.getAltGrade;
+import static seedu.address.testutil.ModuleUtil.getAltSemester;
+import static seedu.address.testutil.ModuleUtil.getAltYear;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
 import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
@@ -46,8 +49,9 @@ public class AddCommandIntegrationTest {
 
         AddCommand addCommand = prepareAddCommand(validModule);
 
-        assertCommandSuccess(addCommand, model,
-                String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)), expectedModel);
+        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule));
+
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -55,13 +59,13 @@ public class AddCommandIntegrationTest {
         // Module present in modulePlan and moduleData
         Module duplicateModule = MODULE_IN_BOTH;
 
+        String expectedMessage = String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, duplicateModule.getModuleCode());
+
         // Duplicate module with the same user inputs
-        assertCommandFailure(prepareAddCommand(duplicateModule), model,
-                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, duplicateModule.getModuleCode()));
+        assertCommandFailure(prepareAddCommand(duplicateModule), model, expectedMessage);
         
         // Duplicate module with alternate user inputs
-        assertCommandFailure(prepareAltUserInputsAddCommand(duplicateModule), model,
-                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, duplicateModule.getModuleCode()));
+        assertCommandFailure(prepareAltUserInputsAddCommand(duplicateModule), model, expectedMessage);
     }
 
     @Test
@@ -69,8 +73,9 @@ public class AddCommandIntegrationTest {
         // Module not present in moduleData
         Module invalidModule = MODULE_IN_NEITHER;
 
-        assertCommandFailure(prepareAddCommand(invalidModule), model,
-                String.format(Messages.MESSAGE_INVALID_MODULE_CODE, invalidModule.getModuleCode()));
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_MODULE_CODE, invalidModule.getModuleCode());
+
+        assertCommandFailure(prepareAddCommand(invalidModule), model, expectedMessage);
     }
 
     // Utility function to create an {@code AddCommand} with the given {@code Module}.
@@ -80,21 +85,9 @@ public class AddCommandIntegrationTest {
 
     // Utility function to create an {@code AddCommand} with alternate user inputs than the given {@code Module}.
     private AddCommand prepareAltUserInputsAddCommand(Module m) {
-        Year altYear = new Year("1");
-        if (altYear.equals(m.getYearTaken())) {
-            altYear = new Year("2");
-        }
-
-        Semester altSemester = new Semester("1");
-        if (altSemester.equals(m.getSemesterTaken())) {
-            altSemester = new Semester("2");
-        }
-
-        Grade altGrade = new Grade("A");
-        if (altGrade.equals(m.getGrade())) {
-            altGrade = new Grade("B");
-        }
-
+        Year altYear = getAltYear(m.getYearTaken());
+        Semester altSemester = getAltSemester(m.getSemesterTaken());
+        Grade altGrade = getAltGrade(m.getGrade());
         return new AddCommand(m.getModuleCode(), altYear, altSemester, altGrade);
     }
 }

@@ -27,7 +27,7 @@ public class CalculateCapCommandTest {
 
         assertCommandSuccess(new CalculateCapCommand(), actualmodel, expectedMessage, expectedModel);
 
-        //Test for zero MC modules as well (same expected message as above)
+        // Test for zero MC modules as well (same expected message as above)
         actualmodel.addModule(MODULE_ZERO_MC);
         expectedModel.addModule(MODULE_ZERO_MC);
         assertCommandSuccess(new CalculateCapCommand(), actualmodel, expectedMessage, expectedModel);
@@ -35,18 +35,13 @@ public class CalculateCapCommandTest {
 
     @Test
     public void execute_emptyModulePlan_success() {
-        // Model with empty in modulePlan
+        // Model with empty modulePlan
         Model actualmodel = new ModelManager(new ModulePlan(), new UserPrefs(), getTypicalModuleData());
         Model expectedModel = new ModelManager(new ModulePlan(), new UserPrefs(), getTypicalModuleData());
 
         // Expected CAP should be 0.0
         String expectedMessage = String.format(CalculateCapCommand.MESSAGE_CALCULATION_SUCCESS, 0.0);
 
-        assertCommandSuccess(new CalculateCapCommand(), actualmodel, expectedMessage, expectedModel);
-
-        //Test for zero MC modules as well (same expected message as above)
-        actualmodel.addModule(MODULE_ZERO_MC);
-        expectedModel.addModule(MODULE_ZERO_MC);
         assertCommandSuccess(new CalculateCapCommand(), actualmodel, expectedMessage, expectedModel);
     }
 }

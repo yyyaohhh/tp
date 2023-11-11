@@ -28,7 +28,7 @@ public class CalculateMcCommandTest {
 
         assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
 
-        //Test for zero MC modules as well (same expected message as above)
+        // Test for zero MC modules as well (same expected message as above)
         actualmodel.addModule(MODULE_ZERO_MC);
         expectedModel.addModule(MODULE_ZERO_MC);
         assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
@@ -43,11 +43,6 @@ public class CalculateMcCommandTest {
         // Expected MC should be 0.0
         String expectedMessage = String.format(CalculateMcCommand.MESSAGE_CALCULATION_SUCCESS, 0.0);
 
-        assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
-
-        //Test for zero MC modules as well (same expected message as above)
-        actualmodel.addModule(MODULE_ZERO_MC);
-        expectedModel.addModule(MODULE_ZERO_MC);
         assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
     }
 }

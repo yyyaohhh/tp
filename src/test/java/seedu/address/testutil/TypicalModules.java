@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
 
 /**
@@ -104,8 +105,8 @@ public class TypicalModules {
             .build();
 
     // Modules defined based on their presence in modulePlan and moduleData
-    public static final Module MODULE_IN_BOTH = CS2100;
-    public static final Module MODULE_ONLY_DATA = CS2030S;
+    public static final Module MODULE_IN_BOTH = CS2101;
+    public static final Module MODULE_ONLY_DATA = CS2040S;
     public static final Module MODULE_IN_NEITHER = CS9999;
 
     // Module with 0 MC
@@ -125,22 +126,10 @@ public class TypicalModules {
         return modulePlan;
     }
 
-    public static ModulePlan getTypicModulePlanWithout(Module module) {
+    public static ModulePlan getTypicalModulePlanWithout(Module module) {
         ModulePlan modulePlan = getTypicalModulePlan();
         modulePlan.removeModule(module);
         return modulePlan;
-    }
-
-    public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
-        List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
-        ModulePlan mp = getTypicalModulePlan();
-        for (Module excludedModule : exclusionList) {
-            if (mp.hasModule(excludedModule)) {
-                mp.removeModule(excludedModule);
-            }
-        }
-        return new ModulePlan(mp);
-
     }
 
     public static ModuleData getTypicalModuleData() {
@@ -148,10 +137,6 @@ public class TypicalModules {
         moduleData.addModule(MODULE_IN_BOTH);
         moduleData.addModule(MODULE_ONLY_DATA);
         return moduleData;
-    }
-
-    public static Module clearUserInputFields(Module m) {
-        return new Module(m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
     }
 
     public static List<Module> getTypicalModules() {
