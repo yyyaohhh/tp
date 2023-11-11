@@ -190,7 +190,8 @@ Currently, ModCraft have certain **limitations**.
 
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
-* ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade, for example `CS2100` and input its grade as `CS`. Likewise, you can add a CS/CU module with a non-CS/CU grade.
+* ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade, for example `CS2100` and input its grade as `CS`. 
+Likewise, you can add a CS/CU module with a non-CS/CU grade. For example, you can mark the grade of `CG1002` as `A`.
 
 These features are planned enhancements in future releases.
 
