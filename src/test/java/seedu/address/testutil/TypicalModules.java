@@ -93,16 +93,24 @@ public class TypicalModules {
             .withCode("IS6000")
             .withYear("4")
             .withSem("2")
-            .withGrade("IP")
+            .withGrade("A")
             .withName("Topics in Information Systems and Analytics Research")
             .withModularCredit("0")
             .withDescription("A 0 MC module")
             .build();
 
+    public static final Module CFG1002 = new ModuleBuilder()
+            .withCode("CFG1002")
+            .withYear("1")
+            .withSem("1")
+            .withGrade("CS")
+            .withName("Career Catalyst")
+            .withModularCredit("2")
+            .withDescription("A CS/CU module")
+            .build();
 
 
     private TypicalModules() {}
-
 
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan modulePlan = new ModulePlan();
@@ -116,7 +124,7 @@ public class TypicalModules {
 
 
     public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
-        List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
+        List<Module> exclusionList = new ArrayList<>(Arrays.asList(exclusions));
         ModulePlan mp = getTypicalModulePlan();
         for (Module excludedModule : exclusionList) {
             if (mp.hasModule(excludedModule)) {
@@ -145,5 +153,4 @@ public class TypicalModules {
     public static List<Module> getAllTypicalModules() {
         return new ArrayList<>(Arrays.asList(CS2040S, CS2030S, MA2001, CS2101, GEA1000, CS2100, CS2106, IS6000));
     }
-
 }
