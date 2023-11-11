@@ -48,6 +48,29 @@ public class UiManager implements Ui {
         alert.showAndWait();
     }
 
+    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
+        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+    }
+
+
+    private Image getImage(String imagePath) {
+        return new Image(MainApp.class.getResourceAsStream(imagePath));
+    }
+
+
+
+    /**
+     * Shows an error alert dialog with {@code title} and error message, {@code e},
+     * and exits the application after the user has closed the alert dialog.
+     */
+    private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
+        logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));
+        showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
+        Platform.exit();
+        System.exit(1);
+    }
+
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
@@ -64,25 +87,6 @@ public class UiManager implements Ui {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
-    }
-
-    private Image getImage(String imagePath) {
-        return new Image(MainApp.class.getResourceAsStream(imagePath));
-    }
-
-    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
-    }
-
-    /**
-     * Shows an error alert dialog with {@code title} and error message, {@code e},
-     * and exits the application after the user has closed the alert dialog.
-     */
-    private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
-        logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));
-        showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
-        Platform.exit();
-        System.exit(1);
     }
 
 }
