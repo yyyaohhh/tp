@@ -53,7 +53,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_moduleAcceptedByModel_addSuccessful() {
         Module toAdd = new ModuleBuilder().build();
         AddCommand addCommand = new AddCommand(toAdd.getModuleCode(), toAdd.getYearTaken(), toAdd.getSemesterTaken(),
                 toAdd.getGrade());
@@ -89,7 +89,7 @@ public class AddCommandTest {
 
 
     @Test
-    public void execute_duplicateModule_throwsCommandException() throws Exception {
+    public void execute_duplicateModule_throwsCommandException() {
         //Both in ModuleData and ModulePlan
         Module validModule = new ModuleBuilder().build();
 
