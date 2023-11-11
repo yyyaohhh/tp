@@ -1,6 +1,7 @@
 package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**

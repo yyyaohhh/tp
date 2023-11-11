@@ -1,9 +1,11 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+
 import seedu.address.commons.core.GuiSettings;
 
 /**
@@ -78,8 +80,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public String toString() {
-        String sb = "Gui Settings : " + guiSettings +
-            "\nLocal data file location : " + modulePlanFilePath;
+        String sb = "Gui Settings : "
+            + guiSettings
+            + "\nLocal data file location : "
+            + modulePlanFilePath;
         return sb;
     }
 

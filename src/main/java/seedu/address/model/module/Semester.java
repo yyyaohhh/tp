@@ -2,6 +2,7 @@ package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
