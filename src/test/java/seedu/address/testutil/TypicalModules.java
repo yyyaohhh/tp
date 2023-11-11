@@ -125,6 +125,12 @@ public class TypicalModules {
         return modulePlan;
     }
 
+    public static ModulePlan getTypicModulePlanWithout(Module module) {
+        ModulePlan modulePlan = getTypicalModulePlan();
+        modulePlan.removeModule(module);
+        return modulePlan;
+    }
+
     public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
         List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
         ModulePlan mp = getTypicalModulePlan();
