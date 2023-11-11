@@ -38,10 +38,13 @@ import seedu.address.storage.StorageManager;
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
-    private final Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
-    private Logic logic;
+
     @TempDir
     public Path temporaryFolder;
+
+    private final Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
+    
+    private Logic logic;
 
     @BeforeEach
     public void setUp() {
