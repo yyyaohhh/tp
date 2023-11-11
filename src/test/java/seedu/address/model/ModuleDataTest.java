@@ -89,6 +89,33 @@ public class ModuleDataTest {
         assertEquals(expectedString, moduleData.toString());
     }
 
+    @Test
+    public void equals() {
+        moduleData.resetData(getTypicalModuleData());
+
+        // same values -> returns true
+        ModuleData moduleDataCopy = new ModuleData();
+        moduleDataCopy.resetData(getTypicalModuleData());
+        assertTrue(moduleData.equals(moduleDataCopy));
+
+        // same object -> returns true
+        assertTrue(moduleData.equals(moduleData));
+
+        // null -> returns false
+        assertFalse(moduleData.equals(null));
+
+        // different types -> returns false
+        assertFalse(moduleData.equals(5));
+
+        // different moduleData -> returns false
+        assertFalse(moduleData.equals(new ModuleData()));
+
+        // different moduleData -> returns false
+        ModuleData differentModuleData = new ModuleData();
+        differentModuleData.addModule(CS9999);
+        assertFalse(moduleData.equals(differentModuleData));
+    }
+
     /**
      * A stub ReadOnlyModuleData whose modules list can violate interface constraints.
      */
