@@ -1,9 +1,7 @@
 package seedu.address.model.moduleplan;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.List;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.module.Module;
@@ -17,6 +15,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModulePlan implements ReadOnlyModulePlan {
 
     private final ModulePlanSemesterList semesters;
+
     {
         semesters = new ModulePlanSemesterList();
     }
@@ -70,7 +69,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
     public void removeSemester(ModulePlanSemester semester) {
         this.semesters.removeSemester(semester);
     }
-
 
 
     //// module-level operations
@@ -141,8 +139,8 @@ public class ModulePlan implements ReadOnlyModulePlan {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("semesters", semesters)
-                .toString();
+            .add("semesters", semesters)
+            .toString();
     }
 
     @Override

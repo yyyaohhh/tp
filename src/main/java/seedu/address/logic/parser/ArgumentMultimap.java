@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
-
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,7 +18,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -68,8 +69,8 @@ public class ArgumentMultimap {
      */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
-                .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
-                .toArray(Prefix[]::new);
+            .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
+            .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));

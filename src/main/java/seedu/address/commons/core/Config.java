@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.logging.Level;
-
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -47,7 +46,7 @@ public class Config {
 
         Config otherConfig = (Config) other;
         return Objects.equals(logLevel, otherConfig.logLevel)
-                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
+            && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
     }
 
     @Override
@@ -58,9 +57,9 @@ public class Config {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("logLevel", logLevel)
-                .add("userPrefsFilePath", userPrefsFilePath)
-                .toString();
+            .add("logLevel", logLevel)
+            .add("userPrefsFilePath", userPrefsFilePath)
+            .toString();
     }
 
 }

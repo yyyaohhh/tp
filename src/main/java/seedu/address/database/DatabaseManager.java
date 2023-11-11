@@ -1,11 +1,9 @@
 package seedu.address.database;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,7 +16,7 @@ import seedu.address.model.ModuleData;
 public class DatabaseManager implements Database {
 
     private static final Logger logger = LogsCenter.getLogger(DatabaseManager.class);
-    private String filePath = "database/moduleinfo.json";
+    private final String filePath = "database/moduleinfo.json";
 
     @Override
     public String getDatabaseFilePath() {
@@ -36,7 +34,7 @@ public class DatabaseManager implements Database {
         logger.fine("Attempting to parse module information: " + filePath);
 
         Optional<JsonSerializableModuleData> jsonDatabaseOptional = JsonUtil.readJsonResource(
-                "database/moduleinfo.json", JsonSerializableModuleData.class);
+            "database/moduleinfo.json", JsonSerializableModuleData.class);
 
         try {
             return jsonDatabaseOptional.get().toModelType();

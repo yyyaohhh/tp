@@ -18,9 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalModules.CS2040S;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.module.Grade;
@@ -31,7 +29,7 @@ import seedu.address.model.module.Year;
 import seedu.address.testutil.ModuleBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -39,70 +37,70 @@ public class AddCommandParserTest {
         String moduleCodeString = expectedModule.getModuleCode().toString();
 
         AddCommand expectedAddCommand = new AddCommand(expectedModule.getModuleCode(), expectedModule.getYearTaken(),
-                expectedModule.getSemesterTaken(), expectedModule.getGrade());
+            expectedModule.getSemesterTaken(), expectedModule.getGrade());
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + moduleCodeString + YEAR_DESC_CS2040S
-                + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, expectedAddCommand);
+            + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, expectedAddCommand);
 
         System.out.println(moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
-                + GRADE_DESC_CS2040S);
+            + GRADE_DESC_CS2040S);
 
         // no whitespace preamble
         assertParseSuccess(parser, moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
-                + GRADE_DESC_CS2040S, expectedAddCommand);
+            + GRADE_DESC_CS2040S, expectedAddCommand);
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedModuleString = VALID_CODE_CS2101
-                + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
+            + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
 
         // multiple years
         assertParseFailure(parser, YEAR_DESC_CS2101 + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR));
 
         // multiple semesters
         assertParseFailure(parser, SEMESTER_DESC_CS2101 + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEMESTER));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEMESTER));
 
         // multiple grades
         assertParseFailure(parser, GRADE_DESC_CS2101 + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                 YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
-                        + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
+            YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
+                + validExpectedModuleString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
 
         // invalid value followed by valid value
 
         // invalid year
         assertParseFailure(parser, INVALID_YEAR_DESC + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR));
 
         // invalid semester
         assertParseFailure(parser, INVALID_SEMESTER_DESC + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEMESTER));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEMESTER));
 
         // invalid grade
         assertParseFailure(parser, INVALID_GRADE_DESC + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
 
         // valid value followed by invalid value
 
         // invalid year
         assertParseFailure(parser, validExpectedModuleString + INVALID_YEAR_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR));
 
         // invalid semester
         assertParseFailure(parser, validExpectedModuleString + INVALID_SEMESTER_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEMESTER));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEMESTER));
 
         // invalid grade
         assertParseFailure(parser, validExpectedModuleString + INVALID_GRADE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
     }
 
     //TODO
@@ -135,30 +133,30 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid year
         assertParseFailure(parser,
-                VALID_CODE_CS2101 + INVALID_YEAR_DESC + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
-                Year.MESSAGE_CONSTRAINTS);
+            VALID_CODE_CS2101 + INVALID_YEAR_DESC + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+            Year.MESSAGE_CONSTRAINTS);
 
         // invalid semester
         assertParseFailure(parser,
-                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + INVALID_SEMESTER_DESC + GRADE_DESC_CS2101,
-                Semester.MESSAGE_CONSTRAINTS);
+            VALID_CODE_CS2101 + YEAR_DESC_CS2101 + INVALID_SEMESTER_DESC + GRADE_DESC_CS2101,
+            Semester.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser,
-                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + INVALID_GRADE_DESC,
-                Grade.MESSAGE_CONSTRAINTS);
+            VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + INVALID_GRADE_DESC,
+            Grade.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser,
-                VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + INVALID_YEAR_DESC + INVALID_GRADE_DESC,
-                Year.MESSAGE_CONSTRAINTS);
+            VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + INVALID_YEAR_DESC + INVALID_GRADE_DESC,
+            Year.MESSAGE_CONSTRAINTS);
 
 
         // non-empty preamble
         assertParseFailure(parser,
-                PREAMBLE_NON_EMPTY + VALID_CODE_CS2101
-                 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
-                ModuleCode.MESSAGE_CONSTRAINTS);
+            PREAMBLE_NON_EMPTY + VALID_CODE_CS2101
+                + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+            ModuleCode.MESSAGE_CONSTRAINTS);
     }
 
 }

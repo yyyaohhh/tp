@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.Grade;
@@ -33,7 +31,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCode_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode(null));
     }
 
     @Test
@@ -56,7 +54,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseMc_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModularCredit((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModularCredit(null));
     }
 
     @Test
@@ -79,7 +77,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDescription_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
     }
 
 
@@ -98,7 +96,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseYear_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseYear((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseYear(null));
     }
 
     @Test
@@ -144,7 +142,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseGrade_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade(null));
     }
 
     @Test
@@ -167,7 +165,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleName(null));
     }
 
 

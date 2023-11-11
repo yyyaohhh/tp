@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,9 +17,9 @@ public class InfoCommand extends Command {
     public static final String COMMAND_WORD = "info";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows information on the module identified by the module code. \n"
-            + "Parameters: " + "code \n"
-            + "Example: " + COMMAND_WORD + " " + "CS1101S ";
+        + ": Shows information on the module identified by the module code. \n"
+        + "Parameters: " + "code \n"
+        + "Example: " + COMMAND_WORD + " " + "CS1101S ";
 
     private final ModuleCode moduleCode;
 
@@ -66,7 +65,7 @@ public class InfoCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("moduleCode", moduleCode)
-                .toString();
+            .add("moduleCode", moduleCode)
+            .toString();
     }
 }

@@ -1,12 +1,10 @@
 package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -21,7 +19,7 @@ public class JsonModulePlanStorage implements ModulePlanStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonModulePlanStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonModulePlanStorage(Path filePath) {
         this.filePath = filePath;
@@ -48,7 +46,7 @@ public class JsonModulePlanStorage implements ModulePlanStorage {
         requireNonNull(filePath);
 
         Optional<JsonSerializableModulePlan> jsonModulePlan = JsonUtil.readJsonFile(
-                filePath, JsonSerializableModulePlan.class);
+            filePath, JsonSerializableModulePlan.class);
         if (!jsonModulePlan.isPresent()) {
             return Optional.empty();
         }

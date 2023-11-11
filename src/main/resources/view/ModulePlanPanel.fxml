@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
-
-<HBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="modulePlanView" orientation="HORIZONTAL" HBox.hgrow="ALWAYS" />
+<HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+    <ListView fx:id="modulePlanView" orientation="HORIZONTAL" HBox.hgrow="ALWAYS"/>
 </HBox>

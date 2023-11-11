@@ -27,7 +27,6 @@ public class ModulePlanCard extends UiPart<Region> {
     private ListView<Module> modules;
 
 
-
     /**
      * Creates a {@code ModulePlanCard} with the given {@code ModulePlanSemester} and index to display.
      */

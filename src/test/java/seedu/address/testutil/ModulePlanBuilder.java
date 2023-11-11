@@ -7,11 +7,11 @@ import seedu.address.model.moduleplan.ModulePlanSemester;
 /**
  * A utility class to help with building ModulePlan objects.
  * Example usage: <br>
- *     {@code ModulePlan ab = new ModulePlanBuilder().withModule(module).build();}
+ * {@code ModulePlan ab = new ModulePlanBuilder().withModule(module).build();}
  */
 public class ModulePlanBuilder {
 
-    private ModulePlan modulePlan;
+    private final ModulePlan modulePlan;
 
     public ModulePlanBuilder() {
         modulePlan = new ModulePlan();

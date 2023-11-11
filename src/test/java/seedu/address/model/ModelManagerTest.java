@@ -2,17 +2,15 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2101;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ModulePlanSemester;
@@ -103,24 +101,24 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(modulePlan, userPrefs, moduleData);
         ModelManager modelManagerCopy = new ModelManager(modulePlan, userPrefs, moduleData);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different modulePlan -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentModulePlan, userPrefs, moduleData)));
+        assertNotEquals(modelManager, new ModelManager(differentModulePlan, userPrefs, moduleData));
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setModulePlanFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs, moduleData)));
+        assertNotEquals(modelManager, new ModelManager(modulePlan, differentUserPrefs, moduleData));
     }
 
 }

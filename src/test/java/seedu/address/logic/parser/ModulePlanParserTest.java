@@ -6,9 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2030S;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CalculateCapCommand;
 import seedu.address.logic.commands.CalculateMcCommand;
@@ -33,13 +31,13 @@ public class ModulePlanParserTest {
         Module module = new ModuleBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(ModuleUtil.getAddCommand(module));
         assertEquals(new AddCommand(module.getModuleCode(), module.getYearTaken(),
-                module.getSemesterTaken(), module.getGrade()), command);
+            module.getSemesterTaken(), module.getGrade()), command);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + CS2030S.getModuleCode());
+            DeleteCommand.COMMAND_WORD + " " + CS2030S.getModuleCode());
         assertEquals(new DeleteCommand(CS2030S.getModuleCode()), command);
     }
 
@@ -48,7 +46,7 @@ public class ModulePlanParserTest {
         Module module = new ModuleBuilder().build();
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + CS2030S.getModuleCode() + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+            + CS2030S.getModuleCode() + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
         assertEquals(new EditCommand(CS2030S.getModuleCode(), descriptor), command);
     }
 
@@ -77,13 +75,13 @@ public class ModulePlanParserTest {
     @Test
     public void parseCommand_info() throws Exception {
         assertTrue(parser.parseCommand(InfoCommand.COMMAND_WORD + " " + CS2030S.getModuleCode())
-                instanceof InfoCommand);
+            instanceof InfoCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+            -> parser.parseCommand(""));
     }
 
     @Test

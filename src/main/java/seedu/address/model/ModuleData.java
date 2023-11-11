@@ -1,9 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.List;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.module.Description;
@@ -20,6 +18,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModuleData implements ReadOnlyModuleData {
 
     private final UniqueModuleList modules;
+
     {
         modules = new UniqueModuleList();
     }
@@ -27,7 +26,8 @@ public class ModuleData implements ReadOnlyModuleData {
     /**
      * Constucts an empty {@code ModuleData}.
      */
-    public ModuleData() {}
+    public ModuleData() {
+    }
 
     /**
      * Creates a ModuleData using the Modules in the {@code toBeCopied}.
@@ -152,8 +152,8 @@ public class ModuleData implements ReadOnlyModuleData {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("modules", modules)
-                .toString();
+            .add("modules", modules)
+            .toString();
     }
 
     @Override

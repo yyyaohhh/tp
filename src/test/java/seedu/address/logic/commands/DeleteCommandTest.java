@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -12,12 +13,10 @@ import static seedu.address.testutil.TypicalModules.CS2100;
 import static seedu.address.testutil.TypicalModules.CS3230;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,8 +35,8 @@ import seedu.address.testutil.ModuleBuilder;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalModulePlan(),
-            new UserPrefs(), getTypicalModuleData());
+    private final Model model = new ModelManager(getTypicalModulePlan(),
+        new UserPrefs(), getTypicalModuleData());
 
     @Test
     public void constructor_nullModule_throwsNullPointerException() {
@@ -51,7 +50,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(code);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,
-                Messages.format(moduleToDelete));
+            Messages.format(moduleToDelete));
 
         ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         expectedModel.deleteModule(moduleToDelete);
@@ -68,8 +67,8 @@ public class DeleteCommandTest {
 
         CommandResult commandResult = new DeleteCommand(validModule.getModuleCode()).execute(modelStub);
         assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, Messages.format(validModule)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(), modelStub.getModulesAdded());
+            commandResult.getFeedbackToUser());
+        assertEquals(List.of(), modelStub.getModulesAdded());
     }
 
 
@@ -105,20 +104,20 @@ public class DeleteCommandTest {
         DeleteCommand deleteSecondCommand = new DeleteCommand(secondCode);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstCode);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertNotEquals(1, deleteFirstCommand);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(null, deleteFirstCommand);
 
         // different module -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
 
     @Test

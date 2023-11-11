@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -17,8 +16,8 @@ import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ModulePlanStorage modulePlanStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final ModulePlanStorage modulePlanStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ModulePlanStorage} and {@code UserPrefStorage}.

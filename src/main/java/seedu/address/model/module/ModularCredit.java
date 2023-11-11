@@ -11,7 +11,7 @@ public class ModularCredit {
 
     public static final String VALIDATION_REGEX = "^[\\p{Digit}]*[.]?[\\p{Digit}]+$";
 
-    private float modularCredit;
+    private final float modularCredit;
 
     /**
      * Constructs a {@code ModularCredit}.

@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Objects;
-
 import javafx.beans.DefaultProperty;
 
 /**
@@ -13,7 +12,8 @@ public class TestFxmlObject {
 
     private String text;
 
-    public TestFxmlObject() {}
+    public TestFxmlObject() {
+    }
 
     public TestFxmlObject(String text) {
         setText(text);

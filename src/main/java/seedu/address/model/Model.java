@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
@@ -15,18 +14,20 @@ import seedu.address.model.moduleplan.ReadOnlyModulePlan;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
-
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * {@code Predicate} that always evaluate to true
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -49,12 +50,14 @@ public interface Model {
     void setModulePlanFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the AddressBook
+     */
+    ReadOnlyModulePlan getModulePlan();
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setModulePlan(ReadOnlyModulePlan modulePlan);
-
-    /** Returns the AddressBook */
-    ReadOnlyModulePlan getModulePlan();
 
     /**
      * Returns true if a module with the same identity as {@code module} exists in the address book.
@@ -104,14 +107,14 @@ public interface Model {
     Float getCap();
 
     /**
-     * Replaces the module data with the data in {@code moduleData}.
-     */
-    public void setModuleData(ReadOnlyModuleData moduleData);
-
-    /**
      * Returns the module data.
      */
-    public ReadOnlyModuleData getModuleData();
+    ReadOnlyModuleData getModuleData();
+
+    /**
+     * Replaces the module data with the data in {@code moduleData}.
+     */
+    void setModuleData(ReadOnlyModuleData moduleData);
 
     /**
      * Checks if the specified {@code module} is present in the database.
@@ -139,7 +142,9 @@ public interface Model {
      */
     Module getModuleFromDb(ModuleCode moduleCode);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<ModulePlanSemester> getFilteredModuleList();
 
 }

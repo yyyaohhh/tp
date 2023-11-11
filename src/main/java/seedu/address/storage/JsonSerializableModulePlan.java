@@ -3,11 +3,9 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Module;
@@ -40,11 +38,11 @@ public class JsonSerializableModulePlan {
      */
     public JsonSerializableModulePlan(ReadOnlyModulePlan source) {
         modules.addAll(
-                source.getModulePlanSemesterList().stream()
-                        .map(ModulePlanSemester::getModuleList)
-                        .flatMap(ObservableList::stream)
-                        .map(JsonAdaptedModule::new)
-                        .collect(Collectors.toList()));
+            source.getModulePlanSemesterList().stream()
+                .map(ModulePlanSemester::getModuleList)
+                .flatMap(ObservableList::stream)
+                .map(JsonAdaptedModule::new)
+                .collect(Collectors.toList()));
     }
 
     /**

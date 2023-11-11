@@ -5,10 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 import static seedu.address.testutil.TypicalModules.getTypicalModules;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,11 +34,11 @@ public class AddCommandIntegrationTest {
         expectedModel.addModule(validModule);
 
         AddCommand actualCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
-                validModule.getSemesterTaken(), validModule.getGrade());
+            validModule.getSemesterTaken(), validModule.getGrade());
 
         assertCommandSuccess(actualCommand, model,
-                String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
-                expectedModel);
+            String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
+            expectedModel);
     }
 
     @Test
@@ -48,10 +46,10 @@ public class AddCommandIntegrationTest {
         Module moduleInList = getTypicalModules().get(0);
 
         AddCommand actualCommand = new AddCommand(moduleInList.getModuleCode(), moduleInList.getYearTaken(),
-                moduleInList.getSemesterTaken(), moduleInList.getGrade());
+            moduleInList.getSemesterTaken(), moduleInList.getGrade());
 
         assertCommandFailure(actualCommand, model,
-                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, moduleInList.getModuleCode()));
+            String.format(AddCommand.MESSAGE_DUPLICATE_MODULE, moduleInList.getModuleCode()));
     }
 
 }

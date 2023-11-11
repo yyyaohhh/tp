@@ -6,13 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.GEA1000;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
@@ -77,10 +74,10 @@ public class ModulePlanTest {
     public void hasModule_moduleWithSameIdentityFieldsInModulePlan_returnsTrue() {
         modulePlan.addModule(CS2040S);
         Module editedCS2040S = new ModuleBuilder()
-                .withCode("CS2040S")
-                .withYear("1")
-                .withSem("1")
-                .withGrade("B-").build();
+            .withCode("CS2040S")
+            .withYear("1")
+            .withSem("1")
+            .withGrade("B-").build();
 
         assertTrue(modulePlan.hasModule(editedCS2040S));
     }

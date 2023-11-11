@@ -3,7 +3,6 @@ package seedu.address.commons.core;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
-
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -62,8 +61,8 @@ public class GuiSettings implements Serializable {
 
         GuiSettings otherGuiSettings = (GuiSettings) other;
         return windowWidth == otherGuiSettings.windowWidth
-                && windowHeight == otherGuiSettings.windowHeight
-                && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates);
+            && windowHeight == otherGuiSettings.windowHeight
+            && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates);
     }
 
     @Override
@@ -74,9 +73,9 @@ public class GuiSettings implements Serializable {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("windowWidth", windowWidth)
-                .add("windowHeight", windowHeight)
-                .add("windowCoordinates", windowCoordinates)
-                .toString();
+            .add("windowWidth", windowWidth)
+            .add("windowHeight", windowHeight)
+            .add("windowCoordinates", windowCoordinates)
+            .toString();
     }
 }

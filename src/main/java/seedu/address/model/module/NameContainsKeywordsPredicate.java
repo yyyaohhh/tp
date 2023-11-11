@@ -2,7 +2,6 @@ package seedu.address.model.module;
 
 import java.util.List;
 import java.util.function.Predicate;
-
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -19,7 +18,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Module> {
     @Override
     public boolean test(Module module) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getName().moduleName, keyword));
+            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getName().moduleName, keyword));
     }
 
     @Override

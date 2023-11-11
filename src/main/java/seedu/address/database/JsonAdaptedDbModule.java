@@ -2,7 +2,6 @@ package seedu.address.database;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.ModularCredit;
@@ -32,7 +31,7 @@ public class JsonAdaptedDbModule {
                                //@JsonProperty("semesterData") String semesterData,
                                //@JsonProperty("attributes") String attributes,
                                //@JsonProperty("gradingBasisDescription") String gradingBasisDescription
-                               ) {
+    ) {
         this.moduleCode = moduleCode;
         this.title = title;
         this.description = description;
@@ -48,13 +47,13 @@ public class JsonAdaptedDbModule {
 
         if (moduleCode == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
         final ModuleCode modelCode = new ModuleCode(moduleCode);
 
         if (title == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
         if (!ModuleName.isValidName(title)) {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
@@ -63,7 +62,7 @@ public class JsonAdaptedDbModule {
 
         if (description == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -72,7 +71,7 @@ public class JsonAdaptedDbModule {
 
         if (moduleCredit == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
         }
         if (!ModularCredit.isValidModularCredit(moduleCredit)) {
             throw new IllegalValueException(ModularCredit.MESSAGE_CONSTRAINTS);

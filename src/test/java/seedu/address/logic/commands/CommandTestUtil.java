@@ -5,10 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEMESTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.testutil.Assert.assertThrows;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.moduleplan.ModulePlan;
@@ -48,9 +46,9 @@ public class CommandTestUtil {
 
     static {
         DESC_CS2040S = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2040S)
-                .withSemester(VALID_SEMESTER_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
+            .withSemester(VALID_SEMESTER_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
         DESC_CS2101 = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2101)
-                .withSemester(VALID_SEMESTER_CS2101).withGrade(VALID_GRADE_CS2101).build();
+            .withSemester(VALID_SEMESTER_CS2101).withGrade(VALID_GRADE_CS2101).build();
     }
 
     /**
@@ -59,7 +57,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -74,7 +72,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -114,7 +112,6 @@ public class CommandTestUtil {
         assertEquals(expectedModulePlan, actualModel.getModulePlan());
         assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
     }
-
 
 
 }

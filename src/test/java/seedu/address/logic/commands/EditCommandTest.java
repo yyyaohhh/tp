@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2101;
@@ -15,9 +16,7 @@ import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.MA2001;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.model.Model;
@@ -34,17 +33,17 @@ import seedu.address.testutil.ModuleBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
+    private final Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
 
     @Test
     public void execute_allFieldsSpecified_success() {
         Module module = model.getModule(CS2040S.getModuleCode());
 
         Module editedModule = new ModuleBuilder(CS2040S)
-                .withSem("1")
-                .withYear("2")
-                .withGrade("B")
-                .build();
+            .withSem("1")
+            .withYear("2")
+            .withGrade("B")
+            .build();
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
         EditCommand editCommand = new EditCommand(module.getModuleCode(), descriptor);
@@ -52,7 +51,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
         Model expectedModel = new ModelManager(new ModulePlan(getTypicalModulePlan()),
-                new UserPrefs(), getTypicalModuleData());
+            new UserPrefs(), getTypicalModuleData());
         expectedModel.setModule(module, editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -65,16 +64,16 @@ public class EditCommandTest {
 
         ModuleBuilder moduleInList = new ModuleBuilder(module);
         Module editedModule = moduleInList
-                .withYear(VALID_YEAR_CS2101).withSem(VALID_SEMESTER_CS2101).build();
+            .withYear(VALID_YEAR_CS2101).withSem(VALID_SEMESTER_CS2101).build();
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder()
-                .withYear(VALID_YEAR_CS2101).withSemester(VALID_SEMESTER_CS2101).build();
+            .withYear(VALID_YEAR_CS2101).withSemester(VALID_SEMESTER_CS2101).build();
         EditCommand editCommand = new EditCommand(moduleCode, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
         Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()),
-                new UserPrefs(), getTypicalModuleData());
+            new UserPrefs(), getTypicalModuleData());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -88,7 +87,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule));
 
         Model expectedModel = new ModelManager(new ModulePlan(model.getModulePlan()),
-                new UserPrefs(), getTypicalModuleData());
+            new UserPrefs(), getTypicalModuleData());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -100,7 +99,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(editedModule.getModuleCode(), new EditModuleDescriptor());
 
         String expectedMessage = String.format(Messages.MESSAGE_MODULE_NOT_FOUND,
-                editedModule.getModuleCode(), EditCommand.COMMAND_WORD);
+            editedModule.getModuleCode(), EditCommand.COMMAND_WORD);
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }
@@ -112,22 +111,22 @@ public class EditCommandTest {
         // same values -> returns true
         EditModuleDescriptor copyDescriptor = new EditModuleDescriptor(DESC_CS2040S);
         EditCommand commandWithSameValues = new EditCommand(new ModuleCode(VALID_CODE_CS2040S), copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new HelpCommand()));
+        assertNotEquals(standardCommand, new HelpCommand());
 
         // different module code -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new ModuleCode(VALID_CODE_CS2101), DESC_CS2040S)));
+        assertNotEquals(standardCommand, new EditCommand(new ModuleCode(VALID_CODE_CS2101), DESC_CS2040S));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new ModuleCode(VALID_CODE_CS2040S), DESC_CS2101)));
+        assertNotEquals(standardCommand, new EditCommand(new ModuleCode(VALID_CODE_CS2040S), DESC_CS2101));
     }
 
     @Test
@@ -136,7 +135,7 @@ public class EditCommandTest {
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         EditCommand editCommand = new EditCommand(moduleCode, editModuleDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{moduleCode=" + moduleCode + ", editModuleDescriptor="
-                + editModuleDescriptor + "}";
+            + editModuleDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

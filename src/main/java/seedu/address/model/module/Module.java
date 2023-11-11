@@ -1,7 +1,6 @@
 package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -11,8 +10,8 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Module {
 
     public static final String MESSAGE_INFO = "%1$s: %2$s \n"
-            + "%3$s MC \n"
-            + "%4$s \n";
+        + "%3$s MC \n"
+        + "%4$s \n";
 
     // Identity fields
     private final ModuleName moduleName;
@@ -29,7 +28,7 @@ public class Module {
      * Every field must be present and not null.
      */
     public Module(ModuleCode moduleCode, Year yearTaken, Semester semesterTaken, Grade grade, ModuleName name,
-                   Description description, ModularCredit modularCredit) {
+                  Description description, ModularCredit modularCredit) {
         requireAllNonNull(name, moduleCode, description, yearTaken, semesterTaken, grade);
         this.moduleName = name;
         this.moduleCode = moduleCode;
@@ -105,6 +104,7 @@ public class Module {
 
     /**
      * Checks if two modules are the same module.
+     *
      * @param otherModule the other module to check.
      * @return true if the modules are the same, false otherwise.
      */
@@ -130,12 +130,12 @@ public class Module {
         Module otherModule = (Module) other;
 
         return this.moduleCode.equals(otherModule.moduleCode)
-                && this.moduleName.equals(otherModule.moduleName)
-                && this.description.equals(otherModule.description)
-                && this.modularCredit.equals(otherModule.modularCredit)
-                && isEditableFieldEquals(this.yearTaken, otherModule.yearTaken)
-                && isEditableFieldEquals(this.semesterTaken, otherModule.semesterTaken)
-                && isEditableFieldEquals(this.grade, otherModule.grade);
+            && this.moduleName.equals(otherModule.moduleName)
+            && this.description.equals(otherModule.description)
+            && this.modularCredit.equals(otherModule.modularCredit)
+            && isEditableFieldEquals(this.yearTaken, otherModule.yearTaken)
+            && isEditableFieldEquals(this.semesterTaken, otherModule.semesterTaken)
+            && isEditableFieldEquals(this.grade, otherModule.grade);
     }
 
     private boolean isEditableFieldEquals(Object thisObj, Object otherObj) {
@@ -150,10 +150,10 @@ public class Module {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("moduleCode", moduleCode)
-                .add("year", yearTaken)
-                .add("semester", semesterTaken)
-                .add("grade", grade)
-                .toString();
+            .add("moduleCode", moduleCode)
+            .add("year", yearTaken)
+            .add("semester", semesterTaken)
+            .add("grade", grade)
+            .toString();
     }
 }
