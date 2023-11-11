@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.Grade;
