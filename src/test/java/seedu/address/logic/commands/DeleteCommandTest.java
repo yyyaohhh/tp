@@ -63,12 +63,9 @@ public class DeleteCommandTest {
         // Module present in moduleData but not modulePlan
         Module missingModule = MODULE_ONLY_DATA;
 
-        // Expected model's modulePlan does not contain the missing module
-        Model expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
-
         DeleteCommand deleteCommand = prepareDeleteCommand(missingModule);
 
-        assertCommandFailure(deleteCommand, expectedModel, String.format(Messages.MESSAGE_MODULE_NOT_FOUND,
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_MODULE_NOT_FOUND,
                 missingModule.getModuleCode(), DeleteCommand.COMMAND_WORD));
     }
 
@@ -77,12 +74,9 @@ public class DeleteCommandTest {
         // Module not present in moduleData
         Module invalidModule = MODULE_IN_NEITHER;
 
-        // Expected model's modulePlan does not contain the invalid module
-        Model expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
-
         DeleteCommand deleteCommand = prepareDeleteCommand(invalidModule);
 
-        assertCommandFailure(deleteCommand, expectedModel, String.format(Messages.MESSAGE_INVALID_MODULE_CODE,
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_MODULE_CODE,
                 invalidModule.getModuleCode()));
     }
 
