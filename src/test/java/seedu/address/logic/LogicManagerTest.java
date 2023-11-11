@@ -43,7 +43,6 @@ public class LogicManagerTest {
     public Path temporaryFolder;
     private final Model model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
     private Logic logic;
-    
     @BeforeEach
     public void setUp() {
         JsonModulePlanStorage modulePlanStorage =
