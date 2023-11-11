@@ -23,7 +23,7 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(null));
 
         // different types -> returns false
-        assertFalse(commandResult.equals(0.5f));
+        assertFalse(commandResult.equals(5.0f));
 
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
