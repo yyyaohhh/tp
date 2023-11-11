@@ -2,6 +2,7 @@ package seedu.address.database;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ModuleData;
-import seedu.address.testutil.TypicalModules;
 
 public class JsonSerializableModuleDataTest {
 
@@ -24,7 +24,7 @@ public class JsonSerializableModuleDataTest {
         JsonSerializableModuleData dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULES_FILE,
                 JsonSerializableModuleData.class).get();
         ModuleData moduleDataFromFile = dataFromFile.toModelType();
-        ModuleData typicalModulesModuleData = TypicalModules.getTypicalModuleData();
+        ModuleData typicalModulesModuleData = getTypicalModuleData();
         assertEquals(moduleDataFromFile, typicalModulesModuleData);
     }
 
