@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
-import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.CS2101;
-import static seedu.address.testutil.TypicalModules.CS9999;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
@@ -21,7 +21,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
 
 public class ModelManagerTest {
 
@@ -88,14 +87,24 @@ public class ModelManagerTest {
 
     @Test
     public void hasModule_moduleNotInModulePlan_returnsFalse() {
-        assertFalse(modelManager.hasModule(CS2101));
+        modelManager.setModulePlan(getTypicalModulePlan());
+        modelManager.setModuleData(getTypicalModuleData());
+
+        // Module is present in moduleData but not in modulePlan
+        Module module = MODULE_ONLY_DATA;
+        assertFalse(modelManager.hasModule(module));
+
+        // Module is not present in moduleData or modulePlan
+        module = MODULE_IN_NEITHER;
+        assertFalse(modelManager.hasModule(module));
     }
 
     @Test
     public void hasModule_moduleInModulePlan_returnsTrue() {
-        ModulePlanSemester m = new ModulePlanSemester(CS2101.getYearTaken(), CS2101.getSemesterTaken());
-        modelManager.addModule(CS2101);
-        assertTrue(modelManager.hasModule(CS2101));
+        modelManager.setModulePlan(getTypicalModulePlan());
+
+        Module module = MODULE_IN_BOTH;
+        assertTrue(modelManager.hasModule(module));
     }
 
     @Test
@@ -113,28 +122,28 @@ public class ModelManagerTest {
     @Test
     public void getModuleFromDb_validModule_returnsModule() {
         modelManager.setModuleData(getTypicalModuleData());
-        Module actualModule = modelManager.getModuleFromDb(CS2100.getModuleCode());
-        Module expectedModule = clearUserInputFields(CS2100);
+        Module actualModule = modelManager.getModuleFromDb(MODULE_ONLY_DATA.getModuleCode());
+        Module expectedModule = clearUserInputFields(MODULE_ONLY_DATA);
         assertEquals(expectedModule, actualModule);
     }
 
     @Test
     public void getModuleFromDb_invalidModule_throwsIllegalArgumentException() {
-        ModuleCode invalidModuleCode = CS9999.getModuleCode();
+        modelManager.setModuleData(getTypicalModuleData());
+        ModuleCode invalidModuleCode = MODULE_IN_NEITHER.getModuleCode();
         assertThrows(ModuleNotFoundException.class, () -> modelManager.getModuleFromDb(invalidModuleCode));
     }
 
     @Test
     public void checkDbValidModule_validModule_returnsTrue() {
         modelManager.setModuleData(getTypicalModuleData());
-        Module validModule = CS2100;
-        assertTrue(modelManager.checkDbValidModule(validModule));
+        assertTrue(modelManager.checkDbValidModule(MODULE_ONLY_DATA));
     }
 
     @Test
     public void checkDbValidModule_invalidModule_returnsFalse() {
-        Module invalidModule = CS9999;
-        assertFalse(modelManager.checkDbValidModule(invalidModule));
+        modelManager.setModuleData(getTypicalModuleData());
+        assertFalse(modelManager.checkDbValidModule(MODULE_IN_NEITHER));
     }
 
     @Test
@@ -145,13 +154,14 @@ public class ModelManagerTest {
     @Test
     public void checkDbValidModuleCode_validModule_returnsTrue() {
         modelManager.setModuleData(getTypicalModuleData());
-        ModuleCode validModuleCode = CS2100.getModuleCode();
+        ModuleCode validModuleCode = MODULE_IN_BOTH.getModuleCode();
         assertTrue(modelManager.checkDbValidModuleCode(validModuleCode));
     }
 
     @Test
     public void checkDbValidModuleCode_invalidModule_returnsFalse() {
-        ModuleCode invalidModuleCode = CS9999.getModuleCode();
+        modelManager.setModuleData(getTypicalModuleData());
+        ModuleCode invalidModuleCode = MODULE_IN_NEITHER.getModuleCode();
         assertFalse(modelManager.checkDbValidModuleCode(invalidModuleCode));
     }
 
@@ -163,12 +173,11 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         ModulePlan modulePlan = getTypicalModulePlan();
-        ModulePlan differentModulePlan = new ModulePlan();
         UserPrefs userPrefs = new UserPrefs();
         ModuleData moduleData = getTypicalModuleData();
+        modelManager = new ModelManager(modulePlan, userPrefs, moduleData);
 
         // same values -> returns true
-        modelManager = new ModelManager(modulePlan, userPrefs, moduleData);
         ModelManager modelManagerCopy = new ModelManager(modulePlan, userPrefs, moduleData);
         assertTrue(modelManager.equals(modelManagerCopy));
 
@@ -182,12 +191,17 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different modulePlan -> returns false
+        ModulePlan differentModulePlan = new ModulePlan();
         assertFalse(modelManager.equals(new ModelManager(differentModulePlan, userPrefs, moduleData)));
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setModulePlanFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs, moduleData)));
+
+        // different moduleData -> returns false
+        ModuleData differentModuleData = new ModuleData();
+        assertFalse(modelManager.equals(new ModelManager(modulePlan, userPrefs, differentModuleData)));
     }
 
 }
