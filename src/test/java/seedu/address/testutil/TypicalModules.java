@@ -1,12 +1,13 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.ModulePlan;
 
 /**
@@ -134,8 +135,8 @@ public class TypicalModules {
 
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
-        moduleData.addModule(MODULE_IN_BOTH);
-        moduleData.addModule(MODULE_ONLY_DATA);
+        moduleData.addModule(clearUserInputFields(MODULE_IN_BOTH));
+        moduleData.addModule(clearUserInputFields(MODULE_ONLY_DATA));
         return moduleData;
     }
 
