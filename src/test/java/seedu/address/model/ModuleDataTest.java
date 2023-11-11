@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.CS9999;
+import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import java.util.Arrays;
@@ -19,7 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
-import seedu.address.testutil.TypicalModules;
 
 public class ModuleDataTest {
 
@@ -37,7 +37,7 @@ public class ModuleDataTest {
 
     @Test
     public void resetData_withValidReadOnlyModuleData_replacesData() {
-        ModuleData newData = TypicalModules.getTypicalModuleData();
+        ModuleData newData = getTypicalModuleData();
         moduleData.resetData(newData);
         assertEquals(newData, moduleData);
     }
@@ -45,10 +45,11 @@ public class ModuleDataTest {
     @Test
     public void resetData_withDuplicateModules_throwsDuplicateModuleException() {
         // Two modules with the same identity fields
-        Module duplicateModule = new Module(CS2100.getModuleCode(), CS2100.getName(),
-                CS2100.getDescription(), CS2100.getModularCredit());
+        Module module = MODULE_ONLY_DATA;
+        Module duplicateModule = new Module(module.getModuleCode(), module.getName(),
+                module.getDescription(), module.getModularCredit());
 
-        List<Module> newModuleData = Arrays.asList(CS2100, duplicateModule);
+        List<Module> newModuleData = Arrays.asList(module, duplicateModule);
         ModuleDataStub newData = new ModuleDataStub(newModuleData);
 
         assertThrows(DuplicateModuleException.class, () -> moduleData.resetData(newData));
@@ -61,19 +62,21 @@ public class ModuleDataTest {
 
     @Test
     public void hasModule_moduleNotInModuleData_returnsFalse() {
-        assertFalse(moduleData.hasModule(CS9999));
+        Module module = MODULE_IN_NEITHER;
+        assertFalse(moduleData.hasModule(module));
     }
 
     @Test
     public void hasModule_moduleInModuleData_returnsTrue() {
         moduleData.resetData(getTypicalModuleData());
-        assertTrue(moduleData.hasModule(CS2100));
-    }
 
-    @Test
-    public void hasModule_moduleWithSameIdentityFieldsInModuleData_returnsTrue() {
-        moduleData.resetData(getTypicalModuleData());
-        assertTrue(moduleData.hasModule(CS2100));
+        // Module with user inputs
+        Module module = MODULE_ONLY_DATA;
+        assertTrue(moduleData.hasModule(module));
+
+        // Module without user inputs
+        module = clearUserInputFields(module);
+        assertTrue(moduleData.hasModule(module));
     }
 
     @Test
@@ -112,7 +115,7 @@ public class ModuleDataTest {
 
         // different moduleData -> returns false
         ModuleData differentModuleData = new ModuleData();
-        differentModuleData.addModule(CS9999);
+        differentModuleData.addModule(MODULE_IN_NEITHER);
         assertFalse(moduleData.equals(differentModuleData));
     }
 
