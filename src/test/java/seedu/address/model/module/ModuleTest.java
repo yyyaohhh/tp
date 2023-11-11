@@ -13,7 +13,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2101;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.ModuleBuilder;
 
 public class ModuleTest {

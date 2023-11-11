@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
 import seedu.address.model.moduleplan.ModulePlan;

@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Objects;
+
 import javafx.beans.DefaultProperty;
 
 /**

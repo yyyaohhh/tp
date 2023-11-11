@@ -7,11 +7,14 @@ import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2106;
 import static seedu.address.testutil.TypicalModules.MA2001;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.moduleplan.ModulePlan;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
