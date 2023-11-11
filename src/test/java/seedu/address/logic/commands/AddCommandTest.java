@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2030S;
-import static seedu.address.testutil.TypicalModules.CS2100;
-import static seedu.address.testutil.TypicalModules.CS3230;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
-import static seedu.address.testutil.TypicalModules.getTypicalModulePlanWithout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,11 +29,10 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.ModuleBuilder;
 
-
+/**
+ * Contains unit tests for {@code AddCommand}.
+ */
 public class AddCommandTest {
-
-    private Model model = new ModelManager(getTypicalModulePlanWithout(CS2100),
-            new UserPrefs(), getTypicalModuleData());
 
     @Test
     public void constructor_nullModule_throwsNullPointerException() {
@@ -42,22 +40,10 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
-        Module toAdd = new ModuleBuilder().build();
-        AddCommand addCommand = new AddCommand(toAdd.getModuleCode(), toAdd.getYearTaken(), toAdd.getSemesterTaken(),
-                toAdd.getGrade());
-
-        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS,
-                Messages.format(toAdd));
-        ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
-        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-
-    }
-    @Test
     public void execute_moduleInDataNotInPlan_addSuccessful() throws Exception {
         //In ModuleData and not in ModulePlan
-        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(CS2100);
-        Module validModule = CS2030S;
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule();
+        Module validModule = MODULE_ONLY_DATA;
 
         AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
                 validModule.getSemesterTaken(), validModule.getGrade());
@@ -65,13 +51,13 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(new Module[]{CS2100, validModule}), modelStub.modulesAdded);
+        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
     }
 
     @Test
     public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException() {
-        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(CS2030S);
-        Module notInDB = CS3230;
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule();
+        Module notInDB = MODULE_IN_NEITHER;
 
         assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(notInDB.getModuleCode()));
     }
@@ -80,50 +66,72 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateModule_throwsCommandException() throws Exception {
         //Both in ModuleData and ModulePlan
-        Module validModule = new ModuleBuilder().build();
+        Module validModule = MODULE_IN_BOTH;
 
         AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
                 validModule.getSemesterTaken(), validModule.getGrade());
         ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
 
-        assertThrows(CommandException.class,
-                String.format(AddCommand.MESSAGE_DUPLICATE_MODULE,
-                        validModule.getModuleCode()), () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_DUPLICATE_MODULE,
+                validModule.getModuleCode()), () -> addCommand.execute(modelStub));
     }
 
 
     @Test
     public void equals() {
-        Module cs2030s = new ModuleBuilder().withCode("CS2030S").build();
-        Module cs2040s = new ModuleBuilder().withCode("CS2040S").build();
-        AddCommand add2030Command = new AddCommand(cs2030s.getModuleCode(), cs2030s.getYearTaken(),
-                cs2030s.getSemesterTaken(), cs2030s.getGrade());
-        AddCommand add2040Command = new AddCommand(cs2040s.getModuleCode(), cs2040s.getYearTaken(),
-                cs2040s.getSemesterTaken(), cs2040s.getGrade());
+        // Use random typical modules for their module codes
+        Module module = MODULE_IN_BOTH;
+        Module otherModule = MODULE_ONLY_DATA;
 
-        //same -> returns true
-        assertTrue(add2030Command.equals(add2030Command));
+        // same object -> returns true
+        AddCommand addCommand = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertTrue(addCommand.equals(addCommand));
 
+        // same values -> returns true
+        AddCommand addCommandCopy = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertTrue(addCommand.equals(addCommandCopy));
 
-        AddCommand add2030CommandCopy = new AddCommand(cs2030s.getModuleCode(), cs2030s.getYearTaken(),
-                cs2030s.getSemesterTaken(), cs2030s.getGrade());
-        assertTrue(add2030Command.equals(add2030CommandCopy));
+        // different types -> returns false
+        assertFalse(addCommand.equals(1));
 
-        assertFalse(add2030Command.equals(1));
-        assertFalse(add2030Command.equals(null));
+        // null -> returns false
+        assertFalse(addCommand.equals(null));
 
-        assertFalse(add2030Command.equals(add2040Command));
+        // different module code -> returns false
+        AddCommand differentCode = new AddCommand(otherModule.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertFalse(addCommand.equals(differentCode));
 
+        // different year -> returns false
+        AddCommand differentYear = new AddCommand(module.getModuleCode(), otherModule.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertFalse(addCommand.equals(differentYear));
+
+        // different semester -> returns false
+        AddCommand differentSemester = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                otherModule.getSemesterTaken(), module.getGrade());
+        assertFalse(addCommand.equals(differentSemester));
+
+        // different grade -> returns false
+        AddCommand differentGrade = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), otherModule.getGrade());
+        assertFalse(addCommand.equals(differentGrade));
     }
 
     @Test
     public void toStringMethod() {
+        // use random typical module
+        Module module = MODULE_IN_BOTH;
 
-        AddCommand addCommand = new AddCommand(CS2030S.getModuleCode(), CS2030S.getYearTaken(),
-                CS2030S.getSemesterTaken(), CS2030S.getGrade());
-        String expected = AddCommand.class.getCanonicalName() + "{moduleCode=" + CS2030S.getModuleCode()
-                + ", year=" + CS2030S.getYearTaken() + ", semester=" + CS2030S.getSemesterTaken()
-                + ", grade=" + CS2030S.getGrade() + "}";
+        AddCommand addCommand = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        String expected = AddCommand.class.getCanonicalName()
+                + "{moduleCode=" + module.getModuleCode()
+                + ", year=" + module.getYearTaken()
+                + ", semester=" + module.getSemesterTaken()
+                + ", grade=" + module.getGrade() + "}";
         assertEquals(expected, addCommand.toString());
     }
 
@@ -133,6 +141,7 @@ public class AddCommandTest {
     private class ModelStubWithMultipleModule extends ModelStub {
         private final ArrayList<Module> modulesAdded = new ArrayList<>();
 
+        ModelStubWithMultipleModule() {}
 
         ModelStubWithMultipleModule(Module module) {
             requireNonNull(module);
