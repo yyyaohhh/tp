@@ -22,7 +22,7 @@ public class CommandResultTest {
         assertNotEquals(null, commandResult);
 
         // different types -> returns false
-        assertNotEquals(0.5f, commandResult, 0.0);
+        assertFalse(commandResult.equals(5.0f));
 
         // different feedbackToUser value -> returns false
         assertNotEquals(commandResult, new CommandResult("different"));
