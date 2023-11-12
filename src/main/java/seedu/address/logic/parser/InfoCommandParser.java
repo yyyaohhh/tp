@@ -29,7 +29,7 @@ public class InfoCommandParser implements Parser<InfoCommand> {
         Matcher matcher = SINGLE_ARGUMENT_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, InfoCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InfoCommand.MESSAGE_USAGE));
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(args);

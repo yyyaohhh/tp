@@ -14,9 +14,9 @@ public class Grade {
     // We define an enum inside a class to allow error messages to be abstracted out.
 
     public static final String MESSAGE_CONSTRAINTS = "Grade should only be the following: "
-        + String.join(", ",
-        Arrays.stream(GradeEnum.values()).map(GradeEnum::getGrade)
-            .collect(Collectors.toList()));
+            + String.join(", ",
+            Arrays.stream(GradeEnum.values()).map(GradeEnum::getGrade)
+                    .collect(Collectors.toList()));
     private final GradeEnum grade;
 
     /**

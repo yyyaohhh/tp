@@ -95,7 +95,7 @@ public class JsonModulePlanStorageTest {
     private void saveModulePlan(ReadOnlyModulePlan modulePlan, String filePath) {
         try {
             new JsonModulePlanStorage(Paths.get(filePath)).saveModulePlan(modulePlan,
-                addToTestDataPathIfNotNull(filePath));
+                    addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

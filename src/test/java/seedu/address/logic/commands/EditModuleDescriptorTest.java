@@ -34,7 +34,7 @@ public class EditModuleDescriptorTest {
 
         // different year -> returns false
         EditModuleDescriptor editedCS2040S = new EditModuleDescriptorBuilder(DESC_CS2040S)
-            .withYear(VALID_YEAR_CS2101).build();
+                .withYear(VALID_YEAR_CS2101).build();
         assertNotEquals(DESC_CS2040S, editedCS2040S);
 
         // different semester -> returns false
@@ -50,9 +50,9 @@ public class EditModuleDescriptorTest {
     public void toStringMethod() {
         EditModuleDescriptor editPersonDescriptor = new EditModuleDescriptor();
         String expected = EditModuleDescriptor.class.getCanonicalName() + "{year="
-            + editPersonDescriptor.getYear().orElse(null) + ", semester="
-            + editPersonDescriptor.getSemester().orElse(null) + ", grade="
-            + editPersonDescriptor.getGrade().orElse(null) + "}";
+                + editPersonDescriptor.getYear().orElse(null) + ", semester="
+                + editPersonDescriptor.getSemester().orElse(null) + ", grade="
+                + editPersonDescriptor.getGrade().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

@@ -26,7 +26,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class UniqueModuleList implements Iterable<Module> {
     private final ObservableList<Module> internalList = FXCollections.observableArrayList();
     private final ObservableList<Module> internalUnmodifiableList =
-        FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent module as the given argument.

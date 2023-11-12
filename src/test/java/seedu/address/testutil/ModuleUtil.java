@@ -28,9 +28,9 @@ public class ModuleUtil {
      */
     public static String getModuleDetails(Module module) {
         String sb = module.getModuleCode().toString()
-            + " " + PREFIX_YEAR + module.getYearTaken().year.toString()
-            + " " + PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester()
-            + " " + PREFIX_GRADE + module.getGrade().toString() + " ";
+                + " " + PREFIX_YEAR + module.getYearTaken().year.toString()
+                + " " + PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester()
+                + " " + PREFIX_GRADE + module.getGrade().toString() + " ";
         return sb;
     }
 
@@ -41,7 +41,7 @@ public class ModuleUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getYear().ifPresent(year -> sb.append(PREFIX_YEAR).append(year).append(" "));
         descriptor.getSemester().ifPresent(
-            semester -> sb.append(PREFIX_SEMESTER).append(semester.getSemesterString()).append(" "));
+                semester -> sb.append(PREFIX_SEMESTER).append(semester.getSemesterString()).append(" "));
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade).append(" "));
 
         return sb.toString();

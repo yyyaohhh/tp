@@ -22,7 +22,7 @@ public class CommandResultTest {
         assertNotEquals(null, commandResult);
 
         // different types -> returns false
-        assertFalse(commandResult.equals(5.0f));
+        assertNotEquals(5.0f, commandResult, 0.0);
 
         // different feedbackToUser value -> returns false
         assertNotEquals(commandResult, new CommandResult("different"));
@@ -55,8 +55,8 @@ public class CommandResultTest {
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-            + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-            + ", exit=" + commandResult.isExit() + "}";
+                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
+                + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }
