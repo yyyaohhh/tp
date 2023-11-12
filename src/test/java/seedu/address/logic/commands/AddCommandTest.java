@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
@@ -12,7 +10,6 @@ import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;

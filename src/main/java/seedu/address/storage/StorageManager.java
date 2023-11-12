@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ModulePlan data in local storage.
  */
 public class StorageManager implements Storage {
 

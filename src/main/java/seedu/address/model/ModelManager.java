@@ -17,7 +17,7 @@ import seedu.address.model.moduleplan.ModulePlanSemester;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the module plan data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
