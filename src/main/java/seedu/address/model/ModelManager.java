@@ -154,11 +154,13 @@ public class ModelManager implements Model {
 
     @Override
     public boolean checkDbValidModule(Module module) {
+        requireNonNull(module);
         return checkDbValidModuleCode(module.getModuleCode());
     }
 
     @Override
     public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
         return moduleData.checkDbValidModuleCode(moduleCode);
     }
 
@@ -186,7 +188,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return modulePlan.equals(otherModelManager.modulePlan)
-                && userPrefs.equals(otherModelManager.userPrefs);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && moduleData.equals(otherModelManager.moduleData);
     }
 
 }

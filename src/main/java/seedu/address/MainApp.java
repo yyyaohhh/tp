@@ -64,7 +64,7 @@ public class MainApp extends Application {
         ModulePlanStorage modulePlanStorage = new JsonModulePlanStorage(userPrefs.getModulePlanFilePath());
         storage = new StorageManager(modulePlanStorage, userPrefsStorage);
 
-        Database database = new DatabaseManager();
+        Database database = new DatabaseManager(DatabaseManager.DEFAULT_DATABASE_FILEPATH);
 
         model = initModelManager(storage, userPrefs, database);
 

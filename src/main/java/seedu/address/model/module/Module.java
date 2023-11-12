@@ -57,20 +57,10 @@ public class Module {
     }
 
     /**
-     * Constructs a {@code Module} with only user input fields.
+     * Makes a new Module with the fields Year, Semester and Grade set.
+     *
+     * @return A new Module with the input fields.
      */
-    // public Module(ModuleCode moduleCode, Year year, Semester semester, Grade grade) {
-    //     requireAllNonNull(moduleCode, year, semester, grade);
-    //     this.moduleCode = moduleCode;
-    //     this.yearTaken = year;
-    //     this.semesterTaken = semester;
-    //     this.grade = grade;
-    //     // Temporary until we get back-end setup
-    //     this.moduleName = null;
-    //     this.description = null;
-    //     this.modularCredit = null;
-    // }
-
     public Module fillUserInputs(Year yearTaken, Semester semesterTaken, Grade grade) {
         requireAllNonNull(yearTaken, semesterTaken, grade);
 
@@ -138,13 +128,23 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
+
         return this.moduleCode.equals(otherModule.moduleCode)
                 && this.moduleName.equals(otherModule.moduleName)
                 && this.description.equals(otherModule.description)
                 && this.modularCredit.equals(otherModule.modularCredit)
-                && this.yearTaken.equals(otherModule.yearTaken)
-                && this.semesterTaken.equals(otherModule.semesterTaken)
-                && this.grade.equals(otherModule.grade);
+                && isEditableFieldEquals(this.yearTaken, otherModule.yearTaken)
+                && isEditableFieldEquals(this.semesterTaken, otherModule.semesterTaken)
+                && isEditableFieldEquals(this.grade, otherModule.grade);
+    }
+
+    private boolean isEditableFieldEquals(Object thisObj, Object otherObj) {
+        if (thisObj == null && otherObj == null) {
+            return true;
+        } else if (thisObj == null || otherObj == null) {
+            return false;
+        }
+        return thisObj.equals(otherObj);
     }
 
     @Override

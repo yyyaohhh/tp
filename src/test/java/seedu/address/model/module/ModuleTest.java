@@ -4,16 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
+import static seedu.address.testutil.ModuleUtil.getAltGrade;
+import static seedu.address.testutil.ModuleUtil.getAltSemester;
+import static seedu.address.testutil.ModuleUtil.getAltYear;
 import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.CS2101;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.ModuleBuilder;
 
 public class ModuleTest {
@@ -25,9 +26,9 @@ public class ModuleTest {
         // null -> returns false
         assertFalse(CS2040S.isSameModule(null));
 
-        // same module code, all other attributes different -> returns true
-        Module editedCS2040S = new ModuleBuilder(CS2040S).withYear(VALID_YEAR_CS2040S).withSem(VALID_SEMESTER_CS2040S)
-                .withGrade(VALID_GRADE_CS2040S).build();
+        // same module code, different user inputs -> returns true
+        Module editedCS2040S = CS2040S.fillUserInputs(getAltYear(CS2040S.getYearTaken()),
+                getAltSemester(CS2040S.getSemesterTaken()), getAltGrade(CS2040S.getGrade()));
         assertTrue(CS2040S.isSameModule(editedCS2040S));
 
         // different module code, all other attributes same -> returns false

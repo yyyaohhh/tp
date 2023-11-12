@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 

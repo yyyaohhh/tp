@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.testutil.TypicalModules.GEA1000;
+import static seedu.address.testutil.ModuleUtil.getAltGrade;
+import static seedu.address.testutil.ModuleUtil.getAltSemester;
+import static seedu.address.testutil.ModuleUtil.getAltYear;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,8 +23,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
-import seedu.address.testutil.ModuleBuilder;
-import seedu.address.testutil.TypicalModules;
 
 public class ModulePlanTest {
 
@@ -29,7 +30,7 @@ public class ModulePlanTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), modulePlan.getModulePlanSemesterList());
+        assertEquals(ModulePlanSemesterList.DEFAULT_SEMESTERS, modulePlan.getModulePlanSemesterList());
     }
 
     @Test
@@ -39,7 +40,7 @@ public class ModulePlanTest {
 
     @Test
     public void resetData_withValidReadOnlyModulePlan_replacesData() {
-        ModulePlan newData = TypicalModules.getTypicalModulePlan();
+        ModulePlan newData = getTypicalModulePlan();
         modulePlan.resetData(newData);
         assertEquals(newData, modulePlan);
     }
@@ -64,27 +65,23 @@ public class ModulePlanTest {
 
     @Test
     public void hasModule_moduleNotInModulePlan_returnsFalse() {
-        assertFalse(modulePlan.hasModule(GEA1000));
+        assertFalse(modulePlan.hasModule(MODULE_ONLY_DATA));
     }
 
     @Test
     public void hasModule_moduleInModulePlan_returnsTrue() {
-        modulePlan.addSemester(new ModulePlanSemester(CS2040S.getYearTaken(), CS2040S.getSemesterTaken()));
-        modulePlan.addModule(CS2040S);
-        assertTrue(modulePlan.hasModule(CS2040S));
+        modulePlan.resetData(getTypicalModulePlan());
+        assertTrue(modulePlan.hasModule(MODULE_IN_BOTH));
     }
 
     @Test
     public void hasModule_moduleWithSameIdentityFieldsInModulePlan_returnsTrue() {
-        modulePlan.addSemester(new ModulePlanSemester(CS2040S.getYearTaken(), CS2040S.getSemesterTaken()));
-        modulePlan.addModule(CS2040S);
-        Module editedCS2040S = new ModuleBuilder()
-                .withCode("CS2040S")
-                .withYear("1")
-                .withSem("1")
-                .withGrade("B-").build();
+        modulePlan.resetData(getTypicalModulePlan());
+        Module module = MODULE_IN_BOTH;
+        module = module.fillUserInputs(getAltYear(module.getYearTaken()), getAltSemester(module.getSemesterTaken()),
+                getAltGrade(module.getGrade()));
 
-        assertTrue(modulePlan.hasModule(editedCS2040S));
+        assertTrue(modulePlan.hasModule(module));
     }
 
     @Test
@@ -94,8 +91,9 @@ public class ModulePlanTest {
 
     @Test
     public void toStringMethod() {
-        // String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-        // assertEquals(expected, modulePlan.toString());
+        String expected = ModulePlan.class.getCanonicalName()
+                + "{semesters=" + modulePlan.getModulePlanSemesterList() + "}";
+        assertEquals(expected, modulePlan.toString());
     }
 
     /**
@@ -107,7 +105,6 @@ public class ModulePlanTest {
         ModulePlanStub(Collection<ModulePlanSemester> semesters) {
             this.semesters.setAll(semesters);
         }
-
 
         @Override
         public ObservableList<ModulePlanSemester> getModulePlanSemesterList() {
