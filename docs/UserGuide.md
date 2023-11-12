@@ -25,16 +25,16 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 This User Guide consists of various visuals to aid your reading.
 
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+Provides you with information that is useful to know.
+</md></div>
+
 <div class="alert alert-primary"><md>:bulb: **Tip:**
-Tips in boxes like this contain information that may be helpful.
+Tips in boxes like this contain recommendations for users to consider.
 </md></div>
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
-</md></div>
-
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
-Provides you with information that is useful to know.
 </md></div>
 
 <br>
@@ -73,7 +73,11 @@ Provides you with information that is useful to know.
 
 2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
 
-3. Copy the downloaded jar file to the folder you want to use as the _home folder_(the folder `ModCraft.jar` will be in) for your ModCraft.
+3. Copy the downloaded jar file to the folder you want to use as the _home folder_(the folder `ModCraft.jar` will be in) for ModCraft.
+
+<div class="alert alert-warning"><md>:exclamation: **Caution:**
+As ModCraft writes to files within the directory it is in, we recommend placing ModCraft in an empty directory to prevent unexpected behaviour.
+</md></div>
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
    A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
@@ -110,8 +114,6 @@ Provides you with information that is useful to know.
 
 * Parameters in square brackets denote **optional parameters**.<br>
   e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if `y/` is keyed in by the user, `YEAR` has to be specified.
-
-* When passing in grades as parameters, the grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).
 
 * Grades and semesters as parameters are **case-sensitive**. Only grades and semesters in **capital letters** are allowed.<br>
   e.g. `g/A` instead of `g/a`, and `s/ST1` instead of `g/st1`.
@@ -160,19 +162,23 @@ The module code, module title, module description and modular credits **cannot**
 In ModCraft, you can specify the **year, semester and grade** of each module when you are adding or editing your study plan.
 
 
-<div class="alert alert-primary"><md>:bulb: **Tip:**
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
 
-* The parameter for year follows a constraint of `0` to `6`, where Year 0 represents the Advance Placement semester.
+* The value for year is a number from `0` to `6`, where Year 0 represents the Advance Placement semester.
+
+* The possible values for semester are `1`, `2`, `ST1`, `ST2`, which represent Semester 1, Semester 2, Special Term 1 and Special Term 2 respectively.
+
+* The possible grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).
 
 * There is **only one** Advance Placement semester and whenever `y/0` is entered, **regardless of the semester** entered, the module will be added or edited to the Advance Placement Semester.
 
-* The list for the Advance Placement semester and Special Terms 1 and 2 (ST) will only be displayed when there is a module within them.
+* The list for the Advance Placement semester, year 5 and year 6 semesters, and Special Terms 1 and 2 (ST1 and ST2) will only be displayed when there is a module within them.
 
 </md></div>
 
 <br>
 
-Below shows you the process for adding a module to the Advance Placement semester in ModCraft. The module `CS1010` is being added to Year 0 (the Advance Placement semester).
+The images below show you the process for adding a module to the Advance Placement semester in ModCraft. The module `CS1010` is being added to Year 0 (the Advance Placement semester).
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/ap-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
@@ -181,7 +187,7 @@ Below shows you the process for adding a module to the Advance Placement semeste
 
 <br>
 
-Below shows you the process for adding a module to one of the Special Term (ST) in ModCraft. The module `CS3230` is being added to Year 1, Special Term 1.
+The images below show you the process for adding a module to one of the Special Term (ST) in ModCraft. The module `CS3230` is being added to Year 1, Special Term 1.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/st-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
@@ -191,9 +197,9 @@ Below shows you the process for adding a module to one of the Special Term (ST) 
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 
-Currently, ModCraft have certain **limitations**.
+Currently, ModCraft has certain **limitations**.
 
-* ModCraft **does not** check for pre-requisite, pre-clusion and co-requisites while adding, deleting and editing modules. For example, you can add modules into ModCraft without adding their prerequisite modules.
+* ModCraft **does not** check for pre-requisites, pre-clusions and co-requisites while adding, deleting and editing modules. For example, you can add modules into ModCraft without adding their prerequisite modules.
 
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
@@ -213,7 +219,7 @@ These features are planned enhancements in future releases.
 
 ### Adding a module: `add`
 
-You can add a module to your study plan of the list of modules taken in the **specified year and semester**.
+You can add a module to your study plan of the list of modules taken in the **specified year and semester** using this command.
 
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
@@ -222,7 +228,7 @@ Examples:
 * `add IS1108 y/1 s/2 g/CS`
 * `add ST2334 y/2 s/1 g/IP`
 
-Below shows you the process for executing the `add` command in ModCraft.
+The images below show you the process for executing the `add` command in ModCraft.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/add-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
@@ -241,7 +247,9 @@ Below shows you the process for executing the `add` command in ModCraft.
 
 ### Editing a module: `edit`
 
-Changes an attribute of a module **only if it exists**. Useful if you want to update information about a module or have made a mistake while adding a module.
+You can change an attribute of a module using this command. This command works **only if the module exists**. 
+
+This command may be useful if you want to update information about a module or have made a mistake while adding a module.
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
@@ -253,15 +261,14 @@ If before editing, the module was in Year 2 Semester 1, after editing it would b
 * `edit CS2101 s/1`: Moves CS2101 to the Semester 1 module list, with **Year unchanged**.<br>
 If before editing, the module was in Year 1 Semester 2, after editing it would be in Year 1 Semester 1.
 
-Below shows you the process for executing the `edit` command in ModCraft. The grade of `CS1101S` is being edited to `C`.
+The images below show you the process for executing the `edit` command in ModCraft. The grade of `CS1101S` is being edited to `C`.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/edit-before.png" alt="Before executing edit command" style="height:400px; margin:20px;">
   <img src="images/ImagesForUG/edit-after.png" alt="After executing edit command" style="height:400px; margin:20px;">
 </div>
 
-
-<div class="alert alert-primary"><md>:bulb: **Tip:**
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
 You need to provide at least one of the optional fields (either GRADE or YEAR or SEMESTER).
 </md></div>
 
@@ -269,7 +276,7 @@ You need to provide at least one of the optional fields (either GRADE or YEAR or
 
 ### Deleting a module: `delete`
 
-You can remove the module from whichever semester the module is taken, **only if it exists**.
+You can remove the module from whichever semester the module is taken using this command. This command works **only if the module exists**.
 
 Format: `delete MODULE`
 
@@ -277,18 +284,19 @@ Examples:
 * `delete GEA1000`
 * `delete CS2030S`
 
-Below shows you the process for executing the `delete` command in ModCraft. The module `CS2101` is being deleted.
+The images below show you the process for executing the `delete` command in ModCraft. The module `CS2101` is being deleted.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/delete-before.png" alt="Before executing delete command" style="height:400px; margin:20px;">
   <img src="images/ImagesForUG/delete-after.png" alt="After executing delete command" style="height:400px; margin:20px;">
 </div>
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+<div class="alert alert-primary"><md>:bulb: **Tip:**
 
 * If you are **dropping a module** and retaking it in later semesters, the module dropped should be **deleted** before adding the same module to another semester later on.
 
 * ModCraft currently **does not support** retaking failed modules by keeping the failed module in the study plan and adding another copy of the same module for retake.
+
 </md></div>
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
@@ -301,7 +309,7 @@ Deleting a module also **deletes all the information associated with the module*
 
 ### Finding Information about a module: `info`
 
-You can retrieve information about **any** module by its module code, including the modules **not added** to your study plan.
+You can retrieve information about **any** module by its module code using this command, including the modules **not yet added** to your study plan.
 
 The **module code, module title, modular credit and module description** of the module will be displayed.
 
@@ -311,7 +319,7 @@ Examples:
 * `info CS2109S`
 * `info CS1010`
 
-Below shows you what ModCraft should look like for executing the `info` command. Information about the module `CS3230` is displayed.
+The images below show you what ModCraft should look like for executing the `info` command. Information about the module `CS3230` is displayed.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/info-before.png" alt="Before executing info command" style="height:400px; margin:20px;">
@@ -322,7 +330,8 @@ Below shows you what ModCraft should look like for executing the `info` command.
 
 ### Calculating the total current CAP: `calculateCAP`
 
-You can calculate the total current Cumulative Average Point (CAP), or Grade Point Average (GPA) of all modules stored in all years and semesters.
+You can calculate the total current Cumulative Average Point (CAP), or Grade Point Average (GPA) of all modules stored in all years and semesters, using this command.
+
 ModCraft will calculate your CAP according to the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/non-graduating/modular-system), and using the following formula:
 
 $\Large\frac{\text{sum of all valid modules: (grade point of each valid module * Modular Credits of each valid module)}}{\text{total Modular Credits of valid modules}}$.
@@ -331,7 +340,7 @@ Displays you a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
 Format: `calculateCAP`
 
-Below shows you what ModCraft should look like for executing the `calculateCAP` command.
+The images below show you what ModCraft should look like for executing the `calculateCAP` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/cap-before.png" alt="Before executing calculateCAP command" style="height:400px; margin:20px;">
@@ -354,7 +363,7 @@ You can calculate the total current Modular Credits (MCs) stored in all years an
 
 Format: `calculateMC`
 
-Below shows you what ModCraft should look like for executing the `calculateMC` command.
+The images below show you what ModCraft should look like for executing the `calculateMC` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/mc-before.png" alt="Before executing calculateMC command" style="height:400px; margin:20px;">
