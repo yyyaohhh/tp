@@ -59,7 +59,7 @@ public class AppParametersTest {
         assertNotEquals(null, appParameters);
 
         // different types -> returns false
-        //assertNotEquals(5.0f, appParameters, 0.0);
+        assertNotEquals(appParameters, 0.5f);
 
         // different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();

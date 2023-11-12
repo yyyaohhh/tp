@@ -37,7 +37,7 @@ public interface Logic {
     ObservableList<ModulePlanSemester> getFilteredModuleList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' module plan file path.
      */
     Path getModulePlanFilePath();
 
