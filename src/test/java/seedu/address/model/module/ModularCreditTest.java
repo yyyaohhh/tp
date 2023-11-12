@@ -72,4 +72,17 @@ public class ModularCreditTest {
         ModularCredit differentModularCredit = new ModularCredit("1.5");
         assertFalse(modularCredit.equals(differentModularCredit));
     }
+
+    @Test
+    public void hashCodeMethod() {
+        ModularCredit modularCredit = new ModularCredit("4");
+        assertTrue(modularCredit.hashCode() == ((Float) Float.parseFloat("4")).hashCode());
+
+        // same values -> returns same hashcode
+        ModularCredit modularCreditCopy = new ModularCredit("4");
+        assertTrue(modularCredit.hashCode() == modularCreditCopy.hashCode());
+
+        ModularCredit differentModularCredit = new ModularCredit("1.5");
+        assertFalse(modularCredit.hashCode() == differentModularCredit.hashCode());
+    }
 }

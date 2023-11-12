@@ -49,4 +49,18 @@ public class DescriptionTest {
         Description differentDescription = new Description("This is a different description");
         assertFalse(description.equals(differentDescription));
     }
+
+    @Test
+    public void hashCodeMethod() {
+        Description description = new Description("This is a description");
+        assertTrue(description.hashCode() == "This is a description".hashCode());
+
+        // same value
+        Description descriptionCopy = new Description("This is a description");
+        assertTrue(description.hashCode() == descriptionCopy.hashCode());
+
+        // different value
+        Description differentDescription = new Description("This is a different description");
+        assertFalse(description.hashCode() == differentDescription.hashCode());
+    }
 }

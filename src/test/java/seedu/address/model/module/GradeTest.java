@@ -88,7 +88,20 @@ public class GradeTest {
         assertFalse(grade.equals(null));
 
         // different grade -> returns false
-        Grade gradeDifferent = new Grade("B");
-        assertFalse(grade.equals(gradeDifferent));
+        Grade differentGrade = new Grade("B");
+        assertFalse(grade.equals(differentGrade));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Grade grade = new Grade("A");
+
+        // same value
+        Grade gradeCopy = new Grade("A");
+        assertTrue(grade.hashCode() == gradeCopy.hashCode());
+
+        // different value
+        Grade differentGrade = new Grade("B");
+        assertFalse(grade.hashCode() == differentGrade.hashCode());
     }
 }

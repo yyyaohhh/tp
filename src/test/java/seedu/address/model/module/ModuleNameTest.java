@@ -12,7 +12,7 @@ public class ModuleNameTest {
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ModuleName(null));
     }
-    
+
     @Test
     public void isValidName_alwaysTrue() {
         assertTrue(ModuleName.isValidName("")); // empty string
