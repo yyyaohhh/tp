@@ -46,4 +46,49 @@ public class GradeTest {
         assertTrue(Grade.isValidGrade("S"));
         assertTrue(Grade.isValidGrade("U"));
     }
+
+    @Test
+    public void getColourCode() {
+        assertTrue(new Grade("A+").getColourCode().equals("green"));
+        assertTrue(new Grade("A").getColourCode().equals("green"));
+        assertTrue(new Grade("A-").getColourCode().equals("green"));
+        assertTrue(new Grade("B+").getColourCode().equals("green"));
+        assertTrue(new Grade("B").getColourCode().equals("green"));
+        assertTrue(new Grade("B-").getColourCode().equals("green"));
+        assertTrue(new Grade("C+").getColourCode().equals("green"));
+        assertTrue(new Grade("C").getColourCode().equals("green"));
+        assertTrue(new Grade("D+").getColourCode().equals("green"));
+        assertTrue(new Grade("D").getColourCode().equals("green"));
+        assertTrue(new Grade("F").getColourCode().equals("red"));
+        assertTrue(new Grade("EXE").getColourCode().equals("blue"));
+        assertTrue(new Grade("IC").getColourCode().equals("orange"));
+        assertTrue(new Grade("IP").getColourCode().equals("gray"));
+        assertTrue(new Grade("W").getColourCode().equals("silver"));
+        assertTrue(new Grade("CS").getColourCode().equals("green"));
+        assertTrue(new Grade("CU").getColourCode().equals("red"));
+        assertTrue(new Grade("S").getColourCode().equals("green"));
+        assertTrue(new Grade("U").getColourCode().equals("red"));
+    }
+
+    @Test
+    public void equals() {
+        Grade grade = new Grade("A");
+
+        // same object -> returns true
+        assertTrue(grade.equals(grade));
+
+        // same values -> returns true
+        Grade gradeCopy = new Grade("A");
+        assertTrue(grade.equals(gradeCopy));
+
+        // different types -> returns false
+        assertFalse(grade.equals(1));
+
+        // null -> returns false
+        assertFalse(grade.equals(null));
+
+        // different grade -> returns false
+        Grade gradeDifferent = new Grade("B");
+        assertFalse(grade.equals(gradeDifferent));
+    }
 }
