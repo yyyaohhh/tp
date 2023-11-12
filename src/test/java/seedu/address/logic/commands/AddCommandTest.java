@@ -4,13 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
 import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
-import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,15 +17,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.testutil.ModelStub;
-import seedu.address.testutil.ModuleBuilder;
 
 /**
  * Contains unit tests for {@code AddCommand}.
