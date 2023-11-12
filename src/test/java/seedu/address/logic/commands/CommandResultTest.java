@@ -18,7 +18,7 @@ public class CommandResultTest {
         assertEquals(commandResult, commandResult);
 
         // null -> returns false
-        assertNotEquals(null, commandResult);
+        assertNotEquals(commandResult, null);
 
         // different types -> returns false
         assertNotEquals(commandResult, 0.5f);

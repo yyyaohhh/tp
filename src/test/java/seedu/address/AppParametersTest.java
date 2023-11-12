@@ -56,7 +56,7 @@ public class AppParametersTest {
         assertEquals(appParameters, appParameters);
 
         // null -> returns false
-        assertNotEquals(null, appParameters);
+        assertNotEquals(appParameters, null);
 
         // different types -> returns false
         assertNotEquals(appParameters, 0.5f);

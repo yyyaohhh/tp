@@ -100,7 +100,7 @@ public class AddCommandTest {
         assertNotEquals(1, addCommand);
 
         // null -> returns false
-        assertNotEquals(null, addCommand);
+        assertNotEquals(addCommand, null);
 
         // different module code -> returns false
         AddCommand differentCode = new AddCommand(otherModule.getModuleCode(), module.getYearTaken(),
