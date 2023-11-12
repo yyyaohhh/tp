@@ -7,6 +7,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class ModularCreditTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ModularCredit(null));
+    }
+
     @Test
     public void constructor_invalidModularCredit_throwsIllegalArgumentException() {
         String invalidModularCreditEmpty = "";
@@ -32,11 +38,38 @@ public class ModularCreditTest {
 
     @Test
     public void isValidModularCredit_valid() {
-
         // valid modular credit
         assertTrue(ModularCredit.isValidModularCredit(".5"));
         assertTrue(ModularCredit.isValidModularCredit("3.5"));
         assertTrue(ModularCredit.isValidModularCredit("2"));
         assertTrue(ModularCredit.isValidModularCredit("0"));
+    }
+
+    @Test
+    public void getValue() {
+        ModularCredit modularCredit = new ModularCredit("4");
+        assertTrue(modularCredit.getValue() == 4);
+    }
+
+    @Test
+    public void equals() {
+        ModularCredit modularCredit = new ModularCredit("4");
+
+        // same object -> returns true
+        assertTrue(modularCredit.equals(modularCredit));
+
+        // same values -> returns true
+        ModularCredit modularCreditCopy = new ModularCredit("4");
+        assertTrue(modularCredit.equals(modularCreditCopy));
+
+        // different types -> returns false
+        assertFalse(modularCredit.equals(1));
+
+        // null -> returns false
+        assertFalse(modularCredit.equals(null));
+
+        // different modular credit -> returns false
+        ModularCredit differentModularCredit = new ModularCredit("1.5");
+        assertFalse(modularCredit.equals(differentModularCredit));
     }
 }
