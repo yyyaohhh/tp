@@ -50,12 +50,12 @@ public class JsonModulePlanStorageTest {
     }
 
     @Test
-    public void readModulePlan_invalidPersonAddressBook_throwDataLoadingException() {
+    public void readModulePlan_invalidModulePlan_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readModulePlan("invalidModuleModulePlan.json"));
     }
 
     @Test
-    public void readModulePlan_invalidAndValidPersonAddressBook_throwDataLoadingException() {
+    public void readModulePlan_invalidAndValidModuleModulePlan_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readModulePlan("invalidAndValidModuleModulePlan.json"));
     }
 

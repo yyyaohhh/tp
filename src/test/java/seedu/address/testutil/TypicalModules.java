@@ -41,7 +41,7 @@ public class TypicalModules {
             .withCode("CS2101")
             .withYear("2")
             .withSem("1")
-            .withGrade("IP")
+            .withGrade("B-")
             .withName("Effective Communication for Computing Professionals")
             .withModularCredit("4")
             .withDescription("This course aims to equip students with the skills needed to communicate.")
@@ -86,7 +86,7 @@ public class TypicalModules {
             .withCode("IS6000")
             .withYear("4")
             .withSem("2")
-            .withGrade("IP")
+            .withGrade("A")
             .withName("Topics in Information Systems and Analytics Research")
             .withModularCredit("0")
             .withDescription("A 0 MC module")
@@ -100,6 +100,15 @@ public class TypicalModules {
             .withModularCredit("0")
             .withDescription("Should not be in modulePlan or moduleDatabase.")
             .build();
+    public static final Module CFG1002 = new ModuleBuilder()
+            .withCode("CFG1002")
+            .withYear("1")
+            .withSem("1")
+            .withGrade("CS")
+            .withName("Career Catalyst")
+            .withModularCredit("2")
+            .withDescription("A CS/CU module")
+            .build();
 
     // Modules defined based on their presence in modulePlan and moduleData
     public static final Module MODULE_IN_BOTH = CS2101;
@@ -108,6 +117,9 @@ public class TypicalModules {
 
     // Module with 0 MC
     public static final Module MODULE_ZERO_MC = IS6000;
+
+    // Module with CS grade
+    public static final Module MODULE_CS_GRADE = CFG1002;
 
     private TypicalModules() {}
 

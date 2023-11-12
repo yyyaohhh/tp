@@ -69,12 +69,12 @@ public class ModelManagerTest {
     //=========== ModulePlan ================================================================================
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setModulePlanFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setModulePlanFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setModulePlanFilePath_validPath_setsModulePlanFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setModulePlanFilePath(path);
         assertEquals(path, modelManager.getModulePlanFilePath());

@@ -37,26 +37,30 @@ Warnings in boxes like this contain information that are vital to the running of
 Provides you with information that is useful to know.
 </md></div>
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
 1. [Quick start](#quick-start)
 2. [Features](#features)
-    2.1. [Viewing help](#viewing-help-help)
-    2.2. [Modules](#modules)
-      2.2.1. [Adding a module](#adding-a-module-add)
-      2.2.2. [Editing a module](#editing-a-module-edit)
-      2.2.3. [Deleting a module](#deleting-a-module-delete)
-      2.2.4. [Finding information about a module](#finding-information-about-a-module-info)
-    2.3. [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
-    2.4. [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
-    2.5. [Exiting the program](#exiting-the-program-exit)
+   * [Viewing help](#viewing-help-help)
+   * [Modules](#modules)
+     * [Adding a module](#adding-a-module-add)
+     * [Editing a module](#editing-a-module-edit)
+     * [Deleting a module](#deleting-a-module-delete)
+     * [Finding information about a module](#finding-information-about-a-module-info)
+     * [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
+     * [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
+     * [Exiting the program](#exiting-the-program-exit)
 3. [Advanced Use](#advanced-use)
-    3.1. [Editing the data file](#editing-the-data-file)
+   * [Editing the data file](#editing-the-data-file)
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
 6. [Command summary](#command-summary)
 7. [Glossary](#glossary)
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +76,8 @@ Provides you with information that is useful to know.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
    A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
-   ![Ui](images/Ui.png)
+   ![StartUp](images/ImagesForUG/StartUp.png)
+
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -86,6 +91,8 @@ Provides you with information that is useful to know.
     * `exit` : Exits the app.
 
 6. You can refer to the [Features](#features) section below for details of each command.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,14 +153,16 @@ Examples:
 The module code, module title, module description and modular credits **cannot** be edited.
 </md></div>
 
+
 In ModCraft, you can specify the **year, semester and grade** of each module when you are adding or editing your study plan.
+
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The parameter for Year follows a constraint of `0` to `6`, where Year 0 represents the Advance Placement semester.
+* The parameter for Year follows a constraint of `0` to `6`, where Year 0 represents the Advance Placement semester.
 There is **only one** Advance Placement semester and whenever `y/0` is entered, regardless of the semester entered, the module will be added or edited to the Advance Placement Semester.
 
-The list for the Advance Placement semester and Special Terms 1 and 2 (ST) will only be displayed when there is a module within them.
+* The list for the Advance Placement semester and Special Terms 1 and 2 (ST) will only be displayed when there is a module within them.
 
 </md></div>
 
@@ -164,12 +173,14 @@ Below shows what ModCraft should look like for adding a module the Advance Place
   <img src="images/ImagesForUG/ap-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
 
+
 Below shows what ModCraft should look like for adding a module to the Special Term (ST). The module `CS3230` is being added to Year 1, special term 1.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/st-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
   <img src="images/ImagesForUG/st-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
+
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 
@@ -179,7 +190,8 @@ Currently, ModCraft have certain **limitations**.
 
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
-* ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade, for example `CS2100` and input its grade as `CS`. Likewise, you can add a CS/CU module with a non-CS/CU grade.
+* ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade, for example `CS2100` and input its grade as `CS`. 
+Likewise, you can add a CS/CU module with a non-CS/CU grade. For example, you can mark the grade of `CG1002` as `A`.
 
 These features are planned enhancements in future releases.
 
@@ -205,10 +217,12 @@ Below shows what ModCraft should look like for executing the `add` command.
   <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:400px; margin:20px;">
 </div>
 
-<div class="alert alert-primary"><md>:bulb: **Tip:**
-TTo **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**.
 
-For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `S` or `U` as `GRADE`.
+<div class="alert alert-primary"><md>:bulb: **Tip:**
+
+* To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**.
+
+* For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `S` or `U` as `GRADE`.
 </md></div>
 
 <br>
@@ -256,9 +270,10 @@ Below shows what ModCraft should look like for executing the `delete` command. T
 </div>
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
-If you are **dropping a module** and retaking it in later semesters, the module dropped should be **deleted** before adding the same module to another semester later on.
 
-ModCraft currently **does not support** retaking failed modules by keeping the failed module in the study plan and adding another copy of the same module for retake.
+* If you are **dropping a module** and retaking it in later semesters, the module dropped should be **deleted** before adding the same module to another semester later on.
+
+* ModCraft currently **does not support** retaking failed modules by keeping the failed module in the study plan and adding another copy of the same module for retake.
 </md></div>
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
@@ -308,6 +323,7 @@ Below shows what ModCraft should look like for executing the `calculateCAP` comm
   <img src="images/ImagesForUG/cap-after.png" alt="After executing calculateCAP command" style="height:400px; margin:20px;">
 </div>
 
+
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
 The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as `IP` (In progress), `CS` and `CU`.
@@ -345,6 +361,8 @@ Format: `exit`
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Advanced use
 
 ModuleList data is saved in the hard disk automatically after any command you inputted that changes the data.
@@ -358,8 +376,12 @@ The module data is saved automatically as a JSON file `[JAR file location]/data/
 
 Advanced users are welcome to update data directly by editing that data file.
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
+
 If your changes to the data file makes its format invalid, ModCraft will discard all data and start with a default data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+
 </md></div>
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -372,11 +394,15 @@ If your changes to the data file makes its format invalid, ModCraft will discard
 **A**: The data is saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -393,6 +419,8 @@ There is no need to save manually.
 | **help**         | `help`                                                                                                       |
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 

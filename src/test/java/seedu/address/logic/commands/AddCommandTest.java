@@ -68,7 +68,7 @@ public class AddCommandTest {
 
 
     @Test
-    public void execute_duplicateModule_throwsCommandException() throws Exception {
+    public void execute_duplicateModule_throwsCommandException() {
         //Both in ModuleData and ModulePlan
         Module validModule = MODULE_IN_BOTH;
 

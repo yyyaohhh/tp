@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalModules.MODULE_ZERO_MC;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -17,32 +18,43 @@ import seedu.address.model.moduleplan.ModulePlan;
  */
 public class CalculateMcCommandTest {
 
+    private Model actualModel;
+    private Model expectedModel;
+
+    @BeforeEach
+    public void setUp() {
+        actualModel = new ModelManager(new ModulePlan(), new UserPrefs(), getTypicalModuleData());
+        expectedModel = new ModelManager(new ModulePlan(), new UserPrefs(), getTypicalModuleData());
+    }
+
     @Test
     public void execute_calculateMc_success() {
         // Both actual and expected models should be identical
-        Model actualmodel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
-        Model expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
+        actualModel.setModulePlan(getTypicalModulePlan());
+        expectedModel.setModulePlan(getTypicalModulePlan());
 
         String expectedMessage = String.format(CalculateMcCommand.MESSAGE_CALCULATION_SUCCESS,
-                actualmodel.totalModularCredits());
+                actualModel.totalModularCredits());
 
-        assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
-
-        // Test for zero MC modules as well (same expected message as above)
-        actualmodel.addModule(MODULE_ZERO_MC);
-        expectedModel.addModule(MODULE_ZERO_MC);
-        assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
+        assertCommandSuccess(new CalculateMcCommand(), actualModel, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_emptyModulePlan_success() {
-        // Model with empty modulePlan
-        Model actualmodel = new ModelManager(new ModulePlan(), new UserPrefs(), getTypicalModuleData());
-        Model expectedModel = new ModelManager(new ModulePlan(), new UserPrefs(), getTypicalModuleData());
+        // Expected MC should be 0.0
+        String expectedMessage = String.format(CalculateMcCommand.MESSAGE_CALCULATION_SUCCESS, 0.0);
+
+        assertCommandSuccess(new CalculateMcCommand(), actualModel, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_zeroMcModulesGivesZero() throws Exception {
+        actualModel.addModule(MODULE_ZERO_MC);
+        expectedModel.addModule(MODULE_ZERO_MC);
 
         // Expected MC should be 0.0
         String expectedMessage = String.format(CalculateMcCommand.MESSAGE_CALCULATION_SUCCESS, 0.0);
 
-        assertCommandSuccess(new CalculateMcCommand(), actualmodel, expectedMessage, expectedModel);
+        assertCommandSuccess(new CalculateMcCommand(), actualModel, expectedMessage, expectedModel);
     }
 }
