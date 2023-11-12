@@ -5,6 +5,6 @@ package seedu.address.model.moduleplan.exceptions;
  */
 public class DuplicateSemesterException extends RuntimeException {
     public DuplicateSemesterException() {
-        super("Operation would result in semesters");
+        super("Operation would result in duplicate semesters");
     }
 }
