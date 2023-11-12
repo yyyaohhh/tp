@@ -47,14 +47,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -82,13 +82,13 @@ public class ModelManager implements Model {
     //=========== ModulePlan ================================================================================
 
     @Override
-    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
-        this.modulePlan.resetData(modulePlan);
+    public ReadOnlyModulePlan getModulePlan() {
+        return modulePlan;
     }
 
     @Override
-    public ReadOnlyModulePlan getModulePlan() {
-        return modulePlan;
+    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+        this.modulePlan.resetData(modulePlan);
     }
 
     @Override
@@ -142,14 +142,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setModuleData(ReadOnlyModuleData moduleData) {
-        requireNonNull(moduleData);
-        this.moduleData.resetData(moduleData);
+    public ReadOnlyModuleData getModuleData() {
+        return moduleData;
     }
 
     @Override
-    public ReadOnlyModuleData getModuleData() {
-        return moduleData;
+    public void setModuleData(ReadOnlyModuleData moduleData) {
+        requireNonNull(moduleData);
+        this.moduleData.resetData(moduleData);
     }
 
     @Override

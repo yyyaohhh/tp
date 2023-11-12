@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
@@ -179,29 +180,29 @@ public class ModelManagerTest {
 
         // same values -> returns true
         ModelManager modelManagerCopy = new ModelManager(modulePlan, userPrefs, moduleData);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different modulePlan -> returns false
         ModulePlan differentModulePlan = new ModulePlan();
-        assertFalse(modelManager.equals(new ModelManager(differentModulePlan, userPrefs, moduleData)));
+        assertNotEquals(modelManager, new ModelManager(differentModulePlan, userPrefs, moduleData));
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setModulePlanFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(modulePlan, differentUserPrefs, moduleData)));
+        assertNotEquals(modelManager, new ModelManager(modulePlan, differentUserPrefs, moduleData));
 
         // different moduleData -> returns false
         ModuleData differentModuleData = new ModuleData();
-        assertFalse(modelManager.equals(new ModelManager(modulePlan, userPrefs, differentModuleData)));
+        assertNotEquals(modelManager, new ModelManager(modulePlan, userPrefs, differentModuleData));
     }
 
 }

@@ -17,8 +17,8 @@ import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ModulePlanStorage modulePlanStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final ModulePlanStorage modulePlanStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ModulePlanStorage} and {@code UserPrefStorage}.

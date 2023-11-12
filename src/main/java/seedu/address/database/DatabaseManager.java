@@ -21,7 +21,7 @@ public class DatabaseManager implements Database {
 
     private static final Logger logger = LogsCenter.getLogger(DatabaseManager.class);
 
-    private String filePath;
+    private final String filePath;
 
     public DatabaseManager(String filePath) {
         this.filePath = filePath;

@@ -29,7 +29,7 @@ public class Module {
      * Every field must be present and not null.
      */
     public Module(ModuleCode moduleCode, Year yearTaken, Semester semesterTaken, Grade grade, ModuleName name,
-                   Description description, ModularCredit modularCredit) {
+                  Description description, ModularCredit modularCredit) {
         requireAllNonNull(name, moduleCode, description, yearTaken, semesterTaken, grade);
         this.moduleName = name;
         this.moduleCode = moduleCode;
@@ -105,6 +105,7 @@ public class Module {
 
     /**
      * Checks if two modules are the same module.
+     *
      * @param otherModule the other module to check.
      * @return true if the modules are the same, false otherwise.
      */

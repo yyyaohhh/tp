@@ -34,9 +34,7 @@ public class JsonModulePlanStorageTest {
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-                : null;
+        return prefsFileInTestDataFolder != null ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder) : null;
     }
 
     @Test
@@ -85,6 +83,7 @@ public class JsonModulePlanStorageTest {
         assertEquals(original, new ModulePlan(readBack));
 
     }
+
     @Test
     public void saveModulePlan_nullModulePlan_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveModulePlan(null, "SomeFile.json"));
@@ -95,8 +94,8 @@ public class JsonModulePlanStorageTest {
      */
     private void saveModulePlan(ReadOnlyModulePlan modulePlan, String filePath) {
         try {
-            new JsonModulePlanStorage(Paths.get(filePath))
-                    .saveModulePlan(modulePlan, addToTestDataPathIfNotNull(filePath));
+            new JsonModulePlanStorage(Paths.get(filePath)).saveModulePlan(modulePlan,
+                    addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

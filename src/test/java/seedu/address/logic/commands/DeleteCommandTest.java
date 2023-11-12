@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -88,21 +89,21 @@ public class DeleteCommandTest {
 
         // same object -> returns true
         DeleteCommand deleteCommand = prepareDeleteCommand(module);
-        assertTrue(deleteCommand.equals(deleteCommand));
+        assertEquals(deleteCommand, deleteCommand);
 
         // same values -> returns true
         DeleteCommand deleteCommandCopy = prepareDeleteCommand(module);
-        assertTrue(deleteCommand.equals(deleteCommandCopy));
+        assertEquals(deleteCommand, deleteCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteCommand.equals(1));
+        assertNotEquals(1, deleteCommand);
 
         // null -> returns false
-        assertFalse(deleteCommand.equals(null));
+        assertNotEquals(null, deleteCommand);
 
         // different module -> returns false
         DeleteCommand differentDeleteCommand = prepareDeleteCommand(otherModule);
-        assertFalse(deleteCommand.equals(differentDeleteCommand));
+        assertNotEquals(deleteCommand, differentDeleteCommand);
     }
 
     @Test

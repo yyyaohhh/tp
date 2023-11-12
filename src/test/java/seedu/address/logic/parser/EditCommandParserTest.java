@@ -39,7 +39,7 @@ public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private final EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -56,7 +56,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // empty string
-        assertParseFailure(parser, "" + YEAR_DESC_CS2040S, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, YEAR_DESC_CS2040S, MESSAGE_INVALID_FORMAT);
 
         // spaces only
         assertParseFailure(parser, " " + YEAR_DESC_CS2040S, MESSAGE_INVALID_FORMAT);
