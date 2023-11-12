@@ -31,6 +31,10 @@ public class ModularCredit {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public float getValue() {
+        return modularCredit;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(modularCredit);
@@ -49,10 +53,6 @@ public class ModularCredit {
 
         ModularCredit otherModularCredit = (ModularCredit) other;
         return modularCredit == otherModularCredit.modularCredit;
-    }
-
-    public float getValue() {
-        return modularCredit;
     }
 
     @Override

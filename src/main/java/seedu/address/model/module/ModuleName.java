@@ -26,7 +26,7 @@ public class ModuleName {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true for any given string.
      */
     public static boolean isValidName(String test) {
         return true;
