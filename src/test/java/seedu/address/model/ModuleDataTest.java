@@ -119,6 +119,16 @@ public class ModuleDataTest {
         assertFalse(moduleData.equals(differentModuleData));
     }
 
+    @Test
+    public void hashCodeTest() {
+        moduleData.resetData(getTypicalModuleData());
+
+        // different moduleData
+        ModuleData differentModuleData = new ModuleData();
+        differentModuleData.addModule(MODULE_IN_NEITHER);
+        assertFalse(moduleData.hashCode() == differentModuleData.hashCode());
+    }
+
     /**
      * A stub ReadOnlyModuleData whose modules list can violate interface constraints.
      */
