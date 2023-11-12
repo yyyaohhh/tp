@@ -87,4 +87,5 @@ public class ModularCreditTest {
         ModularCredit differentModularCredit = new ModularCredit("1.5");
         assertFalse(modularCredit.hashCode() == differentModularCredit.hashCode());
     }
+
 }
