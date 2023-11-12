@@ -3,6 +3,7 @@ package seedu.address.model.moduleplan;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2106;
@@ -83,7 +84,7 @@ public class ModulePlanSemesterListTest {
     }
 
     @Test
-    public void setSemester_validSemester_returnTrue() {
+    public void setSemester_validSemester_success() {
         List<ModulePlanSemester> validSemesters = getTypicalModulePlanSemesterList();
         modulePlanSemesterList.setSemesters(validSemesters);
         assertEquals(modulePlanSemesterList.asUnmodifiableObservableList(), validSemesters);
@@ -251,6 +252,29 @@ public class ModulePlanSemesterListTest {
             assertEquals(iterator.next(), m);
         }
         assertFalse(iterator.hasNext());
+    }
+
+
+    @Test
+    public void equals() {
+        assertEquals(modulePlanSemesterList, modulePlanSemesterList);
+
+        ModulePlanSemesterList differentSemesters = new ModulePlanSemesterList();
+        differentSemesters.setSemesters(getTypicalModulePlanSemesterList());
+        assertEquals(modulePlanSemesterList, differentSemesters);
+
+        ModulePlanSemesterList emptySemesters = new ModulePlanSemesterList();
+        ModulePlanSemesterList emptySemesters2 = new ModulePlanSemesterList();
+        assertEquals(emptySemesters, emptySemesters2);
+
+        assertNotEquals(modulePlanSemesterList, null);
+
+        assertNotEquals(modulePlanSemesterList, new Integer(0));
+
+        ModulePlanSemesterList semWithExtraSem = new ModulePlanSemesterList();
+        semWithExtraSem.setSemesters(getTypicalModulePlanSemesterList());
+        semWithExtraSem.addSemester(NOT_IN_SEM_LIST);
+        assertNotEquals(modulePlanSemesterList, semWithExtraSem);
     }
 
 
