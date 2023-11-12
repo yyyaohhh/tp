@@ -28,7 +28,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Matcher matcher = SINGLE_ARGUMENT_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         ModuleCode moduleCode = ParserUtil.parseModuleCode(args);

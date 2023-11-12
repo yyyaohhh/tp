@@ -40,11 +40,11 @@ public class JsonSerializableModulePlan {
      */
     public JsonSerializableModulePlan(ReadOnlyModulePlan source) {
         modules.addAll(
-            source.getModulePlanSemesterList().stream()
-                .map(ModulePlanSemester::getModuleList)
-                .flatMap(ObservableList::stream)
-                .map(JsonAdaptedModule::new)
-                .collect(Collectors.toList()));
+                source.getModulePlanSemesterList().stream()
+                        .map(ModulePlanSemester::getModuleList)
+                        .flatMap(ObservableList::stream)
+                        .map(JsonAdaptedModule::new)
+                        .collect(Collectors.toList()));
     }
 
     /**

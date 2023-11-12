@@ -27,16 +27,16 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the module plan. \n"
-        + "Parameters: "
-        + "Code "
-        + PREFIX_YEAR + "Year "
-        + PREFIX_SEMESTER + "Semester "
-        + PREFIX_GRADE + "Grade \n"
-        + "Example: " + COMMAND_WORD + " "
-        + "CS2103T "
-        + PREFIX_YEAR + "2 "
-        + PREFIX_SEMESTER + "1 "
-        + PREFIX_GRADE + "B ";
+            + "Parameters: "
+            + "Code "
+            + PREFIX_YEAR + "Year "
+            + PREFIX_SEMESTER + "Semester "
+            + PREFIX_GRADE + "Grade \n"
+            + "Example: " + COMMAND_WORD + " "
+            + "CS2103T "
+            + PREFIX_YEAR + "2 "
+            + PREFIX_SEMESTER + "1 "
+            + PREFIX_GRADE + "B ";
 
     public static final String MESSAGE_ADD_MODULE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "%1$s has already been added.";
@@ -93,18 +93,18 @@ public class AddCommand extends Command {
 
         AddCommand otherAddCommand = (AddCommand) other;
         return this.moduleCode.equals(otherAddCommand.moduleCode)
-            && this.year.equals(otherAddCommand.year)
-            && this.semester.equals(otherAddCommand.semester)
-            && this.grade.equals(otherAddCommand.grade);
+                && this.year.equals(otherAddCommand.year)
+                && this.semester.equals(otherAddCommand.semester)
+                && this.grade.equals(otherAddCommand.grade);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("moduleCode", moduleCode)
-            .add("year", year)
-            .add("semester", semester)
-            .add("grade", grade)
-            .toString();
+                .add("moduleCode", moduleCode)
+                .add("year", year)
+                .add("semester", semester)
+                .add("grade", grade)
+                .toString();
     }
 }

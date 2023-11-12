@@ -37,7 +37,7 @@ import seedu.address.testutil.EditModuleDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private final EditCommandParser parser = new EditCommandParser();
 
@@ -56,7 +56,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // empty string
-        assertParseFailure(parser, "" + YEAR_DESC_CS2040S, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, YEAR_DESC_CS2040S, MESSAGE_INVALID_FORMAT);
 
         // spaces only
         assertParseFailure(parser, " " + YEAR_DESC_CS2040S, MESSAGE_INVALID_FORMAT);
@@ -71,31 +71,31 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, VALID_CODE_CS2040S + INVALID_YEAR_DESC,
-            Year.MESSAGE_CONSTRAINTS); // invalid year
+                Year.MESSAGE_CONSTRAINTS); // invalid year
         assertParseFailure(parser, VALID_CODE_CS2040S + INVALID_SEMESTER_DESC,
-            Semester.MESSAGE_CONSTRAINTS); // invalid semester
+                Semester.MESSAGE_CONSTRAINTS); // invalid semester
         assertParseFailure(parser, VALID_CODE_CS2040S + INVALID_GRADE_DESC,
-            Grade.MESSAGE_CONSTRAINTS); // invalid grade
+                Grade.MESSAGE_CONSTRAINTS); // invalid grade
 
         // invalid year followed by valid semester
         assertParseFailure(parser,
-            VALID_CODE_CS2040S + INVALID_YEAR_DESC + SEMESTER_DESC_CS2040S,
-            Year.MESSAGE_CONSTRAINTS);
+                VALID_CODE_CS2040S + INVALID_YEAR_DESC + SEMESTER_DESC_CS2040S,
+                Year.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-            VALID_CODE_CS2040S + INVALID_SEMESTER_DESC + INVALID_YEAR_DESC + VALID_GRADE_CS2040S,
-            Year.MESSAGE_CONSTRAINTS);
+                VALID_CODE_CS2040S + INVALID_SEMESTER_DESC + INVALID_YEAR_DESC + VALID_GRADE_CS2040S,
+                Year.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         ModuleCode moduleCode = new ModuleCode(VALID_CODE_CS2040S);
         String userInput = moduleCode + SEMESTER_DESC_CS2101
-            + YEAR_DESC_CS2040S + GRADE_DESC_CS2040S;
+                + YEAR_DESC_CS2040S + GRADE_DESC_CS2040S;
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withSemester(VALID_SEMESTER_CS2101)
-            .withYear(VALID_YEAR_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
+                .withYear(VALID_YEAR_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
         EditCommand expectedCommand = new EditCommand(moduleCode, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -107,7 +107,7 @@ public class EditCommandParserTest {
         String userInput = moduleCode + GRADE_DESC_CS2101 + YEAR_DESC_CS2040S;
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withGrade(VALID_GRADE_CS2101)
-            .withYear(VALID_YEAR_CS2040S).build();
+                .withYear(VALID_YEAR_CS2040S).build();
         EditCommand expectedCommand = new EditCommand(moduleCode, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -153,16 +153,16 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = moduleCode + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
-            + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
+                + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
 
         assertParseFailure(parser, userInput,
-            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
 
         // multiple invalid values
         userInput = moduleCode + INVALID_YEAR_DESC + INVALID_SEMESTER_DESC + INVALID_GRADE_DESC
-            + INVALID_YEAR_DESC + INVALID_SEMESTER_DESC + INVALID_GRADE_DESC;
+                + INVALID_YEAR_DESC + INVALID_SEMESTER_DESC + INVALID_GRADE_DESC;
 
         assertParseFailure(parser, userInput,
-            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
     }
 }

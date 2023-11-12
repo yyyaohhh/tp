@@ -28,18 +28,18 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the module identified "
-        + "by the module code. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: "
-        + "CODE "
-        + "[" + PREFIX_YEAR + "YEAR] "
-        + "[" + PREFIX_SEMESTER + "SEMESTER] "
-        + "[" + PREFIX_GRADE + "GRADE]\n"
-        + "Example: " + COMMAND_WORD + " "
-        + "CS2103T "
-        + PREFIX_YEAR + "2 "
-        + PREFIX_SEMESTER + "1 "
-        + PREFIX_GRADE + "IP";
+            + "by the module code. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: "
+            + "CODE "
+            + "[" + PREFIX_YEAR + "YEAR] "
+            + "[" + PREFIX_SEMESTER + "SEMESTER] "
+            + "[" + PREFIX_GRADE + "GRADE]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "CS2103T "
+            + PREFIX_YEAR + "2 "
+            + PREFIX_SEMESTER + "1 "
+            + PREFIX_GRADE + "IP";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -89,7 +89,7 @@ public class EditCommand extends Command {
             moduleToEdit = model.getModule(moduleCode);
         } catch (ModuleNotFoundException mnfe) {
             throw new CommandException(
-                String.format(Messages.MESSAGE_MODULE_NOT_FOUND, moduleCode, COMMAND_WORD));
+                    String.format(Messages.MESSAGE_MODULE_NOT_FOUND, moduleCode, COMMAND_WORD));
         }
 
         // Edit module
@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         // Update module plan and return success message
         model.setModule(moduleToEdit, editedModule);
         return new CommandResult(
-            String.format(MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule)));
+                String.format(MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule)));
     }
 
     @Override
@@ -119,15 +119,15 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return moduleCode.equals(otherEditCommand.moduleCode)
-            && editModuleDescriptor.equals(otherEditCommand.editModuleDescriptor);
+                && editModuleDescriptor.equals(otherEditCommand.editModuleDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("moduleCode", moduleCode)
-            .add("editModuleDescriptor", editModuleDescriptor)
-            .toString();
+                .add("moduleCode", moduleCode)
+                .add("editModuleDescriptor", editModuleDescriptor)
+                .toString();
     }
 
     /**
@@ -195,17 +195,17 @@ public class EditCommand extends Command {
 
             EditModuleDescriptor otherEditModuleDescriptor = (EditModuleDescriptor) other;
             return Objects.equals(year, otherEditModuleDescriptor.year)
-                && Objects.equals(semester, otherEditModuleDescriptor.semester)
-                && Objects.equals(grade, otherEditModuleDescriptor.grade);
+                    && Objects.equals(semester, otherEditModuleDescriptor.semester)
+                    && Objects.equals(grade, otherEditModuleDescriptor.grade);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                .add("year", year)
-                .add("semester", semester)
-                .add("grade", grade)
-                .toString();
+                    .add("year", year)
+                    .add("semester", semester)
+                    .add("grade", grade)
+                    .toString();
         }
     }
 }

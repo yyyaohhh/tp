@@ -48,9 +48,9 @@ public class CommandTestUtil {
 
     static {
         DESC_CS2040S = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2040S)
-            .withSemester(VALID_SEMESTER_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
+                .withSemester(VALID_SEMESTER_CS2040S).withGrade(VALID_GRADE_CS2040S).build();
         DESC_CS2101 = new EditModuleDescriptorBuilder().withYear(VALID_YEAR_CS2101)
-            .withSemester(VALID_SEMESTER_CS2101).withGrade(VALID_GRADE_CS2101).build();
+                .withSemester(VALID_SEMESTER_CS2101).withGrade(VALID_GRADE_CS2101).build();
     }
 
     /**

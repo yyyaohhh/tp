@@ -154,8 +154,8 @@ public class ModuleData implements ReadOnlyModuleData {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("modules", modules)
-            .toString();
+                .add("modules", modules)
+                .toString();
     }
 
     @Override

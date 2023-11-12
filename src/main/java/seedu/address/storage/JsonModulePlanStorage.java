@@ -48,7 +48,7 @@ public class JsonModulePlanStorage implements ModulePlanStorage {
         requireNonNull(filePath);
 
         Optional<JsonSerializableModulePlan> jsonModulePlan = JsonUtil.readJsonFile(
-            filePath, JsonSerializableModulePlan.class);
+                filePath, JsonSerializableModulePlan.class);
         if (!jsonModulePlan.isPresent()) {
             return Optional.empty();
         }

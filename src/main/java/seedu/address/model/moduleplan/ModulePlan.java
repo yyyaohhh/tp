@@ -141,8 +141,8 @@ public class ModulePlan implements ReadOnlyModulePlan {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("semesters", semesters)
-            .toString();
+                .add("semesters", semesters)
+                .toString();
     }
 
     @Override

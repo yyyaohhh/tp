@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class Semester implements Comparable<Semester> {
 
     public static final String MESSAGE_CONSTRAINTS = "Semester should only be the following: "
-        + String.join(", ",
-        Arrays.stream(SemesterEnum.values()).map(SemesterEnum::getSemester)
-            .collect(Collectors.toList()));
+            + String.join(", ",
+            Arrays.stream(SemesterEnum.values()).map(SemesterEnum::getSemester)
+                    .collect(Collectors.toList()));
     public final SemesterEnum semester;
 
     /**

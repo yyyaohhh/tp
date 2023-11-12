@@ -32,13 +32,13 @@ public class JsonUtil {
     private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
 
     private static final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
-        .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
-        .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-        .registerModule(new SimpleModule("SimpleModule")
-            .addSerializer(Level.class, new ToStringSerializer())
-            .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
+            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+            .registerModule(new SimpleModule("SimpleModule")
+                    .addSerializer(Level.class, new ToStringSerializer())
+                    .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
 
     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
@@ -58,7 +58,7 @@ public class JsonUtil {
      * @throws DataLoadingException if loading of the JSON file failed.
      */
     public static <T> Optional<T> readJsonFile(
-        Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -86,7 +86,7 @@ public class JsonUtil {
      * @throws DataLoadingException if loading of the JSON file failed.
      */
     public static <T> Optional<T> readJsonResource(
-        String filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+            String filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
         requireNonNull(filePath);
 
         ClassLoader classLoader = JsonUtil.class.getClassLoader();

@@ -32,7 +32,7 @@ public class JsonAdaptedDbModule {
                                //@JsonProperty("semesterData") String semesterData,
                                //@JsonProperty("attributes") String attributes,
                                //@JsonProperty("gradingBasisDescription") String gradingBasisDescription
-                               ) {
+    ) {
         this.moduleCode = moduleCode;
         this.title = title;
         this.description = description;
@@ -48,7 +48,7 @@ public class JsonAdaptedDbModule {
 
         if (moduleCode == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
         if (!ModuleCode.isValidModuleCode(moduleCode)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
@@ -57,19 +57,19 @@ public class JsonAdaptedDbModule {
 
         if (title == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
         final ModuleName modelName = new ModuleName(title);
 
         if (description == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         final Description modelDescription = new Description(description);
 
         if (moduleCredit == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredit.class.getSimpleName()));
         }
         if (!ModularCredit.isValidModularCredit(moduleCredit)) {
             throw new IllegalValueException(ModularCredit.MESSAGE_CONSTRAINTS);

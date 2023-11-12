@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -71,21 +72,21 @@ public class InfoCommandTest {
 
         // same object -> returns true
         InfoCommand infoCommand = prepareInfoCommand(module);
-        assertTrue(infoCommand.equals(infoCommand));
+        assertEquals(infoCommand, infoCommand);
 
         // same values -> returns true
         InfoCommand infoCommandCopy = prepareInfoCommand(module);
-        assertTrue(infoCommand.equals(infoCommandCopy));
+        assertEquals(infoCommand, infoCommandCopy);
 
         // different types -> returns false
-        assertFalse(infoCommand.equals(1));
+        assertNotEquals(1, infoCommand);
 
         // null -> returns false
-        assertFalse(infoCommand.equals(null));
+        assertNotEquals(null, infoCommand);
 
         // different module -> returns false
         InfoCommand differentInfoCommand = prepareInfoCommand(otherModule);
-        assertFalse(infoCommand.equals(differentInfoCommand));
+        assertNotEquals(infoCommand, differentInfoCommand);
     }
 
     @Test

@@ -47,9 +47,9 @@ public class Version implements Comparable<Version> {
         }
 
         return new Version(Integer.parseInt(versionMatcher.group(1)),
-            Integer.parseInt(versionMatcher.group(2)),
-            Integer.parseInt(versionMatcher.group(3)),
-            versionMatcher.group(4) != null);
+                Integer.parseInt(versionMatcher.group(2)),
+                Integer.parseInt(versionMatcher.group(3)),
+                versionMatcher.group(4) != null);
     }
 
     public int getMajor() {
@@ -106,9 +106,9 @@ public class Version implements Comparable<Version> {
 
         Version otherVersion = (Version) other;
         return major == otherVersion.major
-            && minor == otherVersion.minor
-            && patch == otherVersion.patch
-            && isEarlyAccess == otherVersion.isEarlyAccess;
+                && minor == otherVersion.minor
+                && patch == otherVersion.patch
+                && isEarlyAccess == otherVersion.isEarlyAccess;
     }
 
     @Override

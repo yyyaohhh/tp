@@ -121,7 +121,8 @@ public class TypicalModules {
     // Module with CS grade
     public static final Module MODULE_CS_GRADE = CFG1002;
 
-    private TypicalModules() {}
+    private TypicalModules() {
+    }
 
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan modulePlan = new ModulePlan();

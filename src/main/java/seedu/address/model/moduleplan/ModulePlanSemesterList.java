@@ -46,7 +46,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
     private final ObservableList<ModulePlanSemester> internalList = FXCollections.observableArrayList();
     private final ObservableList<ModulePlanSemester> internalUnmodifiableList =
-        FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Loads the default semesters in when ever a new instance is created.

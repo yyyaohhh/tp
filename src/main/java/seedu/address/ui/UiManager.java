@@ -58,7 +58,6 @@ public class UiManager implements Ui {
     }
 
 
-
     /**
      * Shows an error alert dialog with {@code title} and error message, {@code e},
      * and exits the application after the user has closed the alert dialog.

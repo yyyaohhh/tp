@@ -33,7 +33,7 @@ public class ModelManager implements Model {
         requireAllNonNull(modulePlan, userPrefs, moduleData);
 
         logger.fine("Initializing with module plan: " + modulePlan + " user prefs " + userPrefs
-            + " and module data " + moduleData);
+                + " and module data " + moduleData);
 
         this.modulePlan = new ModulePlan(modulePlan);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -188,8 +188,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return modulePlan.equals(otherModelManager.modulePlan)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && moduleData.equals(otherModelManager.moduleData);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && moduleData.equals(otherModelManager.moduleData);
     }
 
 }
