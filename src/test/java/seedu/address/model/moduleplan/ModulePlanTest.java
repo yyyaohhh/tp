@@ -47,7 +47,7 @@ public class ModulePlanTest {
 
     @Test
     public void resetData_withDuplicateSemester_throwsDuplicateSemesterException() {
-        // Two persons with the same identity fields
+        // Two ModulePlanSemester with the same identity fields
         ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
         ModulePlanSemester duplicateY1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
 
@@ -95,6 +95,18 @@ public class ModulePlanTest {
                 + "{semesters=" + modulePlan.getModulePlanSemesterList() + "}";
         assertEquals(expected, modulePlan.toString());
     }
+
+
+    @Test
+    public void equals_sameInstance_returnTrue() {
+        assertTrue(modulePlan.equals(modulePlan));
+    }
+
+    @Test
+    public void equals_differentObj_returnFalse() {
+        assertFalse(modulePlan.equals(new Integer(1)));
+    }
+
 
     /**
      * A stub ReadOnlyModulePlan whose list can violate interface constraints.

@@ -97,7 +97,7 @@ public class DeleteCommandTest {
         assertNotEquals(1, deleteCommand);
 
         // null -> returns false
-        assertNotEquals(null, deleteCommand);
+        assertNotEquals(deleteCommand, null);
 
         // different module -> returns false
         DeleteCommand differentDeleteCommand = prepareDeleteCommand(otherModule);

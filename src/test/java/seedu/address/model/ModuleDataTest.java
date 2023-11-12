@@ -106,7 +106,7 @@ public class ModuleDataTest {
         assertEquals(moduleData, moduleData);
 
         // null -> returns false
-        assertNotEquals(null, moduleData);
+        assertNotEquals(moduleData, null);
 
         // different types -> returns false
         assertNotEquals(5, moduleData);

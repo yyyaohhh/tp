@@ -48,7 +48,7 @@ public class ModuleTest {
         assertEquals(CS2040S, CS2040S);
 
         // null -> returns false
-        assertNotEquals(null, CS2040S);
+        assertNotEquals(CS2040S, null);
 
         // different type -> returns false
         assertNotEquals(5, CS2040S);

@@ -186,7 +186,7 @@ public class ModelManagerTest {
         assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertNotEquals(null, modelManager);
+        assertNotEquals(modelManager, null);
 
         // different types -> returns false
         assertNotEquals(5, modelManager);
