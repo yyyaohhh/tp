@@ -502,7 +502,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Open command terminal and `cd` into that folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br> 
+   1. Open command terminal and `cd` into the folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br> 
    Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
@@ -535,7 +535,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add CS1010 y/1 s/ST1 g/a`.<br>
        Expected: No module is added. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
-    3. Other incorrect delete commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be deleted is incorrect)<br>
+    3. Other incorrect delete commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be added is incorrect)<br>
        Expected: Similar to previous.
 
 <br>
@@ -578,7 +578,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit CS1101S ...` when it is not already present in the semester list.<br>
        Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
 
-    3. Other incorrect edit commands to try: `edit`, `edit 1234`, `...` (when the format of the module code to be deleted is incorrect)<br>
+    3. Other incorrect edit commands to try: `edit`, `edit 1234`, `...` (when the format of the module code to be edited is incorrect)<br>
        Expected: Similar to previous.
 
 <br>
@@ -617,12 +617,12 @@ testers are expected to do more *exploratory* testing.
 1. Calculating the current Modular Credits (MCs) from all modules
 
    1. Test case: `calculateMC` when there are no modules in all the semester lists.<br>
-      Expected: The MC output is `0`.
+      Expected: The Modular Credits output is `0.0`.
    
    2. Prerequisites: Multiple modules in the list.
 
    3. Test case: `calculateMC`.<br>
-      Expected: The MC output is a `integer` of MC $\geq$ `0` with a status message.
+      Expected: The Modular Credits output is a `float` of Modular Credits $\geq$ `0.0` with a status message.
 
 <br>
 
