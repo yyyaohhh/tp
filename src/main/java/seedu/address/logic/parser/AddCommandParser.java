@@ -30,38 +30,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
 
-
-
-        ModuleCode moduleCode;
-        Year year = null;
-        Semester semester = null;
-        Grade grade = null;
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE);
-        if (!argMultimap.getPreamble().isEmpty()) {
-            moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
-                    new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
-        }
-
-        if (argMultimap.getValue(PREFIX_YEAR).isPresent()) {
-            year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
-        }
-        if (argMultimap.getValue(PREFIX_SEMESTER).isPresent()) {
-            semester = ParserUtil.parseSemester(argMultimap.getValue(PREFIX_SEMESTER).get());
-        }
-        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
-            grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
-        }
-
-        if (year == null || semester == null || grade == null) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE),
-                    new ParseException(MESSAGE_INVALID_COMMAND_FORMAT));
-        }
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());;
+        Year year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());;
+        Semester semester = ParserUtil.parseSemester(argMultimap.getValue(PREFIX_SEMESTER).get());
+        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
 
         return new AddCommand(moduleCode, year, semester, grade);
     }
