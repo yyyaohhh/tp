@@ -33,12 +33,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         ModuleCode moduleCode;
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        try {
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
-        } else {
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),
-                    new ParseException(MESSAGE_INVALID_MODULE_CODE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
         if (argMultimap.getValue(PREFIX_YEAR).isPresent()) {
             editModuleDescriptor.setYear(ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get()));

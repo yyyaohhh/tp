@@ -92,8 +92,9 @@ public class ModulePlanTest {
 
     @Test
     public void toStringMethod() {
-        // String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-        // assertEquals(expected, modulePlan.toString());
+        String expected = ModulePlan.class.getCanonicalName()
+                + "{semesters=" + modulePlan.getModulePlanSemesterList() + "}";
+        assertEquals(expected, modulePlan.toString());
     }
 
     /**
