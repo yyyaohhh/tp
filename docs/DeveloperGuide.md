@@ -15,11 +15,15 @@
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,6 +36,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
+
+<br>
 
 **Main components of the architecture**
 
@@ -48,6 +54,8 @@ The bulk of the app's work is done by the following four components:
 * [**`Database`**](#database-component) : Parses data from within the App.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+<br>
 
 **How the architecture components interact with each other**
 
@@ -66,6 +74,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -83,6 +93,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `ModulePlanSemester` object residing in the `Model`.
 
+<br>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -90,6 +102,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+
+<br>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete CS2030S")` API call as an example.
 
@@ -107,18 +121,26 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<br>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
+
+<br>
 
 How the parsing works:
 * When called upon to parse a user command, the `ModulePlanParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ModulePlanParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
+
+<br>
 
 The `Model` component,
 
@@ -129,10 +151,11 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** The module plan data is split into different semesters (e.g. Y1S1, Y1S2, Y2S1, etc). Instead of one `UniqueModuleList` storing all of the User's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters.
+**Note:** The module plan data is split into different semesters (e.g. Year 1 S1, Year 1 S2, Year 2 S1, etc). Instead of one `UniqueModuleList` storing all of the User's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters.
 
 </box>
 
+<br>
 
 ### Storage component
 
@@ -140,16 +163,22 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
+<br>
+
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<br>
 
 ### Database component
 
 **API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
 
 <puml src="diagrams/DatabaseClassDiagram.puml" width="250" />
+
+<br>
 
 The `Database` component,
 * reads the module information from JSON format to the corresponding `ModuleData` object.
@@ -161,9 +190,13 @@ The `Database` component,
 
 </box>
 
+<br>
+
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2324S1-CS2103T-T13-0/tp/tree/master/src/main/java/seedu/address/commons) package.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,8 +204,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+* [Edit module feature](#edit-module-feature)
+* [Undo/redo feature](#proposed-undoredo-feature)
+
+<br>
 
 ### Edit module feature
+
+<br>
 
 #### Implementation
 
@@ -195,42 +234,42 @@ As can be seen, this is a helpful class to store fields that need to be edited.
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedModulePlan`. It extends `ModulePlan` with an undo/redo history, stored internally as an `ModulePlanStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedModulePlan#commit()` — Saves the current module plan state in its history.
+* `VersionedModulePlan#undo()` — Restores the previous module plan state from its history.
+* `VersionedModulePlan#redo()` — Restores a previously undone module plan state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitModulePlan()`, `Model#undoModulePlan()` and `Model#redoModulePlan()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedModulePlan` will be initialized with the initial module plan state, and the `currentStatePointer` pointing to that single module plan state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete CS1010` command to delete the module `CS1010` in the module plan. The `delete` command calls `Model#commitModulePlan()`, causing the modified state of the module plan after the `delete CS1010` command executes to be saved in the `modulePlanStateList`, and the `currentStatePointer` is shifted to the newly inserted module plan state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add CS2030 …​` to add a new module. The `add` command also calls `Model#commitModulePlan()`, causing another modified module plan state to be saved into the `modulePlanStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitModulePlan()`, so the module plan state will not be saved into the `modulePlanStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoModulePlan()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous module plan state, and restores the module plan to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModulePlan state, then there are no previous ModulePlan states to restore. The `undo` command uses `Model#canUndoModulePlan()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -245,45 +284,34 @@ The following sequence diagram shows how the undo operation works:
 
 </box>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoModulePlan()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the module plan to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `modulePlanStateList.size() - 1`, pointing to the latest module plan state, then there are no undone ModulePlan states to restore. The `redo` command uses `Model#canRedoModulePlan()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+<br>
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire module plan.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the module being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -292,8 +320,11 @@ _{Explain here how the data archiving feature will be implemented}_
 For our next steps, we plan to add the following features:
 * Check if a module is CS/CU or not, and check if the grade given from user input is valid for that module.
 * Check which semesters a module is offered, and check if the semester given from user input is valid for that module.
-* Check for a module's prerequisites, and check if they are fulfilled before allowing the user to add the module.
-* Check for a module's preclusions, and prevent users from adding modules that are preclusions of each other.
+* Check for a module's pre-requisites, and check if they are fulfilled before allowing the user to add the module.
+* Check for a module's pre-clusions, and prevent users from adding modules that are pre-clusions of each other.
+* Check for a module's co-requisites, and remind users to add modules that are co-requisites of each other and to take them concurrently.
+
+* <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -304,6 +335,8 @@ For our next steps, we plan to add the following features:
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -320,6 +353,8 @@ For our next steps, we plan to add the following features:
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: Provide a fast and easy way for students to track courses to take to meet graduation requirements and plan courses to take, optimized for users who prefer typing in CLI.
+
+<br>
 
 ### User stories
 
@@ -370,6 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | current student                                                        | see which modules have a diagnostic test                                                    | I can skip the mod                                           |
 | `*`      | tryhard student                                                        | see what modules are available in the special term                                          |                                                              |
 
+<br>
 
 ### Use cases
 
@@ -424,7 +460,7 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
-*{More to be added}*
+<br>
 
 ### Non-Functional Requirements
 
@@ -432,12 +468,20 @@ Use case resumes from step 2.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should be able to hold up to 1,000,000 courses without a noticeable sluggishness in performance for typical usage.
 
-*{More to be added}*
+<br>
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* *{More to be added}*
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Command Line Interface (CLI)**: A display that allows you to type commands to interact with the application.
+* **Graphical User Interface (GUI)**: A user-friendly display that allows you to see the effects of your actions in the application.
+* **JSON**: stands for JavaScript Object Notation, a lightweight data-interchange format and a plain text written in JavaScript object notation, used to send data between computers.
+* **Pre-requisite**: Pre-requisites indicate the base of knowledge on which the subject matter of a particular course will be built. Before taking a course, a student should complete any pre-requisite course(s) listed for that particular course.<br>
+Where pre-requisites are specified, equivalent courses will also be accepted. For more information on pre-requisites, please refer to [NUS's Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/graduate/modular-system).
+* **Pre-clusions**: Courses that have similar emphases and may not be taken together with that particular course.
+* **Co-requisites**: Courses that are to be taken concurrently.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -458,7 +502,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
+   1. Open command terminal and `cd` into the folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br> 
+   Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -467,57 +512,141 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+<br>
+
+### Adding a module
+
+1. Adding a module into a semester
+
+    1. Prerequisites: No new modules are being added except for those default modules present in ModCraft.
+
+    1. Test case: `add CS2030S y/1 s/1 g/IP`.<br>
+       Expected: The module `CS2030S` is added to the list `Year 1 S1`, with its grade as `IP` in a grey box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
+
+    1. Test case: `add CS3230 y/0 s/1 g/A`.<br>
+       Expected: A new column of semester named `Adv Placement` appears. The module `CS3230` is added to the list `Adv Placement`, with its grade as `A` in a green box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
+   
+    2. Test case: `add CS1010 y/1 s/ST1 g/F`.<br>
+       Expected: A new column of semester named `Year 1 ST1` appears. The module `CS1010` is added to the list `Year 1 ST1`, with its grade as `F` in a red box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
+   
+    3. Test case: `add CS1231S ...` when it is already in the semester list.<br>
+       Expected: No module is added. Error details shown in the status message. Status bar remains the same.
+   
+    4. Test case: `add CS1010 y/1 s/ST1 g/a`.<br>
+       Expected: No module is added. Error details of wrong format of grade shown in the status message. Status bar remains the same.
+
+    3. Other incorrect delete commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be added is incorrect)<br>
+       Expected: Similar to previous.
+
+<br>
 
 ### Deleting a module
 
-1. Deleting a module from a semester while all modules are being shown
+1. Deleting a module from a semester
 
-   1. Prerequisites: List all modules using the `list` command. Multiple modules in the list.
+   1. Prerequisites: Multiple modules in the list.
 
-   1. Test case: `delete CS2030S`<br>
-      Expected: The module CS2030S is deleted from the list. Details of the deleted module shown in the status message. The modules shown in the semester list is updated.
+   1. Test case: `delete CS2030S`.<br>
+      Expected: The module `CS2030S` is deleted from the list. Details of the deleted module shown in the status message. The modules shown in the semester list is updated.
 
-   1. Test case: `delete CS1231S` when it is not in the semester list<br>
+   1. Test case: `delete CS1231S` when it is not in the semester list.<br>
       Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete 1234`, `...` (when the format of the module code to be deleted is incorrect)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete 1234`, `...` (when the format of the module code to be deleted is incorrect).<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+<br>
+
+### Editing a module
+
+1. Editing a module already present in a semester
+
+    1. Prerequisites: The module to be edited is already present in ModCraft.
+
+    1. Test case: `edit CS2030S g/IP`.<br>
+       Expected: The grade of `CS2030S` is updated to `IP` in a grey box. Details of the edited module shown in the status message. The module shown in the semester list is updated.
+
+    1. Test case: `edit CS3230 y/0`.<br>
+       Expected: A new column of semester named `Adv Placement` appears. The module `CS3230` is moved to the list `Adv Placement`, while its grade remain unchanged. Details of the edited module shown in the status message. The modules shown in the semester list is updated.
+
+    2. Test case: `edit CS1010 s/ST1`.<br>
+       Expected: A new column of semester named `ST1` appears. The module `CS1010` is moved to the list `ST1`, while its grade and semester remain unchanged. Details of the added module shown in the status message. The modules shown in the semester list is updated.
+   
+   3. Test case: `edit CS1010 g/a`.<br>
+      Expected: No module is edited. Error details of wrong format of grade shown in the status message. Status bar remains the same.
+
+    3. Test case: `edit CS1101S ...` when it is not already present in the semester list.<br>
+       Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
+
+    3. Other incorrect edit commands to try: `edit`, `edit 1234`, `...` (when the format of the module code to be edited is incorrect)<br>
+       Expected: Similar to previous.
+
+<br>
+
+### Finding info about a module
+
+1. Finding information about a module from the database
+
+   1. Test case: `info CS2030S`.<br>
+   Expected: The module code, module title, modular credit and module description of `CS2030S` is displayed.
+
+   2. Other incorrect info commands to try: `info`, `info 1234`, `...` (when the format of the module code to be searched is incorrect).<br>
+     No information about module is displayed. Error details shown in the status message. Status bar remains the same.
+
+<br>
 
 ### Calculating total CAP
 
 1. Calculating the current CAP from all modules
 
-    1. Prerequisites: Multiple module in the list.
+   1. Test case: `calculateCAP` when there are no modules in the semester list.<br>
+         Expected: The CAP output is `0.0`.
+   
+   2. Prerequisites: Multiple module in the list.
 
-    1. Test case: `calculateCAP`<br>
-       Expected: The CAP output is a `float` of `0.0` $\leq$ CAP $\leq$ `5.0` with a status message.
+   3. Test case: `calculateCAP`.<br>
+     Expected: The CAP output is a `float` of `0.0` $\leq$ CAP $\leq$ `5.0` with a status message.
+   
+   4. Test case: `calculateCAP` when grades of all modules are marked as `IP`, `EXE`, `W`, `IC`, `S`, `U`, `CS` or `CU`.<br>
+    Expected: The CAP output is `0.0`.
 
-    1. Test case: `calculateCAP` when there are no modules in the semester list<br>
-       Expected: The CAP output is `0.0`
-
-1. _{ more test cases …​ }_
+<br>
 
 ### Calculating total Modular Credits (MCs)
 
 1. Calculating the current Modular Credits (MCs) from all modules
 
-    1. Prerequisites: Multiple modules in the list.
+   1. Test case: `calculateMC` when there are no modules in all the semester lists.<br>
+      Expected: The Modular Credits output is `0.0`.
+   
+   2. Prerequisites: Multiple modules in the list.
 
-    1. Test case: `calculateMC`<br>
-       Expected: The MC output is a `integer` of MC $\geq$ `0` with a status message.
+   3. Test case: `calculateMC`.<br>
+      Expected: The Modular Credits output is a `float` of Modular Credits $\geq$ `0.0` with a status message.
 
-   1. Test case: `calculateMC` when there are no modules in the semester list<br>
-      Expected: The MC output is `0`
-
-1. _{ more test cases …​ }_
+<br>
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: There are existing module and module plan files with existing stored modules.
+   
+   2. Test Case: Close the application and delete `moduleplan.json`.
+      Expected: Upon the next application start, a new `moduleplan.json` is created.
+   
+   3. Test Case: Close the application and edit `moduleplan.json` by changing the name of the first Module to `CS3230`.
+      Expected: Upon the next application start, the name of the first Module in chronological order in the list of years and semesters will appear as `CS3230`.
+   
+   4. Test Case: Close the application and edit `moduleplan.json` by changing the year of the first Module to `2`.
+      Expected: Upon the next application start, the name of the first Module will appear in `Year 2`, with its semester and grade unchanged.
+   
+   5. Test Case: Close the application and edit `moduleplan.json` by changing the semester of the first Module to `ST2`.
+      Expected: Upon the next application start, the name of the first Module will appear in `ST2`, with its year and grade unchanged.
+   
+   6. Test Case: Close the application and edit `moduleplan.json` by changing the grade of the first Module to `IP`.
+      Expected: Upon the next application start, the grade of the first Module in chronological order in the list of years and semesters will appear as `IP`, which should be grey in colour. Its name should remain unchanged.
 
-1. _{ more test cases …​ }_
+
+
+
