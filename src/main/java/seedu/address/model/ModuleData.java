@@ -100,39 +100,6 @@ public class ModuleData implements ReadOnlyModuleData {
     }
 
     /**
-     * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
-     *
-     * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code ModuleName}.
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    public ModuleName getDbModuleName(ModuleCode moduleCode) {
-        return getModule(moduleCode).getName();
-    }
-
-    /**
-     * Returns the {@code Description} of the module with the specified {@code ModuleCode}.
-     *
-     * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code Description}.
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getModule(moduleCode).getDescription();
-    }
-
-    /**
-     * Returns the {@code ModularCredit} of the module with the specified {@code ModuleCode}.
-     *
-     * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code ModularCredit}.
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getModule(moduleCode).getModularCredit();
-    }
-
-    /**
      * Checks if the specified {@code ModuleCode} exists in the database.
      *
      * @param moduleCode The {@code ModuleCode} to be matched with.
