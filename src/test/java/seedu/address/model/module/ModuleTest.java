@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
+import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
 import static seedu.address.testutil.ModuleUtil.getAltGrade;
 import static seedu.address.testutil.ModuleUtil.getAltSemester;
 import static seedu.address.testutil.ModuleUtil.getAltYear;
@@ -58,6 +59,18 @@ public class ModuleTest {
         Module editedCS2040S = new ModuleBuilder(CS2040S).withCode(VALID_CODE_CS2101).build();
         assertFalse(CS2040S.equals(editedCS2040S));
 
+        // different name -> returns false
+        editedCS2040S = new ModuleBuilder(CS2040S).withName(VALID_CODE_CS2101).build();
+        assertFalse(CS2040S.equals(editedCS2040S));
+
+        // different description -> returns false
+        editedCS2040S = new ModuleBuilder(CS2040S).withDescription(VALID_CODE_CS2101).build();
+        assertFalse(CS2040S.equals(editedCS2040S));
+
+        // different modular credit -> returns false
+        editedCS2040S = new ModuleBuilder(CS2040S).withModularCredit("0").build();
+        assertFalse(CS2040S.equals(editedCS2040S));
+
         // different year -> returns false
         editedCS2040S = new ModuleBuilder(CS2040S).withYear(VALID_YEAR_CS2101).build();
         assertFalse(CS2040S.equals(editedCS2040S));
@@ -69,6 +82,16 @@ public class ModuleTest {
         // different grade -> returns false
         editedCS2040S = new ModuleBuilder(CS2040S).withGrade(VALID_GRADE_CS2101).build();
         assertFalse(CS2040S.equals(editedCS2040S));
+
+        // one with any null user fields -> returns false
+        editedCS2040S = clearUserInputFields(CS2040S);
+        assertFalse(CS2040S.equals(editedCS2040S));
+        assertFalse(editedCS2040S.equals(CS2040S));
+
+        // both with null user fields -> returns true
+        Module clearedCS2040S = clearUserInputFields(CS2040S);
+        editedCS2040S = clearUserInputFields(CS2040S);
+        assertTrue(clearedCS2040S.equals(editedCS2040S));
     }
 
     @Test
