@@ -66,7 +66,7 @@ public class TypicalModules {
             .build();
     public static final Module CS2106 = new ModuleBuilder()
             .withCode("CS2106")
-            .withYear("2")
+            .withYear("5")
             .withSem("2")
             .withGrade("B")
             .withName("Introduction to Operating Systems")

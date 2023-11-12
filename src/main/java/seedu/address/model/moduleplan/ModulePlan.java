@@ -16,10 +16,8 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
  */
 public class ModulePlan implements ReadOnlyModulePlan {
 
-    private final ModulePlanSemesterList semesters;
-    {
-        semesters = new ModulePlanSemesterList();
-    }
+    private final ModulePlanSemesterList semesters= new ModulePlanSemesterList();
+
 
     /**
      * Creates a new empty ModulePlan.
@@ -52,25 +50,6 @@ public class ModulePlan implements ReadOnlyModulePlan {
     public void setSemesters(List<ModulePlanSemester> semesters) {
         this.semesters.setSemesters(semesters);
     }
-
-    /**
-     * Adds a new semester to the module plan.
-     *
-     * @param semester The semester to be added.
-     */
-    public void addSemester(ModulePlanSemester semester) {
-        this.semesters.addSemester(semester);
-    }
-
-    /**
-     * Removes a semester from the module plan.
-     *
-     * @param semester The semester to be removed.
-     */
-    public void removeSemester(ModulePlanSemester semester) {
-        this.semesters.removeSemester(semester);
-    }
-
 
 
     //// module-level operations

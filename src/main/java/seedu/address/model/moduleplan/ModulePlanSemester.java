@@ -20,10 +20,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
     private Year year;
     private Semester semester;
 
-    private final UniqueModuleList modules;
-    {
-        modules = new UniqueModuleList();
-    }
+    private final UniqueModuleList modules = new UniqueModuleList();
 
     /**
      * Wraps all data at the Module Plan semester level.
