@@ -1,6 +1,8 @@
 package seedu.address.model.module;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -46,21 +48,21 @@ public class ModuleCodeTest {
         ModuleCode moduleCode = new ModuleCode("CS2103T");
 
         // same object -> returns true
-        assertTrue(moduleCode.equals(moduleCode));
+        assertEquals(moduleCode, moduleCode);
 
         // same values -> returns true
         ModuleCode moduleCodeCopy = new ModuleCode("CS2103T");
-        assertTrue(moduleCode.equals(moduleCodeCopy));
+        assertEquals(moduleCode, moduleCodeCopy);
 
         // different types -> returns false
-        assertFalse(moduleCode.equals(1));
+        assertNotEquals(moduleCode, 1);
 
         // null -> returns false
-        assertFalse(moduleCode.equals(null));
+        assertNotEquals(moduleCode, null);
 
         // different module code -> returns false
         ModuleCode differentModuleCode = new ModuleCode("CS2101");
-        assertFalse(moduleCode.equals(differentModuleCode));
+        assertNotEquals(moduleCode, differentModuleCode);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.address.model.module;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -49,25 +51,25 @@ public class GradeTest {
 
     @Test
     public void getColourCode() {
-        assertTrue(new Grade("A+").getColourCode().equals("green"));
-        assertTrue(new Grade("A").getColourCode().equals("green"));
-        assertTrue(new Grade("A-").getColourCode().equals("green"));
-        assertTrue(new Grade("B+").getColourCode().equals("green"));
-        assertTrue(new Grade("B").getColourCode().equals("green"));
-        assertTrue(new Grade("B-").getColourCode().equals("green"));
-        assertTrue(new Grade("C+").getColourCode().equals("green"));
-        assertTrue(new Grade("C").getColourCode().equals("green"));
-        assertTrue(new Grade("D+").getColourCode().equals("green"));
-        assertTrue(new Grade("D").getColourCode().equals("green"));
-        assertTrue(new Grade("F").getColourCode().equals("red"));
-        assertTrue(new Grade("EXE").getColourCode().equals("blue"));
-        assertTrue(new Grade("IC").getColourCode().equals("orange"));
-        assertTrue(new Grade("IP").getColourCode().equals("gray"));
-        assertTrue(new Grade("W").getColourCode().equals("silver"));
-        assertTrue(new Grade("CS").getColourCode().equals("green"));
-        assertTrue(new Grade("CU").getColourCode().equals("red"));
-        assertTrue(new Grade("S").getColourCode().equals("green"));
-        assertTrue(new Grade("U").getColourCode().equals("red"));
+        assertEquals(new Grade("A+").getColourCode(), "green");
+        assertEquals(new Grade("A").getColourCode(), "green");
+        assertEquals(new Grade("A-").getColourCode(), "green");
+        assertEquals(new Grade("B+").getColourCode(), "green");
+        assertEquals(new Grade("B").getColourCode(), "green");
+        assertEquals(new Grade("B-").getColourCode(), "green");
+        assertEquals(new Grade("C+").getColourCode(), "green");
+        assertEquals(new Grade("C").getColourCode(), "green");
+        assertEquals(new Grade("D+").getColourCode(), "green");
+        assertEquals(new Grade("D").getColourCode(), "green");
+        assertEquals(new Grade("F").getColourCode(), "red");
+        assertEquals(new Grade("EXE").getColourCode(), "blue");
+        assertEquals(new Grade("IC").getColourCode(), "orange");
+        assertEquals(new Grade("IP").getColourCode(), "gray");
+        assertEquals(new Grade("W").getColourCode(), "silver");
+        assertEquals(new Grade("CS").getColourCode(), "green");
+        assertEquals(new Grade("CU").getColourCode(), "red");
+        assertEquals(new Grade("S").getColourCode(), "green");
+        assertEquals(new Grade("U").getColourCode(), "red");
     }
 
     @Test
@@ -75,21 +77,21 @@ public class GradeTest {
         Grade grade = new Grade("A");
 
         // same object -> returns true
-        assertTrue(grade.equals(grade));
+        assertEquals(grade, grade);
 
         // same values -> returns true
         Grade gradeCopy = new Grade("A");
-        assertTrue(grade.equals(gradeCopy));
+        assertEquals(grade, gradeCopy);
 
         // different types -> returns false
-        assertFalse(grade.equals(1));
+        assertNotEquals(grade, 1);
 
         // null -> returns false
-        assertFalse(grade.equals(null));
+        assertNotEquals(grade, null);
 
         // different grade -> returns false
         Grade differentGrade = new Grade("B");
-        assertFalse(grade.equals(differentGrade));
+        assertNotEquals(grade, differentGrade);
     }
 
     @Test

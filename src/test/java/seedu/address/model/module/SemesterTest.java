@@ -1,6 +1,8 @@
 package seedu.address.model.module;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -44,21 +46,21 @@ public class SemesterTest {
         Semester semester = new Semester("1");
 
         // same object -> returns true
-        assertTrue(semester.equals(semester));
+        assertEquals(semester, semester);
 
         // same values -> returns true
         Semester semesterCopy = new Semester("1");
-        assertTrue(semester.equals(semesterCopy));
+        assertEquals(semester, semesterCopy);
 
         // different types -> returns false
-        assertFalse(semester.equals(1));
+        assertNotEquals(semester, 1);
 
         // null -> returns false
-        assertFalse(semester.equals(null));
+        assertNotEquals(semester, null);
 
         // different semester -> returns false
         Semester differentSemester = new Semester("2");
-        assertFalse(semester.equals(differentSemester));
+        assertNotEquals(semester, differentSemester);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.address.model.module;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -33,21 +35,21 @@ public class DescriptionTest {
         Description description = new Description("This is a description");
 
         // same object -> returns true
-        assertTrue(description.equals(description));
+        assertEquals(description, description);
 
         // same values -> returns true
         Description descriptionCopy = new Description("This is a description");
-        assertTrue(description.equals(descriptionCopy));
+        assertEquals(description, descriptionCopy);
 
         // different types -> returns false
-        assertFalse(description.equals(1));
+        assertNotEquals(description, 1);
 
         // null -> returns false
-        assertFalse(description.equals(null));
+        assertNotEquals(description, null);
 
         // different description -> returns false
         Description differentDescription = new Description("This is a different description");
-        assertFalse(description.equals(differentDescription));
+        assertNotEquals(description, differentDescription);
     }
 
     @Test

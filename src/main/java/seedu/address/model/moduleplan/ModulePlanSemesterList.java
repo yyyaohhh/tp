@@ -26,7 +26,7 @@ import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
  * As such, adding and updating of module uses ModulePlanSemester#equals(ModulePlanSemester)
  * for equality so as to ensure that the semester being added or updated is
  * unique in terms of identity in the ModulePlanSemesterList.
- *
+ * <p>
  * Supports a minimal set of list operations.
  */
 public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {

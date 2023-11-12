@@ -17,6 +17,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModuleData implements ReadOnlyModuleData {
 
     private final UniqueModuleList modules;
+
     {
         modules = new UniqueModuleList();
     }
@@ -24,7 +25,8 @@ public class ModuleData implements ReadOnlyModuleData {
     /**
      * Constucts an empty {@code ModuleData}.
      */
-    public ModuleData() {}
+    public ModuleData() {
+    }
 
     /**
      * Creates a ModuleData using the Modules in the {@code toBeCopied}.

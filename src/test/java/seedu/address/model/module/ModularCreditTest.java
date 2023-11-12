@@ -1,6 +1,8 @@
 package seedu.address.model.module;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -56,27 +58,27 @@ public class ModularCreditTest {
         ModularCredit modularCredit = new ModularCredit("4");
 
         // same object -> returns true
-        assertTrue(modularCredit.equals(modularCredit));
+        assertEquals(modularCredit, modularCredit);
 
         // same values -> returns true
         ModularCredit modularCreditCopy = new ModularCredit("4");
-        assertTrue(modularCredit.equals(modularCreditCopy));
+        assertEquals(modularCredit, modularCreditCopy);
 
         // different types -> returns false
-        assertFalse(modularCredit.equals(1));
+        assertNotEquals(modularCredit, 1);
 
         // null -> returns false
-        assertFalse(modularCredit.equals(null));
+        assertNotEquals(modularCredit, null);
 
         // different modular credit -> returns false
         ModularCredit differentModularCredit = new ModularCredit("1.5");
-        assertFalse(modularCredit.equals(differentModularCredit));
+        assertNotEquals(modularCredit, differentModularCredit);
     }
 
     @Test
     public void hashCodeMethod() {
         ModularCredit modularCredit = new ModularCredit("4");
-        assertTrue(modularCredit.hashCode() == ((Float) Float.parseFloat("4")).hashCode());
+        assertTrue(modularCredit.hashCode() == Float.valueOf(4).hashCode());
 
         // same values -> returns same hashcode
         ModularCredit modularCreditCopy = new ModularCredit("4");

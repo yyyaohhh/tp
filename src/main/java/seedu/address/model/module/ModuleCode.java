@@ -14,12 +14,12 @@ public class ModuleCode {
      */
     public static final String MESSAGE_CONSTRAINTS =
             "Module codes should contain a two- to four-letter prefix and four digits.\n"
-            + "Optionally, it can have a one- or two-letter suffix\n"
-            + "Examples: CS2103T, LLJ5094CV, GESS1025";
+                    + "Optionally, it can have a one- or two-letter suffix\n"
+                    + "Examples: CS2103T, LLJ5094CV, GESS1025";
 
     public static final String VALIDATION_REGEX = "^[\\p{Upper}]{2,4}[\\p{Digit}]{4}[\\p{Upper}]{0,2}$";
 
-    private String moduleCode;
+    private final String moduleCode;
 
     /**
      * Constructs a {@code Code}.

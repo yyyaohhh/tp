@@ -47,6 +47,7 @@ public class JsonAdaptedModule {
         this.description = description;
         this.modularCredit = modularCredit;
     }
+
     /**
      * Converts a given {@code Module} into this class for Jackson use.
      */

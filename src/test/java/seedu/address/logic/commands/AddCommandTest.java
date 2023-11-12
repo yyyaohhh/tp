@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
@@ -11,7 +10,7 @@ import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,13 +33,13 @@ public class AddCommandTest {
         Module m = MODULE_IN_BOTH;
 
         assertThrows(NullPointerException.class, () -> new AddCommand(
-                    null, m.getYearTaken(), m.getSemesterTaken(), m.getGrade()));
+                null, m.getYearTaken(), m.getSemesterTaken(), m.getGrade()));
         assertThrows(NullPointerException.class, () -> new AddCommand(
-                    m.getModuleCode(), null, m.getSemesterTaken(), m.getGrade()));
+                m.getModuleCode(), null, m.getSemesterTaken(), m.getGrade()));
         assertThrows(NullPointerException.class, () -> new AddCommand(
-                    m.getModuleCode(), m.getYearTaken(), null, m.getGrade()));
+                m.getModuleCode(), m.getYearTaken(), null, m.getGrade()));
         assertThrows(NullPointerException.class, () -> new AddCommand(
-                    m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(), null));
+                m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(), null));
     }
 
     @Test
@@ -55,7 +54,7 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
+        assertEquals(List.of(validModule), modelStub.modulesAdded);
     }
 
     @Test
@@ -90,38 +89,38 @@ public class AddCommandTest {
         // same object -> returns true
         AddCommand addCommand = new AddCommand(module.getModuleCode(), module.getYearTaken(),
                 module.getSemesterTaken(), module.getGrade());
-        assertTrue(addCommand.equals(addCommand));
+        assertEquals(addCommand, addCommand);
 
         // same values -> returns true
         AddCommand addCommandCopy = new AddCommand(module.getModuleCode(), module.getYearTaken(),
                 module.getSemesterTaken(), module.getGrade());
-        assertTrue(addCommand.equals(addCommandCopy));
+        assertEquals(addCommand, addCommandCopy);
 
         // different types -> returns false
-        assertFalse(addCommand.equals(1));
+        assertNotEquals(1, addCommand);
 
         // null -> returns false
-        assertFalse(addCommand.equals(null));
+        assertNotEquals(null, addCommand);
 
         // different module code -> returns false
         AddCommand differentCode = new AddCommand(otherModule.getModuleCode(), module.getYearTaken(),
                 module.getSemesterTaken(), module.getGrade());
-        assertFalse(addCommand.equals(differentCode));
+        assertNotEquals(addCommand, differentCode);
 
         // different year -> returns false
         AddCommand differentYear = new AddCommand(module.getModuleCode(), otherModule.getYearTaken(),
                 module.getSemesterTaken(), module.getGrade());
-        assertFalse(addCommand.equals(differentYear));
+        assertNotEquals(addCommand, differentYear);
 
         // different semester -> returns false
         AddCommand differentSemester = new AddCommand(module.getModuleCode(), module.getYearTaken(),
                 otherModule.getSemesterTaken(), module.getGrade());
-        assertFalse(addCommand.equals(differentSemester));
+        assertNotEquals(addCommand, differentSemester);
 
         // different grade -> returns false
         AddCommand differentGrade = new AddCommand(module.getModuleCode(), module.getYearTaken(),
                 module.getSemesterTaken(), otherModule.getGrade());
-        assertFalse(addCommand.equals(differentGrade));
+        assertNotEquals(addCommand, differentGrade);
     }
 
     @Test
@@ -145,7 +144,8 @@ public class AddCommandTest {
     private class ModelStubWithMultipleModule extends ModelStub {
         private final ArrayList<Module> modulesAdded = new ArrayList<>();
 
-        ModelStubWithMultipleModule() {}
+        ModelStubWithMultipleModule() {
+        }
 
         ModelStubWithMultipleModule(Module module) {
             requireNonNull(module);
