@@ -32,13 +32,48 @@ public class ModuleCodeTest {
 
     @Test
     public void isValidModuleCode_valid() {
-
         // valid module codes
+        assertTrue(ModuleCode.isValidModuleCode("MA1521"));
         assertTrue(ModuleCode.isValidModuleCode("CS2103T"));
         assertTrue(ModuleCode.isValidModuleCode("GEA1000N"));
         assertTrue(ModuleCode.isValidModuleCode("GEA1000"));
         assertTrue(ModuleCode.isValidModuleCode("LLJ5094CV"));
         assertTrue(ModuleCode.isValidModuleCode("GESS1025"));
+    }
 
+    @Test
+    public void equals() {
+        ModuleCode moduleCode = new ModuleCode("CS2103T");
+
+        // same object -> returns true
+        assertTrue(moduleCode.equals(moduleCode));
+
+        // same values -> returns true
+        ModuleCode moduleCodeCopy = new ModuleCode("CS2103T");
+        assertTrue(moduleCode.equals(moduleCodeCopy));
+
+        // different types -> returns false
+        assertFalse(moduleCode.equals(1));
+
+        // null -> returns false
+        assertFalse(moduleCode.equals(null));
+
+        // different module code -> returns false
+        ModuleCode differentModuleCode = new ModuleCode("CS2101");
+        assertFalse(moduleCode.equals(differentModuleCode));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        ModuleCode moduleCode = new ModuleCode("CS2103T");
+        assertTrue(moduleCode.hashCode() == "CS2103T".hashCode());
+
+        // same values -> returns same hashcode
+        ModuleCode moduleCodeCopy = new ModuleCode("CS2103T");
+        assertTrue(moduleCode.hashCode() == moduleCodeCopy.hashCode());
+
+        // different module code -> returns different hashcode
+        ModuleCode differentModuleCode = new ModuleCode("CS2101");
+        assertFalse(moduleCode.hashCode() == differentModuleCode.hashCode());
     }
 }
