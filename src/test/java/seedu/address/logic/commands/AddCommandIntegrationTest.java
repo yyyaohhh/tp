@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlanWith;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +41,7 @@ public class AddCommandIntegrationTest {
     public void execute_newModule_success() {
         // Module present in moduleData but not modulePlan
         Module validModule = MODULE_ONLY_DATA;
-        
+
         // Expected model's modulePlan includes the valid module
         ModulePlan expectedModulePlan = getTypicalModulePlanWith(validModule);
         Model expectedModel = new ModelManager(expectedModulePlan, new UserPrefs(), getTypicalModuleData());
@@ -63,7 +62,7 @@ public class AddCommandIntegrationTest {
 
         // Duplicate module with the same user inputs
         assertCommandFailure(prepareAddCommand(duplicateModule), model, expectedMessage);
-        
+
         // Duplicate module with alternate user inputs
         assertCommandFailure(prepareAltUserInputsAddCommand(duplicateModule), model, expectedMessage);
     }

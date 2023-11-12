@@ -30,7 +30,7 @@ import seedu.address.model.moduleplan.ModulePlan;
 public class DeleteCommandTest {
 
     private Model model;
-    
+
     @BeforeEach
     public void setup() {
         model = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
@@ -49,7 +49,7 @@ public class DeleteCommandTest {
         // Expected model's modulePlan excludes the valid module
         ModulePlan expectedModulePlan = getTypicalModulePlanWithout(moduleToDelete);
         ModelManager expectedModel = new ModelManager(expectedModulePlan, new UserPrefs(), getTypicalModuleData());
-    
+
         DeleteCommand deleteCommand = prepareDeleteCommand(moduleToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS,

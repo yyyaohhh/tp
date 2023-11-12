@@ -91,7 +91,8 @@ public class ModulePlanTest {
 
     @Test
     public void toStringMethod() {
-        String expected = ModulePlan.class.getCanonicalName() + "{semesters=" + modulePlan.getModulePlanSemesterList() + "}";
+        String expected = ModulePlan.class.getCanonicalName()
+                + "{semesters=" + modulePlan.getModulePlanSemesterList() + "}";
         assertEquals(expected, modulePlan.toString());
     }
 

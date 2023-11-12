@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
 import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
 import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
-import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
+import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

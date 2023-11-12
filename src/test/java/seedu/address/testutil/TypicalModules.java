@@ -2,10 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
 import seedu.address.model.moduleplan.ModulePlan;
@@ -139,13 +135,4 @@ public class TypicalModules {
         moduleData.addModule(clearUserInputFields(MODULE_ONLY_DATA));
         return moduleData;
     }
-
-    public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, CS2100));
-    }
-
-    public static List<Module> getAllTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2040S, CS2030S, MA2001, CS2101, GEA1000, CS2100, CS2106, CS3230, IS6000));
-    }
-
 }

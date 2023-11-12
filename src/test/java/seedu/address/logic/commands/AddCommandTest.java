@@ -29,8 +29,18 @@ import seedu.address.testutil.ModelStub;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null, null, null, null));
+    public void constructor_nullParameter_throwsNullPointerException() {
+        // random typical module
+        Module m = MODULE_IN_BOTH;
+
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                    null, m.getYearTaken(), m.getSemesterTaken(), m.getGrade()));
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                    m.getModuleCode(), null, m.getSemesterTaken(), m.getGrade()));
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                    m.getModuleCode(), m.getYearTaken(), null, m.getGrade()));
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                    m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(), null));
     }
 
     @Test
@@ -155,7 +165,7 @@ public class AddCommandTest {
             requireNonNull(module);
             return modulesAdded.stream().anyMatch(module::isSameModule);
         }
-        
+
         @Override
         public Module getModuleFromDb(ModuleCode moduleCode) {
             return getTypicalModuleData().getModule(moduleCode);
