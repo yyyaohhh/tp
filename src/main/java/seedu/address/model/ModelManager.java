@@ -154,11 +154,13 @@ public class ModelManager implements Model {
 
     @Override
     public boolean checkDbValidModule(Module module) {
+        requireNonNull(module);
         return checkDbValidModuleCode(module.getModuleCode());
     }
 
     @Override
     public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
         return moduleData.checkDbValidModuleCode(moduleCode);
     }
 

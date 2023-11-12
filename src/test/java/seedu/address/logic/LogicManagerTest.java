@@ -3,12 +3,12 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2040S;
+import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2040S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2040S;
+import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2040S;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
@@ -154,8 +154,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an ModulePlanStorage that throws the IOException e when saving
         JsonModulePlanStorage modulePlanStorage = new JsonModulePlanStorage(prefPath) {
             @Override
-            public void saveModulePlan(ReadOnlyModulePlan modulePlan, Path filePath)
-                    throws IOException {
+            public void saveModulePlan(ReadOnlyModulePlan modulePlan, Path filePath) throws IOException {
                 throw e;
             }
         };
@@ -167,9 +166,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveModulePlan method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + " " + VALID_CODE_CS2101
-                + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101;
-        Module expectedModule = CS2101;
+        String addCommand = AddCommand.COMMAND_WORD + " " + VALID_CODE_CS2040S
+                + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S;
+        Module expectedModule = CS2040S;
         ModelManager expectedModel = new ModelManager(getTypicalModulePlan(), new UserPrefs(), getTypicalModuleData());
         expectedModel.addModule(expectedModule);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
