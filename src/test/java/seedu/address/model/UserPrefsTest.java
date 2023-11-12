@@ -13,7 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 
 public class UserPrefsTest {
 
-    UserPrefs userPrefs;
+    private UserPrefs userPrefs;
 
     @BeforeEach
     public void setUp() {
