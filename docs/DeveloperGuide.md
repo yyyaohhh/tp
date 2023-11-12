@@ -535,7 +535,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add CS1010 y/1 s/ST1 g/a`.<br>
        Expected: No module is added. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
-    3. Other incorrect delete commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be added is incorrect)<br>
+    3. Other incorrect add commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be added is incorrect)<br>
        Expected: Similar to previous.
 
 <br>
