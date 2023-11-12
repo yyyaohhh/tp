@@ -80,7 +80,7 @@ public class InfoCommandTest {
         assertNotEquals(1, infoCommand);
 
         // null -> returns false
-        assertNotEquals(null, infoCommand);
+        assertNotEquals(infoCommand, null);
 
         // different module -> returns false
         InfoCommand differentInfoCommand = prepareInfoCommand(otherModule);

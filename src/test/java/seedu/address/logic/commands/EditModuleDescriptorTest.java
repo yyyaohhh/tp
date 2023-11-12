@@ -24,7 +24,7 @@ public class EditModuleDescriptorTest {
         assertEquals(DESC_CS2040S, DESC_CS2040S);
 
         // null -> returns false
-        assertNotEquals(null, DESC_CS2040S);
+        assertNotEquals(DESC_CS2040S, null);
 
         // different types -> returns false
         assertNotEquals(5, DESC_CS2040S);
