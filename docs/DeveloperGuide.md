@@ -204,6 +204,11 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 
 This section describes some noteworthy details on how certain features and commands are implemented.
 
+* [Edit module feature](#edit-module-feature)
+* [Undo/redo feature](#proposed-undoredo-feature)
+
+<br>
+
 ### Module Database Feature
 
 **Overview:**
@@ -230,11 +235,6 @@ The following activity diagram shows the logic of the module database feature:
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
 5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values. 
 
-* [Edit module feature](#edit-module-feature)
-* [Undo/redo feature](#proposed-undoredo-feature)
-
-<br>
-
 If the file cannot be found
 If an error occurs during JSON deserialization
 
@@ -258,8 +258,7 @@ This can be shown through following sequence diagram:
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
 
-### Info Module Command
-- marques
+### Info Module Command (marques)
 
 ### Add Module Command
 
