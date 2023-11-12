@@ -27,7 +27,7 @@ public class ModuleCodeTest {
         assertFalse(ModuleCode.isValidModuleCode("CS50")); // 2 digits
         assertFalse(ModuleCode.isValidModuleCode("C2103T")); // prefix too short
         assertFalse(ModuleCode.isValidModuleCode("C2103TTT")); // 3 postfix
-        assertFalse(ModuleCode.isValidModuleCode("CSCSC2103T")); // 5 postfix
+        assertFalse(ModuleCode.isValidModuleCode("CSCSC2103T")); // 5 prefix
     }
 
     @Test

@@ -3,9 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.testutil.TypicalModules.CS2106;
-import static seedu.address.testutil.TypicalModules.MA2001;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.io.IOException;
@@ -71,14 +70,14 @@ public class JsonModulePlanStorageTest {
         assertEquals(original, new ModulePlan(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addModule(MA2001);
-        original.removeModule(CS2040S);
+        original.addModule(MODULE_ONLY_DATA);
+        original.removeModule(MODULE_IN_BOTH);
         jsonModulePlanStorage.saveModulePlan(original, filePath);
         readBack = jsonModulePlanStorage.readModulePlan(filePath).get();
         assertEquals(original, new ModulePlan(readBack));
 
         // Save and read without specifying file path
-        original.addModule(CS2106);
+        original.addModule(MODULE_IN_BOTH);
         jsonModulePlanStorage.saveModulePlan(original); // file path not specified
         readBack = jsonModulePlanStorage.readModulePlan().get(); // file path not specified
         assertEquals(original, new ModulePlan(readBack));
