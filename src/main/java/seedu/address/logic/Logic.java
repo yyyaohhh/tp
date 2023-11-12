@@ -16,10 +16,11 @@ import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
@@ -30,11 +31,13 @@ public interface Logic {
      */
     ReadOnlyModulePlan getModulePlan();
 
-    /** Returns an unmodifiable view of the filtered list of modules */
+    /**
+     * Returns an unmodifiable view of the filtered list of modules
+     */
     ObservableList<ModulePlanSemester> getFilteredModuleList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' module plan file path.
      */
     Path getModulePlanFilePath();
 

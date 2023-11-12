@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -15,18 +14,15 @@ import seedu.address.model.moduleplan.ReadOnlyModulePlan;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
+    /**
+     * Returns the user prefs.
+     */
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
-
-    /**
-     * Returns the user prefs.
-     */
-    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -39,25 +35,27 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' module plan file path.
      */
     Path getModulePlanFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' module plan file path.
      */
-    void setModulePlanFilePath(Path addressBookFilePath);
+    void setModulePlanFilePath(Path modulePlanFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Returns the ModulePlan
      */
-    void setModulePlan(ReadOnlyModulePlan modulePlan);
-
-    /** Returns the AddressBook */
     ReadOnlyModulePlan getModulePlan();
 
     /**
-     * Returns true if a module with the same identity as {@code module} exists in the address book.
+     * Replaces module plan data with the data in {@code modulePlan}.
+     */
+    void setModulePlan(ReadOnlyModulePlan modulePlan);
+
+    /**
+     * Returns true if a module with the same identity as {@code module} exists in the module plan.
      */
     boolean hasModule(Module module);
 
@@ -69,7 +67,7 @@ public interface Model {
 
     /**
      * Adds the given module.
-     * {@code module} must not already exist in the address book.
+     * {@code module} must not already exist in the module plan.
      *
      * @throws DuplicateModuleException if the module already exists in the module plan.
      */
@@ -77,8 +75,8 @@ public interface Model {
 
     /**
      * Replaces the given module {@code target} with {@code editedModule}.
-     * {@code target} must exist in the address book.
-     * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
+     * {@code target} must exist in the module plan.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the module plan.
      */
     void setModule(Module target, Module editedPerson);
 
@@ -90,9 +88,9 @@ public interface Model {
     Module getModule(ModuleCode moduleCode);
 
     /**
-     * Calculates and returns the total modular credits of all modules in the address book.
+     * Calculates and returns the total modular credits of all modules in the module plan.
      *
-     * @return The total modular credits of all modules in the address book.
+     * @return The total modular credits of all modules in the module plan.
      */
     float totalModularCredits();
 
@@ -104,14 +102,14 @@ public interface Model {
     Float getCap();
 
     /**
-     * Replaces the module data with the data in {@code moduleData}.
-     */
-    public void setModuleData(ReadOnlyModuleData moduleData);
-
-    /**
      * Returns the module data.
      */
-    public ReadOnlyModuleData getModuleData();
+    ReadOnlyModuleData getModuleData();
+
+    /**
+     * Replaces the module data with the data in {@code moduleData}.
+     */
+    void setModuleData(ReadOnlyModuleData moduleData);
 
     /**
      * Checks if the specified {@code module} is present in the database.
@@ -139,7 +137,9 @@ public interface Model {
      */
     Module getModuleFromDb(ModuleCode moduleCode);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<ModulePlanSemester> getFilteredModuleList();
 
 }

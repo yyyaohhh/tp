@@ -17,6 +17,7 @@ import seedu.address.model.module.Year;
  */
 public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
+
     private Year year;
     private Semester semester;
 
@@ -123,15 +124,11 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
             return true;
         }
 
-        if (equalYear && equalSemester) {
-            return true;
-        }
-        return false;
+        return equalYear && equalSemester;
     }
 
     /**
      * Checks if the given semester is the same semesters.
-     *
      */
     public boolean checkIfSameSemester(ModulePlanSemester otherModulePlanSemester) {
         requireNonNull(otherModulePlanSemester);
@@ -165,7 +162,6 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
 
     /**
      * Makes a new copy of ModulePlanSemester.
-     *
      */
     public ModulePlanSemester copy() {
         Year y = new Year(year.toString());
@@ -179,7 +175,7 @@ public class ModulePlanSemester implements Comparable<ModulePlanSemester> {
         if (year.equals(Year.YEAR_0)) {
             return "Adv Placement";
         }
-        return "Year " + year.toString() + " " + semester.toString();
+        return "Year " + year + " " + semester.toString();
     }
 
     @Override

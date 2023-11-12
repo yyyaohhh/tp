@@ -12,45 +12,10 @@ import java.util.stream.Collectors;
  */
 public class Semester implements Comparable<Semester> {
 
-    /**
-     * An enum to represent possible semesters.
-     */
-    public enum SemesterEnum {
-        SEMESTER_1("1"),
-        SEMESTER_2("2"),
-        SPECIAL_TERM_1("ST1"),
-        SPECIAL_TERM_2("ST2");
-
-        private final String semester;
-
-        SemesterEnum(String semester) {
-            this.semester = semester;
-        }
-
-        /**
-         * Converts a {@code String} to {@code SemesterEnum}
-         * @param semester The {@code String} representation of a semester.
-         * @return The corresponding {@code SemesterEnum}
-         */
-        public static SemesterEnum fromString(String semester) {
-            for (SemesterEnum semesterEnum: SemesterEnum.values()) {
-                if (semester.equals(semesterEnum.semester)) {
-                    return semesterEnum;
-                }
-            }
-            return null;
-        }
-
-        public String getSemester() {
-            return this.semester;
-        }
-    }
-
     public static final String MESSAGE_CONSTRAINTS = "Semester should only be the following: "
             + String.join(", ",
             Arrays.stream(SemesterEnum.values()).map(SemesterEnum::getSemester)
-            .collect(Collectors.toList()));
-
+                    .collect(Collectors.toList()));
     public final SemesterEnum semester;
 
     /**
@@ -106,5 +71,40 @@ public class Semester implements Comparable<Semester> {
     @Override
     public int compareTo(Semester o) {
         return this.semester.compareTo(o.semester);
+    }
+
+    /**
+     * An enum to represent possible semesters.
+     */
+    public enum SemesterEnum {
+        SEMESTER_1("1"),
+        SEMESTER_2("2"),
+        SPECIAL_TERM_1("ST1"),
+        SPECIAL_TERM_2("ST2");
+
+        private final String semester;
+
+        SemesterEnum(String semester) {
+            this.semester = semester;
+        }
+
+        /**
+         * Converts a {@code String} to {@code SemesterEnum}
+         *
+         * @param semester The {@code String} representation of a semester.
+         * @return The corresponding {@code SemesterEnum}
+         */
+        public static SemesterEnum fromString(String semester) {
+            for (SemesterEnum semesterEnum : SemesterEnum.values()) {
+                if (semester.equals(semesterEnum.semester)) {
+                    return semesterEnum;
+                }
+            }
+            return null;
+        }
+
+        public String getSemester() {
+            return this.semester;
+        }
     }
 }

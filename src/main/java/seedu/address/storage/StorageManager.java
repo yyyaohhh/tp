@@ -12,13 +12,13 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.moduleplan.ReadOnlyModulePlan;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ModulePlan data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ModulePlanStorage modulePlanStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final ModulePlanStorage modulePlanStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ModulePlanStorage} and {@code UserPrefStorage}.

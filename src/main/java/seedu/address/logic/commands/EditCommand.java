@@ -49,7 +49,7 @@ public class EditCommand extends Command {
     private final EditModuleDescriptor editModuleDescriptor;
 
     /**
-     * @param moduleCode of the module to edit
+     * @param moduleCode           of the module to edit
      * @param editModuleDescriptor details to edit the module with
      */
     public EditCommand(ModuleCode moduleCode, EditModuleDescriptor editModuleDescriptor) {
@@ -58,6 +58,20 @@ public class EditCommand extends Command {
 
         this.moduleCode = moduleCode;
         this.editModuleDescriptor = new EditModuleDescriptor(editModuleDescriptor);
+    }
+
+    /**
+     * Creates and returns a {@code Module} with the details of {@code moduleToEdit}
+     * edited with {@code editModuleDescriptor}.
+     */
+    private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
+        assert moduleToEdit != null;
+
+        Year updatedYear = editModuleDescriptor.getYear().orElse(moduleToEdit.getYearTaken());
+        Semester updatedSemester = editModuleDescriptor.getSemester().orElse(moduleToEdit.getSemesterTaken());
+        Grade updatedGrade = editModuleDescriptor.getGrade().orElse(moduleToEdit.getGrade());
+
+        return moduleToEdit.fillUserInputs(updatedYear, updatedSemester, updatedGrade);
     }
 
     @Override
@@ -90,20 +104,6 @@ public class EditCommand extends Command {
         model.setModule(moduleToEdit, editedModule);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_MODULE_SUCCESS, Messages.format(editedModule)));
-    }
-
-    /**
-     * Creates and returns a {@code Module} with the details of {@code moduleToEdit}
-     * edited with {@code editModuleDescriptor}.
-     */
-    private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
-        assert moduleToEdit != null;
-
-        Year updatedYear = editModuleDescriptor.getYear().orElse(moduleToEdit.getYearTaken());
-        Semester updatedSemester = editModuleDescriptor.getSemester().orElse(moduleToEdit.getSemesterTaken());
-        Grade updatedGrade = editModuleDescriptor.getGrade().orElse(moduleToEdit.getGrade());
-
-        return moduleToEdit.fillUserInputs(updatedYear, updatedSemester, updatedGrade);
     }
 
     @Override
@@ -139,7 +139,8 @@ public class EditCommand extends Command {
         private Semester semester;
         private Grade grade;
 
-        public EditModuleDescriptor() {}
+        public EditModuleDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -157,28 +158,28 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(year, semester, grade);
         }
 
-        public void setYear(Year year) {
-            this.year = year;
-        }
-
         public Optional<Year> getYear() {
             return Optional.ofNullable(year);
         }
 
-        public void setSemester(Semester semester) {
-            this.semester = semester;
+        public void setYear(Year year) {
+            this.year = year;
         }
 
         public Optional<Semester> getSemester() {
             return Optional.ofNullable(semester);
         }
 
-        public void setGrade(Grade grade) {
-            this.grade = grade;
+        public void setSemester(Semester semester) {
+            this.semester = semester;
         }
 
         public Optional<Grade> getGrade() {
             return Optional.ofNullable(grade);
+        }
+
+        public void setGrade(Grade grade) {
+            this.grade = grade;
         }
 
         @Override

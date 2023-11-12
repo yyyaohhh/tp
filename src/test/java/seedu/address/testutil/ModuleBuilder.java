@@ -55,6 +55,7 @@ public class ModuleBuilder {
         modularCredit = moduleToCopy.getModularCredit();
         description = moduleToCopy.getDescription();
     }
+
     /**
      * Sets the {@code moduleCode} of the {@code Module} that we are building.
      */

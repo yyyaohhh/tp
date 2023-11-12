@@ -27,12 +27,11 @@ public class ModuleUtil {
      * Returns the part of command string for the given {@code module}'s details.
      */
     public static String getModuleDetails(Module module) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(module.getModuleCode().toString() + " ");
-        sb.append(PREFIX_YEAR + module.getYearTaken().year.toString() + " ");
-        sb.append(PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester() + " ");
-        sb.append(PREFIX_GRADE + module.getGrade().toString() + " ");
-        return sb.toString();
+        String sb = module.getModuleCode().toString()
+                + " " + PREFIX_YEAR + module.getYearTaken().year.toString()
+                + " " + PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester()
+                + " " + PREFIX_GRADE + module.getGrade().toString() + " ";
+        return sb;
     }
 
     /**
