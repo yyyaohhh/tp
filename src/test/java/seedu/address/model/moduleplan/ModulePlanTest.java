@@ -106,7 +106,6 @@ public class ModulePlanTest {
             this.semesters.setAll(semesters);
         }
 
-
         @Override
         public ObservableList<ModulePlanSemester> getModulePlanSemesterList() {
             return semesters;
