@@ -1,27 +1,41 @@
 package seedu.address.model.moduleplan;
 
-import javafx.collections.ObservableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.CS2040S;
+import static seedu.address.testutil.TypicalModules.MA2001;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
 import seedu.address.testutil.ModuleBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalModules.*;
-
 
 public class ModulePlanSemesterTest {
 
+    private static final Year YEAR = new Year("1");
+    private static final Semester SEMESTER = new Semester("2");
+
+    private static final Module MODULE_IN_LIST = CS2030S;
+    private static final Module MODULE_NOT_IN_LIST = MA2001;
 
     private ModulePlanSemester modulePlanSemester;
 
-    private static final Year YEAR = new Year("1");
-    private static final Semester SEMESTER = new Semester("2");
+    private static List<Module> getTypicalModuleList() {
+        List<Module> returnList = new ArrayList<>();
+        returnList.add(MODULE_IN_LIST);
+        returnList.add(CS2040S);
+        return returnList;
+    }
 
     @BeforeEach
     public void setUp() {
@@ -186,15 +200,5 @@ public class ModulePlanSemesterTest {
     }
 
 
-
-    private static final Module MODULE_IN_LIST = CS2030S;
-    private static final Module MODULE_NOT_IN_LIST = MA2001;
-
-    private static List<Module> getTypicalModuleList() {
-        List<Module> returnList = new ArrayList<>();
-        returnList.add(MODULE_IN_LIST);
-        returnList.add(CS2040S);
-        return returnList;
-    }
 
 }

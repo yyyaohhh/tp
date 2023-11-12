@@ -1,7 +1,23 @@
 package seedu.address.model.moduleplan;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2106;
+import static seedu.address.testutil.TypicalModules.CS3230;
+import static seedu.address.testutil.TypicalModules.GEA1000;
+import static seedu.address.testutil.TypicalModules.MA2001;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.module.Module;
 import seedu.address.model.module.Semester;
 import seedu.address.model.module.Year;
@@ -10,17 +26,31 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.moduleplan.exceptions.DuplicateSemesterException;
 import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalModules.*;
-
 public class ModulePlanSemesterListTest {
 
+    private static final Module MODULE_IN_LIST = GEA1000;
+    private static final Module MODULE_NOT_IN_DEFAULT_LIST = CS2106;
+    private static final Module MODULE_NOT_IN_LIST_INVALID_SEM = CS3230;
+    private static final Module MODULE_NOT_IN_LIST_VALID_SEM = MA2001;
+
+    private static final ModulePlanSemester IN_SEM_LIST = new ModulePlanSemester(new Year("1"), new Semester("1"));
+    private static final ModulePlanSemester NOT_IN_SEM_LIST = new ModulePlanSemester(new Year("0"), new Semester("2"));
+
+
     private ModulePlanSemesterList modulePlanSemesterList;
+
+
+    private static List<ModulePlanSemester> getTypicalModulePlanSemesterList() {
+        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
+        y1s1.addModule(GEA1000);
+        ModulePlanSemester y1s2 = new ModulePlanSemester(new Year("1"), new Semester("2"));
+
+        List<ModulePlanSemester> returnList = new ArrayList<>();
+        returnList.add(y1s1);
+        returnList.add(y1s2);
+        return returnList;
+    }
+
 
 
     @BeforeEach
@@ -169,8 +199,10 @@ public class ModulePlanSemesterListTest {
 
     @Test
     public void removeModule_moduleNotPresent_throwsModuleNotFoundException() {
-        assertThrows(ModuleNotFoundException.class, () -> modulePlanSemesterList.removeModule(MODULE_NOT_IN_LIST_VALID_SEM));
-        assertThrows(ModuleNotFoundException.class, () -> modulePlanSemesterList.removeModule(MODULE_NOT_IN_LIST_INVALID_SEM));
+        assertThrows(ModuleNotFoundException.class, () ->
+                modulePlanSemesterList.removeModule(MODULE_NOT_IN_LIST_VALID_SEM));
+        assertThrows(ModuleNotFoundException.class, () ->
+                modulePlanSemesterList.removeModule(MODULE_NOT_IN_LIST_INVALID_SEM));
     }
 
     @Test
@@ -198,8 +230,10 @@ public class ModulePlanSemesterListTest {
 
     @Test
     public void findModule_moduleNotPresent_throwsModuleNotFoundException() {
-        assertThrows(ModuleNotFoundException.class, () -> modulePlanSemesterList.findModule(MODULE_NOT_IN_LIST_VALID_SEM.getModuleCode()));
-        assertThrows(ModuleNotFoundException.class, () -> modulePlanSemesterList.findModule(MODULE_NOT_IN_LIST_INVALID_SEM.getModuleCode()));
+        assertThrows(ModuleNotFoundException.class, () ->
+                modulePlanSemesterList.findModule(MODULE_NOT_IN_LIST_VALID_SEM.getModuleCode()));
+        assertThrows(ModuleNotFoundException.class, () ->
+                modulePlanSemesterList.findModule(MODULE_NOT_IN_LIST_INVALID_SEM.getModuleCode()));
     }
 
     @Test
@@ -219,23 +253,5 @@ public class ModulePlanSemesterListTest {
         assertFalse(iterator.hasNext());
     }
 
-
-    private static final ModulePlanSemester NOT_IN_SEM_LIST = new ModulePlanSemester(new Year("0"), new Semester("2"));
-    private static final ModulePlanSemester IN_SEM_LIST = new ModulePlanSemester(new Year("1"), new Semester("1"));
-    private static final Module MODULE_IN_LIST = GEA1000;
-    private static final Module MODULE_NOT_IN_LIST_VALID_SEM = MA2001;
-    private static final Module MODULE_NOT_IN_LIST_INVALID_SEM = CS3230;
-    private static final Module MODULE_NOT_IN_DEFAULT_LIST = CS2106;
-
-    private static List<ModulePlanSemester> getTypicalModulePlanSemesterList() {
-        ModulePlanSemester y1s1 = new ModulePlanSemester(new Year("1"), new Semester("1"));
-        y1s1.addModule(GEA1000);
-        ModulePlanSemester y1s2 = new ModulePlanSemester(new Year("1"), new Semester("2"));
-
-        List<ModulePlanSemester> returnList = new ArrayList<>();
-        returnList.add(y1s1);
-        returnList.add(y1s2);
-        return returnList;
-    }
 
 }

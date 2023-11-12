@@ -16,7 +16,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
  */
 public class ModulePlan implements ReadOnlyModulePlan {
 
-    private final ModulePlanSemesterList semesters= new ModulePlanSemesterList();
+    private final ModulePlanSemesterList semesters = new ModulePlanSemesterList();
 
 
     /**
