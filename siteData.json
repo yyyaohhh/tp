@@ -54,7 +54,6 @@
         "implementation": "Implementation",
         "edit-module-feature": "Edit module feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
         "future-enhancements": "Future enhancements",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
@@ -65,7 +64,10 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
+        "adding-a-module": "Adding a module",
         "deleting-a-module": "Deleting a module",
+        "editing-a-module": "Editing a module",
+        "finding-info-about-a-module": "Finding info about a module",
         "calculating-total-cap": "Calculating total CAP",
         "calculating-total-modular-credits-mcs": "Calculating total Modular Credits (MCs)",
         "saving-data": "Saving data"
