@@ -96,6 +96,18 @@ public class ModulePlanTest {
         assertEquals(expected, modulePlan.toString());
     }
 
+
+    @Test
+    public void equals_sameInstance_returnTrue() {
+        assertTrue(modulePlan.equals(modulePlan));
+    }
+
+    @Test
+    public void equals_differentObj_returnFalse() {
+        assertFalse(modulePlan.equals(new Integer(1)));
+    }
+
+
     /**
      * A stub ReadOnlyModulePlan whose list can violate interface constraints.
      */
