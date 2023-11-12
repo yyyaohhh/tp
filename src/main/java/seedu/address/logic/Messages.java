@@ -18,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_MODULE_NOT_FOUND = "%1$s has not been added, unable to %2$s.";
     public static final String MESSAGE_MODULES_LISTED_OVERVIEW = "%1$d modules listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -36,12 +36,14 @@ public class Messages {
      * Formats the {@code module} for display to the user.
      */
     public static String format(Module module) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append((module.getModuleCode()))
-                .append("; Semester: ")
-                .append("Y" + module.getYearTaken() + " " + module.getSemesterTaken())
-                .append("; Grade: ")
-                .append(module.getGrade());
-        return builder.toString();
+        String builder = (module.getModuleCode())
+                + "; Semester: "
+                + "Y"
+                + module.getYearTaken()
+                + " "
+                + module.getSemesterTaken()
+                + "; Grade: "
+                + module.getGrade();
+        return builder;
     }
 }

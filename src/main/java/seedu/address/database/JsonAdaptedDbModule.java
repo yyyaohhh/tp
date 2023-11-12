@@ -29,10 +29,7 @@ public class JsonAdaptedDbModule {
                                @JsonProperty("title") String title,
                                @JsonProperty("description") String description,
                                @JsonProperty("moduleCredit") String moduleCredit
-                               //@JsonProperty("semesterData") String semesterData,
-                               //@JsonProperty("attributes") String attributes,
-                               //@JsonProperty("gradingBasisDescription") String gradingBasisDescription
-                               ) {
+    ) {
         this.moduleCode = moduleCode;
         this.title = title;
         this.description = description;

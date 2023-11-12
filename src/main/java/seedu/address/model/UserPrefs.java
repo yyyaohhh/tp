@@ -14,12 +14,13 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path modulePlanFilePath = Paths.get("data" , "moduleplan.json");
+    private Path modulePlanFilePath = Paths.get("data", "moduleplan.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
@@ -79,10 +80,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + modulePlanFilePath);
-        return sb.toString();
+        String sb = "Gui Settings : "
+                + guiSettings
+                + "\nLocal data file location : "
+                + modulePlanFilePath;
+        return sb;
     }
 
 }

@@ -11,7 +11,7 @@ public class ModularCredit {
 
     public static final String VALIDATION_REGEX = "^[\\p{Digit}]*[.]?[\\p{Digit}]+$";
 
-    private float modularCredit;
+    private final float modularCredit;
 
     /**
      * Constructs a {@code ModularCredit}.
@@ -29,6 +29,10 @@ public class ModularCredit {
      */
     public static boolean isValidModularCredit(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public float getValue() {
+        return modularCredit;
     }
 
     @Override
@@ -49,10 +53,6 @@ public class ModularCredit {
 
         ModularCredit otherModularCredit = (ModularCredit) other;
         return modularCredit == otherModularCredit.modularCredit;
-    }
-
-    public float getValue() {
-        return modularCredit;
     }
 
     @Override

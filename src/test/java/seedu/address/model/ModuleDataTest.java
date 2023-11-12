@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
@@ -99,24 +100,34 @@ public class ModuleDataTest {
         // same values -> returns true
         ModuleData moduleDataCopy = new ModuleData();
         moduleDataCopy.resetData(getTypicalModuleData());
-        assertTrue(moduleData.equals(moduleDataCopy));
+        assertEquals(moduleData, moduleDataCopy);
 
         // same object -> returns true
-        assertTrue(moduleData.equals(moduleData));
+        assertEquals(moduleData, moduleData);
 
         // null -> returns false
-        assertFalse(moduleData.equals(null));
+        assertNotEquals(null, moduleData);
 
         // different types -> returns false
-        assertFalse(moduleData.equals(5));
+        assertNotEquals(5, moduleData);
 
         // different moduleData -> returns false
-        assertFalse(moduleData.equals(new ModuleData()));
+        assertNotEquals(moduleData, new ModuleData());
 
         // different moduleData -> returns false
         ModuleData differentModuleData = new ModuleData();
         differentModuleData.addModule(MODULE_IN_NEITHER);
-        assertFalse(moduleData.equals(differentModuleData));
+        assertNotEquals(moduleData, differentModuleData);
+    }
+
+    @Test
+    public void hashCodeTest() {
+        moduleData.resetData(getTypicalModuleData());
+
+        // different moduleData
+        ModuleData differentModuleData = new ModuleData();
+        differentModuleData.addModule(MODULE_IN_NEITHER);
+        assertFalse(moduleData.hashCode() == differentModuleData.hashCode());
     }
 
     /**

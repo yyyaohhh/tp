@@ -6,11 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
@@ -20,6 +17,7 @@ import seedu.address.model.module.exceptions.ModuleNotFoundException;
 public class ModuleData implements ReadOnlyModuleData {
 
     private final UniqueModuleList modules;
+
     {
         modules = new UniqueModuleList();
     }
@@ -27,7 +25,8 @@ public class ModuleData implements ReadOnlyModuleData {
     /**
      * Constucts an empty {@code ModuleData}.
      */
-    public ModuleData() {}
+    public ModuleData() {
+    }
 
     /**
      * Creates a ModuleData using the Modules in the {@code toBeCopied}.
@@ -97,39 +96,6 @@ public class ModuleData implements ReadOnlyModuleData {
             throw new ModuleNotFoundException();
         }
         return module;
-    }
-
-    /**
-     * Returns the {@code ModuleName} of the module with the specified {@code ModuleCode}.
-     *
-     * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code ModuleName}.
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    public ModuleName getDbModuleName(ModuleCode moduleCode) {
-        return getModule(moduleCode).getName();
-    }
-
-    /**
-     * Returns the {@code Description} of the module with the specified {@code ModuleCode}.
-     *
-     * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code Description}.
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getModule(moduleCode).getDescription();
-    }
-
-    /**
-     * Returns the {@code ModularCredit} of the module with the specified {@code ModuleCode}.
-     *
-     * @param moduleCode The {@code ModuleCode} to be matched with.
-     * @return The matching {@code ModularCredit}.
-     * @throws ModuleNotFoundException if no such module exists in the database.
-     */
-    public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
-        return getModule(moduleCode).getModularCredit();
     }
 
     /**

@@ -31,13 +31,14 @@ public interface ModulePlanStorage {
 
     /**
      * Saves the given {@link ReadOnlyModulePlan} to the storage.
-     * @param addressBook cannot be null.
+     *
+     * @param modulePlan cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveModulePlan(ReadOnlyModulePlan addressBook) throws IOException;
+    void saveModulePlan(ReadOnlyModulePlan modulePlan) throws IOException;
 
     /**
      * @see #saveModulePlan(ReadOnlyModulePlan)
      */
-    void saveModulePlan(ReadOnlyModulePlan addressBook, Path filePath) throws IOException;
+    void saveModulePlan(ReadOnlyModulePlan modulePlan, Path filePath) throws IOException;
 }

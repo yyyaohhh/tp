@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2040S;
@@ -145,22 +144,22 @@ public class EditCommandTest {
         // same values -> returns true
         EditModuleDescriptor copyDescriptor = new EditModuleDescriptor(DESC_CS2040S);
         EditCommand commandWithSameValues = new EditCommand(new ModuleCode(VALID_CODE_CS2040S), copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new HelpCommand()));
+        assertNotEquals(standardCommand, new HelpCommand());
 
         // different module code -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new ModuleCode(VALID_CODE_CS2101), DESC_CS2040S)));
+        assertNotEquals(standardCommand, new EditCommand(new ModuleCode(VALID_CODE_CS2101), DESC_CS2040S));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new ModuleCode(VALID_CODE_CS2040S), DESC_CS2101)));
+        assertNotEquals(standardCommand, new EditCommand(new ModuleCode(VALID_CODE_CS2040S), DESC_CS2101));
     }
 
     @Test
