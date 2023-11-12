@@ -54,7 +54,7 @@ public class JsonAdaptedDbModule {
 
         if (title == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
         if (!ModuleName.isValidName(title)) {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);

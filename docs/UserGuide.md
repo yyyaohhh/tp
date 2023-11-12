@@ -83,7 +83,7 @@ Provides you with information that is useful to know.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `info CS1101S` : Shows you information about the module CS1101S, which are the module code, module title, modular credit and module description of CS1101S.
+    * `info CS1101S` : Shows you information about the module CS1101S, which are the module code, module title, modular credit and module description of `CS1101S`.
 
     * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to your study plan of semester 2 in year 1, and marks its grade as `IP` (In Progress).
 
@@ -172,7 +172,7 @@ In ModCraft, you can specify the **year, semester and grade** of each module whe
 
 <br>
 
-Below shows you the process for adding a module the Advance Placement semester in ModCraft. The module `CS1010` is being added to Year 0 (the Advance Placement semester).
+Below shows you the process for adding a module to the Advance Placement semester in ModCraft. The module `CS1010` is being added to Year 0 (the Advance Placement semester).
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/ap-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
@@ -181,7 +181,7 @@ Below shows you the process for adding a module the Advance Placement semester i
 
 <br>
 
-Below shows you the process for adding a module to the Special Term (ST) in ModCraft. The module `CS3230` is being added to Year 1, Special Term 1.
+Below shows you the process for adding a module to one of the Special Term (ST) in ModCraft. The module `CS3230` is being added to Year 1, Special Term 1.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/st-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
@@ -241,7 +241,7 @@ Below shows you the process for executing the `add` command in ModCraft.
 
 ### Editing a module: `edit`
 
-Changes an attribute of a module **only if it exists**. Useful if you want to update information about a module or has made a mistake while adding a module.
+Changes an attribute of a module **only if it exists**. Useful if you want to update information about a module or have made a mistake while adding a module.
 
 Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 
