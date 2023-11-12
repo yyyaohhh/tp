@@ -85,7 +85,7 @@ Provides you with information that is useful to know.
 
     * `info CS1101S` : Shows you information about the module CS1101S, which are the module code, module title, modular credit and module description of CS1101S.
 
-    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to your study plan of semester 2 in year 1, and marks its grade as In Progress.
+    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to your study plan of semester 2 in year 1, and marks its grade as `IP` (In Progress).
 
     * `delete CS2040S` : Deletes the module CS2040S if it is present from your list of modules taken.
 
@@ -248,8 +248,10 @@ Format: `edit MODULE [y/YEAR] [s/SEM] [g/GRADE]`
 Examples:
 * `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
 * `edit CS3230 y/4 s/2`: Moves CS3230 to the Year 4 Semester 2 module list.
-* `edit CS2100 y/1`: Moves CS2100 to the Year 1 module list, with **Semester unchanged**. If before editing, the module was in Year 2 Semester 1, after editing it would be in Year 1 Semester 1.
-* `edit CS2101 s/1`: Moves CS2101 to the Semester 1 module list, with **Year unchanged**. If before editing, the module was in Year 1 Semester 2, after editing it would be in Year 1 Semester 1.
+* `edit CS2100 y/1`: Moves CS2100 to the Year 1 module list, with **Semester unchanged**.<br>
+If before editing, the module was in Year 2 Semester 1, after editing it would be in Year 1 Semester 1.
+* `edit CS2101 s/1`: Moves CS2101 to the Semester 1 module list, with **Year unchanged**.<br>
+If before editing, the module was in Year 1 Semester 2, after editing it would be in Year 1 Semester 1.
 
 Below shows you the process for executing the `edit` command in ModCraft. The grade of `CS1101S` is being edited to `C`.
 
@@ -321,7 +323,7 @@ Below shows you what ModCraft should look like for executing the `info` command.
 ### Calculating the total current CAP: `calculateCAP`
 
 You can calculate the total current Cumulative Average Point (CAP), or Grade Point Average (GPA) of all modules stored in all years and semesters.
-ModCraft will calculate your CAP using the formula, according to the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/non-graduating/modular-system):
+ModCraft will calculate your CAP according to the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/non-graduating/modular-system), and using the following formula:
 
 $\Large\frac{\text{sum of all valid modules: (grade point of each valid module * Modular Credits of each valid module)}}{\text{total Modular Credits of valid modules}}$.
 
@@ -348,7 +350,7 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 ### Calculating the total current Modular Credits (MCs): `CalculateMC`
 
-You can calculate the total current Modular Credits (MCs) stored in all years and semesters using this command. ModCraft displays a float which is the sum of all MCs of modules in the module plan.
+You can calculate the total current Modular Credits (MCs) stored in all years and semesters using this command. ModCraft displays a float which is the sum of MCs of all modules in the module plan.
 
 Format: `calculateMC`
 
@@ -361,7 +363,7 @@ Below shows you what ModCraft should look like for executing the `calculateMC` c
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The result displayed by the `calculateMC` command **includes** the modules with grades marked as `IP` (In progress).
+The result displayed by the `calculateMC` command **includes** the modular credits of modules with grades marked as `IP` (In progress).
 
 </md></div>
 
