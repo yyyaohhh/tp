@@ -47,6 +47,7 @@ public class JsonAdaptedModule {
         this.description = description;
         this.modularCredit = modularCredit;
     }
+
     /**
      * Converts a given {@code Module} into this class for Jackson use.
      */
@@ -105,17 +106,11 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
-        if (!ModuleName.isValidName(name)) {
-            throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
-        }
         final ModuleName modelName = new ModuleName(name);
 
         if (description == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
-        }
-        if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
 

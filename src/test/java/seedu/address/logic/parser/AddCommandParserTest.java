@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GRADE_DESC;
@@ -10,6 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.SEMESTER_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEMESTER_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2040S;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_CS2101;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -31,7 +35,7 @@ import seedu.address.model.module.Year;
 import seedu.address.testutil.ModuleBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -72,7 +76,7 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                 YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
+                YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
                         + validExpectedModuleString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
 
@@ -105,31 +109,30 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
     }
 
-    //TODO
-    //@Test
-    //public void parse_compulsoryFieldMissing_failure() {
-    //    String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-    //
-    //    // missing year prefix
-    //    assertParseFailure(parser,
-    //            VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + " " + VALID_YEAR_CS2101 + GRADE_DESC_CS2101,
-    //            expectedMessage);
-    //
-    //    // missing semester prefix
-    //    assertParseFailure(parser,
-    //            VALID_CODE_CS2101 + YEAR_DESC_CS2101 + VALID_SEMESTER_CS2101 + GRADE_DESC_CS2101,
-    //            expectedMessage);
-    //
-    //    // missing grade prefix
-    //    assertParseFailure(parser,
-    //            VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + VALID_GRADE_CS2101,
-    //            expectedMessage);
-    //
-    //    // all prefixes missing
-    //    assertParseFailure(parser,
-    //            VALID_CODE_CS2101 + VALID_YEAR_CS2101 + VALID_SEMESTER_CS2101 + VALID_GRADE_CS2101,
-    //            expectedMessage);
-    //}
+    @Test
+    public void parse_compulsoryFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        // missing year prefix
+        assertParseFailure(parser,
+                VALID_CODE_CS2101 + SEMESTER_DESC_CS2101 + " " + VALID_YEAR_CS2101 + GRADE_DESC_CS2101,
+                expectedMessage);
+
+        // missing semester prefix
+        assertParseFailure(parser,
+                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + VALID_SEMESTER_CS2101 + GRADE_DESC_CS2101,
+                expectedMessage);
+
+        // missing grade prefix
+        assertParseFailure(parser,
+                VALID_CODE_CS2101 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + VALID_GRADE_CS2101,
+                expectedMessage);
+
+        // all prefixes missing
+        assertParseFailure(parser,
+                VALID_CODE_CS2101 + VALID_YEAR_CS2101 + VALID_SEMESTER_CS2101 + VALID_GRADE_CS2101,
+                expectedMessage);
+    }
 
     @Test
     public void parse_invalidValue_failure() {
@@ -157,7 +160,7 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser,
                 PREAMBLE_NON_EMPTY + VALID_CODE_CS2101
-                 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+                        + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
                 ModuleCode.MESSAGE_CONSTRAINTS);
     }
 

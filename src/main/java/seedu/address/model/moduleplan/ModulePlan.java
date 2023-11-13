@@ -11,15 +11,14 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the module plan level
  * Duplicates are not allowed (by .isSameModule comparison)
  */
 public class ModulePlan implements ReadOnlyModulePlan {
 
-    private final ModulePlanSemesterList semesters;
-    {
-        semesters = new ModulePlanSemesterList();
-    }
+
+    private final ModulePlanSemesterList semesters = new ModulePlanSemesterList();
+
 
     /**
      * Creates a new empty ModulePlan.
@@ -53,30 +52,11 @@ public class ModulePlan implements ReadOnlyModulePlan {
         this.semesters.setSemesters(semesters);
     }
 
-    /**
-     * Adds a new semester to the module plan.
-     *
-     * @param semester The semester to be added.
-     */
-    public void addSemester(ModulePlanSemester semester) {
-        this.semesters.addSemester(semester);
-    }
-
-    /**
-     * Removes a semester from the module plan.
-     *
-     * @param semester The semester to be removed.
-     */
-    public void removeSemester(ModulePlanSemester semester) {
-        this.semesters.removeSemester(semester);
-    }
-
-
 
     //// module-level operations
 
     /**
-     * Returns true if a module with the same identity as {@code module} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the module plan.
      */
     public boolean hasModule(Module m) {
         requireNonNull(m);
@@ -91,7 +71,7 @@ public class ModulePlan implements ReadOnlyModulePlan {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code ModulePlan}.
      */
     public void removeModule(Module key) {
         semesters.removeModule(key);

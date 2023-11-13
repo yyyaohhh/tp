@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static seedu.address.testutil.ModuleUtil.clearUserInputFields;
 
 import seedu.address.model.ModuleData;
 import seedu.address.model.module.Module;
@@ -39,13 +37,11 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("This course is a first course in linear algebra.")
             .build();
-
-    // Manually added
     public static final Module CS2101 = new ModuleBuilder()
             .withCode("CS2101")
             .withYear("2")
             .withSem("1")
-            .withGrade("IP")
+            .withGrade("B-")
             .withName("Effective Communication for Computing Professionals")
             .withModularCredit("4")
             .withDescription("This course aims to equip students with the skills needed to communicate.")
@@ -68,17 +64,15 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("Learn about computer organisation")
             .build();
-
     public static final Module CS2106 = new ModuleBuilder()
             .withCode("CS2106")
-            .withYear("2")
+            .withYear("5")
             .withSem("2")
             .withGrade("B")
             .withName("Introduction to Operating Systems")
             .withModularCredit("4")
             .withDescription("Learn about operating systems")
             .build();
-
     public static final Module CS3230 = new ModuleBuilder()
             .withCode("CS3230")
             .withYear("3")
@@ -88,62 +82,70 @@ public class TypicalModules {
             .withModularCredit("4")
             .withDescription("This course introduces different techniques of designing and analysing algorithms.")
             .build();
-
     public static final Module IS6000 = new ModuleBuilder()
             .withCode("IS6000")
             .withYear("4")
             .withSem("2")
-            .withGrade("IP")
+            .withGrade("A")
             .withName("Topics in Information Systems and Analytics Research")
             .withModularCredit("0")
             .withDescription("A 0 MC module")
             .build();
+    public static final Module CS9999 = new ModuleBuilder()
+            .withCode("CS9999")
+            .withYear("3")
+            .withSem("1")
+            .withGrade("C")
+            .withName("Invalid Module")
+            .withModularCredit("0")
+            .withDescription("Should not be in modulePlan or moduleDatabase.")
+            .build();
+    public static final Module CFG1002 = new ModuleBuilder()
+            .withCode("CFG1002")
+            .withYear("1")
+            .withSem("1")
+            .withGrade("CS")
+            .withName("Career Catalyst")
+            .withModularCredit("2")
+            .withDescription("A CS/CU module")
+            .build();
 
+    // Modules defined based on their presence in modulePlan and moduleData
+    public static final Module MODULE_IN_BOTH = CS2101;
+    public static final Module MODULE_ONLY_DATA = CS2040S;
+    public static final Module MODULE_IN_NEITHER = CS9999;
 
+    // Module with 0 MC
+    public static final Module MODULE_ZERO_MC = IS6000;
 
-    private TypicalModules() {}
+    // Module with CS grade
+    public static final Module MODULE_CS_GRADE = CFG1002;
 
+    private TypicalModules() {
+    }
 
     public static ModulePlan getTypicalModulePlan() {
         ModulePlan modulePlan = new ModulePlan();
-
-        List<Module> list = getTypicalModules();
-        for (Module module : list) {
-            modulePlan.addModule(module);
-        }
+        modulePlan.addModule(MODULE_IN_BOTH);
         return modulePlan;
     }
 
+    public static ModulePlan getTypicalModulePlanWith(Module module) {
+        ModulePlan modulePlan = getTypicalModulePlan();
+        modulePlan.addModule(module);
+        return modulePlan;
+    }
 
-    public static ModulePlan getTypicalModulePlanWithout(Module ... exclusions) {
-        List<Module> exclusionList = new ArrayList(Arrays.asList(exclusions));
-        ModulePlan mp = getTypicalModulePlan();
-        for (Module excludedModule : exclusionList) {
-            if (mp.hasModule(excludedModule)) {
-                mp.removeModule(excludedModule);
-            }
-        }
-        return new ModulePlan(mp);
-
+    public static ModulePlan getTypicalModulePlanWithout(Module module) {
+        ModulePlan modulePlan = getTypicalModulePlan();
+        modulePlan.removeModule(module);
+        return modulePlan;
     }
 
     public static ModuleData getTypicalModuleData() {
         ModuleData moduleData = new ModuleData();
-
-        for (Module m : getAllTypicalModules()) {
-            Module module = new Module(
-                    m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
-            moduleData.addModule(module);
-        }
+        moduleData.addModule(clearUserInputFields(MODULE_IN_BOTH));
+        moduleData.addModule(clearUserInputFields(MODULE_ONLY_DATA));
         return moduleData;
     }
-
-    public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2030S, CS2040S, CS2100));
-    }
-
-    public static List<Module> getAllTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2040S, CS2030S, MA2001, CS2101, GEA1000, CS2100, CS2106, IS6000));
-    }
-
 }

@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonModulePlanStorage addressBookStorage = new JsonModulePlanStorage(getTempFilePath("mp"));
+        JsonModulePlanStorage modulePlanStorage = new JsonModulePlanStorage(getTempFilePath("mp"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(modulePlanStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -61,8 +61,9 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getModulePlanFilePath() {
         assertNotNull(storageManager.getModulePlanFilePath());
     }
+
 
 }

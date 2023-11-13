@@ -17,8 +17,15 @@ import seedu.address.model.ModuleData;
  */
 public class DatabaseManager implements Database {
 
+    public static final String DEFAULT_DATABASE_FILEPATH = "database/moduleinfo.json";
+
     private static final Logger logger = LogsCenter.getLogger(DatabaseManager.class);
-    private String filePath = "database/moduleinfo.json";
+
+    private final String filePath;
+
+    public DatabaseManager(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     public String getDatabaseFilePath() {
@@ -36,7 +43,7 @@ public class DatabaseManager implements Database {
         logger.fine("Attempting to parse module information: " + filePath);
 
         Optional<JsonSerializableModuleData> jsonDatabaseOptional = JsonUtil.readJsonResource(
-                "database/moduleinfo.json", JsonSerializableModuleData.class);
+                filePath, JsonSerializableModuleData.class);
 
         try {
             return jsonDatabaseOptional.get().toModelType();

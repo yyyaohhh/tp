@@ -11,7 +11,7 @@ import seedu.address.model.module.Year;
  */
 public class EditModuleDescriptorBuilder {
 
-    private EditModuleDescriptor descriptor;
+    private final EditModuleDescriptor descriptor;
 
     public EditModuleDescriptorBuilder() {
         descriptor = new EditModuleDescriptor();

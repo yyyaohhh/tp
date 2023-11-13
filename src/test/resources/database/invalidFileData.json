@@ -1,0 +1,10 @@
+{
+  "modules": [
+    {
+      "moduleCode": "MA1234567890",
+      "title": "Programming Methodology II",
+      "description": "This course is a follow up to CS1010.",
+      "moduleCredit": "4"
+    }
+  ]
+}

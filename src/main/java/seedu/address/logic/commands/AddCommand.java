@@ -58,11 +58,10 @@ public class AddCommand extends Command {
     }
 
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // Retieve module from database
+        // Retrieve module from database
         Module newModule;
         try {
             newModule = model.getModuleFromDb(moduleCode);

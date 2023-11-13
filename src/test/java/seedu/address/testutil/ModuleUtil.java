@@ -6,7 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
+import seedu.address.model.module.Grade;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.Semester;
+import seedu.address.model.module.Year;
 
 
 /**
@@ -24,12 +27,11 @@ public class ModuleUtil {
      * Returns the part of command string for the given {@code module}'s details.
      */
     public static String getModuleDetails(Module module) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(module.getModuleCode().toString() + " ");
-        sb.append(PREFIX_YEAR + module.getYearTaken().year.toString() + " ");
-        sb.append(PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester() + " ");
-        sb.append(PREFIX_GRADE + module.getGrade().toString() + " ");
-        return sb.toString();
+        String sb = module.getModuleCode().toString()
+                + " " + PREFIX_YEAR + module.getYearTaken().year.toString()
+                + " " + PREFIX_SEMESTER + module.getSemesterTaken().semester.getSemester()
+                + " " + PREFIX_GRADE + module.getGrade().toString() + " ";
+        return sb;
     }
 
     /**
@@ -43,5 +45,21 @@ public class ModuleUtil {
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade).append(" "));
 
         return sb.toString();
+    }
+
+    public static Module clearUserInputFields(Module m) {
+        return new Module(m.getModuleCode(), m.getName(), m.getDescription(), m.getModularCredit());
+    }
+
+    public static Year getAltYear(Year year) {
+        return year.equals(new Year("1")) ? new Year("2") : new Year("1");
+    }
+
+    public static Semester getAltSemester(Semester semester) {
+        return semester.equals(new Semester("1")) ? new Semester("2") : new Semester("1");
+    }
+
+    public static Grade getAltGrade(Grade grade) {
+        return grade.equals(new Grade("A")) ? new Grade("B") : new Grade("A");
     }
 }

@@ -3,9 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2040S;
-import static seedu.address.testutil.TypicalModules.CS2106;
-import static seedu.address.testutil.TypicalModules.MA2001;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
 import static seedu.address.testutil.TypicalModules.getTypicalModulePlan;
 
 import java.io.IOException;
@@ -35,9 +34,7 @@ public class JsonModulePlanStorageTest {
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-                : null;
+        return prefsFileInTestDataFolder != null ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder) : null;
     }
 
     @Test
@@ -51,12 +48,12 @@ public class JsonModulePlanStorageTest {
     }
 
     @Test
-    public void readModulePlan_invalidPersonAddressBook_throwDataLoadingException() {
+    public void readModulePlan_invalidModulePlan_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readModulePlan("invalidModuleModulePlan.json"));
     }
 
     @Test
-    public void readModulePlan_invalidAndValidPersonAddressBook_throwDataLoadingException() {
+    public void readModulePlan_invalidAndValidModuleModulePlan_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readModulePlan("invalidAndValidModuleModulePlan.json"));
     }
 
@@ -73,19 +70,20 @@ public class JsonModulePlanStorageTest {
         assertEquals(original, new ModulePlan(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addModule(MA2001);
-        original.removeModule(CS2040S);
+        original.addModule(MODULE_ONLY_DATA);
+        original.removeModule(MODULE_IN_BOTH);
         jsonModulePlanStorage.saveModulePlan(original, filePath);
         readBack = jsonModulePlanStorage.readModulePlan(filePath).get();
         assertEquals(original, new ModulePlan(readBack));
 
         // Save and read without specifying file path
-        original.addModule(CS2106);
+        original.addModule(MODULE_IN_BOTH);
         jsonModulePlanStorage.saveModulePlan(original); // file path not specified
         readBack = jsonModulePlanStorage.readModulePlan().get(); // file path not specified
         assertEquals(original, new ModulePlan(readBack));
 
     }
+
     @Test
     public void saveModulePlan_nullModulePlan_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveModulePlan(null, "SomeFile.json"));
@@ -96,8 +94,8 @@ public class JsonModulePlanStorageTest {
      */
     private void saveModulePlan(ReadOnlyModulePlan modulePlan, String filePath) {
         try {
-            new JsonModulePlanStorage(Paths.get(filePath))
-                    .saveModulePlan(modulePlan, addToTestDataPathIfNotNull(filePath));
+            new JsonModulePlanStorage(Paths.get(filePath)).saveModulePlan(modulePlan,
+                    addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
