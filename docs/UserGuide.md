@@ -105,61 +105,70 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 <br>
 
-**Notes about the command format:**<br>
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note** about the command format:<br>
 
 * All commands are **case-sensitive**.
 
-* Words in `UPPER_CASE` are **compulsory parameters** to be supplied by the user.<br>
-  e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
+* Words in `UPPER_CASE` are **compulsory parameters** supplied by you.<br>
+  e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CS1231S`.
 
-* Parameters in square brackets denote **optional parameters**.<br>
-  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if `y/` is keyed in by the user, `YEAR` has to be specified.
+* Parameters in square brackets denotes **optional parameters**.<br>
+  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if you keyed `y/`, `YEAR` has to be specified.
 
-* Grades and semesters as parameters are **case-sensitive**. Only grades and semesters in **capital letters** are allowed.<br>
+* Grade and Semester are **case-sensitive parameters**. Only grades and semesters in **capital letters** are allowed.<br>
   e.g. `g/A` instead of `g/a`, and `s/ST1` instead of `g/st1`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be **ignored**.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extra parameters for commands that do not take in parameters (such as `help` and `exit`) will be **ignored**.<br>
+  e.g. if you input `help 123`, it will be interpreted as `help`.
 
-* Parameters can come with a **prefix** (like `y/` in `y/YEAR`) or without a prefix (like `MODULE`).
+* Parameters can either come with a **prefix** (like `y/` in `y/YEAR`) or **without a prefix** (like `MODULE`).
 
-* All commands will have at most one parameter without a prefix. Parameters without a prefix should come before any parameters that come with a prefix. ModCraft will parse all input between the command and the first prefix as the parameter without the prefix.<br>
+* All commands will have **at most one** parameter without a prefix. Parameters without a prefix should come **before** any parameters with a prefix. ModCraft will parse all your input between the command and the first prefix as **one parameter**.<br>
   e.g. For `add MODULE y/YEAR s/SEM g/GRADE`, when you key in `add CS2101 CS2103T y/1 s/1 g/A`, ModCraft will read it as you trying to specify `CS2101 CS2103T` as one `MODULE`.
 
-* Parameters with a prefix can be specified in any order among themselves.<br>
+* Parameters with a prefix can be specified in **any order** among themselves.<br>
   e.g. `add CS2030S y/1 s/2 g/IP` is the same as `add CS2030S s/2 g/IP y/1`.
+
+</md></div>
 
 <br>
 
 ### Viewing help: `help`
 
-Displays you a message explaining how to access the help page of ModCraft, as shown below.
+Displays to you a popup explaining how to access the User Guide of ModCraft, as shown below.
 
 ![help message](images/helpMessage.png)
 
-You can copy the URL and paste it into your browser to view [this User Guide](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html) about setting up ModCraft and the descriptions of commands in ModCraft.
+You can copy the URL using the `Copy URL` button and paste it into your browser to view [this User Guide](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html) about setting up ModCraft and the descriptions of commands in ModCraft.
 
 Format: `help`
 
 <br>
 
-### Modules
+### <span style="text-decoration:underline"><strong>Modules</strong></span>
 
-The modules in ModCraft are [courses from National University of Singapore (NUS)](https://nusmods.com/courses?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4). The modules have **module code, module title, module description and modular credits**.
+The modules in ModCraft are [courses from National University of Singapore (NUS)](https://nusmods.com/courses?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4). The modules have **Module Code**, **Module Title**, **Module Description** and **Modular Credits**.
 
 Examples:
-* Module code: `CS2040S`
-* Module title: `Data Structures and Algorithms`
+* Module Code: `CS2040S`
+* Module Title: `Data Structures and Algorithms`
 * Module Description: `This course introduces the fundamentals of data structures and algorithms.`
 * Modular Credits: `4`
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
-The module code, module title, module description and modular credits **cannot** be edited.
+The Module Code, Module Title, Module Description and Modular Credits **cannot** be edited.
 </md></div>
 
 <br>
 
-In ModCraft, you can specify the **year, semester and grade** of each module when you are adding or editing your study plan.
+In ModCraft, you can specify the **Year, Semester and Grade** of each module when you are adding or editing your study plan.
+
+| Parameter    | Values/Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Year**     | Number from `0` to `6` <br> * `0` represents Advance Placement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Semester** | - `1`   (Semester 1)<br>- `2`   (Semester 2)<br>- `ST1` (Special Term 1)<br>- `ST2` (Special Term 2) 	                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                  |
+| **Grade**    | The Grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).<br>- `A+` (5.0)        `IP`  (In Progress)<br>- `A`  (5.0)        `EXE` (Exempted)<br>- `A-` (4.5)        `W`   (Withdrawn)<br>- `B+` (4.0)        `IC`  (Incomplete)<br>- `B`  (3.5)        `S`   (Satisfactory)<br>- `B-` (3.0)        `U`   (Unsatisfactory)<br>- `C+` (2.5)        `CS`  (Completed Satisfactory)<br>- `C`  (2.0)        `CU`  (Completed Unsatisfactory)<br>- `D+` (1.5)<br>- `D`  (1.0) 	 |
+
 
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
