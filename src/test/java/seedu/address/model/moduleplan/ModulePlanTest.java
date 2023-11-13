@@ -107,6 +107,18 @@ public class ModulePlanTest {
         assertFalse(modulePlan.equals(1));
     }
 
+    @Test
+    public void hashCodeMethod() {
+        modulePlan.resetData(getTypicalModulePlan());
+        
+        // same object
+        assertTrue(modulePlan.hashCode() == modulePlan.hashCode());
+
+        // different values
+        ModulePlan differentModulePlan = new ModulePlan();
+        assertFalse(modulePlan.hashCode() == differentModulePlan.hashCode());
+    }
+
 
     /**
      * A stub ReadOnlyModulePlan whose list can violate interface constraints.

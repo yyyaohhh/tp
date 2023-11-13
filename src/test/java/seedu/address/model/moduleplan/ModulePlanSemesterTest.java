@@ -199,6 +199,27 @@ public class ModulePlanSemesterTest {
         assertEquals(modulePlanSemester.toString(), expectedString);
     }
 
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(modulePlanSemester.equals(modulePlanSemester));
 
+        // same values -> returns true
+        ModulePlanSemester modulePlanSemesterCopy = new ModulePlanSemester(YEAR, SEMESTER);
+        assertTrue(modulePlanSemester.equals(modulePlanSemesterCopy));
 
+        // different types -> returns false
+        assertFalse(modulePlanSemester.equals(1));
+
+        // null -> returns false
+        assertFalse(modulePlanSemester.equals(null));
+
+        // different year -> returns false
+        ModulePlanSemester differentModulePlanSemester = new ModulePlanSemester(new Year("2"), SEMESTER);
+        assertFalse(modulePlanSemester.equals(differentModulePlanSemester));
+
+        // different semester -> returns false
+        differentModulePlanSemester = new ModulePlanSemester(YEAR, new Semester("1"));
+        assertFalse(modulePlanSemester.equals(differentModulePlanSemester));
+    }
 }
