@@ -514,6 +514,15 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
+**Use case: UC03 - Calculating CAP**
+
+**MSS**
+
+1. User asks ModCraft for their current CAP.
+2. System show the current CAP of all modules that have been taken.
+
+Use case ends.
+
 <br>
 
 ### Non-Functional Requirements
