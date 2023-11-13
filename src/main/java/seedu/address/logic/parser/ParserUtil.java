@@ -85,9 +85,6 @@ public class ParserUtil {
     public static ModuleName parseModuleName(String moduleName) throws ParseException {
         requireNonNull(moduleName);
         String trimmedModuleName = moduleName.trim();
-        if (!ModuleName.isValidName(trimmedModuleName)) {
-            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
-        }
         return new ModuleName(trimmedModuleName);
     }
 
@@ -100,9 +97,6 @@ public class ParserUtil {
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
-        }
         return new Description(trimmedDescription);
     }
 
