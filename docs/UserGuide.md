@@ -196,7 +196,6 @@ The images below show you the process for adding a module to one of the Special 
 
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
-
 Currently, ModCraft has certain **limitations**.
 
 * ModCraft **does not** check for pre-requisites, pre-clusions and co-requisites while adding, deleting and editing modules. For example, you can add modules into ModCraft without adding their prerequisite modules.
