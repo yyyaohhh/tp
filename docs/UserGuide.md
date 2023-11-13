@@ -142,7 +142,7 @@ Displays to you a popup explaining how to access the User Guide of ModCraft, as 
 
 You can copy the URL using the `Copy URL` button and paste it into your browser to view [this User Guide](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html) about setting up ModCraft and the descriptions of commands in ModCraft.
 
-**Format:** 
+**Format:**
 ```
 help
 ```
@@ -277,7 +277,7 @@ You can change an attribute of a module using this command. This command works *
 
 This command may be useful if you want to update information about a module or have made a mistake while adding a module.
 
-**Format:** 
+**Format:**
 ```
 edit MODULE [y/YEAR] [s/SEM] [g/GRADE]
 ```
@@ -312,7 +312,7 @@ You need to provide **at least one** of the optional fields (i.e. `GRADE`, `YEAR
 
 You can remove the module from whichever semester the module is taken using this command. This command works **only if the module has already been added**.
 
-**Format:** 
+**Format:**
 ```
 delete MODULE
 ```
@@ -353,7 +353,7 @@ You can retrieve information about **any** module by its Module Code using this 
 
 The **Module Code**, **Module Title**, **Modular Credit** and **Module Description** of the module will be displayed.
 
-**Format:** 
+**Format:**
 ```
 info MODULE
 ```
