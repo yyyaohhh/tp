@@ -4,7 +4,7 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 !pragma useVerticalIf on
 start
-:User executes delete module command;
+:User executes delete command;
 :Parse command string;
 
 if () then ([else])

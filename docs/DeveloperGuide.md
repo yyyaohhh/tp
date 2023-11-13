@@ -213,7 +213,7 @@ This section describes some noteworthy details on how certain features and comma
 * [Edit Module Command](#edit-module-command)
 * [Delete Module Command](#delete-module-command)
 * [Calculate CAP Command](#calculate-cap-command)
-* [Calculate Modular Credits (MC) Command](#calculate-modular-credits-mc-command)
+* [Calculate Modular Credits (MCs) Command](#calculate-modular-credits-mcs-command)
 * [Undo/redo feature](#proposed-undoredo-feature)
 
 <br>
@@ -335,17 +335,59 @@ The following sequence diagram shows how the `delete` command works:
 
 ### Calculate CAP Command
 
+**Overview:**<br>
+
+The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module planner, using their grades and modular credits. <br>
+
+The format of the `calculateCAP` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-cap-calculatecap).<br>
+
+**Feature details:**<br>
+
+1. The user executes the `calculateCAP` command.
+2. If the previous step is completed without exceptions, the CAP will be calculated and displayed.
+
 <br>
 
-### Implementation
+The sequence of the `calculateCAP` command is as follows:<br>
 
-### Calculate Modular Credits (MC) Command
+1. The user inputs the `calculateCAP` command.<br>
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `CalculateCapCommand`.
+4. The `CalculateCapCommand` calculates the CAP by calling `Model#getCap`.
+
+The following sequence diagram shows how the `calculateCAP` command works:
+
+<puml src="diagrams/CalculateCapSequenceDiagram.puml" width="450" />
 
 <br>
 
-### Implementation
+### Calculate Modular Credits (MCs) Command
 
+**Overview:**<br>
 
+The `calculateMC` command is used to calculate the total sum of Modular Credits (MCs) of all modules in the module planner, regardless of their grades. <br>
+
+The format of the `calculateMC` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-modular-credits-mcs-calculatemc).<br>
+
+**Feature details:**<br>
+
+1. The user executes the `calculateMC` command.
+2. If the previous step is completed without exceptions, the number of MCs will be calculated and displayed.
+
+<br>
+
+The sequence of the `calculateMC` command is as follows:<br>
+
+1. The user inputs the `calculateMC` command.<br>
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `CalculateMcCommand`.
+4. The `CalculateMcCommand` calculates the CAP by calling `Model#totalModularCredits`.
+
+The following sequence diagram shows how the `calculateMC` command works:
+
+<puml src="diagrams/CalculateMcSequenceDiagram.puml" width="450" />
+
+<br>
 
 ### \[Proposed\] Undo/redo feature
 
