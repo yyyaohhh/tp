@@ -25,11 +25,15 @@ Given below are my contributions to the project.
   * Developer Guide:
     * User stories (as discussed by everyone)
     * Implementation of edit command
+    * Implementation of proposed feature: Prerequisite
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): 4
   * Reported bugs and suggestions for other teams in the class
     * Reported 6 bugs for the group [F13-1](https://github.com/AY2324S1-CS2103-F13-1/tp), all marked as Medium Severity.
+    * Helped test [T13-3](https://github.com/AY2324S1-CS2103T-T13-3/tp) jar file.
 
 * **Tools**:
-  * to be added soon
+  * PlantUML
+  * Markdown
+  * Git
