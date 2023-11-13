@@ -434,7 +434,7 @@ calculateCAP
 ```
 
 
-Here is an example output for executing the `calculateCAP` command:
+Here is an example output after executing the `calculateCAP` command:
 
 ```
 Calculated CAP: 3.75
@@ -461,7 +461,7 @@ ModCraft displays a float which is the sum of MCs of **all modules** in the **st
 calculateMC
 ```
 
-Here is an example output for executing the `calculateMC` command:
+Here is an example output after executing the `calculateMC` command:
 
 ```
 Total Modular Credits: 16.0
