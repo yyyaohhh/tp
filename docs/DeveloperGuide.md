@@ -109,6 +109,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
+<puml src="diagrams/DeleteSequenceDiagram2.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -290,15 +292,19 @@ As can be seen, this is a helpful class to store fields that need to be edited.
 
 The proposed pre-requisite checking mechanism is facilitated by `Prerequisite`. Every `Module` will have a `Prerequisite` field. `Prerequisite` contains a list of other `Prerequisite` objects, of which `Module` is a subclass. It also contains a number that represents the number of `Prerequisite`s in the list that need to be fulfilled before this `Prerequisite` can be considered fulfilled. Additionally, it implements the following operation:
 
-* `Prerequisite#isFulfilled()`: Checks whether the current Prerequisite is fulfilled.
+* `Prerequisite#isFulfilled(List<Module> list)`: Checks whether the current `Prerequisite` is fulfilled by the `Module`s in `list`.
 
-This operation is exposed in the `Model` interface as `Model#checkPrerequisitesFulfilled(Module m)`.
+This operation is accessed in `Module` as `Module#checkPrerequisitesFulfilled(List<Module> list)`.
+
+Here is the class diagram:
+
+<puml src="diagrams/PrerequisiteClassDiagram.puml" />
 
 Given below is an example usage scenario and how the prerequisite mechanism behaves at each step.
 
 Step 1. The user executes `add CS2103T y/2 s/1 g/IP` command to add the module `CS2103T` in the module plan. 
 
-Step 2. The `add` command calls `Model#checkPrerequisitesFulfilled(CS2103T)` to check if the prerequisites have been fulfilled in previous semesters. In this case, these are the Advanced Placement and Year 1 semesters.
+Step 2. When executing the `add` command, `Module#checkPrerequisitesFulfilled(List<Module> list)` is called to check if the prerequisites have been fulfilled in previous semesters. In this case, these are the Advanced Placement and Year 1 semesters, and the `Module`s in these semesters populate `list`.
 
 Step 3. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it adds the module `CS2103T` to Year 2 Semester 1.
 
@@ -308,32 +314,18 @@ Step 3. ModCraft lets the user know if the prerequisites have not been fulfilled
 
 </box>
 
-Step 4. The user now decides to move the module to an earlier semester, and decides to make the appropriate changes by executing the command `edit CS2103T y/1 s/2`. The `edit` command calls `Model#checkPrerequisitesFulfilled(CS2103T)` again to check if the prerequisites have been fulfilled in previous semesters. In this case, they are the Advanced Placement and Year 1 Semester 1 semesters. 
+Step 4. The user now decides to move the module to an earlier semester, and decides to make the appropriate changes by executing the command `edit CS2103T y/1 s/2`. The `edit` command calls `Module#checkPrerequisitesFulfilled(List<Module> list)` again to check if the prerequisites have been fulfilled in previous semesters. In this case, they are the Advanced Placement and Year 1 Semester 1 semesters, and the `Module`s in these semesters populate `list`. 
 
 Step 5. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it moves the module `CS2103T` to Year 1 Semester 2.
 
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the prerequisite checking works:
 
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+<puml src="diagrams/PrerequisiteAddSequenceDiagram.puml" alt="PrerequisiteAddSequenceDiagram" />
 
-<box type="info" seamless>
+The following activity diagram summarizes what happens when a user executes a command that changes the ModulePlan:
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoModulePlan()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the module plan to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `modulePlanStateList.size() - 1`, pointing to the latest module plan state, then there are no undone ModulePlan states to restore. The `redo` command uses `Model#canRedoModulePlan()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="250" />
 
 <br>
 
