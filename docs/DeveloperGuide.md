@@ -15,8 +15,12 @@
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-<br>
 
+Libraries used in this project:
+
+- [Jackson](https://github.com/FasterXML/jackson)
+- [JavaFX](https://openjfx.io/)
+- [JUnit5](https://github.com/junit-team/junit5)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -471,8 +475,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User searches a module that he wants to take next semester
 2. Modcraft displays the information for the module.
-3. User adds that module to his timetable
-4. Modcraft shows the module in the User’s timetable
+3. User adds that module to their module plan.
+4. Modcraft shows the module in the User’s module plan.
 Steps 1-4 are repeated for each module the User is interested in
 
 Use case ends.
@@ -501,7 +505,7 @@ Use case resumes from step 1.
 **MSS**
 
 1. User inputs grades for a module that they have taken.
-2. System shows the updated grade in the timetable.
+2. Modcraft shows the updated grade in the timetable.
 Steps 1-2 are repeated for each grade the user would like to update for.
 
 Use case ends.
@@ -509,13 +513,56 @@ Use case ends.
 **Extensions**
 
 * 1a. Grade is invalid
-    * 1a1. System shows the user the grade is invalid
+    * 1a1. Modcraft shows the user the grade is invalid
     * 1a2. User inputs correct grade
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
 <br>
 
+___
+#### **Use Case: UC06 - Indicating Advanced Placement Modules**
+
+**MSS**
+
+1. User searches for the advanced placement module that they have taken or are planning to take using the info command.
+2. User adds the module to the module plan. 
+3. Modcraft shows the module in the module plan.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Modcraft detects that the module does not exist or not available for advanced placement.
+    * 1a1. Modcraft informs the user it is unavailable.
+    * 1a2. User searches another module.
+Steps 1a1 to 1a2 are repeated until the module is available.
+Use case resumes from step 2.
+
+___
+
+#### **Use Case: UC07 - Indicating Special Term Modules**
+
+**MSS**
+
+1. User searches for a special term module using the info command.
+2. Modcraft shows that the module is available to be taken in the special term.
+3. User adds the module to the module plan. 
+4. Modcraft shows the module in the User's module plan.
+
+Use case ends.
+
+**Extensions**
+* 1a. Modcraft detects that the module does not exist or not available for advanced placement.
+    * 1a1. Modcraft informs the user it is unavailable.
+    * 1a2. User searches another module.
+      Steps 1a1 to 1a2 are repeated until the module is available.
+      Use case resumes from step 2.
+* 3a. User wants to indicate that the module is taken or to be taken in Special Term 1 or Special Term 2
+  * 3a1. User uses the add command and specifies the semester to be `s/ST1` for Special Term 1 or `s/ST2` for Special Term 2
+  * Use case resumes from step 4.
+
+___
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
