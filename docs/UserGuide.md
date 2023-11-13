@@ -7,9 +7,6 @@ pageNav: 3
 # ModCraft User Guide
 --------------------------------------------------------------------------------------------------------------------
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
 ModCraft is a desktop application built for students from National University of Singapore (NUS) to help them **track and organise their academic journey**. With ModCraft serving as your **personal study planner**, you can easily:
 
 * Keep track of the courses you have taken
@@ -27,7 +24,7 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 This User Guide consists of various visuals to aid your reading.
 
 <div class="alert alert-success"><md>:information_source: **Note:**
-Provides you with information that is useful to know.
+Notes in boxes like this provide you with information that is useful to know.
 </md></div>
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
@@ -35,7 +32,7 @@ Tips in boxes like this contain recommendations for users to consider.
 </md></div>
 
 <div class="alert alert-warning"><md>:gear: **Example:**
-Examples are placed in boxes like this to show you possible ways a command can be run.
+Examples in boxes like this show you possible ways a command can be run.
 </md></div>
 
 <div class="alert alert-danger"><md>:exclamation: **Caution:**
@@ -109,7 +106,7 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 <br>
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:** For the command format:<br>
+<div class="alert alert-success"><md>:information_source: **Note:** For the command format:<br>
 
 * All commands are **case-sensitive**.
 
@@ -158,13 +155,14 @@ help
 The modules in ModCraft are [courses from National University of Singapore (NUS)](https://nusmods.com/courses?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4). The modules have **Module Code**, **Module Title**, **Module Description** and **Modular Credits**.
 
 <div class="alert alert-warning"><md>:gear: **Example:**
+
 * Module Code: `CS2040S`
 * Module Title: `Data Structures and Algorithms`
 * Module Description: `This course introduces the fundamentals of data structures and algorithms.`
 * Modular Credits: `4`
 </md></div>
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+<div class="alert alert-success"><md>:information_source: **Note:**
 The Module Code, Module Title, Module Description and Modular Credits **cannot** be edited.
 </md></div>
 
@@ -180,7 +178,7 @@ In ModCraft, you can specify the **Year**, **Semester** and **Grade** of each mo
 |    **Grade**<br>`g/GRADE`     | The Grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).<br><br>- `A+`&nbsp;(5.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `IP`&nbsp;&nbsp;&nbsp;&nbsp;(In Progress)<br>- `A`&nbsp;&nbsp;&nbsp;(5.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `EXE`&nbsp;&nbsp;(Exempted)<br>- `A-`&nbsp;(4.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `W`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Withdrawn)<br>- `B+`&nbsp;(4.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `IC`&nbsp;&nbsp;&nbsp;&nbsp;(Incomplete)<br>- `B`&nbsp;&nbsp;&nbsp;(3.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `S`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Satisfactory)<br>- `B-`&nbsp;(3.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `U`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Unsatisfactory)<br>- `C+`&nbsp;(2.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `CS`&nbsp;&nbsp;&nbsp;&nbsp;(Completed Satisfactory)<br>- `C`&nbsp;&nbsp;&nbsp;(2.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `CU`&nbsp;&nbsp;&nbsp;&nbsp;(Completed Unsatisfactory)<br>- `D+`&nbsp;(1.5)<br>- `D`&nbsp;&nbsp;&nbsp;(1.0) |
 
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:** For the parameters in the table above <br>
+<div class="alert alert-success"><md>:information_source: **Note:** For the parameters in the table above <br>
 
 * `g/GRADE` and `s/SEMESTER` are **case-sensitive parameters**. Only grades and semesters in **capital letters** are allowed.<br>
   e.g. `g/A` instead of `g/a`, and `s/ST1` instead of `g/st1`.
@@ -257,6 +255,7 @@ add MODULE y/YEAR s/SEM g/GRADE
 ```
 
 <div class="alert alert-warning"><md>:gear: **Example:**
+
 * `add MA1521 y/1 s/1 g/A`: Adds the module MA1521 to Year 1 Semester 1 with grade A.
 * `add CFG1002 y/1 s/2 g/CS`: Adds the module CFG1002 to Year 1 Semester 2 with grade CS.
 * `add ST2334 y/2 s/1 g/IP`: Adds the module ST2334 to Year 2 Semester 1 with grade IP.
@@ -301,6 +300,7 @@ edit MODULE [y/YEAR] [s/SEM] [g/GRADE]
 ```
 
 <div class="alert alert-warning"><md>:gear: **Example:**
+
 * `edit CS2030S g/A+`: Updates the grade of CS2030S to A+.
 * `edit CS3230 y/4 s/2`: Moves CS3230 to the Year 4 Semester 2 module list.
 * `edit CS2100 y/1`: Moves CS2100 to the Year 1 module list, with **Semester unchanged**.<br>
@@ -322,7 +322,7 @@ The images below show you the `edit` command in action. The grade of `CS1101S` i
   </figure>
 </div>
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+<div class="alert alert-success"><md>:information_source: **Note:**
 You need to provide **at least one** of the optional fields (i.e. `GRADE`, `YEAR`, `SEMESTER`).
 </md></div>
 
@@ -342,6 +342,7 @@ delete MODULE
 ```
 
 <div class="alert alert-warning"><md>:gear: **Example:**
+
 * `delete GEA1000`: Removes GEA1000 from the study plan.
 </md></div>
 
@@ -403,7 +404,7 @@ The image below show you what ModCraft should look like after executing the `inf
     The command `info CS3230` is executed. Information about the module `CS3230` is displayed.
 </p>
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:** The module information is taken from [NUSmods](https://github.com/nusmodifications/nusmods) for the current Academic Year 23/24.
+<div class="alert alert-success"><md>:information_source: **Note:** The module information is taken from [NUSmods](https://github.com/nusmodifications/nusmods) for the current Academic Year 23/24.
 </md></div>
 
 <br>
@@ -431,13 +432,13 @@ calculateCAP
 ```
 
 
-Here is an example output for executing the `calculateCAP` command:
+Here is an example output after executing the `calculateCAP` command:
 
 ```
 Calculated CAP: 3.75
 ```
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+<div class="alert alert-success"><md>:information_source: **Note:**
 The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as
 `IP`, `EXE`, `W`, `IC`, `S`, `U`, `CS` and `CU`.
 </md></div>
@@ -458,7 +459,7 @@ ModCraft displays a float which is the sum of MCs of **all modules** in the **st
 calculateMC
 ```
 
-Here is an example output for executing the `calculateMC` command:
+Here is an example output after executing the `calculateMC` command:
 
 ```
 Total Modular Credits: 16.0
