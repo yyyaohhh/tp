@@ -208,7 +208,12 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 
 This section describes some noteworthy details on how certain features and commands are implemented.
 
+* [Info feature](#info-module-command-marques)
+* [Add module feature](#add-module-command)
 * [Edit module feature](#edit-module-feature)
+* [Delete module feature](#delete-module-command)
+* [Calculating Cap feature]()
+* [Calculating MCs feature]()
 * [Undo/redo feature](#proposed-undoredo-feature)
 
 <br>
@@ -265,6 +270,26 @@ This can be shown through following sequence diagram:
 ### Info Module Command (marques)
 
 ### Add Module Command
+**Overview:**
+The `add` command is used to add a module to the module plan with the information fields `Module Code`, `Year Taken`,
+    `Semester Taken`, and `Grade`.
+
+The format for the `add` command can be found [here](#adding-a-module)
+
+**Feature details:**
+1. The user executes the `add` command.
+2. If any of the fields are not provided, an error message with the appropriate command usage will be displayed.
+3. If any of the command parameters are invalid, an error message with the appropriate parameter format will be displayed.
+4. The `Module` is then searched in the `model` to see if it is an existing module that NUS offers. If the module is not
+offered, an error message will be displayed.
+5. The `Module` is then checked with `ModulePlan` to see if it has already been added to the module plan previously.
+If the module has already been added the User's module plan, an error message will be displayed.
+6. If all the previous stages complete without exceptions or errors, the `Module` will be added to the `ModulePlan`
+
+The activity diagram for adding a `Module` into the module plan
+
+<puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
+
 
 ### Edit Module Command
 
@@ -287,6 +312,10 @@ And here is a *Sequence Diagram* showing the command being executed:
 As can be seen, this is a helpful class to store fields that need to be edited.
 
 ### Delete Module Command
+
+### Calculate Cap
+
+### Calculate MCs
 
 ### \[Proposed\] Undo/redo feature
 

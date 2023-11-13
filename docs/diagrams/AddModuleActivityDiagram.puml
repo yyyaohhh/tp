@@ -1,0 +1,31 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User executes add command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse commandString;
+
+if () then ([else])
+    :ParseException: Invalid Command Format;
+    stop
+( [all fields are filled and valid]  ) elseif() then ([else]))
+    :ModuleNotFoundException: Module Not Found;
+    stop
+( [Module is in Module Database]) elseif() then([else])
+    :DuplicateModuleException: Module already Added;
+    stop
+else ( [Module not added to module Plan])
+    :Add Command runs successfully
+    Module is added to module plan;
+
+stop
+
+
+
+@enduml
