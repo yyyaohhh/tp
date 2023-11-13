@@ -42,7 +42,23 @@ Warnings in boxes like this contain information that are vital to the running of
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
-somehting else
+1. [Quick start](#quick-start)
+2. [Features](#features)
+   * [Viewing help](#viewing-help-help)
+   * [Modules](#modules)
+     * [Adding a module](#adding-a-module-add)
+     * [Editing a module](#editing-a-module-edit)
+     * [Deleting a module](#deleting-a-module-delete)
+     * [Finding information about a module](#finding-information-about-a-module-info)
+   * [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
+   * [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
+   * [Exiting the program](#exiting-the-program-exit)
+3. [Advanced Use](#advanced-use)
+   * [Editing the data file](#editing-the-data-file)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
+7. [Glossary](#glossary)
 
 <br>
 
