@@ -277,18 +277,18 @@ return to their preferred interface across sessions.
 
 ModulePlan is stored as `moduleplan.json` and UserPrefs is stored as `preferences.json`. Both files will be created if
 they do not already exist in the same folder in which the Modcraft jar file is stored. While users are free to access
-and modify the files as they wish it is recommended that they make a backup before any modifications. If Modcraft 
+and modify the files as they wish it is recommended that they make a backup before any modifications. If Modcraft
 cannot access a file, it will be deleted and replaced with a new empty file.
 
 **Feature details:**
 
 1. When the user launches the application, if there is no `moduleplan.json` or `preferences.json` file detected in the
-same folder as Modcraft or they are corrupted, Modcraft will create them and populate them with the default moduleplan 
+same folder as Modcraft or they are corrupted, Modcraft will create them and populate them with the default moduleplan
 and preferences respectively.
 2. If there are existing `moduleplan.json` and `preferences.json` files with appropriate data, Modcraft will read the
 module plan from `moduleplan.json` and user preferences from `preferences.json`, loading the application with the
 information obtained from the files.
-3. Upon execution of any command that alters the user's module plan, the changes will automatically be saved into 
+3. Upon execution of any command that alters the user's module plan, the changes will automatically be saved into
 `moduleplan.json`.
 4. Upon alteration of any part of the user interface, the changes will automatically be saved into `preferences.json`.
 
@@ -300,21 +300,30 @@ information obtained from the files.
    2a. If `DataLoadingException` is thrown, a new `preferences.json` file will be created with default preferences.
 3. `JsonUserPrefsStorage` deserializes the JSON file by calling `JsonUtil#readJsonFile` into a `UserPrefs` object.
 3. `MainApp` creates a `StorageManager` object with the file paths of `preferences.json` and `moduleplan.json`.
-4. `MainApp#initModelManager` is then called which calls `Storage#readModulePlan` attempting to parse the 
+4. `MainApp#initModelManager` is then called which calls `Storage#readModulePlan` attempting to parse the
 `moduleplan.json` file and create a `modulePlan` object.
    4a. If `DataLoadingException` is thrown, a new `moduleplan.json` file will be created with the default module plan.
 5. `JsonModulePlanStorage` deserializes the JSON file into a `JsonSerializableModulePlan` object by calling
 `JsonUtil#readJsonFile`.
-   5a. The `JsonSerializableModulePlan` object represents a list of `JsonAdaptedModule` objects, created during 
+   5a. The `JsonSerializableModulePlan` object represents a list of `JsonAdaptedModule` objects, created during
 deserialization.
 6. `JsonModulePlanStorage` then calls `JsonSerizaliableModulePlan#toModelType` to create the `ReadOnlyModulePlan` object.
    6a. `JsonAdaptedModule` then calls `JsonAdapedModule#toModelType` for the creation of each `module`.
-7. `ModulePlan` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command 
+7. `ModulePlan` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command
 execution.
 8. A `DataLoadingException` is thrown when any of the following occus.
    - the file cannot be found.
    - an error occurs during deserialization, or
    - the data contains invalid values.
+
+
+This can be seen in the sequence diagram below
+
+<puml src="diagrams/StorageInitSequenceDiagram.puml" />
+
+
+
+
 ### Info Module Command
 
 **Overview:**
