@@ -104,7 +104,7 @@ public class ModulePlanTest {
 
     @Test
     public void equals_differentObj_returnFalse() {
-        assertFalse(modulePlan.equals(new Integer(1)));
+        assertFalse(modulePlan.equals(1));
     }
 
 
