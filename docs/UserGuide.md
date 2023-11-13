@@ -389,8 +389,8 @@ The images below show you what ModCraft should look like for executing the `calc
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The result displayed by the `calculateMC` command **includes** the modular credits of **all modules** including modules
-with non-passing grades
+The result displayed by the `calculateMC` command **includes** the modular credits of **all modules** in the module plan
+including modules with non-passing grades
 
 </md></div>
 
