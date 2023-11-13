@@ -73,7 +73,7 @@ Warnings in boxes like this contain information that are vital to the running of
 1. Ensure you have Java 11 or above installed in your Computer.
    * To do this, open a command terminal and type `java --version`.
    * If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
-   
+
 
 2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
 
@@ -218,7 +218,7 @@ Currently, ModCraft has certain **limitations**.
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
 * ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade.<br>
-e.g. you can add the non-CS/CU module `CS2100` and input its grade as `CS`.<br> 
+e.g. you can add the non-CS/CU module `CS2100` and input its grade as `CS`.<br>
 Likewise, you can add a CS/CU module with a non-CS/CU grade.<br>
 e.g. you can mark the grade of `CFG1002` as `A`.
 
@@ -269,7 +269,7 @@ The images below show you the `add` command in action.
 
 ### Editing a module: `edit`
 
-You can change an attribute of a module using this command. This command works **only if the module exists**. 
+You can change an attribute of a module using this command. This command works **only if the module exists**.
 
 This command may be useful if you want to update information about a module or have made a mistake while adding a module.
 
@@ -382,8 +382,7 @@ The images below show you what ModCraft should look like for executing the `calc
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as 
-`IP` (In Progress), `EXE` (Exempted), `W` (Withdrawn), `IC` (Incomplete), `S` (Satisfactory), `U` (Unsatisfactory), `CS` (Completed Satisfactory) and `CU` (Completed Unsatisfactory).
+The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as `IP` (In Progress), `EXE` (Exempted), `W` (Withdrawn), `IC` (Incomplete), `S` (Satisfactory), `U` (Unsatisfactory), `CS` (Completed Satisfactory) and `CU` (Completed Unsatisfactory).
 
 </md></div>
 
