@@ -315,8 +315,14 @@ The **module code, module title, modular credit and module description** of the 
 Format: `info MODULE`
 
 <div class="alert alert-warning"><md>:gear: Example:
+
 * info CS2109S
+
+Displays information about the module CS2109S
+
 * info CS1010
+
+Displays information about the module CS1010
 </md></div>
 
 The images below show you what ModCraft should look like after executing the `info` command. 
