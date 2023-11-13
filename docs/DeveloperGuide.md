@@ -301,13 +301,17 @@ However, the logic for checking and grouping all Year 0 modules is implemented h
 
 The following diagrams shows the flow for the **main uses** of ModulePlan, adding and removing modules.
 
-<box type="info" seamless>
+<box type="info" seamless><md>
 **Note:** The implementation of editing a module is removing the original and then adding the edited module.
-</box>
+</md></box>
 
-<puml src="diagrams/ModulePlanAddSequenceDiagram.puml" width="450" />
+**Add Module**: <br>
 
-<puml src="diagrams/ModulePlanDeleteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/ModulePlanAddSequenceDiagram.puml" />
+
+**Delete Module**: <br>
+
+<puml src="diagrams/ModulePlanDeleteSequenceDiagram.puml" />
 
 **UI Integration:** <br>
 
