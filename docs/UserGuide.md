@@ -112,10 +112,10 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 * Words in `UPPER_CASE` are **compulsory parameters** supplied by you.<br>
   e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CS1231S`.
 
-* Parameters in square brackets denotes **optional parameters**.<br>
-  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if you keyed `y/`, `YEAR` has to be specified.
+* Parameters in square brackets denote **optional parameters**.<br>
+  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if you keyed in `y/`, `YEAR` has to be specified.
 
-* Grade and Semester are **case-sensitive parameters**. Only grades and semesters in **capital letters** are allowed.<br>
+* `g/GRADE` and `s/SEMESTER` are **case-sensitive parameters**. Only grades and semesters in **capital letters** are allowed.<br>
   e.g. `g/A` instead of `g/a`, and `s/ST1` instead of `g/st1`.
 
 * Extra parameters for commands that do not take in parameters (such as `help` and `exit`) will be **ignored**.<br>
