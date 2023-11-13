@@ -9,17 +9,17 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
-ModCraft is an app that provides a **fast and easy way** for Computer Science students from National University of Singapore (NUS) to **track courses to take to meet graduation requirements** and **plan courses to take**. You can interact
-with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
+ModCraft is a desktop application built for students from National University of Singapore (NUS) to help them **track and organise their academic journey**. With ModCraft serving as your **personal study planner**, you can easily:
 
-ModCraft can serve as a **study planner** for your journey in NUS. With ModCraft, you can easily:
+* Keep track the courses you have taken
+* Plan ahead to fufill graduation requirements
+* Continously adjust your study plan to new changes
 
-* Add in modules you have taken
-* Add in modules you plan to take
-* Delete modules you would like to drop
-* Update grades of your modules
+And much more!
 
-**And many more!**
+ModCraft streamlines the stressful process of course planning by providing a seamless user experience. It is tailored for efficiency through a Command Line Interface (CLI), complemented by the convenience of a Graphical User Interface (GUI) developed using JavaFX.
+
+## Using this Guide
 
 This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features from the [Table of Contents](#table-of-contents) below.
 
@@ -42,23 +42,26 @@ Warnings in boxes like this contain information that are vital to the running of
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
-1. [Quick start](#quick-start)
-2. [Features](#features)
-   * [Viewing help](#viewing-help-help)
-   * [Modules](#modules)
-     * [Adding a module](#adding-a-module-add)
-     * [Editing a module](#editing-a-module-edit)
-     * [Deleting a module](#deleting-a-module-delete)
-     * [Finding information about a module](#finding-information-about-a-module-info)
-   * [Calculating the total current CAP](#calculating-the-total-current-cap-calculatecap)
-   * [Calculating the total current Modular Credits (MCs)](#calculating-the-total-current-modular-credits-mcs-calculatemc)
-   * [Exiting the program](#exiting-the-program-exit)
-3. [Advanced Use](#advanced-use)
-   * [Editing the data file](#editing-the-data-file)
-4. [FAQ](#faq)
-5. [Known issues](#known-issues)
-6. [Command summary](#command-summary)
-7. [Glossary](#glossary)
+- [ModCraft User Guide](#modcraft-user-guide)
+  - [Using this Guide](#using-this-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Quick start](#quick-start)
+  - [Features](#features)
+    - [Viewing help: `help`](#viewing-help-help)
+    - [Modules](#modules)
+    - [Adding a module: `add`](#adding-a-module-add)
+    - [Editing a module: `edit`](#editing-a-module-edit)
+    - [Deleting a module: `delete`](#deleting-a-module-delete)
+    - [Finding Information about a module: `info`](#finding-information-about-a-module-info)
+    - [Calculating the total current CAP: `calculateCAP`](#calculating-the-total-current-cap-calculatecap)
+    - [Calculating the total current Modular Credits (MCs): `CalculateMC`](#calculating-the-total-current-modular-credits-mcs-calculatemc)
+    - [Exiting the program: `exit`](#exiting-the-program-exit)
+  - [Advanced use](#advanced-use)
+    - [Editing the data file](#editing-the-data-file)
+  - [FAQ](#faq)
+  - [Known issues](#known-issues)
+  - [Command summary](#command-summary)
+  - [Glossary](#glossary)
 
 <br>
 
@@ -68,28 +71,24 @@ Warnings in boxes like this contain information that are vital to the running of
 
 1. Ensure you have Java 11 or above installed in your Computer.
    * To do this, open a command terminal and type `java --version`.
-   * If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
-   
-
-2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
-
-3. Copy the downloaded jar file to the folder you want to use as the _home folder_(the folder `ModCraft.jar` will be in) for ModCraft.
+   * If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html). <br>
+2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.4).
+3. Copy the downloaded jar file to the folder you want to use as the _home folder_ (the folder `ModCraft.jar` will be in) for ModCraft.
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 As ModCraft writes to files within the directory it is in, we recommend placing ModCraft in an empty directory to prevent unexpected behaviour.
 </md></div>
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
-   A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application. A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
    ![StartUp](images/ImagesForUG/StartUp.png)
 
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `info CS1101S` : Shows you information about the module CS1101S, which are the module code, module title, modular credit and module description of `CS1101S`.
+    * `info CS1101S` : Shows you the module code, module title, modular credit and description of the module `CS1101S`.
 
-    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to your study plan of semester 2 in year 1, and marks its grade as `IP` (In Progress).
+    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to Year 1 Semester 2 of your study plan, with an `IP` (In Progress) grade.
 
     * `delete CS2040S` : Deletes the module CS2040S if it is present from your list of modules taken.
 
