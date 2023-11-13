@@ -9,17 +9,17 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
-ModCraft is an app that provides a **fast and easy way** for Computer Science students from National University of Singapore (NUS) to **track courses to take to meet graduation requirements** and **plan courses to take**. You can interact
-with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
+ModCraft is a desktop application built for students from National University of Singapore (NUS) to help them **track and organise their academic journey**. With ModCraft serving as your **personal study planner**, you can easily:
 
-ModCraft can serve as a **study planner** for your journey in NUS. With ModCraft, you can easily:
+* Keep track of the courses you have taken
+* Plan ahead to fufill graduation requirements
+* Continously adjust your study plan to new changes
 
-* Add in modules you have taken
-* Add in modules you plan to take
-* Delete modules you would like to drop
-* Update grades of your modules
+And much more!
 
-**And many more!**
+ModCraft streamlines the stressful process of course planning by providing a seamless user experience. It is tailored for efficiency through a Command Line Interface (CLI), complemented by the convenience of a Graphical User Interface (GUI) developed using JavaFX.
+
+## Using this Guide
 
 This User Guide provides a guide of how to set up ModCraft and a description of useful commands to use. If you are a beginner, we recommend that you start with the [Quick start](#quick-start) guide. Otherwise, feel free to explore the various features from the [Table of Contents](#table-of-contents) below.
 
@@ -68,28 +68,25 @@ Warnings in boxes like this contain information that are vital to the running of
 
 1. Ensure you have Java 11 or above installed in your Computer.
    * To do this, open a command terminal and type `java --version`.
-   * If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
- 
+   * If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html). <br>
+2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.4).
+3. Copy the downloaded jar file to the folder you want to use as the _home folder_ (the folder `ModCraft.jar` will be in) for ModCraft.
 
-2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
-
-3. Copy the downloaded jar file to the folder you want to use as the _home folder_(the folder `ModCraft.jar` will be in) for ModCraft.
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 As ModCraft writes to files within the directory it is in, we recommend placing ModCraft in an empty directory to prevent unexpected behaviour.
 </md></div>
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application.<br>
-   A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ModCraft.jar` command to run the application. A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br> <br>
    ![StartUp](images/ImagesForUG/StartUp.png)
 
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `info CS1101S` : Shows you information about the module CS1101S, which are the module code, module title, modular credit and module description of `CS1101S`.
+    * `info CS1101S` : Shows you the module code, module title, modular credit and description of the module `CS1101S`.
 
-    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to your study plan of semester 2 in year 1, and marks its grade as `IP` (In Progress).
+    * `add CS2030S y/1 s/2 g/IP` : Adds the module CS2030S to Year 1 Semester 2 of your study plan, with an `IP` (In Progress) grade.
 
     * `delete CS2040S` : Deletes the module CS2040S if it is present from your list of modules taken.
 
@@ -105,70 +102,73 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 <br>
 
-**Notes about the command format:**<br>
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note** about the command format:<br>
 
 * All commands are **case-sensitive**.
 
-* Words in `UPPER_CASE` are **compulsory parameters** to be supplied by the user.<br>
-  e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CFG1002`.
+* Words in `UPPER_CASE` are **compulsory parameters** supplied by you.<br>
+  e.g. in `delete MODULE`, `MODULE` is a parameter which can be used as `delete CS1231S`.
 
 * Parameters in square brackets denote **optional parameters**.<br>
-  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if `y/` is keyed in by the user, `YEAR` has to be specified.
+  e.g. `edit [y/YEAR]` means that specifying `y/YEAR` is optional. However, if you keyed in `y/`, `YEAR` has to be specified.
 
-* Grades and semesters as parameters are **case-sensitive**. Only grades and semesters in **capital letters** are allowed.<br>
+* `g/GRADE` and `s/SEMESTER` are **case-sensitive parameters**. Only grades and semesters in **capital letters** are allowed.<br>
   e.g. `g/A` instead of `g/a`, and `s/ST1` instead of `g/st1`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be **ignored**.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extra parameters for commands that do not take in parameters (such as `help` and `exit`) will be **ignored**.<br>
+  e.g. if you input `help 123`, it will be interpreted as `help`.
 
-* Parameters can come with a **prefix** (like `y/` in `y/YEAR`) or without a prefix (like `MODULE`).
+* Parameters can either come with a **prefix** (like `y/` in `y/YEAR`) or **without a prefix** (like `MODULE`).
 
-* All commands will have at most one parameter without a prefix. Parameters without a prefix should come before any parameters that come with a prefix. ModCraft will parse all input between the command and the first prefix as the parameter without the prefix.<br>
+* All commands will have **at most one** parameter without a prefix. Parameters without a prefix should come **before** any parameters with a prefix. ModCraft will parse all your input between the command and the first prefix as **one parameter**.<br>
   e.g. For `add MODULE y/YEAR s/SEM g/GRADE`, when you key in `add CS2101 CS2103T y/1 s/1 g/A`, ModCraft will read it as you trying to specify `CS2101 CS2103T` as one `MODULE`.
 
-* Parameters with a prefix can be specified in any order among themselves.<br>
+* Parameters with a prefix can be specified in **any order** among themselves.<br>
   e.g. `add CS2030S y/1 s/2 g/IP` is the same as `add CS2030S s/2 g/IP y/1`.
+
+</md></div>
 
 <br>
 
 ### Viewing help: `help`
 
-Displays you a message explaining how to access the help page of ModCraft, as shown below.
+Displays to you a popup explaining how to access the User Guide of ModCraft, as shown below.
 
 ![help message](images/helpMessage.png)
 
-You can copy the URL and paste it into your browser to view [this User Guide](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html) about setting up ModCraft and the descriptions of commands in ModCraft.
+You can copy the URL using the `Copy URL` button and paste it into your browser to view [this User Guide](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html) about setting up ModCraft and the descriptions of commands in ModCraft.
 
 Format: `help`
 
 <br>
 
-### Modules
+### <span style="text-decoration:underline">Modules</span>
 
-The modules in ModCraft are [courses from National University of Singapore (NUS)](https://nusmods.com/courses?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4). The modules have **module code, module title, module description and modular credits**.
+The modules in ModCraft are [courses from National University of Singapore (NUS)](https://nusmods.com/courses?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4). The modules have **Module Code**, **Module Title**, **Module Description** and **Modular Credits**.
 
 Examples:
-* Module code: `CS2040S`
-* Module title: `Data Structures and Algorithms`
+* Module Code: `CS2040S`
+* Module Title: `Data Structures and Algorithms`
 * Module Description: `This course introduces the fundamentals of data structures and algorithms.`
 * Modular Credits: `4`
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
-The module code, module title, module description and modular credits **cannot** be edited.
+The Module Code, Module Title, Module Description and Modular Credits **cannot** be edited.
 </md></div>
 
 <br>
 
-In ModCraft, you can specify the **year, semester and grade** of each module when you are adding or editing your study plan.
+In ModCraft, you can specify the **Year, Semester and Grade** of each module when you are adding or editing your study plan.
+
+
+|           Parameter           | Values/Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|:-----------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     **Year**<br>`y/YEAR`      | Number from `0` to `6` <br> * `0` represents Advance Placement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Semester**<br>`s/SEMESTER`  | - `1`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Semester 1)<br>- `2`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Semester 2)<br>- `ST1`&nbsp;&nbsp;&nbsp;(Special Term 1)<br>- `ST2`&nbsp;&nbsp;&nbsp;(Special Term 2) 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                                                                |
+|    **Grade**<br>`g/GRADE`     | The Grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).<br><br>- `A+`&nbsp;(5.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `IP`&nbsp;&nbsp;&nbsp;&nbsp;(In Progress)<br>- `A`&nbsp;&nbsp;&nbsp;(5.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `EXE`&nbsp;&nbsp;(Exempted)<br>- `A-`&nbsp;(4.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `W`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Withdrawn)<br>- `B+`&nbsp;(4.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `IC`&nbsp;&nbsp;&nbsp;&nbsp;(Incomplete)<br>- `B`&nbsp;&nbsp;&nbsp;(3.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `S`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Satisfactory)<br>- `B-`&nbsp;(3.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `U`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Unsatisfactory)<br>- `C+`&nbsp;(2.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `CS`&nbsp;&nbsp;&nbsp;&nbsp;(Completed Satisfactory)<br>- `C`&nbsp;&nbsp;&nbsp;(2.0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `CU`&nbsp;&nbsp;&nbsp;&nbsp;(Completed Unsatisfactory)<br>- `D+`&nbsp;(1.5)<br>- `D`&nbsp;&nbsp;&nbsp;(1.0) |
 
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
-
-* The value for year is a number from `0` to `6`, where Year 0 represents the Advance Placement semester.
-
-* The possible values for semester are `1`, `2`, `ST1`, `ST2`, which represent Semester 1, Semester 2, Special Term 1 and Special Term 2 respectively.
-
-* The possible grades follow the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/undergraduate-students/modular-system).
 
 * There is **only one** Advance Placement semester and whenever `y/0` is entered, **regardless of the semester** entered, the module will be added or edited to the Advance Placement Semester.
 
@@ -428,9 +428,7 @@ There is no need for you to save manually.
 The module data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`.
 
 Advanced users are welcome to update data directly by editing that data file.
-<div class="alert alert-warning"><md>:exclamation: **Caution:**
-
-If your changes to the data file makes its format invalid, ModCraft will **discard all data and start with a default data file** at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+<div class="alert alert-warning"><md>:exclamation: **Caution:** If your changes to the data file makes its format invalid, ModCraft will **discard all data and start with a default data file** at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 
 </md></div>
 
@@ -444,6 +442,10 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 |------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | How do I transfer my data to another Computer? | Install the app in the other computer and overwrite the default data file it creates with the file that contains the data of your previous ModCraft home folder. |
 | How do I save the data?                        | The data is saved in the hard disk automatically after any command that changes the data.<br> There is no need to save manually.                                 |
+| Where do I get support for ModCraft?           | You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-0/tp/issues).                                                          |
+| How do I report a bug?                         | You can raise a bug report on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-0/tp/issues).                                                      |
+| How do I import my data from another software? | You can import your data by converting your data into JSON in the format of the `moduleplan.json` data in the data folder.                                       |
+| How do I export my data to another software?   | It is currently not possible to export your data from ModCraft to another software.                                                                              |
 
 <br>
 
@@ -452,6 +454,7 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. For issues related to **lack of features** such as checking for S/U option of a module, please refer to the **limitations of ModCraft** under the **caution warning box** in [Modules](#modules). These features are planned enhancements in future releases.
 
 <br>
 
@@ -475,5 +478,10 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 
 ## Glossary
 
-- Command Line Interface: A display that allows you to type commands to interact with the application.
-- Graphical User Interface: A user-friendly display that allows you to see the effects of your actions in the application.
+- **Command Line Interface (CLI)**: A display that allows you to type commands to interact with the application.
+- **Graphical User Interface (GUI)**: A user-friendly display that allows you to see the effects of your actions in the application.
+- **JSON**: stands for JavaScript Object Notation, a lightweight data-interchange format and a plain text written in JavaScript object notation, used to send data between computers.
+- **Pre-requisite**: Pre-requisites indicate the base of knowledge on which the subject matter of a particular course will be built. Before taking a course, a student should complete any pre-requisite course(s) listed for that particular course.<br>
+  Where pre-requisites are specified, equivalent courses will also be accepted. For more information on pre-requisites, please refer to [NUS's Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/graduate/modular-system).
+- **Pre-clusions**: Courses that have similar emphases and may not be taken together with that particular course.
+- **Co-requisites**: Courses that are to be taken concurrently.
