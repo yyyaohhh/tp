@@ -110,7 +110,7 @@ public class ModulePlanTest {
     @Test
     public void hashCodeMethod() {
         modulePlan.resetData(getTypicalModulePlan());
-        
+
         // same object
         assertTrue(modulePlan.hashCode() == modulePlan.hashCode());
 

@@ -94,7 +94,7 @@ public class EditCommand extends Command {
 
         // Edit module
         Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
-        assert editedModule.isSameModule(moduleToEdit) : MESSAGE_MODULE_CODE_CHANGE; 
+        assert editedModule.isSameModule(moduleToEdit) : MESSAGE_MODULE_CODE_CHANGE;
 
         // Update module plan and return success message
         model.setModule(moduleToEdit, editedModule);
