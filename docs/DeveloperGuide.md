@@ -295,7 +295,7 @@ As can be seen, this is a helpful class to store fields that need to be edited.
 
 **Overview:**<br>
 
-The `delete` command is used to delete a module from the semester lists. The module can only be deleted if it is already present in one of the semester lists in ModCraft.<br>
+The `delete` command is used to delete a module from the module plan. The module can only be deleted if it is already present in one of the semesters in the module plan.<br>
 
 The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#deleting-a-module-delete).<br>
 
@@ -305,13 +305,13 @@ The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-
 2. If the module code field is not provided, an error message with the correct command usage will be shown.
 3. If invalid module code format is provided, an error message with the correct module code format will be shown.
 4. If valid module code format is provided but `Module` does not exist in database, an error message informing user that the `Module` does not exist will be shown.
-5. The `Module` is then cross-referenced in the `Model` to check if a module with the same `ModuleCode` exists in the semester lists.
-6. If the module does not exist in the semester lists, an error message informing the user that the `Module` has not added to the planner yet will be shown.
-7. If all previous steps are completed without exceptions, the new `Module` will be successfully deleted from the semester lists.
+5. The `Module` is then cross-referenced in the `Model` to check if a module with the same `ModuleCode` exists in the module plan.
+6. If the module does not exist in the module plan, an error message informing the user that the `Module` has not added to the module plan will be shown.
+7. If all previous steps are completed without exceptions, the new `Module` will be successfully deleted from the module plan.
 
 <br>
 
-The following activity diagram shows the logic of deleting a `Module` from the semester lists:
+The following activity diagram shows the logic of deleting a `Module` from the module plan:
 
 <puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
 
@@ -325,7 +325,7 @@ e.g. `delete CS3230`
 3. The `ModulePlanParser` then creates a new `DeleteCommandParser` to parse the fields provided by the user and a new `DeleteCommand` is created.
 4. The `DeleteCommand` checks if the `ModuleCode` is valid by calling `Model#checkDbValidModuleCode`.
 4. The `DeleteCommand` then checks if the `Model` contains a module with the same `ModuleCode` by calling `Model#getModule`.
-5. If the `ModuleCode` is valid and `Model` contains the module, the `DeleteCommand` calls `Model#deleteModule` to delete the module from to the semester lists.
+5. If the `ModuleCode` is valid and `Model` contains the module, the `DeleteCommand` calls `Model#deleteModule` to delete the module from to the module plan.
 
 The following sequence diagram shows how the `delete` command works:
 
@@ -337,7 +337,7 @@ The following sequence diagram shows how the `delete` command works:
 
 **Overview:**<br>
 
-The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module planner, using their grade points and modular credits. <br>
+The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module plan, using their grade points and modular credits. <br>
 
 The format of the `calculateCAP` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-cap-calculatecap).<br>
 
@@ -365,7 +365,7 @@ The following sequence diagram shows how the `calculateCAP` command works:
 
 **Overview:**<br>
 
-The `calculateMC` command is used to calculate the total sum of Modular Credits (MCs) of all modules in the module planner, regardless of their grades. <br>
+The `calculateMC` command is used to calculate the total sum of Modular Credits (MCs) of all modules in the module plan, regardless of their grades. <br>
 
 The format of the `calculateMC` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-modular-credits-mcs-calculatemc).<br>
 

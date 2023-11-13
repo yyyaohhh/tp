@@ -27,13 +27,13 @@ if () then ( [else])
 ( [module code exists in ModuleData]) elseif () then ( [else])
     :ModuleNotFoundException: Module has not been added, unable to delete.;
     stop
-else ( [Module exists in the semester lists])
+else ( [Module exists in the module plan])
 
 endif
 }
 
 :Delete Command is executed successfully.
-Module is deleted from the semester lists.;
+Module is deleted from the module plan.;
 
 stop
 
