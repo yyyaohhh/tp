@@ -135,9 +135,22 @@ mark {
   }
 }
 
-h2,
-h3,
-h4,
+h1 {
+  color: #000000;
+}
+
+h2 {
+  color: #e46c0a;
+}
+
+h3 {
+  color: #008080;
+}
+
+h4 {
+  color: #0000ff;
+}
+
 h5,
 h6 {
   color: #e46c0a;

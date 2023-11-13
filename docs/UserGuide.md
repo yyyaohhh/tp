@@ -25,7 +25,7 @@ This User Guide provides a guide of how to set up ModCraft and a description of 
 
 This User Guide consists of various visuals to aid your reading.
 
-<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+<div class="alert alert-success"><md>:information_source: **Note:**
 Provides you with information that is useful to know.
 </md></div>
 
@@ -33,7 +33,11 @@ Provides you with information that is useful to know.
 Tips in boxes like this contain recommendations for users to consider.
 </md></div>
 
-<div class="alert alert-warning"><md>:exclamation: **Caution:**
+<div class="alert alert-warning"><md>:gear: **Example:**
+Examples are placed in boxes like this to show you possible ways a command can be run.
+</md></div>
+
+<div class="alert alert-danger"><md>:exclamation: **Caution:**
 Warnings in boxes like this contain information that are vital to the running of the application. Ensure that you take special note of these warnings to prevent unexpected behaviour.
 </md></div>
 
@@ -99,6 +103,8 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -131,6 +137,8 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ### Viewing help: `help`
 
 Displays you a message explaining how to access the help page of ModCraft, as shown below.
@@ -142,6 +150,8 @@ You can copy the URL and paste it into your browser to view [this User Guide](ht
 Format: `help`
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Modules
 
@@ -217,6 +227,8 @@ These features are planned enhancements in future releases.
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ### Adding a module: `add`
 
 You can add a module to your study plan of the list of modules taken in the **specified year and semester** using this command.
@@ -224,11 +236,11 @@ You can add a module to your study plan of the list of modules taken in the **sp
 Format: `add MODULE y/YEAR s/SEM g/GRADE`
 
 Examples:
-* `add MA1521 y/1 s/1 g/A`
-* `add IS1108 y/1 s/2 g/CS`
-* `add ST2334 y/2 s/1 g/IP`
+* `add MA1521 y/1 s/1 g/A`: Adds the module MA1521 to Year 1 Semester 1 with grade A.
+* `add CFG1002 y/1 s/2 g/CS`: Adds the module CFG1002 to Year 1 Semester 2 with grade Completed Satisfactory (CS).
+* `add ST2334 y/2 s/1 g/IP`: Adds the module ST2334 to Year 2 Semester 1 with grade In Progress (IP).
 
-The images below show you the process for executing the `add` command in ModCraft.
+The images below show you the `add` command in action.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/add-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
@@ -238,12 +250,14 @@ The images below show you the process for executing the `add` command in ModCraf
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-* To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **in progress**.
+* To **plan ahead** using ModCraft, you can input `IP` for grade to represent grade **In Progress**.
 
-* For **Satisfactory/Unsatisfactory (S/U)** modules, you can insert `S` or `U` as `GRADE`.
+* For modules with a **Satisfactory/Unsatisfactory (S/U)** grade, you can insert `S` or `U` as `GRADE`.
 </md></div>
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Editing a module: `edit`
 
@@ -261,7 +275,7 @@ If before editing, the module was in Year 2 Semester 1, after editing it would b
 * `edit CS2101 s/1`: Moves CS2101 to the Semester 1 module list, with **Year unchanged**.<br>
 If before editing, the module was in Year 1 Semester 2, after editing it would be in Year 1 Semester 1.
 
-The images below show you the process for executing the `edit` command in ModCraft. The grade of `CS1101S` is being edited to `C`.
+The images below show you the `edit` command in action. The grade of `CS1101S` is being edited to `C`.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/edit-before.png" alt="Before executing edit command" style="height:400px; margin:20px;">
@@ -269,10 +283,12 @@ The images below show you the process for executing the `edit` command in ModCra
 </div>
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
-You need to provide at least one of the optional fields (either GRADE or YEAR or SEMESTER).
+You need to provide at least one of the optional fields (i.e. `GRADE`, `YEAR`, `SEMESTER`).
 </md></div>
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Deleting a module: `delete`
 
@@ -281,10 +297,9 @@ You can remove the module from whichever semester the module is taken using this
 Format: `delete MODULE`
 
 Examples:
-* `delete GEA1000`
-* `delete CS2030S`
+* `delete GEA1000`: Removes GEA1000 from the module plan.
 
-The images below show you the process for executing the `delete` command in ModCraft. The module `CS2101` is being deleted.
+The images below show you the `delete` command in action. The module `CS2101` is being deleted.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/delete-before.png" alt="Before executing delete command" style="height:400px; margin:20px;">
@@ -300,12 +315,13 @@ The images below show you the process for executing the `delete` command in ModC
 </md></div>
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
-
 Deleting a module also **deletes all the information associated with the module**, such as grade, year and semester taken. This action is **irreversible!**
 
 </md></div>
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Finding Information about a module: `info`
 
@@ -327,6 +343,8 @@ The images below show you what ModCraft should look like for executing the `info
 </div>
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Calculating the total current CAP: `calculateCAP`
 
@@ -357,6 +375,8 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ### Calculating the total current Modular Credits (MCs): `CalculateMC`
 
 You can calculate the total current Modular Credits (MCs) stored in all years and semesters using this command. ModCraft displays a float which is the sum of MCs of all modules in the module plan.
@@ -378,6 +398,8 @@ The result displayed by the `calculateMC` command **includes** the modular credi
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ### Exiting the program: `exit`
 
 You can exit ModCraft using this command.
@@ -385,6 +407,8 @@ You can exit ModCraft using this command.
 Format: `exit`
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -394,6 +418,8 @@ ModuleList data is saved in the hard disk automatically after any command you in
 There is no need for you to save manually.
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Editing the data file
 
@@ -408,6 +434,8 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -419,6 +447,8 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -426,6 +456,8 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 <br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,9 +475,15 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
 - Command Line Interface: A display that allows you to type commands to interact with the application.
 - Graphical User Interface: A user-friendly display that allows you to see the effects of your actions in the application.
+
+<br>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
