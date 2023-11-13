@@ -31,7 +31,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="400" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -51,8 +51,8 @@ The bulk of the app's work is done by the following four components:
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-* [**`Database`**](#database-component) : Parses data from within the App.
 
+[**`Database`**](#database-component) parses data from within the App on startup. This data is used to support user input validation according to the business logic.<br>
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 <br>
@@ -63,7 +63,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the four main components (also shown in the diagram above), as well as the [**`Database`**](#database-component) component,
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -116,7 +116,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `ModulePlanParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to a `ModulePlanParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -151,7 +151,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** The module plan data is split into different semesters (e.g. Year 1 S1, Year 1 S2, Year 2 S1, etc). Instead of one `UniqueModuleList` storing all of the User's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters.
+**Note:** The module plan data is split into different semesters (e.g. Year 1 S1, Year 1 S2, Year 2 S1, etc). Instead of one `UniqueModuleList` storing all of the user's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters. The implementation of this check can be found in `ModulePlanSemesterList`.
 
 </box>
 
@@ -168,7 +168,7 @@ The `Model` component,
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve modifiable objects that belong to the `Model`)
 
 <br>
 
@@ -182,7 +182,7 @@ The `Storage` component,
 
 The `Database` component,
 * reads the module information from JSON format to the corresponding `ModuleData` object.
-* depends on some classes in the `Model` component (because the `Database` component's job is to retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Database` component's job is to retrieve read-only objects that belong to the `Model`)
 
 <box type="info" seamless>
 
@@ -233,25 +233,21 @@ The module information is stored as `moduleinfo.json` in the `src/main/resources
 3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
 4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
 
-The following activity diagram shows the logic of the module database feature:
-
-      activity diagram goes here
-
 **Initialization sequence:**
 1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
-2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`.
-3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object.
+2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
+   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
+3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
+   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values. 
-
-If the file cannot be found
-If an error occurs during JSON deserialization
-
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if 
+   * the file cannot be found,
+   * an error occurs during deserialization, or
+   * the data contains invalid values. 
 
 This can be shown through following sequence diagram:
 
-      seq diagram goes here
-
+<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
 
 ### Module Plan Feature
 - how semesters are setup
@@ -268,6 +264,11 @@ This can be shown through following sequence diagram:
 - userprefs considered the same feature? if too long can split into another one
 
 ### Info Module Command
+
+**Overview:**
+
+**Feature details:**
+
 
 ### Add Module Command
 
@@ -729,7 +730,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add CS1010 y/1 s/ST1 g/a`.<br>
        Expected: No module is added. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
-    3. Other incorrect delete commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be added is incorrect)<br>
+    3. Other incorrect add commands to try: `add`, `add 1234`, `add CS1010 y/1`, `...` (when the format of the module code to be added is incorrect)<br>
        Expected: Similar to previous.
 
 <br>
