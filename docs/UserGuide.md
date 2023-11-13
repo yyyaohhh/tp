@@ -11,7 +11,7 @@ pageNav: 3
 
 ModCraft is a desktop application built for students from National University of Singapore (NUS) to help them **track and organise their academic journey**. With ModCraft serving as your **personal study planner**, you can easily:
 
-* Keep track the courses you have taken
+* Keep track of the courses you have taken
 * Plan ahead to fufill graduation requirements
 * Continously adjust your study plan to new changes
 
