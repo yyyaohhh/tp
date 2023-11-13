@@ -224,25 +224,21 @@ The module information is stored as `moduleinfo.json` in the `src/main/resources
 3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
 4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
 
-The following activity diagram shows the logic of the module database feature:
-
-      activity diagram goes here
-
 **Initialization sequence:**
 1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
-2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`.
-3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object.
+2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
+   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
+3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
+   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values. 
-
-If the file cannot be found
-If an error occurs during JSON deserialization
-
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if 
+   * the file cannot be found,
+   * an error occurs during deserialization, or
+   * the data contains invalid values. 
 
 This can be shown through following sequence diagram:
 
-      seq diagram goes here
-
+<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
 
 ### Module Plan Feature
 - how semesters are setup
@@ -258,7 +254,12 @@ This can be shown through following sequence diagram:
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
 
-### Info Module Command (marques)
+### Info Module Command
+
+**Overview:**
+
+**Feature details:**
+
 
 ### Add Module Command
 
