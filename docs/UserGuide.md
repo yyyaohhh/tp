@@ -352,10 +352,9 @@ $\Large\frac{\text{For each module: Sum of(grade point of each module * Modular 
 
 Displays you a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
-Format: 
-```swift
-calculateCAP
-```
+Format: `calculateCAP`
+
+
 The images below show you what ModCraft should look like for executing the `calculateCAP` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
@@ -379,10 +378,8 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 You can calculate the total current Modular Credits (MCs) stored in **all** years and semesters using this command. 
 ModCraft displays a float which is the sum of MCs of **all modules** in the **module plan**.
 
-Format: 
-```swift
-calculateMC
-```
+Format: `calculateMC`
+
 The images below show you what ModCraft should look like for executing the `calculateMC` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
