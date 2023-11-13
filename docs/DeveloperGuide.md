@@ -113,6 +113,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
+<puml src="diagrams/DeleteSequenceDiagram2.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -415,71 +417,46 @@ The following sequence diagram shows how the `calculateMC` command works:
 
 <br>
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Pre-requisite checking feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedModulePlan`. It extends `ModulePlan` with an undo/redo history, stored internally as an `ModulePlanStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed pre-requisite checking mechanism is facilitated by `Prerequisite`. Every `Module` will have a `Prerequisite` field. `Prerequisite` contains a list of other `Prerequisite` objects, of which `Module` is a subclass. It also contains a number that represents the number of `Prerequisite`s in the list that need to be fulfilled before this `Prerequisite` can be considered fulfilled. Additionally, it implements the following operation:
 
-* `VersionedModulePlan#commit()` — Saves the current module plan state in its history.
-* `VersionedModulePlan#undo()` — Restores the previous module plan state from its history.
-* `VersionedModulePlan#redo()` — Restores a previously undone module plan state from its history.
+* `Prerequisite#isFulfilled(List<Module> list)`: Checks whether the current `Prerequisite` is fulfilled by the `Module`s in `list`.
 
-These operations are exposed in the `Model` interface as `Model#commitModulePlan()`, `Model#undoModulePlan()` and `Model#redoModulePlan()` respectively.
+This operation is accessed in `Module` as `Module#checkPrerequisitesFulfilled(List<Module> list)`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Here is the class diagram:
 
-Step 1. The user launches the application for the first time. The `VersionedModulePlan` will be initialized with the initial module plan state, and the `currentStatePointer` pointing to that single module plan state.
+<puml src="diagrams/PrerequisiteClassDiagram.puml" />
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Given below is an example usage scenario and how the prerequisite mechanism behaves at each step.
 
-Step 2. The user executes `delete CS1010` command to delete the module `CS1010` in the module plan. The `delete` command calls `Model#commitModulePlan()`, causing the modified state of the module plan after the `delete CS1010` command executes to be saved in the `modulePlanStateList`, and the `currentStatePointer` is shifted to the newly inserted module plan state.
+Step 1. The user executes `add CS2103T y/2 s/1 g/IP` command to add the module `CS2103T` in the module plan. 
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+Step 2. When executing the `add` command, `Module#checkPrerequisitesFulfilled(List<Module> list)` is called to check if the prerequisites have been fulfilled in previous semesters. In this case, these are the Advanced Placement and Year 1 semesters, and the `Module`s in these semesters populate `list`.
 
-Step 3. The user executes `add CS2030 …​` to add a new module. The `add` command also calls `Model#commitModulePlan()`, causing another modified module plan state to be saved into the `modulePlanStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 3. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it adds the module `CS2103T` to Year 2 Semester 1.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitModulePlan()`, so the module plan state will not be saved into the `modulePlanStateList`.
+**Note:** If the module is in the Advanced Placement, there are no other semesters to check.
 
 </box>
 
-Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoModulePlan()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous module plan state, and restores the module plan to that state.
+Step 4. The user now decides to move the module to an earlier semester, and decides to make the appropriate changes by executing the command `edit CS2103T y/1 s/2`. The `edit` command calls `Module#checkPrerequisitesFulfilled(List<Module> list)` again to check if the prerequisites have been fulfilled in previous semesters. In this case, they are the Advanced Placement and Year 1 Semester 1 semesters, and the `Module`s in these semesters populate `list`. 
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+Step 5. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it moves the module `CS2103T` to Year 1 Semester 2.
 
 
-<box type="info" seamless>
+The following sequence diagram shows how the prerequisite checking works:
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModulePlan state, then there are no previous ModulePlan states to restore. The `undo` command uses `Model#canUndoModulePlan()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<puml src="diagrams/PrerequisiteAddSequenceDiagram.puml" alt="PrerequisiteAddSequenceDiagram" />
 
-</box>
+The following activity diagram summarizes what happens when a user executes a command that changes the ModulePlan:
 
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoModulePlan()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the module plan to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `modulePlanStateList.size() - 1`, pointing to the latest module plan state, then there are no undone ModulePlan states to restore. The `redo` command uses `Model#canRedoModulePlan()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="250" />
 
 <br>
 
@@ -550,17 +527,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …                                                                 | I want to …                                                                                 | So that I can…                                               |
 |----------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | `* * *`  | fast typer                                                             | use the typing interface                                                                    | I save time from interacting with the GUI                    |
-| `* * *`  | current student                                                        | set my major                                                                                |                                                              |
 | `* * *`  | current student                                                        | add modules to "taken" / "taking" / "plan to take" lists                                    |                                                              |
 | `* * *`  | current student                                                        | search for modules by module code or module name                                            |                                                              |
 | `* * *`  | current student                                                        | remove modules from the lists                                                               |                                                              |
 | `* * *`  | current student                                                        | access data entered in a previous session                                                   |                                                              |
 | `* * *`  | forgetful student                                                      | view which year and semester I have taken certain modules                                   |                                                              |
-| `* * *`  | current student                                                        | see the modules I need to take to graduate                                                  | I can apply for and take those modules to graduate           |
 | `* * *`  | incoming freshman                                                      | see the modules I might need to take for my course                                          | I can make an informed decision about what I am applying for |
 | `* * *`  | current student                                                        | check how many MCs I haven taken                                                            | I know how many more I need to take to graduate              |
 | `* * *`  | overworked student                                                     | just check what modules I have taken                                                        | I don't have to remember them myself                         |
-| `* *`    | student going on exchange                                              | see which modules can be mapped over                                                        |                                                              |
+| `* *`    | current student                                                        | set my major                                                                                |                                                              |
+| `* *`    | current student                                                        | see the modules I need to take to graduate                                                  | I can apply for and take those modules to graduate           |
 | `* *`    | current student                                                        | see how the modules I plan to take affect what modules I will be able to take in the future | I can plan my future semesters                               |
 | `* *`    | current student                                                        | check what prerequisite modules I need to take                                              | I can take this specific module                              |
 | `* *`    | struggling student                                                     | see what modules I can use my remaining S/Us on                                             | I can plan my modules accordingly                            |
@@ -574,13 +550,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | student staying in RC/NUSC or taking other special programs (like SPM) | check for modules that fulfill requirements                                                 | I can replace the general education modules                  |
 | `* *`    | student that wants to take niche modules                               | search for it                                                                               | I know what are the options                                  |
 | `* *`    | current student                                                        | see if certain modules are available in the current semester                                | I can plan my study plan or take it this semester            |
-| `* *`    | student who likes a certain professor                                  | see which semester that professor will be teaching the module                               | I can take their module                                      |
-| `* *`    | student who dislikes a certain professor                               | see which modules they will be teaching                                                     | I can avoid them                                             |
 | `* *`    | student taking credit-bearing internships                              | see how my internships fulfill my graduation requirement and MCs                            |                                                              |
 | `* *`    | student taking a focus area                                            | see if the module I have taken satisfy my focus area                                        |                                                              |
 | `* *`    | failing student                                                        | see if I can drop certain modules                                                           | I can graduate through an alternate path                     |
 | `* *`    | student looking for work                                               | see which modules give me skills I need                                                     | I can apply for certain jobs/internships                     |
 | `* *`    | student who wants to switch courses                                    | check which modules I can carry over and still take                                         | I can graduate                                               |
+| `*`      | student who likes a certain professor                                  | see which semester that professor will be teaching the module                               | I can take their module                                      |
+| `*`      | student who dislikes a certain professor                               | see which modules they will be teaching                                                     | I can avoid them                                             |
+| `*`      | student going on exchange                                              | see which modules can be mapped over                                                        |                                                              |
 | `*`      | advanced user                                                          | manually edit the data file                                                                 | I can manipulate the data as I wish                          |
 | `*`      | student that hates a specific module                                   | check for other alternative modules so that I can avoid that module                         | I can prevent excessive stress                               |
 | `*`      | ambitious student                                                      | find the fastest way to graduate                                                            |                                                              |
@@ -642,6 +619,14 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
+**Use case: UC03 - Calculating CAP**
+
+**MSS**
+
+1. User asks ModCraft for their current CAP.
+2. System show the current CAP of all modules that have been taken.
+
+Use case ends.
 
 **Use case: UC08 - Indicating exempted modules**
 
