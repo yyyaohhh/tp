@@ -254,9 +254,22 @@ This can be shown through following sequence diagram:
 
 <puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
 
-### Module Plan Feature
-- how semesters are setup
-- what happens a user attempts to add a duplicate module
+### Module Plan
+
+**Overview:**
+
+`ModulePlan` is a wrapper class that contains all the information regarding the user's timetable.
+
+**Implementation:** <br>
+
+The ModulePlan implementation consists of 5 levels of classes in the following order:
+* `ModulePlan`
+* `ModulePlanSemesterList`
+* `ModulePlanSemester`
+* `UniqueModuleList`
+* `Module`
+
+<puml src="diagrams/ModulePlanClassDiagram.puml" width="450" />
 
 ### UI Feature?
 - how the ui is setup
