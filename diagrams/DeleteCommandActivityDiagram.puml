@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User executes delete module command;
+:Parse command string;
+
+if () then ([else])
+    :ParseException: Invalid Command Format;
+    stop
+( [all fields are filled but invalid module code format]) elseif () then ([else])
+    :CommandException: Invalid module code format;
+    stop
+( [valid module code format but module does not exist in database]) elseif () then ([else])
+    :CommandException: Module does not exist;
+    stop
+else ( [Module exists in the semester lists])
+
+endif
+:Delete module command is executed successfully.
+Module is deleted from the semester lists.;
+
+stop
+@enduml
