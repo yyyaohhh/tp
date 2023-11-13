@@ -244,10 +244,11 @@ The module information is stored as `moduleinfo.json` in the `src/main/resources
 3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
    3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if 
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
    * the file cannot be found,
    * an error occurs during deserialization, or
-   * the data contains invalid values. 
+   * the data contains invalid values.
+
 
 This can be shown through following sequence diagram:
 
@@ -903,7 +904,7 @@ testers are expected to do more *exploratory* testing.
        Expected: A new column of semester named `ST1` appears. The module `CS1010` is moved to the list `ST1`, while its grade and semester remain unchanged. Details of the added module shown in the status message. The modules shown in the semester list is updated.
 
     3. Test case: `edit CS1010 g/a`.<br>
-      Expected: No module is edited. Error details of wrong format of grade shown in the status message. Status bar remains the same.
+       Expected: No module is edited. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
     3. Test case: `edit CS1101S ...` when it is not already present in the semester list.<br>
        Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
@@ -967,13 +968,13 @@ testers are expected to do more *exploratory* testing.
 
    3. Test Case: Close the application and edit `moduleplan.json` by changing the name of the first Module to `CS3230`.
       Expected: Upon the next application start, the name of the first Module in chronological order in the list of years and semesters will appear as `CS3230`.
-   
+
    4. Test Case: Close the application and edit `moduleplan.json` by changing the year of the first Module to `2`.
       Expected: Upon the next application start, the name of the first Module will appear in `Year 2`, with its semester and grade unchanged.
-   
+
    5. Test Case: Close the application and edit `moduleplan.json` by changing the semester of the first Module to `ST2`.
       Expected: Upon the next application start, the name of the first Module will appear in `ST2`, with its year and grade unchanged.
-   
+
    6. Test Case: Close the application and edit `moduleplan.json` by changing the grade of the first Module to `IP`.
       Expected: Upon the next application start, the grade of the first Module in chronological order in the list of years and semesters will appear as `IP`, which should be grey in colour. Its name should remain unchanged.
 
