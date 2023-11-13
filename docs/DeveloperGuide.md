@@ -204,7 +204,16 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 
 This section describes some noteworthy details on how certain features and commands are implemented.
 
-* [Edit module feature](#edit-module-feature)
+* [Module Database Feature](#module-database-feature)
+* [Module Plan Feature](#module-plan-feature)
+* [UI Feature](#ui-feature)
+* [Module Storage Feature](#module-storage-feature)
+* [Info Module Command](#info-module-command)
+* [Add Module Command](#add-module-command)
+* [Edit Module Command](#edit-module-command)
+* [Delete Module Command](#delete-module-command)
+* [Calculate CAP Command](#calculate-cap-command)
+* [Calculate Modular Credits (MC) Command](#calculate-modular-credits-mc-command)
 * [Undo/redo feature](#proposed-undoredo-feature)
 
 <br>
@@ -258,7 +267,7 @@ This can be shown through following sequence diagram:
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
 
-### Info Module Command (marques)
+### Info Module Command
 
 ### Add Module Command
 
@@ -283,6 +292,60 @@ And here is a *Sequence Diagram* showing the command being executed:
 As can be seen, this is a helpful class to store fields that need to be edited.
 
 ### Delete Module Command
+
+**Overview:**<br>
+
+The `delete` command is used to delete a module from the semester lists. The module can only be deleted if it is already present in one of the semester lists in ModCraft.<br>
+
+The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#deleting-a-module-delete).<br>
+
+**Feature details:**<br>
+
+1. The user executes the `delete` command.
+2. If the module code field is not provided, an error message with the correct command usage will be shown.
+3. If invalid module code format is provided, an error message with the correct module code format will be shown.
+4. If valid module code format is provided but `Module` does not exist in database, an error message informing user that the `Module` does not exist will be shown.
+5. The `Module` is then cross-referenced in the `Model` to check if a module with the same `ModuleCode` exists in the semester lists.
+6. If the module does not exist in the semester lists, an error message informing the user that the `Module` has not added to the planner yet will be shown.
+7. If all previous steps are completed without exceptions, the new `Module` will be successfully deleted from the semester lists.
+
+<br>
+
+The following activity diagram shows the logic of deleting a `Module` from the semester lists:
+
+<puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
+
+<br>
+
+The sequence of the `delete` command is as follows:<br>
+
+1. The user inputs the `delete` command.<br>
+e.g. `delete CS3230`
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `DeleteCommandParser` to parse the fields provided by the user and a new `DeleteCommand` is created.
+4. The `DeleteCommand` checks if the `ModuleCode` is valid by calling `Model#checkDbValidModuleCode`.
+4. The `DeleteCommand` then checks if the `Model` contains a module with the same `ModuleCode` by calling `Model#getModule`.
+5. If the `ModuleCode` is valid and `Model` contains the module, the `DeleteCommand` calls `Model#deleteModule` to delete the module from to the semester lists.
+
+The following sequence diagram shows how the `delete` command works:
+
+<puml src="diagrams/DeleteCommandSequenceDiagram.puml" width="450" />
+
+<br>
+
+### Calculate CAP Command
+
+<br>
+
+### Implementation
+
+### Calculate Modular Credits (MC) Command
+
+<br>
+
+### Implementation
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -377,6 +440,8 @@ For our next steps, we plan to add the following features:
 * Check for a module's pre-requisites, and check if they are fulfilled before allowing the user to add the module.
 * Check for a module's pre-clusions, and prevent users from adding modules that are pre-clusions of each other.
 * Check for a module's co-requisites, and remind users to add modules that are co-requisites of each other and to take them concurrently.
+* Check for a module's availability of S/U options, and prevent users from inputting S/U grades to non-S/U-able modules.
+* Add support for allowing users to add a module that was failed in a previous semester to another new semester.
 
 * <br>
 
@@ -485,16 +550,11 @@ Use case ends.
 Steps 1a1 to 1a2 are repeated until the module is available
 Use case resumes from step 2.
 
-* 3a. Modcraft detects that the module is unavailable for the semester.
-    * 3a1. Modcraft informs the user it is unavailable
-    * 3a2. User searches another module
-Steps 3a1 to 3a2 are repeated until the module is available
-Use case resumes from step 4.
-
 * *a. At any time, user choose to delete a module
     * *a1. User deletes the module
     * *a2. Modcraft removes the module from the timetable
 Use case resumes from step 1.
+
 
 **Use case: UC02 - Updating end of semester grades**
 
@@ -513,6 +573,44 @@ Use case ends.
     * 1a2. User inputs correct grade
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
+
+
+**Use case: UC08 - Indicating exempted modules**
+
+**MSS**
+
+1. User inputs `EXE` as the grade for a module that they have taken.
+2. System shows the updated grade for the module, which is `EXE`, in the timetable.
+   Steps 1-2 are repeated for each module that the user would like to indicate as exempted.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Module code is invalid
+    * 1a1. System shows the user that the module code inputted is invalid
+    * 1a2. User inputs correct module code
+      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
+
+
+**Use case: UC09 - S/Uing modules**
+
+**MSS**
+
+1. User inputs `S` or `U` as the grade for a module that they have taken.
+2. System shows the updated grade for the module, which is `S` or `U`, in the timetable.
+   Steps 1-2 are repeated for each module that the user would like to indicate as Satisfactory (S) or Unsatisfactory (U).
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Module code is invalid
+    * 1a1. System shows the user that the module code inputted is invalid
+    * 1a2. User inputs correct module code
+      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
 
 <br>
 
