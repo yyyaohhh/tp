@@ -297,7 +297,7 @@ However, the logic for checking and grouping all Year 0 modules is implemented h
 
 * The functions `contains` and `modulesAreUnique` ensures that there is no duplicates within this semester.
 * The functions `modularCredits`, `findGradePointsWithUnits` and `findMcsForCap` calculates the CAP/MC for this particular semester only.
-<br>
+<br><br><br>
 
 The following diagrams shows the flow for the **main uses** of ModulePlan, adding and removing modules.
 
