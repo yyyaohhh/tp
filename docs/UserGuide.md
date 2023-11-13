@@ -72,6 +72,7 @@ Warnings in boxes like this contain information that are vital to the running of
 2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.4).
 3. Copy the downloaded jar file to the folder you want to use as the _home folder_ (the folder `ModCraft.jar` will be in) for ModCraft.
 
+
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
 As ModCraft writes to files within the directory it is in, we recommend placing ModCraft in an empty directory to prevent unexpected behaviour.
 </md></div>
@@ -195,7 +196,6 @@ The images below show you the process for adding a module to one of the Special 
 
 
 <div class="alert alert-warning"><md>:exclamation: **Caution:**
-
 Currently, ModCraft has certain **limitations**.
 
 * ModCraft **does not** check for pre-requisites, pre-clusions and co-requisites while adding, deleting and editing modules. For example, you can add modules into ModCraft without adding their prerequisite modules.
@@ -203,7 +203,7 @@ Currently, ModCraft has certain **limitations**.
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
 * ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade.<br>
-e.g. you can add the non-CS/CU module `CS2100` and input its grade as `CS`.<br> 
+e.g. you can add the non-CS/CU module `CS2100` and input its grade as `CS`.<br>
 Likewise, you can add a CS/CU module with a non-CS/CU grade.<br>
 e.g. you can mark the grade of `CFG1002` as `A`.
 
@@ -246,7 +246,7 @@ The images below show you the process for executing the `add` command in ModCraf
 
 ### Editing a module: `edit`
 
-You can change an attribute of a module using this command. This command works **only if the module exists**. 
+You can change an attribute of a module using this command. This command works **only if the module exists**.
 
 This command may be useful if you want to update information about a module or have made a mistake while adding a module.
 
@@ -314,16 +314,32 @@ The **module code, module title, modular credit and module description** of the 
 
 Format: `info MODULE`
 
-Examples:
-* `info CS2109S`
-* `info CS1010`
+<div class="alert alert-warning"><md>:gear: Example:
 
-The images below show you what ModCraft should look like for executing the `info` command. Information about the module `CS3230` is displayed.
+* info CS2109S
+
+Displays information about the module CS2109S
+
+* info CS1010
+
+Displays information about the module CS1010
+</md></div>
+
+The images below show you what ModCraft should look like after executing the `info` command.
+
+In the example below, the command `info CS3230` is executed. Information about the module `CS3230` is displayed.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/info-before.png" alt="Before executing info command" style="height:400px; margin:20px;">
   <img src="images/ImagesForUG/info-after.png" alt="After executing info command" style="height:400px; margin:20px;">
 </div>
+<p style="text-align: center;">
+    Information about the module searched being displayed.
+</p>
+
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+
+The module information is taken from [NUSmods](https://github.com/nusmodifications/nusmods) for the current Academic Year 23/24 .
+</md></div>
 
 <br>
 
@@ -333,47 +349,57 @@ You can calculate the total current Cumulative Average Point (CAP), or Grade Poi
 
 ModCraft will calculate your CAP according to the [NUS Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/non-graduating/modular-system), and using the following formula:
 
-$\Large\frac{\text{sum of all valid modules: (grade point of each valid module * Modular Credits of each valid module)}}{\text{total Modular Credits of valid modules}}$.
+
+<p style="text-align: center;">
+$\Large\frac{\text{For each module: Sum of(grade point of each module * Modular Credits of each module)}}{\text{total Modular Credits of modules}}$.
+</p>
 
 Displays you a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
 
 Format: `calculateCAP`
 
+
 The images below show you what ModCraft should look like for executing the `calculateCAP` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/cap-before.png" alt="Before executing calculateCAP command" style="height:400px; margin:20px;">
   <img src="images/ImagesForUG/cap-after.png" alt="After executing calculateCAP command" style="height:400px; margin:20px;">
 </div>
+<p style="text-align: center;">
+    The cap calculated based on the existing modules and their respective grades in the module plan.
+</p>
 
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
 
-<div class="alert alert-primary"><md>:bulb: **Tip:**
-
-The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as 
+The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as
 `IP` (In Progress), `EXE` (Exempted), `W` (Withdrawn), `IC` (Incomplete), `S` (Satisfactory), `U` (Unsatisfactory), `CS` (Completed Satisfactory) and `CU` (Completed Unsatisfactory).
 
 </md></div>
 
 <br>
 
-### Calculating the total current Modular Credits (MCs): `CalculateMC`
+### Calculating the total current Modular Credits (MCs): `calculateMC`
 
-You can calculate the total current Modular Credits (MCs) stored in all years and semesters using this command. ModCraft displays a float which is the sum of MCs of all modules in the module plan.
+You can calculate the total current Modular Credits (MCs) stored in **all** years and semesters using this command.
+ModCraft displays a float which is the sum of MCs of **all modules** in the **module plan**.
 
 Format: `calculateMC`
 
 The images below show you what ModCraft should look like for executing the `calculateMC` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/mc-before.png" alt="Before executing calculateMC command" style="height:400px; margin:20px;">
   <img src="images/ImagesForUG/mc-after.png" alt="After executing calculateMC command" style="height:400px; margin:20px;">
 </div>
+<p style="text-align: center;">
+    The total amount of modular credits obtained based on the module plan
+</p>
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The result displayed by the `calculateMC` command **includes** the modular credits of modules with grades marked as `IP` (In progress).
+The result displayed by the `calculateMC` command **includes** the modular credits of **all modules** in the module plan
+including modules with non-passing grades
 
 </md></div>
+
 
 <br>
 
@@ -381,7 +407,10 @@ The result displayed by the `calculateMC` command **includes** the modular credi
 
 You can exit ModCraft using this command.
 
-Format: `exit`
+Format:
+```swift
+exit
+```
 
 <br>
 
