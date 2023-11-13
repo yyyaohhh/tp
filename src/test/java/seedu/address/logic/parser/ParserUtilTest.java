@@ -16,12 +16,10 @@ import seedu.address.model.module.Year;
 
 public class ParserUtilTest {
     private static final String INVALID_CODE = "123";
-    private static final String INVALID_MC = "1000";
-    private static final String INVALID_DESCRIPTION = "Hi";
+    private static final String INVALID_MC = "-1";
     private static final String INVALID_YEAR = "-4";
     private static final String INVALID_SEMESTER = "5";
     private static final String INVALID_GRADE = "Y";
-    private static final String INVALID_NAME = "qwer123";
 
     private static final String VALID_CODE = "CS2030S";
     private static final String VALID_MC = "4";
@@ -35,7 +33,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCode_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode(null));
     }
 
     @Test
@@ -58,13 +56,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseMc_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModularCredit((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModularCredit(null));
     }
 
-//     @Test
-//     public void parseMc_invalidValue_throwsParseException() {
-//         assertThrows(ParseException.class, () -> ParserUtil.parseModularCredit(INVALID_MC));
-//     }
+    @Test
+    public void parseMc_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModularCredit(INVALID_MC));
+    }
 
     @Test
     public void parseMc_validValueWithoutWhitespace_returnsMC() throws Exception {
@@ -74,20 +72,16 @@ public class ParserUtilTest {
 
     @Test
     public void parseMc_validValueWithWhitespace_returnsTrimmedMC() throws Exception {
-        String McWithWhitespace = WHITESPACE + VALID_MC + WHITESPACE;
+        String mcWithWhitespace = WHITESPACE + VALID_MC + WHITESPACE;
         ModularCredit expectedMc = new ModularCredit(VALID_MC);
-        assertEquals(expectedMc, ParserUtil.parseModularCredit(McWithWhitespace));
+        assertEquals(expectedMc, ParserUtil.parseModularCredit(mcWithWhitespace));
     }
 
     @Test
     public void parseDescription_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
     }
 
-//     @Test
-//     public void parseDescription_invalidValue_throwsParseException() {
-//         assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
-//     }
 
     @Test
     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
@@ -104,7 +98,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseYear_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseYear((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseYear(null));
     }
 
     @Test
@@ -150,7 +144,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseGrade_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade(null));
     }
 
     @Test
@@ -173,13 +167,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleName(null));
     }
 
-//    @Test
-//    public void parseName_invalidValue_throwsParseException() {
-//        assertThrows(ParseException.class, () -> ParserUtil.parseModuleName(INVALID_NAME));
-//    }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {

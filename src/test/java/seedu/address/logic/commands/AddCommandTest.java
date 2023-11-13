@@ -2,234 +2,163 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2030S;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_BOTH;
+import static seedu.address.testutil.TypicalModules.MODULE_IN_NEITHER;
+import static seedu.address.testutil.TypicalModules.MODULE_ONLY_DATA;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleData;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyModuleData;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.module.Description;
-import seedu.address.model.module.ModularCredit;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
-import seedu.address.model.moduleplan.ModulePlan;
-import seedu.address.model.moduleplan.ModulePlanSemester;
-import seedu.address.model.moduleplan.ReadOnlyModulePlan;
-import seedu.address.testutil.ModuleBuilder;
+import seedu.address.testutil.ModelStub;
 
+/**
+ * Contains unit tests for {@code AddCommand}.
+ */
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullParameter_throwsNullPointerException() {
+        // random typical module
+        Module m = MODULE_IN_BOTH;
+
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                null, m.getYearTaken(), m.getSemesterTaken(), m.getGrade()));
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                m.getModuleCode(), null, m.getSemesterTaken(), m.getGrade()));
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                m.getModuleCode(), m.getYearTaken(), null, m.getGrade()));
+        assertThrows(NullPointerException.class, () -> new AddCommand(
+                m.getModuleCode(), m.getYearTaken(), m.getSemesterTaken(), null));
     }
 
     @Test
-    public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingModuleAdded modelStub = new ModelStubAcceptingModuleAdded();
-        Module validModule = new ModuleBuilder().build();
+    public void execute_moduleInDataNotInPlan_addSuccessful() throws Exception {
+        //In ModuleData and not in ModulePlan
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule();
+        Module validModule = MODULE_ONLY_DATA;
 
-        CommandResult commandResult = new AddCommand(validModule).execute(modelStub);
+        AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
+                validModule.getSemesterTaken(), validModule.getGrade());
+        CommandResult commandResult = addCommand.execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validModule)),
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_MODULE_SUCCESS, Messages.format(validModule)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded );
+        assertEquals(List.of(validModule), modelStub.modulesAdded);
     }
+
+    @Test
+    public void execute_moduleNotInModuleDataNotInModulePlan_throwsCommandException() {
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule();
+        Module notInDB = MODULE_IN_NEITHER;
+
+        assertThrows(ModuleNotFoundException.class, () -> modelStub.getModuleFromDb(notInDB.getModuleCode()));
+    }
+
 
     @Test
     public void execute_duplicateModule_throwsCommandException() {
-        Module validModule = new ModuleBuilder().build();
-        AddCommand addCommand = new AddCommand(validModule);
-        ModelStub modelStub = new ModelStubWithModule(validModule);
+        //Both in ModuleData and ModulePlan
+        Module validModule = MODULE_IN_BOTH;
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MODULE, () -> addCommand.execute(modelStub));
+        AddCommand addCommand = new AddCommand(validModule.getModuleCode(), validModule.getYearTaken(),
+                validModule.getSemesterTaken(), validModule.getGrade());
+        ModelStubWithMultipleModule modelStub = new ModelStubWithMultipleModule(validModule);
+
+        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_DUPLICATE_MODULE,
+                validModule.getModuleCode()), () -> addCommand.execute(modelStub));
     }
 
 
     @Test
     public void equals() {
-        Module cs2030s = new ModuleBuilder().withCode("CS2030S").build();
-        Module cs2040s = new ModuleBuilder().withCode("CS2040S").build();
-        AddCommand add2030Command = new AddCommand(cs2030s);
-        AddCommand add2040Command = new AddCommand(cs2040s);
+        // Use random typical modules for their module codes
+        Module module = MODULE_IN_BOTH;
+        Module otherModule = MODULE_ONLY_DATA;
 
-        //same -> returns true
-        assertTrue(add2030Command.equals(add2030Command));
+        // same object -> returns true
+        AddCommand addCommand = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertEquals(addCommand, addCommand);
 
-        AddCommand add2030CommandCopy = new AddCommand(cs2030s);
-        assertTrue(add2030Command.equals(add2030CommandCopy));
+        // same values -> returns true
+        AddCommand addCommandCopy = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertEquals(addCommand, addCommandCopy);
 
-        assertFalse(add2030Command.equals(1));
-        assertFalse(add2030Command.equals(null));
+        // different types -> returns false
+        assertNotEquals(1, addCommand);
 
-        assertFalse(add2030Command.equals(add2040Command));
+        // null -> returns false
+        assertNotEquals(addCommand, null);
 
+        // different module code -> returns false
+        AddCommand differentCode = new AddCommand(otherModule.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertNotEquals(addCommand, differentCode);
+
+        // different year -> returns false
+        AddCommand differentYear = new AddCommand(module.getModuleCode(), otherModule.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        assertNotEquals(addCommand, differentYear);
+
+        // different semester -> returns false
+        AddCommand differentSemester = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                otherModule.getSemesterTaken(), module.getGrade());
+        assertNotEquals(addCommand, differentSemester);
+
+        // different grade -> returns false
+        AddCommand differentGrade = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), otherModule.getGrade());
+        assertNotEquals(addCommand, differentGrade);
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(CS2030S);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + CS2030S + "}";
+        // use random typical module
+        Module module = MODULE_IN_BOTH;
+
+        AddCommand addCommand = new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade());
+        String expected = AddCommand.class.getCanonicalName()
+                + "{moduleCode=" + module.getModuleCode()
+                + ", year=" + module.getYearTaken()
+                + ", semester=" + module.getSemesterTaken()
+                + ", grade=" + module.getGrade() + "}";
         assertEquals(expected, addCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A Model stub that accepts multiple modules.
      */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
+    private class ModelStubWithMultipleModule extends ModelStub {
+        private final ArrayList<Module> modulesAdded = new ArrayList<>();
+
+        ModelStubWithMultipleModule() {
         }
 
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getModulePlanFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setModulePlanFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setModulePlan(ReadOnlyModulePlan modulePlan) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyModulePlan getModulePlan() {
-            throw new AssertionError("This method should not be called.");
+        ModelStubWithMultipleModule(Module module) {
+            requireNonNull(module);
+            modulesAdded.add(module);
         }
 
         @Override
         public void addModule(Module module) {
-            throw new AssertionError("This method should not be called.");
+            if (modulesAdded.contains(module)) {
+                throw new DuplicateModuleException();
+            }
+            modulesAdded.add(module);
         }
-
-        @Override
-        public boolean hasModule(Module module) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteModule(Module module) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setModule(Module target, Module editedModule) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Module getModule(ModuleCode code) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public float totalModularCredits() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Float getCap() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setModuleData(ReadOnlyModuleData moduleData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyModuleData getModuleData() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ModuleName getDbModuleName(ModuleCode moduleCode) throws ModuleNotFoundException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Description getDbModuleDescription(ModuleCode moduleCode) throws ModuleNotFoundException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ModularCredit getDbModularCredit(ModuleCode moduleCode) throws ModuleNotFoundException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean checkDbValidModule(Module module) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean checkDbValidModuleCode(ModuleCode moduleCode) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<ModulePlanSemester> getFilteredModuleList() {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithModule extends ModelStub {
-        private final Module module;
-
-        ModelStubWithModule(Module module) {
-            requireNonNull(module);
-            this.module = module;
-        }
-
-        @Override
-        public boolean hasModule(Module module) {
-            requireNonNull(module);
-            return this.module.isSameModule(module);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingModuleAdded extends ModelStub {
-        final ArrayList<Module> modulesAdded = new ArrayList<>();
 
         @Override
         public boolean hasModule(Module module) {
@@ -238,14 +167,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addModule(Module module) {
-            requireNonNull(module);
-            modulesAdded.add(module);
-        }
-
-        @Override
-        public ReadOnlyModulePlan getModulePlan() {
-            return new ModulePlan();
+        public Module getModuleFromDb(ModuleCode moduleCode) {
+            return getTypicalModuleData().getModule(moduleCode);
         }
     }
 

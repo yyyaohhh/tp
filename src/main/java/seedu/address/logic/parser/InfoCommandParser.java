@@ -21,6 +21,7 @@ public class InfoCommandParser implements Parser<InfoCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the InfoCommand
      * and returns a InfoCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public InfoCommand parse(String args) throws ParseException {

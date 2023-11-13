@@ -59,7 +59,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -74,7 +74,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -83,7 +83,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the module plan, filtered module list and selected module in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -96,6 +96,24 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
     }
 
+
+    /**
+     * Executes.
+     */
+    public static void assertInfoCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        ModulePlan expectedModulePlan = new ModulePlan(actualModel.getModulePlan());
+        List<ModulePlanSemester> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
+
+        try {
+            System.out.println(command.execute(actualModel).getFeedbackToUser());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel).getFeedbackToUser());
+        assertEquals(expectedModulePlan, actualModel.getModulePlan());
+        assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
+    }
 
 
 }

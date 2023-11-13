@@ -17,12 +17,12 @@ import seedu.address.model.moduleplan.ReadOnlyModulePlan;
  */
 public class ModelStub implements Model {
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+    public ReadOnlyUserPrefs getUserPrefs() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -47,12 +47,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
+    public ReadOnlyModulePlan getModulePlan() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyModulePlan getModulePlan() {
+    public void setModulePlan(ReadOnlyModulePlan modulePlan) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -82,7 +82,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public int totalModularCredits() {
+    public float totalModularCredits() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -92,12 +92,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setModuleData(ReadOnlyModuleData moduleData) {
+    public ReadOnlyModuleData getModuleData() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyModuleData getModuleData() {
+    public void setModuleData(ReadOnlyModuleData moduleData) {
         throw new AssertionError("This method should not be called.");
     }
 

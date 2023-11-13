@@ -52,7 +52,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ModulePlan ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -64,7 +64,7 @@ public class MainApp extends Application {
         ModulePlanStorage modulePlanStorage = new JsonModulePlanStorage(userPrefs.getModulePlanFilePath());
         storage = new StorageManager(modulePlanStorage, userPrefsStorage);
 
-        Database database = new DatabaseManager();
+        Database database = new DatabaseManager(DatabaseManager.DEFAULT_DATABASE_FILEPATH);
 
         model = initModelManager(storage, userPrefs, database);
 
@@ -74,10 +74,10 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, {@code userPrefs} and
+     * Returns a {@code ModelManager} with the data from {@code storage}'s module plan, {@code userPrefs} and
      * {@code database}'s module list. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * The data from the sample module plan will be used instead if {@code storage}'s module plan is not found,
+     * or an empty module plan will be used instead if errors occur when reading {@code storage}'s module plan.
      * If the {@code database}'s module list is not found, a {@code RuntimeException} will be thrown.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Database database) {
@@ -186,13 +186,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting ModulePlan " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Module Plan ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

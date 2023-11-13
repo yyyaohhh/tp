@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.InfoCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.model.module.ModuleCode.MESSAGE_CONSTRAINTS;
-import static seedu.address.logic.commands.InfoCommand.MESSAGE_USAGE;
 
 import org.junit.jupiter.api.Test;
 
 public class InfoCommandParserTest {
 
-    private InfoCommandParser parser = new InfoCommandParser();
+    private final InfoCommandParser parser = new InfoCommandParser();
 
     @Test
     public void parse_invalidSingleArg_throwsParseException() {

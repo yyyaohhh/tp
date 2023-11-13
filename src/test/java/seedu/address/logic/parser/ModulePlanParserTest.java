@@ -32,7 +32,8 @@ public class ModulePlanParserTest {
     public void parseCommand_add() throws Exception {
         Module module = new ModuleBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(ModuleUtil.getAddCommand(module));
-        assertEquals(new AddCommand(module), command);
+        assertEquals(new AddCommand(module.getModuleCode(), module.getYearTaken(),
+                module.getSemesterTaken(), module.getGrade()), command);
     }
 
     @Test
@@ -75,7 +76,8 @@ public class ModulePlanParserTest {
 
     @Test
     public void parseCommand_info() throws Exception {
-        assertTrue(parser.parseCommand(InfoCommand.COMMAND_WORD) instanceof InfoCommand);
+        assertTrue(parser.parseCommand(InfoCommand.COMMAND_WORD + " " + CS2030S.getModuleCode())
+                instanceof InfoCommand);
     }
 
     @Test

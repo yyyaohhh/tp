@@ -1,0 +1,22 @@
+{
+  "modules": [
+    {
+      "code": "CS2030S",
+      "year": "1",
+      "sem": "2",
+      "grade": "A",
+      "name": "Programming Methodology II",
+      "description": "This course is a follow up to CS1010.",
+      "modularCredit": "4"
+    },
+    {
+      "code": "CSS2040S",
+      "year": "Y1",
+      "sem": "S2",
+      "grade": "A-",
+      "name": "Data Structures and Algorithms",
+      "description": "This course introduces the fundamentals of data structures and algorithms.",
+      "modularCredit": "4"
+    }
+  ]
+}

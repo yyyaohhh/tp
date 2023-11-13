@@ -21,7 +21,7 @@ public class JsonModulePlanStorage implements ModulePlanStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonModulePlanStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonModulePlanStorage(Path filePath) {
         this.filePath = filePath;

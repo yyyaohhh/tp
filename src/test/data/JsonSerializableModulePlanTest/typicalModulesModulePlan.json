@@ -1,0 +1,14 @@
+{
+  "_comment": "ModulePlan save file which contains the same Module values as in TypicalModules#getTypicalModulePlan()",
+  "modules": [
+    {
+      "code": "CS2101",
+      "year": "2",
+      "sem": "1",
+      "grade": "B-",
+      "name": "Effective Communication for Computing Professionals",
+      "description": "This course aims to equip students with the skills needed to communicate.",
+      "modularCredit": "4"
+    }
+  ]
+}

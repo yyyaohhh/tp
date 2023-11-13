@@ -1,0 +1,16 @@
+{
+  "modules": [
+    {
+      "moduleCode": "CS2101",
+      "title": "Effective Communication for Computing Professionals",
+      "description": "This course aims to equip students with the skills needed to communicate.",
+      "moduleCredit": "4"
+    },
+    {
+      "moduleCode": "CS2040S",
+      "title": "Data Structures and Algorithms",
+      "description": "This course introduces the fundamentals of data structures and algorithms.",
+      "moduleCredit": "4"
+    }
+  ]
+}

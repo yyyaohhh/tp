@@ -26,12 +26,12 @@ import seedu.address.model.moduleplan.exceptions.SemesterNotFoundException;
  * As such, adding and updating of module uses ModulePlanSemester#equals(ModulePlanSemester)
  * for equality so as to ensure that the semester being added or updated is
  * unique in terms of identity in the ModulePlanSemesterList.
- *
+ * <p>
  * Supports a minimal set of list operations.
  */
 public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
 
-    private static final List<ModulePlanSemester> DEFAULT_SEMESTERS = new ArrayList<>() {
+    protected static final List<ModulePlanSemester> DEFAULT_SEMESTERS = new ArrayList<>() {
         {
             for (int y = 1; y <= 4; y++) {
                 for (int s = 1; s <= 2; s++) {
@@ -105,7 +105,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     public boolean containsSemester(ModulePlanSemester toCheck) {
         requireNonNull(toCheck);
 
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::checkIfSameSemester);
     }
 
     /**
@@ -152,7 +152,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
         }
 
         for (int i = 0; i < internalList.size(); i++) {
-            if (toCheck.equals(internalList.get(i))) {
+            if (toCheck.checkIfSameSemester(internalList.get(i))) {
                 return internalList.get(i).isEmpty();
             }
         }
@@ -167,7 +167,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
      */
     private boolean inDefaultSemesters(ModulePlanSemester toCheck) {
         for (ModulePlanSemester m : DEFAULT_SEMESTERS) {
-            if (m.equals(toCheck)) {
+            if (m.checkIfSameSemester(toCheck)) {
                 return true;
             }
         }
@@ -362,7 +362,7 @@ public class ModulePlanSemesterList implements Iterable<ModulePlanSemester> {
     private boolean semestersAreUnique(List<ModulePlanSemester> semesters) {
         for (int i = 0; i < semesters.size() - 1; i++) {
             for (int j = i + 1; j < semesters.size(); j++) {
-                if (semesters.get(i).equals(semesters.get(j))) {
+                if (semesters.get(i).checkIfSameSemester(semesters.get(j))) {
                     return false;
                 }
             }

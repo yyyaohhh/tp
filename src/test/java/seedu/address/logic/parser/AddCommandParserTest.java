@@ -35,23 +35,26 @@ import seedu.address.model.module.Year;
 import seedu.address.testutil.ModuleBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
         Module expectedModule = new ModuleBuilder(CS2040S).build();
         String moduleCodeString = expectedModule.getModuleCode().toString();
 
+        AddCommand expectedAddCommand = new AddCommand(expectedModule.getModuleCode(), expectedModule.getYearTaken(),
+                expectedModule.getSemesterTaken(), expectedModule.getGrade());
+
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + moduleCodeString + YEAR_DESC_CS2040S
-                + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
+                + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S, expectedAddCommand);
 
         System.out.println(moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
                 + GRADE_DESC_CS2040S);
 
         // no whitespace preamble
         assertParseSuccess(parser, moduleCodeString + YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S
-                + GRADE_DESC_CS2040S, new AddCommand(expectedModule));
+                + GRADE_DESC_CS2040S, expectedAddCommand);
     }
 
     @Test
@@ -73,7 +76,7 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                 YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
+                YEAR_DESC_CS2040S + SEMESTER_DESC_CS2040S + GRADE_DESC_CS2040S
                         + validExpectedModuleString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_YEAR, PREFIX_SEMESTER, PREFIX_GRADE));
 
@@ -157,7 +160,7 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser,
                 PREAMBLE_NON_EMPTY + VALID_CODE_CS2101
-                 + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
+                        + YEAR_DESC_CS2101 + SEMESTER_DESC_CS2101 + GRADE_DESC_CS2101,
                 ModuleCode.MESSAGE_CONSTRAINTS);
     }
 
