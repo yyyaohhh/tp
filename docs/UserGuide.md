@@ -139,6 +139,8 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Viewing help: `help`
 
 Displays you a message explaining how to access the help page of ModCraft, as shown below.
@@ -152,6 +154,8 @@ Format: `help`
 <br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Modules
 
@@ -229,6 +233,8 @@ These features are planned enhancements in future releases.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Adding a module: `add`
 
 You can add a module to your study plan of the list of modules taken in the **specified year and semester** using this command.
@@ -258,6 +264,8 @@ The images below show you the `add` command in action.
 <br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a module: `edit`
 
@@ -289,6 +297,8 @@ You need to provide at least one of the optional fields (i.e. `GRADE`, `YEAR`, `
 <br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a module: `delete`
 
@@ -323,6 +333,8 @@ Deleting a module also **deletes all the information associated with the module*
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Finding Information about a module: `info`
 
 You can retrieve information about **any** module by its module code using this command, including the modules **not yet added** to your study plan.
@@ -345,6 +357,8 @@ The images below show you what ModCraft should look like for executing the `info
 <br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Calculating the total current CAP: `calculateCAP`
 
@@ -377,6 +391,8 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Calculating the total current Modular Credits (MCs): `CalculateMC`
 
 You can calculate the total current Modular Credits (MCs) stored in all years and semesters using this command. ModCraft displays a float which is the sum of MCs of all modules in the module plan.
@@ -400,6 +416,8 @@ The result displayed by the `calculateMC` command **includes** the modular credi
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Exiting the program: `exit`
 
 You can exit ModCraft using this command.
@@ -420,6 +438,8 @@ There is no need for you to save manually.
 <br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing the data file
 
@@ -487,3 +507,5 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 <br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
