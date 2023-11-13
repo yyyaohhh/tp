@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Database`**](#database-component) parses data from within the App on startup. This data is used to support user input validation according to the business logic.
+[**`Database`**](#database-component) parses data from within the App on startup. This data is used to support user input validation according to the business logic.<br>
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 <br>
@@ -151,7 +151,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** The module plan data is split into different semesters (e.g. Year 1 S1, Year 1 S2, Year 2 S1, etc). Instead of one `UniqueModuleList` storing all of the user's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters. The implementation of this checked can be found in `ModelManager`.
+**Note:** The module plan data is split into different semesters (e.g. Year 1 S1, Year 1 S2, Year 2 S1, etc). Instead of one `UniqueModuleList` storing all of the user's modules across multiple semesters, each semester's modules are stored in their own `UniqueModuleList` object. Nevertheless, modules are required to be unique across semesters, meaning that the same module will be prevented from being added to multiple semesters. The implementation of this check can be found in `ModulePlanSemesterList`.
 
 </box>
 
@@ -168,7 +168,7 @@ The `Model` component,
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model` that can be changed)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve modifiable objects that belong to the `Model`)
 
 <br>
 
@@ -182,7 +182,7 @@ The `Storage` component,
 
 The `Database` component,
 * reads the module information from JSON format to the corresponding `ModuleData` object.
-* depends on some classes in the `Model` component (because the `Database` component's job is to retrieve objects that belong to the `Model` that can only be read)
+* depends on some classes in the `Model` component (because the `Database` component's job is to retrieve read-only objects that belong to the `Model`)
 
 <box type="info" seamless>
 
