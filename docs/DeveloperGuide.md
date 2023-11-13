@@ -284,49 +284,34 @@ As can be seen, this is a helpful class to store fields that need to be edited.
 
 ### Delete Module Command
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Pre-requisite checking feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedModulePlan`. It extends `ModulePlan` with an undo/redo history, stored internally as an `ModulePlanStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed pre-requisite checking mechanism is facilitated by `Prerequisite`. Every `Module` will have a `Prerequisite` field. `Prerequisite` contains a list of other `Prerequisite` objects, of which `Module` is a subclass. It also contains a number that represents the number of `Prerequisite`s in the list that need to be fulfilled before this `Prerequisite` can be considered fulfilled. Additionally, it implements the following operation:
 
-* `VersionedModulePlan#commit()` — Saves the current module plan state in its history.
-* `VersionedModulePlan#undo()` — Restores the previous module plan state from its history.
-* `VersionedModulePlan#redo()` — Restores a previously undone module plan state from its history.
+* `Prerequisite#isFulfilled()`: Checks whether the current Prerequisite is fulfilled.
 
-These operations are exposed in the `Model` interface as `Model#commitModulePlan()`, `Model#undoModulePlan()` and `Model#redoModulePlan()` respectively.
+This operation is exposed in the `Model` interface as `Model#checkPrerequisitesFulfilled(Module m)`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the prerequisite mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedModulePlan` will be initialized with the initial module plan state, and the `currentStatePointer` pointing to that single module plan state.
+Step 1. The user executes `add CS2103T y/2 s/1 g/IP` command to add the module `CS2103T` in the module plan. 
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Step 2. The `add` command calls `Model#checkPrerequisitesFulfilled(CS2103T)` to check if the prerequisites have been fulfilled in previous semesters. In this case, these are the Advanced Placement and Year 1 semesters.
 
-Step 2. The user executes `delete CS1010` command to delete the module `CS1010` in the module plan. The `delete` command calls `Model#commitModulePlan()`, causing the modified state of the module plan after the `delete CS1010` command executes to be saved in the `modulePlanStateList`, and the `currentStatePointer` is shifted to the newly inserted module plan state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add CS2030 …​` to add a new module. The `add` command also calls `Model#commitModulePlan()`, causing another modified module plan state to be saved into the `modulePlanStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 3. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it adds the module `CS2103T` to Year 2 Semester 1.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitModulePlan()`, so the module plan state will not be saved into the `modulePlanStateList`.
+**Note:** If the module is in the Advanced Placement, there are no other semesters to check.
 
 </box>
 
-Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoModulePlan()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous module plan state, and restores the module plan to that state.
+Step 4. The user now decides to move the module to an earlier semester, and decides to make the appropriate changes by executing the command `edit CS2103T y/1 s/2`. The `edit` command calls `Model#checkPrerequisitesFulfilled(CS2103T)` again to check if the prerequisites have been fulfilled in previous semesters. In this case, they are the Advanced Placement and Year 1 Semester 1 semesters. 
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+Step 5. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it moves the module `CS2103T` to Year 1 Semester 2.
 
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModulePlan state, then there are no previous ModulePlan states to restore. The `undo` command uses `Model#canUndoModulePlan()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
 
 The following sequence diagram shows how the undo operation works:
 
