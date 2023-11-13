@@ -1,8 +1,11 @@
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
+---
+
 # ModCraft User Guide
 --------------------------------------------------------------------------------------------------------------------
-
-<!-- * Table of Contents -->
-<page-nav-print />
 
 ModCraft is a desktop application built for students from National University of Singapore (NUS) to help them **track and organise their academic journey**. With ModCraft serving as your **personal study planner**, you can easily:
 
