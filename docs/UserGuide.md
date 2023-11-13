@@ -389,16 +389,12 @@ The images below show you what ModCraft should look like for executing the `calc
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
-The result displayed by the `calculateMC` command **includes** the modular credits of modules with grades marked 
-as `IP` (In progress), `W` (Withdrawn), `F`, `CU` and `U`.
+The result displayed by the `calculateMC` command **includes** the modular credits of **all modules** including modules
+with non-passing grades
 
 </md></div>
 
 
-<div class="alert alert-warning"><md>:exclamation: **Caution:**
-
-The `calculateMC` command includes the modules that have a failing grade such as `W`, `F`, `CU`, and `U`.
-</md></div>
 <br>
 
 ### Exiting the program: `exit`
