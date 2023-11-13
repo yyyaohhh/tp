@@ -4,12 +4,10 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 !pragma useVerticalIf on
 start
-:User executes add command;
+:User enters Add Command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
-
-
 
  partition AddCommandParser{
     if () then ([else])
@@ -22,23 +20,23 @@ start
     else ( [valid command format])
 
     endif
-    }
+}
 
-partition Addcommand {
+partition AddCommand {
 
 if () then ([else])
-    :ModuleNotFoundException: Module Not Found;
+    :ModuleNotFoundException: Module not found;
     stop
-( [Module is in ModuleData]) elseif() then([else])
-    :DuplicateModuleException: Module already Added;
+( [module is in ModuleData]) elseif() then([else])
+    :DuplicateModuleException: Module already added;
     stop
+else ( [module not in ModulePlan] )
 
-else ( [Module not in ModulePlan] )
 endif
 }
 
-:Add Command runs successfully
-Module is added to module plan;
+:Add Command is executed successfully
+Module is added to ModulePlan;
 stop
 
 
