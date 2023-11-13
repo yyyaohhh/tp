@@ -104,7 +104,19 @@ public class ModulePlanTest {
 
     @Test
     public void equals_differentObj_returnFalse() {
-        assertFalse(modulePlan.equals(new Integer(1)));
+        assertFalse(modulePlan.equals(1));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        modulePlan.resetData(getTypicalModulePlan());
+
+        // same object
+        assertTrue(modulePlan.hashCode() == modulePlan.hashCode());
+
+        // different values
+        ModulePlan differentModulePlan = new ModulePlan();
+        assertFalse(modulePlan.hashCode() == differentModulePlan.hashCode());
     }
 
 

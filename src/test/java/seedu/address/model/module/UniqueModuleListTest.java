@@ -214,7 +214,7 @@ public class UniqueModuleListTest {
 
         assertNotEquals(modules, null);
 
-        assertNotEquals(modules, new Integer(0));
+        assertNotEquals(modules, 0);
 
         UniqueModuleList modulesWithExtraModule = new UniqueModuleList();
         modulesWithExtraModule.setModules(getTypicalModuleList());

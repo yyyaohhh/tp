@@ -269,7 +269,7 @@ public class ModulePlanSemesterListTest {
 
         assertNotEquals(modulePlanSemesterList, null);
 
-        assertNotEquals(modulePlanSemesterList, new Integer(0));
+        assertNotEquals(modulePlanSemesterList, 0);
 
         ModulePlanSemesterList semWithExtraSem = new ModulePlanSemesterList();
         semWithExtraSem.setSemesters(getTypicalModulePlanSemesterList());
