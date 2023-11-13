@@ -314,11 +314,10 @@ The **module code, module title, modular credit and module description** of the 
 
 Format: `info MODULE`
 
-Examples:
-```swift
-info CS2109S
-info CS1010
-```
+<div class="alert alert-warning"><md>:gear: Example:
+* info CS2109S
+* info CS1010
+</md></div>
 
 The images below show you what ModCraft should look like after executing the `info` command. 
 
