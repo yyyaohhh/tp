@@ -15,8 +15,12 @@
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-<br>
 
+Libraries used in this project:
+
+- [Jackson](https://github.com/FasterXML/jackson)
+- [JavaFX](https://openjfx.io/)
+- [JUnit5](https://github.com/junit-team/junit5)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -206,7 +210,16 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 
 This section describes some noteworthy details on how certain features and commands are implemented.
 
-* [Edit module feature](#edit-module-feature)
+* [Module Database Feature](#module-database-feature)
+* [Module Plan Feature](#module-plan-feature)
+* [UI Feature](#ui-feature)
+* [Module Storage Feature](#module-storage-feature)
+* [Info Module Command](#info-module-command)
+* [Add Module Command](#add-module-command)
+* [Edit Module Command](#edit-module-command)
+* [Delete Module Command](#delete-module-command)
+* [Calculate CAP Command](#calculate-cap-command)
+* [Calculate Modular Credits (MCs) Command](#calculate-modular-credits-mcs-command)
 * [Undo/redo feature](#proposed-undoredo-feature)
 
 <br>
@@ -226,25 +239,22 @@ The module information is stored as `moduleinfo.json` in the `src/main/resources
 3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
 4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
 
-The following activity diagram shows the logic of the module database feature:
-
-      activity diagram goes here
-
 **Initialization sequence:**
 1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
-2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`.
-3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object.
+2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
+   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
+3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
+   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values. 
-
-If the file cannot be found
-If an error occurs during JSON deserialization
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
+   * the file cannot be found,
+   * an error occurs during deserialization, or
+   * the data contains invalid values.
 
 
 This can be shown through following sequence diagram:
 
-      seq diagram goes here
-
+<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
 
 ### Module Plan Feature
 - how semesters are setup
@@ -260,9 +270,34 @@ This can be shown through following sequence diagram:
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
 
-### Info Module Command (marques)
+### Info Module Command
+
+**Overview:**
+
+**Feature details:**
+
 
 ### Add Module Command
+**Overview:**
+The `add` command is used to add a module to the module plan with the information fields `Module Code`, `Year Taken`,
+    `Semester Taken`, and `Grade`.
+
+The format for the `add` command can be found [here](#adding-a-module)
+
+**Feature details:**
+1. The user executes the `add` command.
+2. If any of the fields are not provided, an error message with the appropriate command usage will be displayed.
+3. If any of the command parameters are invalid, an error message with the appropriate parameter format will be displayed.
+4. The `Module` is then searched in the `model` to see if it is an existing module that NUS offers. If the module is not
+offered, an error message will be displayed.
+5. The `Module` is then checked with `ModulePlan` to see if it has already been added to the module plan previously.
+If the module has already been added the User's module plan, an error message will be displayed.
+6. If all the previous stages complete without exceptions or errors, the `Module` will be added to the `ModulePlan`
+
+The activity diagram for adding a `Module` into the module plan
+
+<puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
+
 
 ### Edit Module Command
 
@@ -285,6 +320,102 @@ And here is a *Sequence Diagram* showing the command being executed:
 As can be seen, this is a helpful class to store fields that need to be edited.
 
 ### Delete Module Command
+
+**Overview:**<br>
+
+The `delete` command is used to delete a module from the module plan. The module can only be deleted if it is already present in one of the semesters in the module plan.<br>
+
+The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#deleting-a-module-delete).<br>
+
+**Feature details:**<br>
+
+1. The user executes the `delete` command.
+2. If the module code field is not provided, an error message with the correct command usage will be shown.
+3. If invalid module code format is provided, an error message with the correct module code format will be shown.
+4. If valid module code format is provided but `Module` does not exist in database, an error message informing user that the `Module` does not exist will be shown.
+5. The `Module` is then cross-referenced in the `Model` to check if a module with the same `ModuleCode` exists in the module plan.
+6. If the module does not exist in the module plan, an error message informing the user that the `Module` has not added to the module plan will be shown.
+7. If all previous steps are completed without exceptions, the new `Module` will be successfully deleted from the module plan.
+
+<br>
+
+The following activity diagram shows the logic of deleting a `Module` from the module plan:
+
+<puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
+
+<br>
+
+The sequence of the `delete` command is as follows:<br>
+
+1. The user inputs the `delete` command.<br>
+e.g. `delete CS3230`
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `DeleteCommandParser` to parse the fields provided by the user and a new `DeleteCommand` is created.
+4. The `DeleteCommand` checks if the `ModuleCode` is valid by calling `Model#checkDbValidModuleCode`.
+4. The `DeleteCommand` then checks if the `Model` contains a module with the same `ModuleCode` by calling `Model#getModule`.
+5. If the `ModuleCode` is valid and `Model` contains the module, the `DeleteCommand` calls `Model#deleteModule` to delete the module from to the module plan.
+
+The following sequence diagram shows how the `delete` command works:
+
+<puml src="diagrams/DeleteCommandSequenceDiagram.puml" width="450" />
+
+<br>
+
+### Calculate CAP Command
+
+**Overview:**<br>
+
+The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module plan, using their grade points and modular credits. <br>
+
+The format of the `calculateCAP` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-cap-calculatecap).<br>
+
+**Feature details:**<br>
+
+1. The user executes the `calculateCAP` command.
+2. If the previous step is completed without exceptions, the CAP will be calculated and displayed.
+
+<br>
+
+The sequence of the `calculateCAP` command is as follows:<br>
+
+1. The user inputs the `calculateCAP` command.<br>
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `CalculateCapCommand`.
+4. The `CalculateCapCommand` calculates the CAP by calling `Model#getCap`.
+
+The following sequence diagram shows how the `calculateCAP` command works:
+
+<puml src="diagrams/CalculateCapSequenceDiagram.puml" width="450" />
+
+<br>
+
+### Calculate Modular Credits (MCs) Command
+
+**Overview:**<br>
+
+The `calculateMC` command is used to calculate the total sum of Modular Credits (MCs) of all modules in the module plan, regardless of their grades. <br>
+
+The format of the `calculateMC` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-modular-credits-mcs-calculatemc).<br>
+
+**Feature details:**<br>
+
+1. The user executes the `calculateMC` command.
+2. If the previous step is completed without exceptions, the number of MCs will be calculated and displayed.
+
+<br>
+
+The sequence of the `calculateMC` command is as follows:<br>
+
+1. The user inputs the `calculateMC` command.<br>
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `CalculateMcCommand`.
+4. The `CalculateMcCommand` calculates the CAP by calling `Model#totalModularCredits`.
+
+The following sequence diagram shows how the `calculateMC` command works:
+
+<puml src="diagrams/CalculateMcSequenceDiagram.puml" width="450" />
+
+<br>
 
 ### \[Proposed\] Pre-requisite checking feature
 
@@ -354,6 +485,8 @@ For our next steps, we plan to add the following features:
 * Check for a module's pre-requisites, and check if they are fulfilled before allowing the user to add the module.
 * Check for a module's pre-clusions, and prevent users from adding modules that are pre-clusions of each other.
 * Check for a module's co-requisites, and remind users to add modules that are co-requisites of each other and to take them concurrently.
+* Check for a module's availability of S/U options, and prevent users from inputting S/U grades to non-S/U-able modules.
+* Add support for allowing users to add a module that was failed in a previous semester to another new semester.
 
 * <br>
 
@@ -448,8 +581,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User searches a module that he wants to take next semester
 2. Modcraft displays the information for the module.
-3. User adds that module to his timetable
-4. Modcraft shows the module in the User’s timetable
+3. User adds that module to their module plan.
+4. Modcraft shows the module in the User’s module plan.
 Steps 1-4 are repeated for each module the User is interested in
 
 Use case ends.
@@ -462,23 +595,18 @@ Use case ends.
 Steps 1a1 to 1a2 are repeated until the module is available
 Use case resumes from step 2.
 
-* 3a. Modcraft detects that the module is unavailable for the semester.
-    * 3a1. Modcraft informs the user it is unavailable
-    * 3a2. User searches another module
-Steps 3a1 to 3a2 are repeated until the module is available
-Use case resumes from step 4.
-
 * *a. At any time, user choose to delete a module
     * *a1. User deletes the module
     * *a2. Modcraft removes the module from the timetable
 Use case resumes from step 1.
+
 
 **Use case: UC02 - Updating end of semester grades**
 
 **MSS**
 
 1. User inputs grades for a module that they have taken.
-2. System shows the updated grade in the timetable.
+2. Modcraft shows the updated grade in the timetable.
 Steps 1-2 are repeated for each grade the user would like to update for.
 
 Use case ends.
@@ -486,7 +614,7 @@ Use case ends.
 **Extensions**
 
 * 1a. Grade is invalid
-    * 1a1. System shows the user the grade is invalid
+    * 1a1. Modcraft shows the user the grade is invalid
     * 1a2. User inputs correct grade
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
@@ -500,8 +628,88 @@ Use case resumes from step 2.
 
 Use case ends.
 
+**Use case: UC08 - Indicating exempted modules**
+
+**MSS**
+
+1. User inputs `EXE` as the grade for a module that they have taken.
+2. System shows the updated grade for the module, which is `EXE`, in the timetable.
+   Steps 1-2 are repeated for each module that the user would like to indicate as exempted.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Module code is invalid
+    * 1a1. System shows the user that the module code inputted is invalid
+    * 1a2. User inputs correct module code
+      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
+
+
+**Use case: UC09 - S/Uing modules**
+
+**MSS**
+
+1. User inputs `S` or `U` as the grade for a module that they have taken.
+2. System shows the updated grade for the module, which is `S` or `U`, in the timetable.
+   Steps 1-2 are repeated for each module that the user would like to indicate as Satisfactory (S) or Unsatisfactory (U).
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Module code is invalid
+    * 1a1. System shows the user that the module code inputted is invalid
+    * 1a2. User inputs correct module code
+      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
+
 <br>
 
+___
+#### **Use Case: UC06 - Indicating Advanced Placement Modules**
+
+**MSS**
+
+1. User searches for the advanced placement module that they have taken or are planning to take using the info command.
+2. User adds the module to the module plan.
+3. Modcraft shows the module in the module plan.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Modcraft detects that the module does not exist or not available for advanced placement.
+    * 1a1. Modcraft informs the user it is unavailable.
+    * 1a2. User searches another module.
+Steps 1a1 to 1a2 are repeated until the module is available.
+Use case resumes from step 2.
+
+___
+
+#### **Use Case: UC07 - Indicating Special Term Modules**
+
+**MSS**
+
+1. User searches for a special term module using the info command.
+2. Modcraft shows that the module is available to be taken in the special term.
+3. User adds the module to the module plan.
+4. Modcraft shows the module in the User's module plan.
+
+Use case ends.
+
+**Extensions**
+* 1a. Modcraft detects that the module does not exist or not available for advanced placement.
+    * 1a1. Modcraft informs the user it is unavailable.
+    * 1a2. User searches another module.
+      Steps 1a1 to 1a2 are repeated until the module is available.
+      Use case resumes from step 2.
+* 3a. User wants to indicate that the module is taken or to be taken in Special Term 1 or Special Term 2
+  * 3a1. User uses the add command and specifies the semester to be `s/ST1` for Special Term 1 or `s/ST2` for Special Term 2
+  * Use case resumes from step 4.
+
+___
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -542,7 +750,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Open command terminal and `cd` into the folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br> 
+   1. Open command terminal and `cd` into the folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br>
    Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
@@ -565,13 +773,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add CS3230 y/0 s/1 g/A`.<br>
        Expected: A new column of semester named `Adv Placement` appears. The module `CS3230` is added to the list `Adv Placement`, with its grade as `A` in a green box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
-   
+
     2. Test case: `add CS1010 y/1 s/ST1 g/F`.<br>
        Expected: A new column of semester named `Year 1 ST1` appears. The module `CS1010` is added to the list `Year 1 ST1`, with its grade as `F` in a red box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
-   
+
     3. Test case: `add CS1231S ...` when it is already in the semester list.<br>
        Expected: No module is added. Error details shown in the status message. Status bar remains the same.
-   
+
     4. Test case: `add CS1010 y/1 s/ST1 g/a`.<br>
        Expected: No module is added. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
@@ -611,9 +819,9 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `edit CS1010 s/ST1`.<br>
        Expected: A new column of semester named `ST1` appears. The module `CS1010` is moved to the list `ST1`, while its grade and semester remain unchanged. Details of the added module shown in the status message. The modules shown in the semester list is updated.
-   
-   3. Test case: `edit CS1010 g/a`.<br>
-      Expected: No module is edited. Error details of wrong format of grade shown in the status message. Status bar remains the same.
+
+    3. Test case: `edit CS1010 g/a`.<br>
+       Expected: No module is edited. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
     3. Test case: `edit CS1101S ...` when it is not already present in the semester list.<br>
        Expected: No module is edited. Error details shown in the status message. Status bar remains the same.
@@ -641,12 +849,12 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculateCAP` when there are no modules in the semester list.<br>
          Expected: The CAP output is `0.0`.
-   
+
    2. Prerequisites: Multiple module in the list.
 
    3. Test case: `calculateCAP`.<br>
      Expected: The CAP output is a `float` of `0.0` $\leq$ CAP $\leq$ `5.0` with a status message.
-   
+
    4. Test case: `calculateCAP` when grades of all modules are marked as `IP`, `EXE`, `W`, `IC`, `S`, `U`, `CS` or `CU`.<br>
     Expected: The CAP output is `0.0`.
 
@@ -658,7 +866,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculateMC` when there are no modules in all the semester lists.<br>
       Expected: The Modular Credits output is `0.0`.
-   
+
    2. Prerequisites: Multiple modules in the list.
 
    3. Test case: `calculateMC`.<br>
@@ -671,19 +879,19 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. Prerequisites: There are existing module and module plan files with existing stored modules.
-   
+
    2. Test Case: Close the application and delete `moduleplan.json`.
       Expected: Upon the next application start, a new `moduleplan.json` is created.
-   
+
    3. Test Case: Close the application and edit `moduleplan.json` by changing the name of the first Module to `CS3230`.
       Expected: Upon the next application start, the name of the first Module in chronological order in the list of years and semesters will appear as `CS3230`.
-   
+
    4. Test Case: Close the application and edit `moduleplan.json` by changing the year of the first Module to `2`.
       Expected: Upon the next application start, the name of the first Module will appear in `Year 2`, with its semester and grade unchanged.
-   
+
    5. Test Case: Close the application and edit `moduleplan.json` by changing the semester of the first Module to `ST2`.
       Expected: Upon the next application start, the name of the first Module will appear in `ST2`, with its year and grade unchanged.
-   
+
    6. Test Case: Close the application and edit `moduleplan.json` by changing the grade of the first Module to `IP`.
       Expected: Upon the next application start, the grade of the first Module in chronological order in the list of years and semesters will appear as `IP`, which should be grey in colour. Its name should remain unchanged.
 

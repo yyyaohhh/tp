@@ -34,6 +34,13 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
+    public void getUserPrefsFilePath_success() {
+        Path path = Paths.get("testPath");
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(path);
+        assertEquals(path, jsonUserPrefsStorage.getUserPrefsFilePath());
+    }
+
+    @Test
     public void readUserPrefs_missingFile_emptyResult() throws DataLoadingException {
         assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
     }
