@@ -69,7 +69,7 @@ Warnings in boxes like this contain information that are vital to the running of
 1. Ensure you have Java 11 or above installed in your Computer.
    * To do this, open a command terminal and type `java --version`.
    * If you do not have Java 11 installed, get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
-   
+ 
 
 2. Download the latest `ModCraft.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-0/tp/releases/tag/v1.2b).
 
@@ -203,7 +203,7 @@ Currently, ModCraft has certain **limitations**.
 * ModCraft **does not** check for availability of modules for semesters. This means that you can add any module into any semester of your study plan, even though the module may not be offered in that semester.
 
 * ModCraft **does not** check for the availability of Completed Satisfactory/Completed Unsatisfactory (CS/CU) options of modules, meaning that you can add a non-CS/CU module with a CS/CU grade.<br>
-e.g. you can add the non-CS/CU module `CS2100` and input its grade as `CS`.<br> 
+e.g. you can add the non-CS/CU module `CS2100` and input its grade as `CS`.<br>
 Likewise, you can add a CS/CU module with a non-CS/CU grade.<br>
 e.g. you can mark the grade of `CFG1002` as `A`.
 
@@ -246,7 +246,7 @@ The images below show you the process for executing the `add` command in ModCraf
 
 ### Editing a module: `edit`
 
-You can change an attribute of a module using this command. This command works **only if the module exists**. 
+You can change an attribute of a module using this command. This command works **only if the module exists**.
 
 This command may be useful if you want to update information about a module or have made a mistake while adding a module.
 
@@ -325,7 +325,7 @@ Displays information about the module CS2109S
 Displays information about the module CS1010
 </md></div>
 
-The images below show you what ModCraft should look like after executing the `info` command. 
+The images below show you what ModCraft should look like after executing the `info` command.
 
 In the example below, the command `info CS3230` is executed. Information about the module `CS3230` is displayed.
 
@@ -370,7 +370,7 @@ The images below show you what ModCraft should look like for executing the `calc
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
 
-The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as 
+The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as
 `IP` (In Progress), `EXE` (Exempted), `W` (Withdrawn), `IC` (Incomplete), `S` (Satisfactory), `U` (Unsatisfactory), `CS` (Completed Satisfactory) and `CU` (Completed Unsatisfactory).
 
 </md></div>
@@ -379,7 +379,7 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 ### Calculating the total current Modular Credits (MCs): `calculateMC`
 
-You can calculate the total current Modular Credits (MCs) stored in **all** years and semesters using this command. 
+You can calculate the total current Modular Credits (MCs) stored in **all** years and semesters using this command.
 ModCraft displays a float which is the sum of MCs of **all modules** in the **module plan**.
 
 Format: `calculateMC`
@@ -407,7 +407,7 @@ including modules with non-passing grades
 
 You can exit ModCraft using this command.
 
-Format: 
+Format:
 ```swift
 exit
 ```

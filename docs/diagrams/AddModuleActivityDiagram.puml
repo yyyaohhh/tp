@@ -32,7 +32,7 @@ if () then ([else])
 ( [Module is in ModuleData]) elseif() then([else])
     :DuplicateModuleException: Module already Added;
     stop
-    
+
 else ( [Module not in ModulePlan] )
 endif
 }

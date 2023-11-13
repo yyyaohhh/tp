@@ -242,7 +242,7 @@ The following activity diagram shows the logic of the module database feature:
 2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`.
 3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object.
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values. 
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values.
 
 If the file cannot be found
 If an error occurs during JSON deserialization
@@ -555,7 +555,7 @@ ___
 **MSS**
 
 1. User searches for the advanced placement module that they have taken or are planning to take using the info command.
-2. User adds the module to the module plan. 
+2. User adds the module to the module plan.
 3. Modcraft shows the module in the module plan.
 
 Use case ends.
@@ -576,7 +576,7 @@ ___
 
 1. User searches for a special term module using the info command.
 2. Modcraft shows that the module is available to be taken in the special term.
-3. User adds the module to the module plan. 
+3. User adds the module to the module plan.
 4. Modcraft shows the module in the User's module plan.
 
 Use case ends.
@@ -632,7 +632,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Open command terminal and `cd` into the folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br> 
+   1. Open command terminal and `cd` into the folder where the jar file is in. Use the `java -jar ModCraft.jar` command to run the application.<br>
    Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
@@ -655,13 +655,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add CS3230 y/0 s/1 g/A`.<br>
        Expected: A new column of semester named `Adv Placement` appears. The module `CS3230` is added to the list `Adv Placement`, with its grade as `A` in a green box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
-   
+
     2. Test case: `add CS1010 y/1 s/ST1 g/F`.<br>
        Expected: A new column of semester named `Year 1 ST1` appears. The module `CS1010` is added to the list `Year 1 ST1`, with its grade as `F` in a red box. Details of the added module shown in the status message. The modules shown in the semester list is updated.
-   
+
     3. Test case: `add CS1231S ...` when it is already in the semester list.<br>
        Expected: No module is added. Error details shown in the status message. Status bar remains the same.
-   
+
     4. Test case: `add CS1010 y/1 s/ST1 g/a`.<br>
        Expected: No module is added. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
@@ -701,8 +701,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `edit CS1010 s/ST1`.<br>
        Expected: A new column of semester named `ST1` appears. The module `CS1010` is moved to the list `ST1`, while its grade and semester remain unchanged. Details of the added module shown in the status message. The modules shown in the semester list is updated.
-   
-   3. Test case: `edit CS1010 g/a`.<br>
+
+    3. Test case: `edit CS1010 g/a`.<br>
       Expected: No module is edited. Error details of wrong format of grade shown in the status message. Status bar remains the same.
 
     3. Test case: `edit CS1101S ...` when it is not already present in the semester list.<br>
@@ -731,12 +731,12 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculateCAP` when there are no modules in the semester list.<br>
          Expected: The CAP output is `0.0`.
-   
+
    2. Prerequisites: Multiple module in the list.
 
    3. Test case: `calculateCAP`.<br>
      Expected: The CAP output is a `float` of `0.0` $\leq$ CAP $\leq$ `5.0` with a status message.
-   
+
    4. Test case: `calculateCAP` when grades of all modules are marked as `IP`, `EXE`, `W`, `IC`, `S`, `U`, `CS` or `CU`.<br>
     Expected: The CAP output is `0.0`.
 
@@ -748,7 +748,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculateMC` when there are no modules in all the semester lists.<br>
       Expected: The Modular Credits output is `0.0`.
-   
+
    2. Prerequisites: Multiple modules in the list.
 
    3. Test case: `calculateMC`.<br>
@@ -761,10 +761,10 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. Prerequisites: There are existing module and module plan files with existing stored modules.
-   
+
    2. Test Case: Close the application and delete `moduleplan.json`.
       Expected: Upon the next application start, a new `moduleplan.json` is created.
-   
+
    3. Test Case: Close the application and edit `moduleplan.json` by changing the name of the first Module to `CS3230`.
       Expected: Upon the next application start, the name of the first Module in chronological order in the list of years and semesters will appear as `CS3230`.
    
