@@ -195,8 +195,14 @@ In ModCraft, you can specify the **Year, Semester and Grade** of each module whe
 The images below show you the process for adding a module to the Advance Placement semester in ModCraft. The module `CS1010` is being added to Year 0 (the Advance Placement semester).
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/ap-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
-  <img src="images/ImagesForUG/ap-after.png" alt="After executing add command" style="height:400px; margin:20px;">
+  <figure>
+    <img src="images/ImagesForUG/ap-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
+    <figcaption>Before</figcaption>
+  </figure>
+  <figure>
+    <img src="images/ImagesForUG/ap-after.png" alt="After executing add command" style="height:400px; margin:20px;">
+    <figcaption>After</figcaption>
+  </figure>
 </div>
 
 <br>
@@ -204,8 +210,14 @@ The images below show you the process for adding a module to the Advance Placeme
 The images below show you the process for adding a module to one of the Special Term (ST) in ModCraft. The module `CS3230` is being added to Year 1, Special Term 1.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/st-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
-  <img src="images/ImagesForUG/st-after.png" alt="After executing add command" style="height:400px; margin:20px;">
+  <figure>
+    <img src="images/ImagesForUG/st-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
+    <figcaption>Before</figcaption>
+  </figure>
+  <figure>
+    <img src="images/ImagesForUG/st-after.png" alt="After executing add command" style="height:400px; margin:20px;">
+    <figcaption>After</figcaption>
+  </figure>
 </div>
 
 
@@ -248,8 +260,14 @@ Examples:
 The images below show you the `add` command in action.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/add-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
-  <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:400px; margin:20px;">
+  <figure>
+    <img src="images/ImagesForUG/add-before.png" alt="Before executing add command" style="height:400px; margin:20px;">
+    <figcaption>Before</figcaption>
+  </figure>
+  <figure>
+    <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:400px; margin:20px;">
+    <figcaption>After</figcaption>
+  </figure>
 </div>
 
 
@@ -285,8 +303,14 @@ If before editing, the module was in Year 1 Semester 2, after editing it would b
 The images below show you the `edit` command in action. The grade of `CS1101S` is being edited to `C`.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/edit-before.png" alt="Before executing edit command" style="height:400px; margin:20px;">
-  <img src="images/ImagesForUG/edit-after.png" alt="After executing edit command" style="height:400px; margin:20px;">
+  <figure>
+    <img src="images/ImagesForUG/edit-before.png" alt="Before executing edit command" style="height:400px; margin:20px;">
+    <figcaption>Before</figcaption>
+  </figure>
+  <figure>
+    <img src="images/ImagesForUG/edit-after.png" alt="After executing edit command" style="height:400px; margin:20px;">
+    <figcaption>After</figcaption>
+  </figure>
 </div>
 
 <div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
@@ -311,8 +335,14 @@ Examples:
 The images below show you the `delete` command in action. The module `CS2101` is being deleted.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/ImagesForUG/delete-before.png" alt="Before executing delete command" style="height:400px; margin:20px;">
-  <img src="images/ImagesForUG/delete-after.png" alt="After executing delete command" style="height:400px; margin:20px;">
+  <figure>
+    <img src="images/ImagesForUG/delete-before.png" alt="Before executing delete command" style="height:400px; margin:20px;">
+    <figcaption>Before</figcaption>
+  </figure>
+  <figure>
+    <img src="images/ImagesForUG/delete-after.png" alt="After executing delete command" style="height:400px; margin:20px;">
+    <figcaption>After</figcaption>
+  </figure>
 </div>
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
