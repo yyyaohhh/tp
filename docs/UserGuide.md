@@ -328,6 +328,14 @@ In the example below, the command `info CS3230` is executed. Information about t
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/info-after.png" alt="After executing info command" style="height:400px; margin:20px;">
 </div>
+<p style="text-align: center;">
+    Information about the module searched being displayed.
+</p>
+
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
+
+The module information is taken from [NUSmods](https://github.com/nusmodifications/nusmods) for the current Academic Year 23/24 .
+</md></div>
 
 <br>
 
@@ -339,7 +347,7 @@ ModCraft will calculate your CAP according to the [NUS Modular System](https://w
 
 
 <p style="text-align: center;">
-$\Large\frac{\text{sum of all valid modules: (grade point of each module * Modular Credits of each module)}}{\text{total Modular Credits of modules}}$.
+$\Large\frac{\text{For each module: Sum of(grade point of each module * Modular Credits of each module)}}{\text{total Modular Credits of modules}}$.
 </p>
 
 Displays you a `float` of `0.0` $\leq$ value $\leq$ `5.0`.
@@ -353,9 +361,11 @@ The images below show you what ModCraft should look like for executing the `calc
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/cap-after.png" alt="After executing calculateCAP command" style="height:400px; margin:20px;">
 </div>
+<p style="text-align: center;">
+    The cap calculated based on the existing modules and their respective grades in the module plan.
+</p>
 
-
-<div class="alert alert-primary"><md>:bulb: **Tip:**
+<div class="alert alert-default" style="background-color: rgb(223, 240, 216); border-color: rgb(214, 233, 198);"><md>:information_source: **Note:**
 
 The result displayed by the `calculateCAP` command **does not include** the modules with grades marked as 
 `IP` (In Progress), `EXE` (Exempted), `W` (Withdrawn), `IC` (Incomplete), `S` (Satisfactory), `U` (Unsatisfactory), `CS` (Completed Satisfactory) and `CU` (Completed Unsatisfactory).
@@ -364,7 +374,7 @@ The result displayed by the `calculateCAP` command **does not include** the modu
 
 <br>
 
-### Calculating the total current Modular Credits (MCs): `CalculateMC`
+### Calculating the total current Modular Credits (MCs): `calculateMC`
 
 You can calculate the total current Modular Credits (MCs) stored in **all** years and semesters using this command. 
 ModCraft displays a float which is the sum of MCs of **all modules** in the **module plan**.
@@ -378,6 +388,9 @@ The images below show you what ModCraft should look like for executing the `calc
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/mc-after.png" alt="After executing calculateMC command" style="height:400px; margin:20px;">
 </div>
+<p style="text-align: center;">
+    The total amount of modular credits obtained based on the module plan
+</p>
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
