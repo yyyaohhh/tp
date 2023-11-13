@@ -256,7 +256,7 @@ This can be shown through following sequence diagram:
 
 ### Module Plan
 
-**Overview:**
+#### Overview:
 
 ModulePlan is a collection of classes that wraps all the information regarding the user's timetable and houses all the `Module` in the user's study plan. It has a facade class `ModulePlan` that handles all calls into the ModulePlan Component. The internal lists can only be modified through calls to the facade class as it is only exposed as a `unmodifiableObservableList`.
 
@@ -270,13 +270,13 @@ The class diagram below shows the OOP structure of the ModulePlan component:
 
 <puml src="diagrams/ModulePlanClassDiagram.puml" width="450" />
 
-**Implementation:** <br>
+#### Implementation:
 
-**`ModulePlan`**: <br>
+**ModulePlan**: <br>
 
 `ModulePlan` is the facade class of the ModulePlan component. It contains exactly 1 `ModulePlanSemesterList` that is initialised whenever a new instance of `ModulePlan` is created. There isn't any logic implemented in this class, it just passes down information to the lower level classes and relays back the response to the caller.
 
-**`ModulePlanSemesterList`**: <br>
+**ModulePlanSemesterList**: <br>
 
 `ModulePlanSemesterList` is where the main logic regarding modules that belong in different semesters is implemented. `ModulePlanSemesterList` contains a `internalList` of `ModulePlanSemester` and when a instance of `ModulePlanSemesterList` is created, its constructor populates the `internalList` with copies of a list of default `ModulePlanSemester` called `DEFAULT_SEMESTER`. `DEFAULT_SEMESTER` is a class level immutable list of `ModulePlanSemester` of both Semester 1 and 2 from Year 1 to 4. <br>
 
@@ -285,13 +285,13 @@ The class diagram below shows the OOP structure of the ModulePlan component:
 * `getCAP` and `modularCredit` is also where the CAP and MC respectively are collated across all the semesters.
 * `ModulePlanSemesterList` also contains the logic for adding `ModulePlanSemester` outside of the default ones and removing them when they are empty. These are implemented in the `addModule` and `removeModule` functions respectively with the assistance of some helper functions like `checkIfSemesterEmpty` and `inDefaultSemesters`.
 
-**`ModulePlanSemester`**: <br>
+**ModulePlanSemester**: <br>
 
 `ModulePlanSemester` is modeled after a semester in the timetable. It is identified by the fields `Year` and `Semester` and contains 1 `UniqueModuleList`. Like `ModulePlan`, there is not much logic implemented here and it mainly passes the input down and relays the result back up the hierarchy.<br>
 
 However, the logic for checking and grouping all Year 0 modules is implemented here, in the `checkModuleBelongToSemester` and `checkIfSameSemester` functions. 
 
-**`UniqueModuleList`**: <br>
+**UniqueModuleList**: <br>
 
 `UniqueModuleList` is where the `Module` objects are housed, in the `ObservableList` called `internalList`. It is also where logic for modules in the same semester are implemented. <br>
 
@@ -313,16 +313,16 @@ The following diagrams shows the flow for the **main uses** of ModulePlan, addin
 
 <puml src="diagrams/ModulePlanDeleteSequenceDiagram.puml" />
 
-**UI Integration:** <br>
+#### UI Integration:
 
 Changes in the ModulePlan are displayed to the user through an observer pattern where the `listview` in the UI class `ModulePlanPane` listens to the `ObservableList` in `ModulePlanSemesterList` and the `listview` in `ModulePlanCard` listens to the the `ObservableList` in `UniqueModuleList`.
 The individual modules are then displayed in `ModuleCard`. <br>
 
 However, as changes in the `UniqueModuleList` will not propagate to the `ObservableList` in `ModulePlanSemesterList`, there is a need for the function `refreshList` to update the `ObservableList` in `ModulePlanSemesterList` whenever changes in the `UniqueModuleList` occurs.<br>
 
-**Design Consideration:** <br>
+#### Design Consideration:
 
-Aspect: Data Structure to Store `Module`
+**Aspect:** Data Structure to Store `Module`
 
 * **Alternative 1 (Chosen)**: Store it in OOP fashion.
   * Pros: Closely models the real world way of organizing the study plan (into each semester), logic for organizing and sorting the modules can be contained in the model instead of the Ui.
