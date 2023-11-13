@@ -399,9 +399,7 @@ There is no need for you to save manually.
 The module data is saved automatically as a JSON file `[JAR file location]/data/moduleplan.json`.
 
 Advanced users are welcome to update data directly by editing that data file.
-<div class="alert alert-warning"><md>:exclamation: **Caution:**
-
-If your changes to the data file makes its format invalid, ModCraft will **discard all data and start with a default data file** at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+<div class="alert alert-warning"><md>:exclamation: **Caution:** If your changes to the data file makes its format invalid, ModCraft will **discard all data and start with a default data file** at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 
 </md></div>
 
@@ -415,6 +413,10 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 |------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | How do I transfer my data to another Computer? | Install the app in the other computer and overwrite the default data file it creates with the file that contains the data of your previous ModCraft home folder. |
 | How do I save the data?                        | The data is saved in the hard disk automatically after any command that changes the data.<br> There is no need to save manually.                                 |
+| Where do I get support for ModCraft?           | You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-0/tp/issues).                                                          |
+| How do I report a bug?                         | You can raise a bug report on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-0/tp/issues).                                                      |
+| How do I import my data from another software? | You can import your data by converting your data into JSON in the format of the `moduleplan.json` data in the data folder.                                       |
+| How do I export my data to another software?   | It is currently not possible to export your data from ModCraft to another software.                                                                              |
 
 <br>
 
@@ -423,6 +425,7 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. For issues related to **lack of features** such as checking for S/U option of a module, please refer to the **limitations of ModCraft** under the **caution warning box** in [Modules](#modules). These features are planned enhancements in future releases.
 
 <br>
 
@@ -446,5 +449,10 @@ If your changes to the data file makes its format invalid, ModCraft will **disca
 
 ## Glossary
 
-- Command Line Interface: A display that allows you to type commands to interact with the application.
-- Graphical User Interface: A user-friendly display that allows you to see the effects of your actions in the application.
+- **Command Line Interface (CLI)**: A display that allows you to type commands to interact with the application.
+- **Graphical User Interface (GUI)**: A user-friendly display that allows you to see the effects of your actions in the application.
+- **JSON**: stands for JavaScript Object Notation, a lightweight data-interchange format and a plain text written in JavaScript object notation, used to send data between computers.
+- **Pre-requisite**: Pre-requisites indicate the base of knowledge on which the subject matter of a particular course will be built. Before taking a course, a student should complete any pre-requisite course(s) listed for that particular course.<br>
+  Where pre-requisites are specified, equivalent courses will also be accepted. For more information on pre-requisites, please refer to [NUS's Modular System](https://www.nus.edu.sg/registrar/academic-information-policies/graduate/modular-system).
+- **Pre-clusions**: Courses that have similar emphases and may not be taken together with that particular course.
+- **Co-requisites**: Courses that are to be taken concurrently.

@@ -3,34 +3,42 @@
 ## Project ModCraft
 
 
-ModCraft is an app that provides a fast and easy way for students to track courses
+ModCraft is an app that provides a fast and easy way for NUS students to track courses
 to take to meet graduation requirements and plan courses to take. The user interacts
-with it using a CLI, and it has a GUI created with JavaFX.
+with it using a Command Line Interface (CLI), and it has a Graphic User Interface (GUI) created with JavaFX.
 
 Given below are my contributions to the project.
 
-- **to be added soon\*** **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=46&chartIndex=0)
+- **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=yyyaohhh&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 - **Project management**:
 
   - to be added soon
 
 - **Enhancements to existing features**:
-  to be added soon
+
+  - `delete` command: deletes a module from the semester lists if it exists.
+  - `calculateCAP` command: calculates the Cumulative Average Point (CAP) of all valid modules in the module planner, using their grades and modular credits.
+  - `calculateMC` command: calculates the total sum of Modular Credits (MCs) of all modules in the module planner, regardless of their grades.
 
 - **Documentation**:
 
   - User Guide:
-    - to be added soon
+    - Description of ModCraft.
+    - Description of the `edit` command and other commands.
+    - FAQ.
+    - Glossary
   - Developer Guide:
-    - to be added soon
+    - Implementation details of the `delete` command, `calculateCAP` command and `calculateMC` command.
+    - Instructions for manual testing.
 
 - **Community**:
 
-  - PRs reviewed (with non-trivial review comments): to be added soon
-  - Contributed to forum discussions (examples: to be added soon)
-  - Reported bugs and suggestions for other teams in the class (examples: to be added soon)
-  - Some parts of some feature I added was adopted by several other class mates (to be added soon)
+  - PRs reviewed (with non-trivial review comments): 4
+  - Contributed to forum discussions .
+    - [answered questions posted by peers](https://github.com/nus-cs2103-AY2324S1/forum/issues/256).
+    - [asked questions](https://github.com/nus-cs2103-AY2324S1/forum/issues/132).
+  - Reported bugs and [suggestions](https://github.com/nus-cs2103-AY2324S1/forum/issues/309) for other teams in the class.
 
 - **Tools**:
 
