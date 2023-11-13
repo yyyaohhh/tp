@@ -244,10 +244,10 @@ The module information is stored as `moduleinfo.json` in the `src/main/resources
 3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
    3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
 4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if 
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
    * the file cannot be found,
    * an error occurs during deserialization, or
-   * the data contains invalid values. 
+   * the data contains invalid values.
 
 
 This can be shown through following sequence diagram:
