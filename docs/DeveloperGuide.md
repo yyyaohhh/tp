@@ -337,7 +337,7 @@ The following sequence diagram shows how the `delete` command works:
 
 **Overview:**<br>
 
-The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module planner, using their grades and modular credits. <br>
+The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module planner, using their grade points and modular credits. <br>
 
 The format of the `calculateCAP` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-cap-calculatecap).<br>
 
