@@ -42,27 +42,6 @@ Warnings in boxes like this contain information that are vital to the running of
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
-- [ModCraft User Guide](#modcraft-user-guide)
-  - [Using this Guide](#using-this-guide)
-  - [Table of Contents](#table-of-contents)
-  - [Quick start](#quick-start)
-  - [Features](#features)
-    - [Viewing help: `help`](#viewing-help-help)
-    - [Modules](#modules)
-    - [Adding a module: `add`](#adding-a-module-add)
-    - [Editing a module: `edit`](#editing-a-module-edit)
-    - [Deleting a module: `delete`](#deleting-a-module-delete)
-    - [Finding Information about a module: `info`](#finding-information-about-a-module-info)
-    - [Calculating the total current CAP: `calculateCAP`](#calculating-the-total-current-cap-calculatecap)
-    - [Calculating the total current Modular Credits (MCs): `CalculateMC`](#calculating-the-total-current-modular-credits-mcs-calculatemc)
-    - [Exiting the program: `exit`](#exiting-the-program-exit)
-  - [Advanced use](#advanced-use)
-    - [Editing the data file](#editing-the-data-file)
-  - [FAQ](#faq)
-  - [Known issues](#known-issues)
-  - [Command summary](#command-summary)
-  - [Glossary](#glossary)
-
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
