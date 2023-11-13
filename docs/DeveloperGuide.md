@@ -295,6 +295,24 @@ The activity diagram for adding a `Module` into the module plan
 
 <puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
 
+The sequence of the `add` command is as follows:
+
+1. The user inputs the `add` command.<br>
+   e.g. `add CS2040S y/1 s/1 g/A`
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `AddCommandParser` to parse the fields provided by the user and 
+a new `AddCommand` is created.
+4. The `AddCommand` checks if the `ModuleCode` is valid bt calling `Model#getModuleFromDb` and retrieves 
+the module if it exists from the database.
+5. `AddCommand` then fills the user inputs into the module using the `Module#fillUserInputs` function.
+6. `AddCommand` then attempts to add the module into the Model via `Model#addModule`.
+7. If `ModuleCode`, the user inputs are valid, and the Model does not contain the module, `AddCommand` will 
+successfully add the new `Module` into the module plan.
+   
+The following sequence diagram shows how the `add` command works:
+
+<puml src="diagrams/AddOverallSequenceDiagram.puml" width="450" />
+
 
 ### Edit Module Command
 
@@ -339,6 +357,9 @@ The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-
 The following activity diagram shows the logic of deleting a `Module` from the module plan:
 
 <puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
+
+   
+
 
 <br>
 
