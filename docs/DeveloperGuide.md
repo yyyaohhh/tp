@@ -297,6 +297,7 @@ information obtained from the files.
 1. At startup, `MainApp` calls `MainApp#initPrefs` to attempt to parse the `preferences.json` file.
 2. `MainApp#initPrefs` calls `Storage#readUserPrefs` to obtain the user preferences as a `UserPrefs` object.
    2a. If `DataLoadingException` is thrown, a new `preferences.json` file will be created with default preferences.
+3. `JsonUserPrefsStorage` deserializes the JSON file by calling `JsonUtil#readJsonFile` into a `UserPrefs` object.
 3. `MainApp` creates a `StorageManager` object with the file paths of `preferences.json` and `moduleplan.json`.
 4. `MainApp#initModelManager` is then called which calls `Storage#readModulePlan` attempting to parse the 
 `moduleplan.json` file and create a `modulePlan` object.
