@@ -202,14 +202,67 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features and commands are implemented.
 
 * [Edit module feature](#edit-module-feature)
 * [Undo/redo feature](#proposed-undoredo-feature)
 
 <br>
 
-### Edit module feature
+### Module Database Feature
+
+**Overview:**
+
+ModCraft contains an internal list of all possible modules, which forms the backbone of the application. This `ModuleData` allows for validation of user input and provides the required module information to be displayed.
+
+The module information is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Users are not permitted to access the file as uninformed modifications could cause the application to invariably fail at startup.
+
+**Feature details:**
+
+1.   When the user launches the application, the data is converted from JSON format to the `ModuleData` class, which supports verification and retrieval of `Module` information.
+2.   During command execution, the `ModuleCode` input by the user is validated to exist within `ModuleData`.
+3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
+4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
+
+The following activity diagram shows the logic of the module database feature:
+
+      activity diagram goes here
+
+**Initialization sequence:**
+1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
+2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`.
+3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object.
+4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if the file cannot be found, if an error occurs during deserialization, or if the data contains invalid values. 
+
+If the file cannot be found
+If an error occurs during JSON deserialization
+
+
+This can be shown through following sequence diagram:
+
+      seq diagram goes here
+
+
+### Module Plan Feature
+- how semesters are setup
+- what happens a user attempts to add a duplicate module
+
+### UI Feature?
+- how the ui is setup
+- what happens when the user inputs a command
+
+### Module Storage Feature
+- how the storage works
+- what happens when it fails to load
+- what happens when the user modifies the moduleplan
+- userprefs considered the same feature? if too long can split into another one
+
+### Info Module Command (marques)
+
+### Add Module Command
+
+### Edit Module Command
 
 <br>
 
@@ -229,6 +282,7 @@ And here is a *Sequence Diagram* showing the command being executed:
 
 As can be seen, this is a helpful class to store fields that need to be edited.
 
+### Delete Module Command
 
 ### \[Proposed\] Undo/redo feature
 
