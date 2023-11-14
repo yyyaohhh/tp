@@ -59,4 +59,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yyyaohhh.md)]
 
 - Role: Developer
-- Responsibilities: UI
+- Responsibilities: Commands
