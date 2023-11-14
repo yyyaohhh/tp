@@ -341,6 +341,62 @@ Alternative 1 is ultimately chosen as it helps abstracts out the logic for diffe
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
 
+**Overview:**
+
+Modcraft stores two types of information on the hard drive, ModulePlan and UserPrefs(User Preferences).
+ModulePlan stores the user's last saved module plan when using Modcraft allowing the user to access their module plan
+across sessions. UserPrefs contains the last known user interface settings when using Modcraft allowing the user to
+return to their preferred interface across sessions.
+
+ModulePlan is stored as `moduleplan.json` and UserPrefs is stored as `preferences.json`. Both files will be created if
+they do not already exist in the same folder in which the Modcraft jar file is stored. While users are free to access
+and modify the files as they wish it is recommended that they make a backup before any modifications. If Modcraft
+cannot access a file, it will be deleted and replaced with a new empty file.
+
+**Feature details:**
+
+1. When the user launches the application, if there is no `moduleplan.json` or `preferences.json` file detected in the
+same folder as Modcraft or they are corrupted, Modcraft will create them and populate them with the default moduleplan
+and preferences respectively.
+2. If there are existing `moduleplan.json` and `preferences.json` files with appropriate data, Modcraft will read the
+module plan from `moduleplan.json` and user preferences from `preferences.json`, loading the application with the
+information obtained from the files.
+3. Upon execution of any command that alters the user's module plan, the changes will automatically be saved into
+`moduleplan.json`.
+4. Upon alteration of any part of the user interface, the changes will automatically be saved into `preferences.json`.
+
+
+**Initialization sequence:**
+
+1. At startup, `MainApp` calls `MainApp#initPrefs` to attempt to parse the `preferences.json` file.
+2. `MainApp#initPrefs` calls `Storage#readUserPrefs` to obtain the user preferences as a `UserPrefs` object.
+   2a. If `DataLoadingException` is thrown, a new `preferences.json` file will be created with default preferences.
+3. `JsonUserPrefsStorage` deserializes the JSON file by calling `JsonUtil#readJsonFile` into a `UserPrefs` object.
+3. `MainApp` creates a `StorageManager` object with the file paths of `preferences.json` and `moduleplan.json`.
+4. `MainApp#initModelManager` is then called which calls `Storage#readModulePlan` attempting to parse the
+`moduleplan.json` file and create a `modulePlan` object.
+   4a. If `DataLoadingException` is thrown, a new `moduleplan.json` file will be created with the default module plan.
+5. `JsonModulePlanStorage` deserializes the JSON file into a `JsonSerializableModulePlan` object by calling
+`JsonUtil#readJsonFile`.
+   5a. The `JsonSerializableModulePlan` object represents a list of `JsonAdaptedModule` objects, created during
+deserialization.
+6. `JsonModulePlanStorage` then calls `JsonSerizaliableModulePlan#toModelType` to create the `ReadOnlyModulePlan` object.
+   6a. `JsonAdaptedModule` then calls `JsonAdapedModule#toModelType` for the creation of each `module`.
+7. `ModulePlan` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command
+execution.
+8. A `DataLoadingException` is thrown when any of the following occus.
+   - the file cannot be found.
+   - an error occurs during deserialization, or
+   - the data contains invalid values.
+
+
+This can be seen in the sequence diagram below
+
+<puml src="diagrams/StorageInitSequenceDiagram.puml" />
+
+
+
+
 ### Info Module Command
 
 **Overview:**
@@ -368,6 +424,24 @@ If the module has already been added the User's module plan, an error message wi
 The activity diagram for adding a `Module` into the module plan
 
 <puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
+
+The sequence of the `add` command is as follows:
+
+1. The user inputs the `add` command.<br>
+   e.g. `add CS2040S y/1 s/1 g/A`
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `AddCommandParser` to parse the fields provided by the user and 
+a new `AddCommand` is created.
+4. The `AddCommand` checks if the `ModuleCode` is valid bt calling `Model#getModuleFromDb` and retrieves 
+the module if it exists from the database.
+5. `AddCommand` then fills the user inputs into the module using the `Module#fillUserInputs` function.
+6. `AddCommand` then attempts to add the module into the Model via `Model#addModule`.
+7. If `ModuleCode`, the user inputs are valid, and the Model does not contain the module, `AddCommand` will 
+successfully add the new `Module` into the module plan.
+   
+The following sequence diagram shows how the `add` command works:
+
+<puml src="diagrams/AddOverallSequenceDiagram.puml" width="450" />
 
 
 ### Edit Module Command
@@ -413,6 +487,9 @@ The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-
 The following activity diagram shows the logic of deleting a `Module` from the module plan:
 
 <puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
+
+   
+
 
 <br>
 
