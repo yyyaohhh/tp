@@ -305,7 +305,9 @@ The individual modules are then displayed in `ModuleCard`. <br>
 
 However, as changes in the `UniqueModuleList` will not propagate to the `ObservableList` in `ModulePlanSemesterList`, there is a need for the function `refreshList` to update the `ObservableList` in `ModulePlanSemesterList` whenever changes in the `UniqueModuleList` occurs.<br>
 
-#### Design Consideration
+<div style="page-break-after: always;"></div>
+
+#### Design Considerations
 
 **Aspect: Data Structure to Store `Module`**
 
@@ -473,6 +475,8 @@ the module if it exists from the database.
 6. `AddCommand` then attempts to add the module into the Model via `Model#addModule`.
 7. If `ModuleCode`, the user inputs are valid, and the Model does not contain the module, `AddCommand` will 
 successfully add the new `Module` into the module plan.
+
+<div style="page-break-after: always;"></div>
    
 The following two *Sequence Diagrams* shows how the `add` command works:
 
@@ -676,6 +680,8 @@ Step 3. ModCraft lets the user know if the prerequisites have not been fulfilled
 **Note:** If the module is in the Advanced Placement, there are no other semesters to check.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 Step 4. The user now decides to move the module to an earlier semester, and decides to make the appropriate changes by executing the command `edit CS2103T y/1 s/2`. The `edit` command calls `Module#checkPrerequisitesFulfilled(List<Module> list)` again to check if the prerequisites have been fulfilled in previous semesters. In this case, they are the Advanced Placement and Year 1 Semester 1 semesters, and the `Module`s in these semesters populate `list`. 
 
