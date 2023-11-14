@@ -783,13 +783,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tryhard student                                                        | see what modules are available in the special term                                          |                                                              |
 
 <br>
-___
+--------------------------------------------------------------------------------------------------------------------
 
 ### Use cases
 
 (For all use cases below, the **System** is `ModCraft` and the **Actor** is the `user`, unless specified otherwise)
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use case: UC01 - Planning mods to take in the upcoming semester**
 
@@ -819,7 +819,7 @@ Use case resumes from step 2.
 Use case resumes from step 1.
 
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use case: UC02 - Updating end of semester grades**
 
@@ -841,7 +841,7 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade.
 Use case resumes from step 2.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use case: UC03 - Calculating CAP**
 
@@ -852,7 +852,7 @@ ___
 
 Use case ends.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use case: UC04 - Calculating MC**
 
@@ -869,7 +869,7 @@ Steps 4-6 are repeated for each combination of modules the user tries.
 
 Use case ends.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use case: UC05 - Indicating exempted modules**
 
@@ -891,7 +891,7 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct module code.
 Use case resumes from step 2.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use case: UC06 - S/Uing modules**
 
@@ -914,7 +914,7 @@ Use case resumes from step 2.
 
 <br>
 
-___
+--------------------------------------------------------------------------------------------------------------------
 #### **Use Case: UC07 - Indicating Advanced Placement Modules**
 
 **MSS**
@@ -934,7 +934,7 @@ Use case ends.
 Steps 1a1 to 1a2 are repeated until the module is available.
 Use case resumes from step 2.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use Case: UC08 - Indicating Special Term Modules**
 
@@ -960,7 +960,7 @@ Use case resumes from step 2.
 
 Use case resumes from step 4.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 
 #### **Use Case: UC09 - Dropping Modules**
 
@@ -986,7 +986,7 @@ Use case resumes from step 2.
 Steps 1b1 and 1b2 are repeated until the user inputs the correct module code.
 Use case resumes from step 2.
 
-___
+--------------------------------------------------------------------------------------------------------------------
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -994,7 +994,7 @@ ___
 3. Should be able to hold up to 1,000,000 courses without a noticeable sluggishness in performance for typical usage.
 
 <br>
-___
+--------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
 

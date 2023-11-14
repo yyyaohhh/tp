@@ -198,6 +198,8 @@ The images below show you the process for adding a module to the Advance Placeme
     <img src="images/ImagesForUG/ap-before.png" alt="Before executing add command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">Before</figcaption>
   </figure>
+</div>
+<div style="display:flex; justify-content:space-around; align-items:center;">
   <figure>
     <img src="images/ImagesForUG/ap-after.png" alt="After executing add command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">After</figcaption>
@@ -213,10 +215,12 @@ The images below show you the process for adding a module to one of the Special 
     <img src="images/ImagesForUG/st-before.png" alt="Before executing add command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">Before</figcaption>
   </figure>
+</div>
+<div style="display:flex; justify-content:space-around; align-items:center;">
   <figure>
     <img src="images/ImagesForUG/st-after.png" alt="After executing add command" style="height:350px; margin:10px;">
-    <figcaption style="text-align: center;">After</figcaption>
-  </figure>
+  <figcaption style="text-align: center;">After</figcaption>
+</figure>
 </div>
 
 
@@ -268,12 +272,13 @@ The images below show you the `add` command in action.
     <img src="images/ImagesForUG/add-before.png" alt="Before executing add command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">Before</figcaption>
   </figure>
+</div>
+<div style="display:flex; justify-content:space-around; align-items:center;">
   <figure>
     <img src="images/ImagesForUG/add-after.png" alt="After executing add command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">After</figcaption>
   </figure>
 </div>
-
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
@@ -316,6 +321,8 @@ The images below show you the `edit` command in action. The grade of `CS1101S` i
     <img src="images/ImagesForUG/edit-before.png" alt="Before executing edit command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">Before</figcaption>
   </figure>
+</div>
+<div style="display:flex; justify-content:space-around; align-items:center;">
   <figure>
     <img src="images/ImagesForUG/edit-after.png" alt="After executing edit command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">After</figcaption>
@@ -353,6 +360,8 @@ The images below show you the `delete` command in action. The module `CS2101` is
     <img src="images/ImagesForUG/delete-before.png" alt="Before executing delete command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">Before</figcaption>
   </figure>
+</div>
+<div style="display:flex; justify-content:space-around; align-items:center;">
   <figure>
     <img src="images/ImagesForUG/delete-after.png" alt="After executing delete command" style="height:350px; margin:10px;">
     <figcaption style="text-align: center;">After</figcaption>
