@@ -256,13 +256,84 @@ This can be shown through following sequence diagram:
 
 <puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
 
-### Module Plan Feature
-- how semesters are setup
-- what happens a user attempts to add a duplicate module
+### Module Plan
 
-### UI Feature?
-- how the ui is setup
-- what happens when the user inputs a command
+#### Overview:
+
+ModulePlan is a collection of classes that wraps all the information regarding the user's timetable and houses all the `Module` in the user's study plan. It has a facade class `ModulePlan` that handles all calls into the ModulePlan Component. The internal lists can only be modified through calls to the facade class as it is only exposed as a `unmodifiableObservableList`.
+
+The ModulePlan implementation consists of 4 levels of classes in the following order:
+* `ModulePlan`
+* `ModulePlanSemesterList`
+* `ModulePlanSemester`
+* `UniqueModuleList`
+
+The class diagram below shows the OOP structure of the ModulePlan component:
+
+<puml src="diagrams/ModulePlanClassDiagram.puml" width="450" />
+
+#### Implementation:
+
+**ModulePlan**: <br>
+
+`ModulePlan` is the facade class of the ModulePlan component. It contains exactly 1 `ModulePlanSemesterList` that is initialised whenever a new instance of `ModulePlan` is created. There isn't any logic implemented in this class, it just passes down information to the lower level classes and relays back the response to the caller.
+
+**ModulePlanSemesterList**: <br>
+
+`ModulePlanSemesterList` is where the main logic regarding modules that belong in different semesters is implemented. `ModulePlanSemesterList` contains a `internalList` of `ModulePlanSemester` and when a instance of `ModulePlanSemesterList` is created, its constructor populates the `internalList` with copies of a list of default `ModulePlanSemester` called `DEFAULT_SEMESTER`. `DEFAULT_SEMESTER` is a class level immutable list of `ModulePlanSemester` of both Semester 1 and 2 from Year 1 to 4. <br>
+
+* `ModulePlanSemesterList` implements the check for duplicate modules with the function `containsModule`. 
+* The function `findSemester` is used to figure out which `ModulePlanSemester` to pass the module to while also acting as a check for whether the module in question is in the ModulePlan.
+* `getCAP` and `modularCredit` is also where the CAP and MC respectively are collated across all the semesters.
+* `ModulePlanSemesterList` also contains the logic for adding `ModulePlanSemester` outside of the default ones and removing them when they are empty. These are implemented in the `addModule` and `removeModule` functions respectively with the assistance of some helper functions like `checkIfSemesterEmpty` and `inDefaultSemesters`.
+
+**ModulePlanSemester**: <br>
+
+`ModulePlanSemester` is modeled after a semester in the timetable. It is identified by the fields `Year` and `Semester` and contains 1 `UniqueModuleList`. Like `ModulePlan`, there is not much logic implemented here and it mainly passes the input down and relays the result back up the hierarchy.<br>
+
+However, the logic for checking and grouping all Year 0 modules is implemented here, in the `checkModuleBelongToSemester` and `checkIfSameSemester` functions. 
+
+**UniqueModuleList**: <br>
+
+`UniqueModuleList` is where the `Module` objects are housed, in the `ObservableList` called `internalList`. It is also where logic for modules in the same semester are implemented. <br>
+
+* The functions `contains` and `modulesAreUnique` ensures that there is no duplicates within this semester.
+* The functions `modularCredits`, `findGradePointsWithUnits` and `findMcsForCap` calculates the CAP/MC for this particular semester only.
+<br><br><br>
+
+The following diagrams shows the flow for the **main uses** of ModulePlan, adding and removing modules.
+
+<box type="info" seamless><md>
+**Note:** The implementation of editing a module is removing the original and then adding the edited module.
+</md></box>
+
+**Add Module**: <br>
+
+<puml src="diagrams/ModulePlanAddSequenceDiagram.puml" />
+
+**Delete Module**: <br>
+
+<puml src="diagrams/ModulePlanDeleteSequenceDiagram.puml" />
+
+#### UI Integration:
+
+Changes in the ModulePlan are displayed to the user through an observer pattern where the `listview` in the UI class `ModulePlanPane` listens to the `ObservableList` in `ModulePlanSemesterList` and the `listview` in `ModulePlanCard` listens to the the `ObservableList` in `UniqueModuleList`.
+The individual modules are then displayed in `ModuleCard`. <br>
+
+However, as changes in the `UniqueModuleList` will not propagate to the `ObservableList` in `ModulePlanSemesterList`, there is a need for the function `refreshList` to update the `ObservableList` in `ModulePlanSemesterList` whenever changes in the `UniqueModuleList` occurs.<br>
+
+#### Design Consideration:
+
+**Aspect:** Data Structure to Store `Module`
+
+* **Alternative 1 (Chosen)**: Store it in OOP fashion.
+  * Pros: Closely models the real world way of organizing the study plan (into each semester), logic for organizing and sorting the modules can be contained in the model instead of the Ui.
+  * Cons: A lot of overhead with the 4 level of classes.
+* **Alternative 2**: Store it in a single list.
+  * Pros: Simple to implement and very little overhead.
+  * Cons: Ui component needs to organise the Module when displaying to user which is not what the Ui component is meant to do. Harder to visualise the data and thus harder to test and maintain code.  
+
+Alternative 1 is ultimately chosen as it helps abstracts out the logic for different semester to the Model component where it is meant to be and having a OOP structure makes it easier to visualise and thus test/maintain code. Which is important as this is a team-based project.
 
 ### Module Storage Feature
 - how the storage works
@@ -708,6 +779,29 @@ Use case ends.
 * 3a. User wants to indicate that the module is taken or to be taken in Special Term 1 or Special Term 2
   * 3a1. User uses the add command and specifies the semester to be `s/ST1` for Special Term 1 or `s/ST2` for Special Term 2
   * Use case resumes from step 4.
+
+___
+
+#### **Use Case: UC05 - Dropping Modules**
+
+**MSS**
+
+1. User edits the grade of module he/she want to drop to `W` or `F`
+2. Modcraft shows that the module has been edited to the appropriate grade.
+
+Use case ends.
+
+**Extensions**
+* 1a. Module code is invalid
+    * 1a1. System shows the user that the module code inputted is invalid
+    * 1a2. User inputs correct module code
+      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
+* 1b. Module not in study plan
+    * 1b1. System shows the user that the module code inputted is not in study plan
+    * 1b2. User inputs another module code
+      Steps 1b1 and 1b2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
 
 ___
 ### Non-Functional Requirements
