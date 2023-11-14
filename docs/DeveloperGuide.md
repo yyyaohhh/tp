@@ -686,7 +686,7 @@ Use case resumes from step 2.
 3. ModCraft displays number of MCs taken.
 4. User inputs planned future modules with IP grade.
 5. User requests for MC calculation.
-6. ModCraft displays updated number of MCs taken.
+6. ModCraft displays updated number of MCs (including IP modules).
 Steps 4-6 are repeated for each combination of modules the user tries.
 
 Use case ends.

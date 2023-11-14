@@ -33,7 +33,6 @@ Given below are my contributions to the project.
   - PRs reviewed: 19
     - with non-trivial review comments: #167 #170 #180 #238
   - Reported 12 bugs for group [CS2103T-F10-1](https://github.com/AY2324S1-CS2103T-F10-1/tp/issues?q=is%3Aissue+%5BPE-D%5D%5BTester+C%5D+) during PE-D
-  - Some parts of some feature I added was adopted by several other class mates (to be added soon)
 
 - **Tools**:
   - PlantUML
