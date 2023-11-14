@@ -224,9 +224,7 @@ This section describes some noteworthy details on how certain features and comma
 
 <br>
 
-### Module Plan Feature
-- how semesters are setup
-- what happens a user attempts to add a duplicate module
+### Module Plan
 
 #### Overview:
 
@@ -812,7 +810,15 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
-<<<<<<< HEAD
+**Use case: UC03 - Calculating CAP**
+
+**MSS**
+
+1. User asks ModCraft for their current CAP.
+2. System show the current CAP of all modules that have been taken.
+
+Use case ends.
+
 **Use case: UC04 - Calculating MC**
 
 **MSS**
@@ -824,14 +830,6 @@ Use case resumes from step 2.
 5. User requests for MC calculation.
 6. ModCraft displays updated number of MCs (including IP modules).
 Steps 4-6 are repeated for each combination of modules the user tries.
-=======
-**Use case: UC03 - Calculating CAP**
-
-**MSS**
-
-1. User asks ModCraft for their current CAP.
-2. System show the current CAP of all modules that have been taken.
->>>>>>> 84ffff64ae410560208cd7cd980c36da0e72aafb
 
 Use case ends.
 
