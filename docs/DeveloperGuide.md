@@ -65,7 +65,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete CS2030S`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="585" />
 
 Each of the four main components (also shown in the diagram above), as well as the [**`Database`**](#database-component) component,
 
@@ -182,7 +182,7 @@ The `Storage` component,
 
 **API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
 
-<puml src="diagrams/DatabaseClassDiagram.puml" width="250" />
+<puml src="diagrams/DatabaseClassDiagram.puml" width="230" />
 
 <br>
 
@@ -238,7 +238,7 @@ The ModulePlan implementation consists of 4 levels of classes in the following o
 
 The class diagram below shows the OOP structure of the ModulePlan component:
 
-<puml src="diagrams/ModulePlanClassDiagram.puml" width="450" />
+<puml src="diagrams/ModulePlanClassDiagram.puml" width="600" />
 
 #### Implementation:
 
@@ -435,7 +435,7 @@ If the module has already been added the User's module plan, an error message wi
 
 The activity diagram for adding a `Module` into the module plan
 
-<puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
+<puml src="diagrams/AddModuleActivityDiagram.puml" width="475" />
 
 The sequence of the `add` command is as follows:
 
@@ -453,7 +453,7 @@ successfully add the new `Module` into the module plan.
    
 The following sequence diagram shows how the `add` command works:
 
-<puml src="diagrams/AddOverallSequenceDiagram.puml" width="450" />
+<puml src="diagrams/AddOverallSequenceDiagram.puml" />
 
 <br>
 
@@ -469,11 +469,11 @@ We shall now illustrate how `EditModuleDescriptor` is used.
 
 Here is a *Sequence Diagram* showing the parser in action:
 
-<puml src="diagrams/EditParseSequenceDiagram.puml" width="450" />
+<puml src="diagrams/EditParseSequenceDiagram.puml" />
 
 And here is a *Sequence Diagram* showing the command being executed:
 
-<puml src="diagrams/EditExecuteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/EditExecuteSequenceDiagram.puml" />
 
 As can be seen, this is a helpful class to store fields that need to be edited.
 
@@ -501,10 +501,7 @@ The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-
 
 The following activity diagram shows the logic of deleting a `Module` from the module plan:
 
-<puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
-
-   
-
+<puml src="diagrams/DeleteCommandActivityDiagram.puml" width="600" />
 
 <br>
 
@@ -520,7 +517,7 @@ e.g. `delete CS3230`
 
 The following sequence diagram shows how the `delete` command works:
 
-<puml src="diagrams/DeleteCommandSequenceDiagram.puml" width="450" />
+<puml src="diagrams/DeleteCommandSequenceDiagram.puml" />
 
 <br>
 
@@ -576,7 +573,7 @@ The sequence of the `calculateCAP` command is as follows:<br>
 
 The following sequence diagram shows how the `calculateCAP` command works:
 
-<puml src="diagrams/CalculateCapSequenceDiagram.puml" width="450" />
+<puml src="diagrams/CalculateCapSequenceDiagram.puml" />
 
 <br>
 
@@ -604,7 +601,7 @@ The sequence of the `calculateMC` command is as follows:<br>
 
 The following sequence diagram shows how the `calculateMC` command works:
 
-<puml src="diagrams/CalculateMcSequenceDiagram.puml" width="450" />
+<puml src="diagrams/CalculateMcSequenceDiagram.puml" />
 
 <br>
 
@@ -647,7 +644,7 @@ The following sequence diagram shows how the prerequisite checking works:
 
 The following activity diagram summarizes what happens when a user executes a command that changes the ModulePlan:
 
-<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="250" />
+<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="350" />
 
 <br>
 
