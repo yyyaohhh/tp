@@ -80,6 +80,8 @@ The sections below give more details of each component.
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -98,6 +100,8 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `ModulePlanSemester` object residing in the `Model`.
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Logic component
 
@@ -141,6 +145,9 @@ How the parsing works:
 
 <br>
 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -163,6 +170,9 @@ The `Model` component,
 
 <br>
 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -177,6 +187,9 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve modifiable objects that belong to the `Model`)
 
 <br>
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Database component
 
@@ -198,6 +211,9 @@ The `Database` component,
 
 <br>
 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Common classes
 
 Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2324S1-CS2103T-T13-0/tp/tree/master/src/main/java/seedu/address/commons) package.
@@ -210,23 +226,25 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 
 This section describes some noteworthy details on how certain features and commands are implemented.
 
-* [Module Database Feature](#module-database-feature)
-* [Module Plan Feature](#module-plan-feature)
-* [UI Feature](#ui-feature)
-* [Module Storage Feature](#module-storage-feature)
+* [Module Plan](#module-plan)
+* [Module Storage](#module-storage)
+* [Module Data](#module-data)
 * [Info Module Command](#info-module-command)
 * [Add Module Command](#add-module-command)
 * [Edit Module Command](#edit-module-command)
 * [Delete Module Command](#delete-module-command)
 * [Calculate CAP Command](#calculate-cap-command)
-* [Calculate Modular Credits (MCs) Command](#calculate-modular-credits-mcs-command)
-* [Undo/redo feature](#proposed-undoredo-feature)
+* [Calculate MC Command](#calculate-mc-command)
+* [[Proposed] Pre-requisite checking](#proposed-pre-requisite-checking)
 
 <br>
 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Module Plan
 
-#### Overview:
+#### Overview
 
 ModulePlan is a collection of classes that wraps all the information regarding the user's timetable and houses all the `Module` in the user's study plan. It has a facade class `ModulePlan` that handles all calls into the ModulePlan Component. The internal lists can only be modified through calls to the facade class as it is only exposed as a `unmodifiableObservableList`.
 
@@ -240,7 +258,7 @@ The class diagram below shows the OOP structure of the ModulePlan component:
 
 <puml src="diagrams/ModulePlanClassDiagram.puml" width="600" />
 
-#### Implementation:
+#### Implementation
 
 **ModulePlan**: <br>
 
@@ -283,16 +301,16 @@ The following diagrams shows the flow for the **main uses** of ModulePlan, addin
 
 <puml src="diagrams/ModulePlanDeleteSequenceDiagram.puml" />
 
-#### UI Integration:
+#### UI Integration
 
 Changes in the ModulePlan are displayed to the user through an observer pattern where the `listview` in the UI class `ModulePlanPane` listens to the `ObservableList` in `ModulePlanSemesterList` and the `listview` in `ModulePlanCard` listens to the the `ObservableList` in `UniqueModuleList`.
 The individual modules are then displayed in `ModuleCard`. <br>
 
 However, as changes in the `UniqueModuleList` will not propagate to the `ObservableList` in `ModulePlanSemesterList`, there is a need for the function `refreshList` to update the `ObservableList` in `ModulePlanSemesterList` whenever changes in the `UniqueModuleList` occurs.<br>
 
-#### Design Consideration:
+#### Design Consideration
 
-**Aspect:** Data Structure to Store `Module`
+**Aspect: Data Structure to Store `Module`**
 
 * **Alternative 1 (Chosen)**: Store it in OOP fashion.
   * Pros: Closely models the real world way of organizing the study plan (into each semester), logic for organizing and sorting the modules can be contained in the model instead of the Ui.
@@ -305,13 +323,12 @@ Alternative 1 is ultimately chosen as it helps abstracts out the logic for diffe
 
 <br>
 
-### Module Storage Feature
-- how the storage works
-- what happens when it fails to load
-- what happens when the user modifies the moduleplan
-- userprefs considered the same feature? if too long can split into another one
 
-**Overview:**
+--------------------------------------------------------------------------------------------------------------------
+
+### Module Storage
+
+#### Overview
 
 Modcraft stores two types of information on the hard drive, ModulePlan and UserPrefs(User Preferences).
 ModulePlan stores the user's last saved module plan when using Modcraft allowing the user to access their module plan
@@ -323,7 +340,7 @@ they do not already exist in the same folder in which the Modcraft jar file is s
 and modify the files as they wish it is recommended that they make a backup before any modifications. If Modcraft
 cannot access a file, it will be deleted and replaced with a new empty file.
 
-**Feature details:**
+#### Feature details
 
 1. When the user launches the application, if there is no `moduleplan.json` or `preferences.json` file detected in the
 same folder as Modcraft or they are corrupted, Modcraft will create them and populate them with the default moduleplan
@@ -336,7 +353,7 @@ information obtained from the files.
 4. Upon alteration of any part of the user interface, the changes will automatically be saved into `preferences.json`.
 
 
-**Initialization sequence:**
+#### Initialization sequence
 
 1. At startup, `MainApp` calls `MainApp#initPrefs` to attempt to parse the `preferences.json` file.
 2. `MainApp#initPrefs` calls `Storage#readUserPrefs` to obtain the user preferences as a `UserPrefs` object.
@@ -366,13 +383,16 @@ This can be seen in the sequence diagram below
 
 <br>
 
-### ModuleData
 
-**Overview:**
+--------------------------------------------------------------------------------------------------------------------
+
+### Module Data
+
+#### Overview
 
 The `ModuleData` object represents an internal list of all possible modules, which forms the base of the application. It allows for validation of the module codes in user input, and provides the required identity fields for the creation of modules to be saved to the user's study plan.
 
-**Implementation:**
+#### Implementation
 
 Though the internal list utlizes the same class as `ModulePlan`, here the `UniqueModulesList modules` field models the full list of all NUS modules instead of the list of a user's modules in a given semester. It maintains the same property of protecting against duplicate modules, which are identified based on their similar module codes. 
 
@@ -380,15 +400,15 @@ The `checkDbValidModuleCode(ModuleCode)` method fufills one of the two motivatio
 
 Another purpose of `ModuleData` is to provide information about a module (e.g. its name, description and number of modular credits), if it is a valid NUS module. This is fufilled by the `getModule(ModuleCode)` method, which returns the desired module as an immutable `Module` object. This immutability is vital to preserve the correctness of the module information, so that future references to `ModuleData` return the same results.
 
-**Initialization:**
+#### Initialization
 
 The module information (of over 15000 modules!) is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Upon launching ModCraft, the module information is deserialized (with the help of the Jackson library) from JSON format to the `ModuleData` object through a series of conversions. The `Module` fields are parsed into Strings and combined into a `JsonAdaptedDbModule` object, which is then further collated into a `JsonSerializableModuleData` object. When the `JsonSerializableModuleData#toModelType` method is called, an empty `ModuleData` object is created before the conversion of all `JsonAdaptedDbModule` objects into `Module` objects, which are then added into `ModuleData`.
 
 This initialization process can be shown through following sequence diagrams:
 
-<puml src="diagrams/JsonModuleSequenceDiagram.puml" />
+<puml src="diagrams/JsonModuleDataSequenceDiagram.puml" />
 
-<puml src="diagram/ToModelTypeSequenceDiagram.puml" />
+<puml src="diagrams/ToModelTypeSequenceDiagram.puml" />
 
 <br>
 
@@ -405,7 +425,9 @@ In such cases where the data cannot be read successfully, a `RuntimeException` i
 
 </box>
 
-**Design considerations:** Location of `moduleinfo.json`
+#### Design considerations 
+
+**Aspect: Location of `moduleinfo.json`**
 
 * **Alternative 1**: Expose the file. (Similar to the ModulePlan storage file implementation)
    * Pros: The module information within the file could be inaccurate. Users will be able to easily modify/update information directly without developer intervention.
@@ -416,14 +438,18 @@ In such cases where the data cannot be read successfully, a `RuntimeException` i
 
 <br>
 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Add Module Command
-**Overview:**
+
+#### Overview
 The `add` command is used to add a module to the module plan with the information fields `Module Code`, `Year Taken`,
     `Semester Taken`, and `Grade`.
 
-The format for the `add` command can be found [here](#adding-a-module)
+The format for the `add` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#adding-a-module-add)
 
-**Feature details:**
+#### Feature details
 1. The user executes the `add` command.
 2. If any of the fields are not provided, an error message with the appropriate command usage will be displayed.
 3. If any of the command parameters are invalid, an error message with the appropriate parameter format will be displayed.
@@ -457,11 +483,17 @@ The following sequence diagram shows how the `add` command works:
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Edit Module Command
 
-<br>
+#### Overview
 
-#### Implementation
+The `edit` command is used to change the information fields (e.g. year, semester and grade) for modules in the study plan.
+
+The format for the `edit` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#editing-a-module-edit).
+
+#### Feature details
 
 The edit mechanism uses `EditModuleDescriptor` to abstract out the fields to edit. It can be found as a publicly accessible class within `EditCommand`. Currently, it only contains fields for `Year`, `Semester` and `Grade`, which are the only attributes of `Module` that can be edited for now. Besides this, it largely follows the parser and command structure as described in [Logic](#logic-component).
 
@@ -479,15 +511,17 @@ As can be seen, this is a helpful class to store fields that need to be edited.
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Delete Module Command
 
-**Overview:**<br>
+#### Overview
 
 The `delete` command is used to delete a module from the module plan. The module can only be deleted if it is already present in one of the semesters in the module plan.<br>
 
 The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#deleting-a-module-delete).<br>
 
-**Feature details:**<br>
+#### Feature details
 
 1. The user executes the `delete` command.
 2. If the module code field is not provided, an error message with the correct command usage will be shown.
@@ -521,15 +555,17 @@ The following sequence diagram shows how the `delete` command works:
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Info Module Command
 
-**Overview:**
+#### Overview
 
 The `info` command is used to display information about a selected module, which is specified by the user by its module code.
 
 The format of the `info` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#finding-information-about-a-module-info).
 
-**Feature details:**
+#### Feature details
 
 1. The user enters the `info` command.
 2. The `InfoCommandParser` checks that only a single argument is provided, and that the argument follows the valid module code format.
@@ -541,23 +577,23 @@ This is shown through the following activity diagram:
 
 <puml src="diagrams/InfoCommandActivityDiagram.puml" />
 
-**Command execution sequence:**
-
 During command execution, the `info` command calls `Module#toInfoString`, as shown in the sequence diagram below:
 
 <puml src="diagrams/InfoCommandSequenceDiagram.puml" />
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Calculate CAP Command
 
-**Overview:**<br>
+#### Overview
 
 The `calculateCAP` command is used to calculate the Cumulative Average Point (CAP) of all valid modules in the module plan, using their grade points and modular credits. <br>
 
 The format of the `calculateCAP` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-cap-calculatecap).<br>
 
-**Feature details:**<br>
+#### Feature details
 
 1. The user executes the `calculateCAP` command.
 2. If the previous step is completed without exceptions, the CAP will be calculated and displayed.
@@ -577,15 +613,17 @@ The following sequence diagram shows how the `calculateCAP` command works:
 
 <br>
 
-### Calculate Modular Credits (MCs) Command
+--------------------------------------------------------------------------------------------------------------------
 
-**Overview:**<br>
+### Calculate MC Command
+
+#### Overview
 
 The `calculateMC` command is used to calculate the total sum of Modular Credits (MCs) of all modules in the module plan, regardless of their grades. <br>
 
 The format of the `calculateMC` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#calculating-the-total-current-modular-credits-mcs-calculatemc).<br>
 
-**Feature details:**<br>
+#### Feature details
 
 1. The user executes the `calculateMC` command.
 2. If the previous step is completed without exceptions, the number of MCs will be calculated and displayed.
@@ -604,6 +642,8 @@ The following sequence diagram shows how the `calculateMC` command works:
 <puml src="diagrams/CalculateMcSequenceDiagram.puml" />
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### \[Proposed\] Pre-requisite checking feature
 
@@ -644,22 +684,7 @@ The following sequence diagram shows how the prerequisite checking works:
 
 The following activity diagram summarizes what happens when a user executes a command that changes the ModulePlan:
 
-<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="350" />
-
-<br>
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire module plan.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the module being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="500" />
 
 <br>
 
@@ -676,7 +701,7 @@ For our next steps, we plan to add the following features:
 * Check for a module's availability of S/U options, and prevent users from inputting S/U grades to non-S/U-able modules.
 * Add support for allowing users to add a module that was failed in a previous semester to another new semester.
 
-* <br>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -758,34 +783,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tryhard student                                                        | see what modules are available in the special term                                          |                                                              |
 
 <br>
+___
 
 ### Use cases
 
 (For all use cases below, the **System** is `ModCraft` and the **Actor** is the `user`, unless specified otherwise)
 
+___
+
 #### **Use case: UC01 - Planning mods to take in the upcoming semester**
 
 **MSS**
 
-1. User searches a module that he wants to take next semester
+1. User searches a module that he wants to take next semester.
 2. Modcraft displays the information for the module.
 3. User adds that module to their module plan.
 4. Modcraft shows the module in the User’s module plan.
-Steps 1-4 are repeated for each module the User is interested in
+
+Steps 1-4 are repeated for each module the User is interested in.
 
 Use case ends.
 
 **Extensions**
 
 * 1a. Modcraft detects that the module does not exist.
-    * 1a1. Modcraft informs the user it is unavailable
-    * 1a2. User searches another module
-Steps 1a1 to 1a2 are repeated until the module is available
+    * 1a1. Modcraft informs the user it is unavailable.
+    * 1a2. User searches another module.
+
+Steps 1a1 to 1a2 are repeated until the module is available.
 Use case resumes from step 2.
 
-* *a. At any time, user choose to delete a module
-    * *a1. User deletes the module
-    * *a2. Modcraft removes the module from the timetable
+* *a. At any time, user choose to delete a module.
+    * *a1. User deletes the module.
+    * *a2. Modcraft removes the module from the timetable.
 Use case resumes from step 1.
 
 
@@ -797,16 +827,18 @@ ___
 
 1. User inputs grades for a module that they have taken.
 2. Modcraft shows the updated grade in the timetable.
+
 Steps 1-2 are repeated for each grade the user would like to update for.
 
 Use case ends.
 
 **Extensions**
 
-* 1a. Grade is invalid
-    * 1a1. Modcraft shows the user the grade is invalid
-    * 1a2. User inputs correct grade
-Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
+* 1a. Grade is invalid.
+    * 1a1. Modcraft shows the user the grade is invalid.
+    * 1a2. User inputs correct grade.
+
+Steps 1a1 and 1a2 are repeated until the user inputs the correct grade.
 Use case resumes from step 2.
 
 ___
@@ -832,33 +864,36 @@ ___
 4. User inputs planned future modules with IP grade.
 5. User requests for MC calculation.
 6. ModCraft displays updated number of MCs (including IP modules).
+
 Steps 4-6 are repeated for each combination of modules the user tries.
 
 Use case ends.
 
 ___
 
-#### **Use case: UC08 - Indicating exempted modules**
+#### **Use case: UC05 - Indicating exempted modules**
 
 **MSS**
 
 1. User inputs `EXE` as the grade for a module that they have taken.
 2. System shows the updated grade for the module, which is `EXE`, in the timetable.
-   Steps 1-2 are repeated for each module that the user would like to indicate as exempted.
+
+Steps 1-2 are repeated for each module that the user would like to indicate as exempted.
 
 Use case ends.
 
 **Extensions**
 
-* 1a. Module code is invalid
-    * 1a1. System shows the user that the module code inputted is invalid
-    * 1a2. User inputs correct module code
-      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
-      Use case resumes from step 2.
+* 1a. Module code is invalid.
+    * 1a1. System shows the user that the module code inputted is invalid.
+    * 1a2. User inputs correct module code.
+
+Steps 1a1 and 1a2 are repeated until the user inputs the correct module code.
+Use case resumes from step 2.
 
 ___
 
-#### **Use case: UC09 - S/Uing modules**
+#### **Use case: UC06 - S/Uing modules**
 
 **MSS**
 
@@ -870,16 +905,17 @@ Use case ends.
 
 **Extensions**
 
-* 1a. Module code is invalid
-    * 1a1. System shows the user that the module code inputted is invalid
-    * 1a2. User inputs correct module code
-      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
-      Use case resumes from step 2.
+* 1a. Module code is invalid.
+    * 1a1. System shows the user that the module code inputted is invalid.
+    * 1a2. User inputs correct module code.
+
+Steps 1a1 and 1a2 are repeated until the user inputs the correct module code.
+Use case resumes from step 2.
 
 <br>
 
 ___
-#### **Use Case: UC06 - Indicating Advanced Placement Modules**
+#### **Use Case: UC07 - Indicating Advanced Placement Modules**
 
 **MSS**
 
@@ -894,12 +930,13 @@ Use case ends.
 * 1a. Modcraft detects that the module does not exist or not available for advanced placement.
     * 1a1. Modcraft informs the user it is unavailable.
     * 1a2. User searches another module.
+
 Steps 1a1 to 1a2 are repeated until the module is available.
 Use case resumes from step 2.
 
 ___
 
-#### **Use Case: UC07 - Indicating Special Term Modules**
+#### **Use Case: UC08 - Indicating Special Term Modules**
 
 **MSS**
 
@@ -914,34 +951,40 @@ Use case ends.
 * 1a. Modcraft detects that the module does not exist or not available for advanced placement.
     * 1a1. Modcraft informs the user it is unavailable.
     * 1a2. User searches another module.
-      Steps 1a1 to 1a2 are repeated until the module is available.
-      Use case resumes from step 2.
-* 3a. User wants to indicate that the module is taken or to be taken in Special Term 1 or Special Term 2
-  * 3a1. User uses the add command and specifies the semester to be `s/ST1` for Special Term 1 or `s/ST2` for Special Term 2
-  * Use case resumes from step 4.
+
+Steps 1a1 to 1a2 are repeated until the module is available.
+Use case resumes from step 2.
+
+* 3a. User wants to indicate that the module is taken or to be taken in Special Term 1 or Special Term 2.
+  * 3a1. User uses the add command and specifies the semester to be `s/ST1` for Special Term 1 or `s/ST2` for Special Term 2.
+
+Use case resumes from step 4.
 
 ___
 
-#### **Use Case: UC05 - Dropping Modules**
+#### **Use Case: UC09 - Dropping Modules**
 
 **MSS**
 
-1. User edits the grade of module he/she want to drop to `W` or `F`
+1. User edits the grade of module he/she want to drop to `W` or `F`.
 2. Modcraft shows that the module has been edited to the appropriate grade.
 
 Use case ends.
 
 **Extensions**
-* 1a. Module code is invalid
-    * 1a1. System shows the user that the module code inputted is invalid
-    * 1a2. User inputs correct module code
-      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
-      Use case resumes from step 2.
-* 1b. Module not in study plan
-    * 1b1. System shows the user that the module code inputted is not in study plan
-    * 1b2. User inputs another module code
-      Steps 1b1 and 1b2 are repeated until the user inputs the correct module code
-      Use case resumes from step 2.
+* 1a. Module code is invalid.
+    * 1a1. System shows the user that the module code inputted is invalid.
+    * 1a2. User inputs correct module code.
+
+Steps 1a1 and 1a2 are repeated until the user inputs the correct module code.
+Use case resumes from step 2.
+
+* 1b. Module not in study plan.
+    * 1b1. System shows the user that the module code inputted is not in study plan.
+    * 1b2. User inputs another module code.
+
+Steps 1b1 and 1b2 are repeated until the user inputs the correct module code.
+Use case resumes from step 2.
 
 ___
 ### Non-Functional Requirements
@@ -951,6 +994,7 @@ ___
 3. Should be able to hold up to 1,000,000 courses without a noticeable sluggishness in performance for typical usage.
 
 <br>
+___
 
 ### Glossary
 
