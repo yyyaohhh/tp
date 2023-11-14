@@ -222,38 +222,6 @@ This section describes some noteworthy details on how certain features and comma
 
 <br>
 
-### Module Database Feature
-
-**Overview:**
-
-ModCraft contains an internal list of all possible modules, which forms the backbone of the application. This `ModuleData` allows for validation of user input and provides the required module information to be displayed.
-
-The module information is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Users are not permitted to access the file as uninformed modifications could cause the application to invariably fail at startup.
-
-**Feature details:**
-
-1.   When the user launches the application, the data is converted from JSON format to the `ModuleData` class, which supports verification and retrieval of `Module` information.
-2.   During command execution, the `ModuleCode` input by the user is validated to exist within `ModuleData`.
-3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
-4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
-
-**Initialization sequence:**
-1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
-2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
-   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
-3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
-   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
-4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
-   * the file cannot be found,
-   * an error occurs during deserialization, or
-   * the data contains invalid values.
-
-
-This can be shown through following sequence diagram:
-
-<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
-
 ### Module Plan Feature
 - how semesters are setup
 - what happens a user attempts to add a duplicate module
@@ -268,12 +236,53 @@ This can be shown through following sequence diagram:
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
 
-### Info Module Command
+### ModuleData
 
 **Overview:**
 
-**Feature details:**
+The `ModuleData` object represents an internal list of all possible modules, which forms the base of the application. It allows for validation of the module codes in user input, and provides the required identity fields for the creation of modules to be saved to the user's study plan.
 
+**Implementation:**
+
+Though the internal list utlizes the same class as `ModulePlan`, here the `UniqueModulesList modules` field models the full list of all NUS modules instead of the list of a user's modules in a given semester. It maintains the same property of protecting against duplicate modules, which are identified based on their similar module codes. 
+
+The `checkDbValidModuleCode(ModuleCode)` method fufills one of the two motivations of `ModuleData`: validation. It simply iterates through the internal list and checks if a module with a matching module code exists. It allows Modcraft to distinguish between valid and invalid modules codes during command execution.
+
+Another purpose of `ModuleData` is to provide information about a module (e.g. its name, description and number of modular credits), if it is a valid NUS module. This is fufilled by the `getModule(ModuleCode)` method, which returns the desired module as an immutable `Module` object. This immutability is vital to preserve the correctness of the module information, so that future references to `ModuleData` return the same results.
+
+**Initialization:**
+
+The module information (of over 15000 modules!) is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Upon launching ModCraft, the module information is deserialized (with the help of the Jackson library) from JSON format to the `ModuleData` object through a series of conversions. The `Module` fields are parsed into Strings and combined into a `JsonAdaptedDbModule` object, which is then further collated into a `JsonSerializableModuleData` object. When the `JsonSerializableModuleData#toModelType` method is called, an empty `ModuleData` object is created before the conversion of all `JsonAdaptedDbModule` objects into `Module` objects, which are then added into `ModuleData`.
+
+This initialization process can be shown through following sequence diagrams:
+
+<puml src="diagrams/JsonModuleSequenceDiagram.puml" />
+
+<puml src="diagram/ToModelTypeSequenceDiagram.puml" />
+
+<br>
+
+<box type="info" seamless>
+
+**Note:** Initialization failure
+
+A `DataLoadingException` is thrown if:
+* the file cannot be found,
+* an error occurs during deserialization, or
+* the data contains invalid values (e.g. negative modular credits)
+
+In such cases where the data cannot be read successfully, a `RuntimeException` is deliberately triggered to forcefully abort the application's launch. This is necessary as most features are reliant on the validation and information provided by the `ModuleData` object.
+
+</box>
+
+**Design considerations:** Location of `moduleinfo.json`
+
+* **Alternative 1**: Expose the file. (Similar to the ModulePlan storage file implementation)
+   * Pros: The module information within the file could be inaccurate. Users will be able to easily modify/update information directly without developer intervention.
+   * Cons: New users might mistakenly make unintended modifications, causing the completeness/correctness of the information to be compromised. Due to the lack of a failsafe overwrite mechanism, the application might invariably fail at startup.
+* **Alternative 2 (Chosen)**: Hide the file in the resources folder.
+   * Pros: Maintain the completeness and correctness of the information.
+   * Cons: Lack of user customization for more advanced users. As module information changes over time, responsibilty falls on the developers to ensure the information is updated and error-free.
 
 ### Add Module Command
 **Overview:**
@@ -358,6 +367,32 @@ The following sequence diagram shows how the `delete` command works:
 <puml src="diagrams/DeleteCommandSequenceDiagram.puml" width="450" />
 
 <br>
+
+### Info Module Command
+
+**Overview:**
+
+The `info` command is used to display information about a selected module, which is specified by the user by its module code.
+
+The format of the `info` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#finding-information-about-a-module-info).
+
+**Feature details:**
+
+1. The user enters the `info` command.
+2. The `InfoCommandParser` checks that only a single argument is provided, and that the argument follows the valid module code format.
+3. A `ParseException` is thrown if either of the above checks fail. Otherwise, an `InfoCommand` object will be created and executed.
+4. The `InfoCommand` verifies that the module code exists in `ModuleData`. Otherwise, `ModuleNotFoundException` will be thrown.
+5. The `Module` is retrieved from the database and the information is displayed to the user.
+
+This is shown through the following activity diagram:
+
+<puml src="diagrams/InfoCommandActivityDiagram.puml" />
+
+**Command execution sequence:**
+
+During command execution, the `info` command calls `Module#toInfoString`, as shown in the sequence diagram below:
+
+<puml src="diagrams/InfoCommandSequenceDiagram.puml" />
 
 ### Calculate CAP Command
 
@@ -642,6 +677,19 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
+**Use case: UC04 - Calculating MC**
+
+**MSS**
+
+1. User inputs taken modules.
+2. User requests for MC calculation.
+3. ModCraft displays number of MCs taken.
+4. User inputs planned future modules with IP grade.
+5. User requests for MC calculation.
+6. ModCraft displays updated number of MCs taken.
+Steps 4-6 are repeated for each combination of modules the user tries.
+
+Use case ends.
 
 **Use case: UC08 - Indicating exempted modules**
 
