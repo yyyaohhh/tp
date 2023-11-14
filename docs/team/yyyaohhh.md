@@ -5,8 +5,8 @@
 ModCraft is a desktop application built for students from National University of Singapore (NUS) to help them **track and organise their academic journey**. With ModCraft serving as your **personal study planner**, you can easily:
 
 * Keep track of the courses you have taken
-* Plan ahead to fufill graduation requirements
-* Continously adjust your study plan to new changes
+* Plan ahead to fulfill graduation requirements
+* Continuously adjust your study plan to new changes
 
 And much more!
 
@@ -27,6 +27,9 @@ Given below are my contributions to the project.
   - `calculateCAP` command: allows users to calculate the Cumulative Average Point (CAP) of all valid modules in the module plan easily, using their grades and modular credits.
     - Justification: This feature improves the product significantly because calculating and knowing the CAP is very important to NUS students, as it is used in many areas.<br>
     e.g. Calculating CAP for Semester Exchange Programs (SEP) and application for scholarships.
+    
+  <div style="page-break-after: always;"></div>
+
   - `calculateMC` command: allows users to calculate the total sum of Modular Credits (MCs) of all modules in the module plan, regardless of their grades.
     - Justification: This feature improves the product significantly because calculating and knowing the MCs is very important to NUS students, as it is used in many areas.<br>
         e.g. Calculating MCs for Semester Exchange Programs (SEP) and checking for graduate requirements.
