@@ -437,9 +437,9 @@ The image below show you what ModCraft should look like after executing the `inf
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/ImagesForUG/info-after.png" alt="After executing info command" style="height:400px; margin:20px;">
 </div>
-<p style="text-align: center;">
-    The command info CS3230 is executed. Information about the module CS3230 is displayed.
-</p>
+<p style="text-align: center;"><md>
+    The command `info CS3230` is executed. Information about the module `CS3230` is displayed.
+</p><md>
 
 <div class="alert alert-success"><md>:information_source: **Note:** The module information is taken from [NUSmods](https://github.com/nusmodifications/nusmods) for the current Academic Year 23/24.
 </md></div>
