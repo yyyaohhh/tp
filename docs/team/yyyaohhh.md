@@ -49,7 +49,7 @@ Given below are my contributions to the project.
 
   - PRs reviewed (with non-trivial review comments): 4
   - Contributed to forum discussions:
-    - [answered questions posted by peers](https://github.com/nus-cs2103-AY2324S1/forum/issues/256).
+    - answered questions posted by peers: [#256](https://github.com/nus-cs2103-AY2324S1/forum/issues/256).
     - asked questions: [#132](https://github.com/nus-cs2103-AY2324S1/forum/issues/132), [#193](https://github.com/nus-cs2103-AY2324S1/forum/issues/132), [#130](https://github.com/nus-cs2103-AY2324S1/forum/issues/130), [#26](https://github.com/nus-cs2103-AY2324S1/forum/issues/26)
   - Reported bugs and suggestions for other teams in the class: [#309](https://github.com/nus-cs2103-AY2324S1/forum/issues/309)
 
