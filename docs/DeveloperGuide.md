@@ -477,9 +477,16 @@ the module if it exists from the database.
 7. If `ModuleCode`, the user inputs are valid, and the Model does not contain the module, `AddCommand` will 
 successfully add the new `Module` into the module plan.
    
-The following sequence diagram shows how the `add` command works:
+The following two *Sequence Diagrams* shows how the `add` command works:
 
-<puml src="diagrams/AddOverallSequenceDiagram.puml" />
+Here is the *Sequence Diagram* showing how the parser works:
+
+<puml src="diagrams/AddParseSequenceDiagram.puml" />
+
+And here is the *Sequence Diagram* showing the command being executed:
+
+<puml src="diagrams/AddExecuteSequenceDiagram.puml" />
+
 
 <br>
 
