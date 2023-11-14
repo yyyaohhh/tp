@@ -113,6 +113,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
+<puml src="diagrams/DeleteSequenceDiagram2.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -222,19 +224,184 @@ This section describes some noteworthy details on how certain features and comma
 
 <br>
 
+<<<<<<< HEAD
 ### Module Plan Feature
 - how semesters are setup
 - what happens a user attempts to add a duplicate module
+=======
+### Module Database Feature
 
-### UI Feature?
-- how the ui is setup
-- what happens when the user inputs a command
+**Overview:**
+
+ModCraft contains an internal list of all possible modules, which forms the backbone of the application. This `ModuleData` allows for validation of user input and provides the required module information to be displayed.
+
+The module information is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Users are not permitted to access the file as uninformed modifications could cause the application to invariably fail at startup.
+
+**Feature details:**
+
+1.   When the user launches the application, the data is converted from JSON format to the `ModuleData` class, which supports verification and retrieval of `Module` information.
+2.   During command execution, the `ModuleCode` input by the user is validated to exist within `ModuleData`.
+3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
+4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
+
+**Initialization sequence:**
+1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
+2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
+   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
+3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
+   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
+4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
+5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
+   * the file cannot be found,
+   * an error occurs during deserialization, or
+   * the data contains invalid values.
+
+
+This can be shown through following sequence diagram:
+
+<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
+
+### Module Plan
+>>>>>>> 84ffff64ae410560208cd7cd980c36da0e72aafb
+
+#### Overview:
+
+ModulePlan is a collection of classes that wraps all the information regarding the user's timetable and houses all the `Module` in the user's study plan. It has a facade class `ModulePlan` that handles all calls into the ModulePlan Component. The internal lists can only be modified through calls to the facade class as it is only exposed as a `unmodifiableObservableList`.
+
+The ModulePlan implementation consists of 4 levels of classes in the following order:
+* `ModulePlan`
+* `ModulePlanSemesterList`
+* `ModulePlanSemester`
+* `UniqueModuleList`
+
+The class diagram below shows the OOP structure of the ModulePlan component:
+
+<puml src="diagrams/ModulePlanClassDiagram.puml" width="450" />
+
+#### Implementation:
+
+**ModulePlan**: <br>
+
+`ModulePlan` is the facade class of the ModulePlan component. It contains exactly 1 `ModulePlanSemesterList` that is initialised whenever a new instance of `ModulePlan` is created. There isn't any logic implemented in this class, it just passes down information to the lower level classes and relays back the response to the caller.
+
+**ModulePlanSemesterList**: <br>
+
+`ModulePlanSemesterList` is where the main logic regarding modules that belong in different semesters is implemented. `ModulePlanSemesterList` contains a `internalList` of `ModulePlanSemester` and when a instance of `ModulePlanSemesterList` is created, its constructor populates the `internalList` with copies of a list of default `ModulePlanSemester` called `DEFAULT_SEMESTER`. `DEFAULT_SEMESTER` is a class level immutable list of `ModulePlanSemester` of both Semester 1 and 2 from Year 1 to 4. <br>
+
+* `ModulePlanSemesterList` implements the check for duplicate modules with the function `containsModule`. 
+* The function `findSemester` is used to figure out which `ModulePlanSemester` to pass the module to while also acting as a check for whether the module in question is in the ModulePlan.
+* `getCAP` and `modularCredit` is also where the CAP and MC respectively are collated across all the semesters.
+* `ModulePlanSemesterList` also contains the logic for adding `ModulePlanSemester` outside of the default ones and removing them when they are empty. These are implemented in the `addModule` and `removeModule` functions respectively with the assistance of some helper functions like `checkIfSemesterEmpty` and `inDefaultSemesters`.
+
+**ModulePlanSemester**: <br>
+
+`ModulePlanSemester` is modeled after a semester in the timetable. It is identified by the fields `Year` and `Semester` and contains 1 `UniqueModuleList`. Like `ModulePlan`, there is not much logic implemented here and it mainly passes the input down and relays the result back up the hierarchy.<br>
+
+However, the logic for checking and grouping all Year 0 modules is implemented here, in the `checkModuleBelongToSemester` and `checkIfSameSemester` functions. 
+
+**UniqueModuleList**: <br>
+
+`UniqueModuleList` is where the `Module` objects are housed, in the `ObservableList` called `internalList`. It is also where logic for modules in the same semester are implemented. <br>
+
+* The functions `contains` and `modulesAreUnique` ensures that there is no duplicates within this semester.
+* The functions `modularCredits`, `findGradePointsWithUnits` and `findMcsForCap` calculates the CAP/MC for this particular semester only.
+<br><br><br>
+
+The following diagrams shows the flow for the **main uses** of ModulePlan, adding and removing modules.
+
+<box type="info" seamless><md>
+**Note:** The implementation of editing a module is removing the original and then adding the edited module.
+</md></box>
+
+**Add Module**: <br>
+
+<puml src="diagrams/ModulePlanAddSequenceDiagram.puml" />
+
+**Delete Module**: <br>
+
+<puml src="diagrams/ModulePlanDeleteSequenceDiagram.puml" />
+
+#### UI Integration:
+
+Changes in the ModulePlan are displayed to the user through an observer pattern where the `listview` in the UI class `ModulePlanPane` listens to the `ObservableList` in `ModulePlanSemesterList` and the `listview` in `ModulePlanCard` listens to the the `ObservableList` in `UniqueModuleList`.
+The individual modules are then displayed in `ModuleCard`. <br>
+
+However, as changes in the `UniqueModuleList` will not propagate to the `ObservableList` in `ModulePlanSemesterList`, there is a need for the function `refreshList` to update the `ObservableList` in `ModulePlanSemesterList` whenever changes in the `UniqueModuleList` occurs.<br>
+
+#### Design Consideration:
+
+**Aspect:** Data Structure to Store `Module`
+
+* **Alternative 1 (Chosen)**: Store it in OOP fashion.
+  * Pros: Closely models the real world way of organizing the study plan (into each semester), logic for organizing and sorting the modules can be contained in the model instead of the Ui.
+  * Cons: A lot of overhead with the 4 level of classes.
+* **Alternative 2**: Store it in a single list.
+  * Pros: Simple to implement and very little overhead.
+  * Cons: Ui component needs to organise the Module when displaying to user which is not what the Ui component is meant to do. Harder to visualise the data and thus harder to test and maintain code.  
+
+Alternative 1 is ultimately chosen as it helps abstracts out the logic for different semester to the Model component where it is meant to be and having a OOP structure makes it easier to visualise and thus test/maintain code. Which is important as this is a team-based project.
 
 ### Module Storage Feature
 - how the storage works
 - what happens when it fails to load
 - what happens when the user modifies the moduleplan
 - userprefs considered the same feature? if too long can split into another one
+
+**Overview:**
+
+Modcraft stores two types of information on the hard drive, ModulePlan and UserPrefs(User Preferences).
+ModulePlan stores the user's last saved module plan when using Modcraft allowing the user to access their module plan
+across sessions. UserPrefs contains the last known user interface settings when using Modcraft allowing the user to
+return to their preferred interface across sessions.
+
+ModulePlan is stored as `moduleplan.json` and UserPrefs is stored as `preferences.json`. Both files will be created if
+they do not already exist in the same folder in which the Modcraft jar file is stored. While users are free to access
+and modify the files as they wish it is recommended that they make a backup before any modifications. If Modcraft
+cannot access a file, it will be deleted and replaced with a new empty file.
+
+**Feature details:**
+
+1. When the user launches the application, if there is no `moduleplan.json` or `preferences.json` file detected in the
+same folder as Modcraft or they are corrupted, Modcraft will create them and populate them with the default moduleplan
+and preferences respectively.
+2. If there are existing `moduleplan.json` and `preferences.json` files with appropriate data, Modcraft will read the
+module plan from `moduleplan.json` and user preferences from `preferences.json`, loading the application with the
+information obtained from the files.
+3. Upon execution of any command that alters the user's module plan, the changes will automatically be saved into
+`moduleplan.json`.
+4. Upon alteration of any part of the user interface, the changes will automatically be saved into `preferences.json`.
+
+
+**Initialization sequence:**
+
+1. At startup, `MainApp` calls `MainApp#initPrefs` to attempt to parse the `preferences.json` file.
+2. `MainApp#initPrefs` calls `Storage#readUserPrefs` to obtain the user preferences as a `UserPrefs` object.
+   2a. If `DataLoadingException` is thrown, a new `preferences.json` file will be created with default preferences.
+3. `JsonUserPrefsStorage` deserializes the JSON file by calling `JsonUtil#readJsonFile` into a `UserPrefs` object.
+3. `MainApp` creates a `StorageManager` object with the file paths of `preferences.json` and `moduleplan.json`.
+4. `MainApp#initModelManager` is then called which calls `Storage#readModulePlan` attempting to parse the
+`moduleplan.json` file and create a `modulePlan` object.
+   4a. If `DataLoadingException` is thrown, a new `moduleplan.json` file will be created with the default module plan.
+5. `JsonModulePlanStorage` deserializes the JSON file into a `JsonSerializableModulePlan` object by calling
+`JsonUtil#readJsonFile`.
+   5a. The `JsonSerializableModulePlan` object represents a list of `JsonAdaptedModule` objects, created during
+deserialization.
+6. `JsonModulePlanStorage` then calls `JsonSerizaliableModulePlan#toModelType` to create the `ReadOnlyModulePlan` object.
+   6a. `JsonAdaptedModule` then calls `JsonAdapedModule#toModelType` for the creation of each `module`.
+7. `ModulePlan` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command
+execution.
+8. A `DataLoadingException` is thrown when any of the following occus.
+   - the file cannot be found.
+   - an error occurs during deserialization, or
+   - the data contains invalid values.
+
+
+This can be seen in the sequence diagram below
+
+<puml src="diagrams/StorageInitSequenceDiagram.puml" />
+
+
+
 
 ### ModuleData
 
@@ -305,6 +472,24 @@ The activity diagram for adding a `Module` into the module plan
 
 <puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
 
+The sequence of the `add` command is as follows:
+
+1. The user inputs the `add` command.<br>
+   e.g. `add CS2040S y/1 s/1 g/A`
+2. The `LogicManager` calls the `ModulePlanParser#parseCommand` to parse the command.
+3. The `ModulePlanParser` then creates a new `AddCommandParser` to parse the fields provided by the user and 
+a new `AddCommand` is created.
+4. The `AddCommand` checks if the `ModuleCode` is valid bt calling `Model#getModuleFromDb` and retrieves 
+the module if it exists from the database.
+5. `AddCommand` then fills the user inputs into the module using the `Module#fillUserInputs` function.
+6. `AddCommand` then attempts to add the module into the Model via `Model#addModule`.
+7. If `ModuleCode`, the user inputs are valid, and the Model does not contain the module, `AddCommand` will 
+successfully add the new `Module` into the module plan.
+   
+The following sequence diagram shows how the `add` command works:
+
+<puml src="diagrams/AddOverallSequenceDiagram.puml" width="450" />
+
 
 ### Edit Module Command
 
@@ -349,6 +534,9 @@ The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-
 The following activity diagram shows the logic of deleting a `Module` from the module plan:
 
 <puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
+
+   
+
 
 <br>
 
@@ -450,71 +638,46 @@ The following sequence diagram shows how the `calculateMC` command works:
 
 <br>
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Pre-requisite checking feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedModulePlan`. It extends `ModulePlan` with an undo/redo history, stored internally as an `ModulePlanStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed pre-requisite checking mechanism is facilitated by `Prerequisite`. Every `Module` will have a `Prerequisite` field. `Prerequisite` contains a list of other `Prerequisite` objects, of which `Module` is a subclass. It also contains a number that represents the number of `Prerequisite`s in the list that need to be fulfilled before this `Prerequisite` can be considered fulfilled. Additionally, it implements the following operation:
 
-* `VersionedModulePlan#commit()` — Saves the current module plan state in its history.
-* `VersionedModulePlan#undo()` — Restores the previous module plan state from its history.
-* `VersionedModulePlan#redo()` — Restores a previously undone module plan state from its history.
+* `Prerequisite#isFulfilled(List<Module> list)`: Checks whether the current `Prerequisite` is fulfilled by the `Module`s in `list`.
 
-These operations are exposed in the `Model` interface as `Model#commitModulePlan()`, `Model#undoModulePlan()` and `Model#redoModulePlan()` respectively.
+This operation is accessed in `Module` as `Module#checkPrerequisitesFulfilled(List<Module> list)`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Here is the class diagram:
 
-Step 1. The user launches the application for the first time. The `VersionedModulePlan` will be initialized with the initial module plan state, and the `currentStatePointer` pointing to that single module plan state.
+<puml src="diagrams/PrerequisiteClassDiagram.puml" />
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Given below is an example usage scenario and how the prerequisite mechanism behaves at each step.
 
-Step 2. The user executes `delete CS1010` command to delete the module `CS1010` in the module plan. The `delete` command calls `Model#commitModulePlan()`, causing the modified state of the module plan after the `delete CS1010` command executes to be saved in the `modulePlanStateList`, and the `currentStatePointer` is shifted to the newly inserted module plan state.
+Step 1. The user executes `add CS2103T y/2 s/1 g/IP` command to add the module `CS2103T` in the module plan. 
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+Step 2. When executing the `add` command, `Module#checkPrerequisitesFulfilled(List<Module> list)` is called to check if the prerequisites have been fulfilled in previous semesters. In this case, these are the Advanced Placement and Year 1 semesters, and the `Module`s in these semesters populate `list`.
 
-Step 3. The user executes `add CS2030 …​` to add a new module. The `add` command also calls `Model#commitModulePlan()`, causing another modified module plan state to be saved into the `modulePlanStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 3. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it adds the module `CS2103T` to Year 2 Semester 1.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitModulePlan()`, so the module plan state will not be saved into the `modulePlanStateList`.
+**Note:** If the module is in the Advanced Placement, there are no other semesters to check.
 
 </box>
 
-Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoModulePlan()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous module plan state, and restores the module plan to that state.
+Step 4. The user now decides to move the module to an earlier semester, and decides to make the appropriate changes by executing the command `edit CS2103T y/1 s/2`. The `edit` command calls `Module#checkPrerequisitesFulfilled(List<Module> list)` again to check if the prerequisites have been fulfilled in previous semesters. In this case, they are the Advanced Placement and Year 1 Semester 1 semesters, and the `Module`s in these semesters populate `list`. 
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+Step 5. ModCraft lets the user know if the prerequisites have not been fulfilled, and which prerequisites. Otherwise, it moves the module `CS2103T` to Year 1 Semester 2.
 
 
-<box type="info" seamless>
+The following sequence diagram shows how the prerequisite checking works:
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModulePlan state, then there are no previous ModulePlan states to restore. The `undo` command uses `Model#canUndoModulePlan()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<puml src="diagrams/PrerequisiteAddSequenceDiagram.puml" alt="PrerequisiteAddSequenceDiagram" />
 
-</box>
+The following activity diagram summarizes what happens when a user executes a command that changes the ModulePlan:
 
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoModulePlan()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the module plan to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `modulePlanStateList.size() - 1`, pointing to the latest module plan state, then there are no undone ModulePlan states to restore. The `redo` command uses `Model#canRedoModulePlan()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="250" />
 
 <br>
 
@@ -585,17 +748,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …                                                                 | I want to …                                                                                 | So that I can…                                               |
 |----------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | `* * *`  | fast typer                                                             | use the typing interface                                                                    | I save time from interacting with the GUI                    |
-| `* * *`  | current student                                                        | set my major                                                                                |                                                              |
 | `* * *`  | current student                                                        | add modules to "taken" / "taking" / "plan to take" lists                                    |                                                              |
 | `* * *`  | current student                                                        | search for modules by module code or module name                                            |                                                              |
 | `* * *`  | current student                                                        | remove modules from the lists                                                               |                                                              |
 | `* * *`  | current student                                                        | access data entered in a previous session                                                   |                                                              |
 | `* * *`  | forgetful student                                                      | view which year and semester I have taken certain modules                                   |                                                              |
-| `* * *`  | current student                                                        | see the modules I need to take to graduate                                                  | I can apply for and take those modules to graduate           |
 | `* * *`  | incoming freshman                                                      | see the modules I might need to take for my course                                          | I can make an informed decision about what I am applying for |
 | `* * *`  | current student                                                        | check how many MCs I haven taken                                                            | I know how many more I need to take to graduate              |
 | `* * *`  | overworked student                                                     | just check what modules I have taken                                                        | I don't have to remember them myself                         |
-| `* *`    | student going on exchange                                              | see which modules can be mapped over                                                        |                                                              |
+| `* *`    | current student                                                        | set my major                                                                                |                                                              |
+| `* *`    | current student                                                        | see the modules I need to take to graduate                                                  | I can apply for and take those modules to graduate           |
 | `* *`    | current student                                                        | see how the modules I plan to take affect what modules I will be able to take in the future | I can plan my future semesters                               |
 | `* *`    | current student                                                        | check what prerequisite modules I need to take                                              | I can take this specific module                              |
 | `* *`    | struggling student                                                     | see what modules I can use my remaining S/Us on                                             | I can plan my modules accordingly                            |
@@ -609,13 +771,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | student staying in RC/NUSC or taking other special programs (like SPM) | check for modules that fulfill requirements                                                 | I can replace the general education modules                  |
 | `* *`    | student that wants to take niche modules                               | search for it                                                                               | I know what are the options                                  |
 | `* *`    | current student                                                        | see if certain modules are available in the current semester                                | I can plan my study plan or take it this semester            |
-| `* *`    | student who likes a certain professor                                  | see which semester that professor will be teaching the module                               | I can take their module                                      |
-| `* *`    | student who dislikes a certain professor                               | see which modules they will be teaching                                                     | I can avoid them                                             |
 | `* *`    | student taking credit-bearing internships                              | see how my internships fulfill my graduation requirement and MCs                            |                                                              |
 | `* *`    | student taking a focus area                                            | see if the module I have taken satisfy my focus area                                        |                                                              |
 | `* *`    | failing student                                                        | see if I can drop certain modules                                                           | I can graduate through an alternate path                     |
 | `* *`    | student looking for work                                               | see which modules give me skills I need                                                     | I can apply for certain jobs/internships                     |
 | `* *`    | student who wants to switch courses                                    | check which modules I can carry over and still take                                         | I can graduate                                               |
+| `*`      | student who likes a certain professor                                  | see which semester that professor will be teaching the module                               | I can take their module                                      |
+| `*`      | student who dislikes a certain professor                               | see which modules they will be teaching                                                     | I can avoid them                                             |
+| `*`      | student going on exchange                                              | see which modules can be mapped over                                                        |                                                              |
 | `*`      | advanced user                                                          | manually edit the data file                                                                 | I can manipulate the data as I wish                          |
 | `*`      | student that hates a specific module                                   | check for other alternative modules so that I can avoid that module                         | I can prevent excessive stress                               |
 | `*`      | ambitious student                                                      | find the fastest way to graduate                                                            |                                                              |
@@ -677,6 +840,7 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
+<<<<<<< HEAD
 **Use case: UC04 - Calculating MC**
 
 **MSS**
@@ -688,6 +852,14 @@ Use case resumes from step 2.
 5. User requests for MC calculation.
 6. ModCraft displays updated number of MCs (including IP modules).
 Steps 4-6 are repeated for each combination of modules the user tries.
+=======
+**Use case: UC03 - Calculating CAP**
+
+**MSS**
+
+1. User asks ModCraft for their current CAP.
+2. System show the current CAP of all modules that have been taken.
+>>>>>>> 84ffff64ae410560208cd7cd980c36da0e72aafb
 
 Use case ends.
 
@@ -771,6 +943,29 @@ Use case ends.
 * 3a. User wants to indicate that the module is taken or to be taken in Special Term 1 or Special Term 2
   * 3a1. User uses the add command and specifies the semester to be `s/ST1` for Special Term 1 or `s/ST2` for Special Term 2
   * Use case resumes from step 4.
+
+___
+
+#### **Use Case: UC05 - Dropping Modules**
+
+**MSS**
+
+1. User edits the grade of module he/she want to drop to `W` or `F`
+2. Modcraft shows that the module has been edited to the appropriate grade.
+
+Use case ends.
+
+**Extensions**
+* 1a. Module code is invalid
+    * 1a1. System shows the user that the module code inputted is invalid
+    * 1a2. User inputs correct module code
+      Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
+* 1b. Module not in study plan
+    * 1b1. System shows the user that the module code inputted is not in study plan
+    * 1b2. User inputs another module code
+      Steps 1b1 and 1b2 are repeated until the user inputs the correct module code
+      Use case resumes from step 2.
 
 ___
 ### Non-Functional Requirements
