@@ -763,7 +763,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `ModCraft` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Planning mods to take in the upcoming semester**
+#### **Use case: UC01 - Planning mods to take in the upcoming semester**
 
 **MSS**
 
@@ -789,7 +789,9 @@ Use case resumes from step 2.
 Use case resumes from step 1.
 
 
-**Use case: UC02 - Updating end of semester grades**
+___
+
+#### **Use case: UC02 - Updating end of semester grades**
 
 **MSS**
 
@@ -807,7 +809,9 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
-**Use case: UC03 - Calculating CAP**
+___
+
+#### **Use case: UC03 - Calculating CAP**
 
 **MSS**
 
@@ -816,7 +820,9 @@ Use case resumes from step 2.
 
 Use case ends.
 
-**Use case: UC04 - Calculating MC**
+___
+
+#### **Use case: UC04 - Calculating MC**
 
 **MSS**
 
@@ -830,7 +836,9 @@ Steps 4-6 are repeated for each combination of modules the user tries.
 
 Use case ends.
 
-**Use case: UC08 - Indicating exempted modules**
+___
+
+#### **Use case: UC08 - Indicating exempted modules**
 
 **MSS**
 
@@ -848,8 +856,9 @@ Use case ends.
       Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
       Use case resumes from step 2.
 
+___
 
-**Use case: UC09 - S/Uing modules**
+#### **Use case: UC09 - S/Uing modules**
 
 **MSS**
 
