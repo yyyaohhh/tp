@@ -4,10 +4,7 @@
   pageNav: 3
 ---
 
-# MODCRAFT Developer Guide
-
-<!-- * Table of Contents -->
-<page-nav-print />
+# ModCraft Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
