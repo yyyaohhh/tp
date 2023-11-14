@@ -136,6 +136,10 @@ As ModCraft writes to files within the directory it is in, we recommend placing 
 
 <br>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
@@ -361,8 +365,6 @@ You need to provide **at least one** of the optional fields (i.e. `GRADE`, `YEAR
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Deleting a module: `delete`
 
 You can remove the module from whichever semester the module is taken using this command. This command works **only if the module has already been added**.
@@ -391,8 +393,6 @@ The images below show you the `delete` command in action. The module `CS2101` is
     <figcaption style="text-align: center;">After</figcaption>
   </figure>
 </div>
-
-<div style="page-break-after: always;"></div>
 
 <div class="alert alert-primary"><md>:bulb: **Tip:**
 
@@ -431,6 +431,8 @@ info MODULE
 * `info CS2109S`: Displays information about the module CS2109S.
 
 </md></div>
+
+<div style="page-break-after: always;"></div>
 
 The image below show you what ModCraft should look like after executing the `info` command.
 
