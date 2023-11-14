@@ -65,7 +65,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete CS2030S`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="585" />
 
 Each of the four main components (also shown in the diagram above), as well as the [**`Database`**](#database-component) component,
 
@@ -182,7 +182,7 @@ The `Storage` component,
 
 **API** : [`Database.java`](https://github.com/AY2324S1-CS2103T-T13-0/tp/blob/master/src/main/java/seedu/address/database/Database.java)
 
-<puml src="diagrams/DatabaseClassDiagram.puml" width="250" />
+<puml src="diagrams/DatabaseClassDiagram.puml" width="230" />
 
 <br>
 
@@ -224,38 +224,6 @@ This section describes some noteworthy details on how certain features and comma
 
 <br>
 
-### Module Database Feature
-
-**Overview:**
-
-ModCraft contains an internal list of all possible modules, which forms the backbone of the application. This `ModuleData` allows for validation of user input and provides the required module information to be displayed.
-
-The module information is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Users are not permitted to access the file as uninformed modifications could cause the application to invariably fail at startup.
-
-**Feature details:**
-
-1.   When the user launches the application, the data is converted from JSON format to the `ModuleData` class, which supports verification and retrieval of `Module` information.
-2.   During command execution, the `ModuleCode` input by the user is validated to exist within `ModuleData`.
-3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
-4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
-
-**Initialization sequence:**
-1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
-2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
-   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
-3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
-   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
-4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
-   * the file cannot be found,
-   * an error occurs during deserialization, or
-   * the data contains invalid values.
-
-
-This can be shown through following sequence diagram:
-
-<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
-
 ### Module Plan
 
 #### Overview:
@@ -270,7 +238,7 @@ The ModulePlan implementation consists of 4 levels of classes in the following o
 
 The class diagram below shows the OOP structure of the ModulePlan component:
 
-<puml src="diagrams/ModulePlanClassDiagram.puml" width="450" />
+<puml src="diagrams/ModulePlanClassDiagram.puml" width="600" />
 
 #### Implementation:
 
@@ -335,6 +303,8 @@ However, as changes in the `UniqueModuleList` will not propagate to the `Observa
 
 Alternative 1 is ultimately chosen as it helps abstracts out the logic for different semester to the Model component where it is meant to be and having a OOP structure makes it easier to visualise and thus test/maintain code. Which is important as this is a team-based project.
 
+<br>
+
 ### Module Storage Feature
 - how the storage works
 - what happens when it fails to load
@@ -394,15 +364,57 @@ This can be seen in the sequence diagram below
 
 <puml src="diagrams/StorageInitSequenceDiagram.puml" />
 
+<br>
 
-
-
-### Info Module Command
+### ModuleData
 
 **Overview:**
 
-**Feature details:**
+The `ModuleData` object represents an internal list of all possible modules, which forms the base of the application. It allows for validation of the module codes in user input, and provides the required identity fields for the creation of modules to be saved to the user's study plan.
 
+**Implementation:**
+
+Though the internal list utlizes the same class as `ModulePlan`, here the `UniqueModulesList modules` field models the full list of all NUS modules instead of the list of a user's modules in a given semester. It maintains the same property of protecting against duplicate modules, which are identified based on their similar module codes. 
+
+The `checkDbValidModuleCode(ModuleCode)` method fufills one of the two motivations of `ModuleData`: validation. It simply iterates through the internal list and checks if a module with a matching module code exists. It allows Modcraft to distinguish between valid and invalid modules codes during command execution.
+
+Another purpose of `ModuleData` is to provide information about a module (e.g. its name, description and number of modular credits), if it is a valid NUS module. This is fufilled by the `getModule(ModuleCode)` method, which returns the desired module as an immutable `Module` object. This immutability is vital to preserve the correctness of the module information, so that future references to `ModuleData` return the same results.
+
+**Initialization:**
+
+The module information (of over 15000 modules!) is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Upon launching ModCraft, the module information is deserialized (with the help of the Jackson library) from JSON format to the `ModuleData` object through a series of conversions. The `Module` fields are parsed into Strings and combined into a `JsonAdaptedDbModule` object, which is then further collated into a `JsonSerializableModuleData` object. When the `JsonSerializableModuleData#toModelType` method is called, an empty `ModuleData` object is created before the conversion of all `JsonAdaptedDbModule` objects into `Module` objects, which are then added into `ModuleData`.
+
+This initialization process can be shown through following sequence diagrams:
+
+<puml src="diagrams/JsonModuleSequenceDiagram.puml" />
+
+<puml src="diagram/ToModelTypeSequenceDiagram.puml" />
+
+<br>
+
+<box type="info" seamless>
+
+**Note:** Initialization failure
+
+A `DataLoadingException` is thrown if:
+* the file cannot be found,
+* an error occurs during deserialization, or
+* the data contains invalid values (e.g. negative modular credits)
+
+In such cases where the data cannot be read successfully, a `RuntimeException` is deliberately triggered to forcefully abort the application's launch. This is necessary as most features are reliant on the validation and information provided by the `ModuleData` object.
+
+</box>
+
+**Design considerations:** Location of `moduleinfo.json`
+
+* **Alternative 1**: Expose the file. (Similar to the ModulePlan storage file implementation)
+   * Pros: The module information within the file could be inaccurate. Users will be able to easily modify/update information directly without developer intervention.
+   * Cons: New users might mistakenly make unintended modifications, causing the completeness/correctness of the information to be compromised. Due to the lack of a failsafe overwrite mechanism, the application might invariably fail at startup.
+* **Alternative 2 (Chosen)**: Hide the file in the resources folder.
+   * Pros: Maintain the completeness and correctness of the information.
+   * Cons: Lack of user customization for more advanced users. As module information changes over time, responsibilty falls on the developers to ensure the information is updated and error-free.
+
+<br>
 
 ### Add Module Command
 **Overview:**
@@ -423,7 +435,7 @@ If the module has already been added the User's module plan, an error message wi
 
 The activity diagram for adding a `Module` into the module plan
 
-<puml src="diagrams/AddModuleActivityDiagram.puml" width="450" />
+<puml src="diagrams/AddModuleActivityDiagram.puml" width="475" />
 
 The sequence of the `add` command is as follows:
 
@@ -441,8 +453,9 @@ successfully add the new `Module` into the module plan.
    
 The following sequence diagram shows how the `add` command works:
 
-<puml src="diagrams/AddOverallSequenceDiagram.puml" width="450" />
+<puml src="diagrams/AddOverallSequenceDiagram.puml" />
 
+<br>
 
 ### Edit Module Command
 
@@ -456,13 +469,15 @@ We shall now illustrate how `EditModuleDescriptor` is used.
 
 Here is a *Sequence Diagram* showing the parser in action:
 
-<puml src="diagrams/EditParseSequenceDiagram.puml" width="450" />
+<puml src="diagrams/EditParseSequenceDiagram.puml" />
 
 And here is a *Sequence Diagram* showing the command being executed:
 
-<puml src="diagrams/EditExecuteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/EditExecuteSequenceDiagram.puml" />
 
 As can be seen, this is a helpful class to store fields that need to be edited.
+
+<br>
 
 ### Delete Module Command
 
@@ -486,10 +501,7 @@ The format of the `delete` command can be found [here](https://ay2324s1-cs2103t-
 
 The following activity diagram shows the logic of deleting a `Module` from the module plan:
 
-<puml src="diagrams/DeleteCommandActivityDiagram.puml" width="450" />
-
-   
-
+<puml src="diagrams/DeleteCommandActivityDiagram.puml" width="600" />
 
 <br>
 
@@ -505,7 +517,35 @@ e.g. `delete CS3230`
 
 The following sequence diagram shows how the `delete` command works:
 
-<puml src="diagrams/DeleteCommandSequenceDiagram.puml" width="450" />
+<puml src="diagrams/DeleteCommandSequenceDiagram.puml" />
+
+<br>
+
+### Info Module Command
+
+**Overview:**
+
+The `info` command is used to display information about a selected module, which is specified by the user by its module code.
+
+The format of the `info` command can be found [here](https://ay2324s1-cs2103t-t13-0.github.io/tp/UserGuide.html#finding-information-about-a-module-info).
+
+**Feature details:**
+
+1. The user enters the `info` command.
+2. The `InfoCommandParser` checks that only a single argument is provided, and that the argument follows the valid module code format.
+3. A `ParseException` is thrown if either of the above checks fail. Otherwise, an `InfoCommand` object will be created and executed.
+4. The `InfoCommand` verifies that the module code exists in `ModuleData`. Otherwise, `ModuleNotFoundException` will be thrown.
+5. The `Module` is retrieved from the database and the information is displayed to the user.
+
+This is shown through the following activity diagram:
+
+<puml src="diagrams/InfoCommandActivityDiagram.puml" />
+
+**Command execution sequence:**
+
+During command execution, the `info` command calls `Module#toInfoString`, as shown in the sequence diagram below:
+
+<puml src="diagrams/InfoCommandSequenceDiagram.puml" />
 
 <br>
 
@@ -533,7 +573,7 @@ The sequence of the `calculateCAP` command is as follows:<br>
 
 The following sequence diagram shows how the `calculateCAP` command works:
 
-<puml src="diagrams/CalculateCapSequenceDiagram.puml" width="450" />
+<puml src="diagrams/CalculateCapSequenceDiagram.puml" />
 
 <br>
 
@@ -561,7 +601,7 @@ The sequence of the `calculateMC` command is as follows:<br>
 
 The following sequence diagram shows how the `calculateMC` command works:
 
-<puml src="diagrams/CalculateMcSequenceDiagram.puml" width="450" />
+<puml src="diagrams/CalculateMcSequenceDiagram.puml" />
 
 <br>
 
@@ -604,7 +644,7 @@ The following sequence diagram shows how the prerequisite checking works:
 
 The following activity diagram summarizes what happens when a user executes a command that changes the ModulePlan:
 
-<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="250" />
+<puml src="diagrams/PrerequisiteActivityDiagram.puml" width="350" />
 
 <br>
 
@@ -723,7 +763,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `ModCraft` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Planning mods to take in the upcoming semester**
+#### **Use case: UC01 - Planning mods to take in the upcoming semester**
 
 **MSS**
 
@@ -749,7 +789,9 @@ Use case resumes from step 2.
 Use case resumes from step 1.
 
 
-**Use case: UC02 - Updating end of semester grades**
+___
+
+#### **Use case: UC02 - Updating end of semester grades**
 
 **MSS**
 
@@ -767,7 +809,9 @@ Use case ends.
 Steps 1a1 and 1a2 are repeated until the user inputs the correct grade
 Use case resumes from step 2.
 
-**Use case: UC03 - Calculating CAP**
+___
+
+#### **Use case: UC03 - Calculating CAP**
 
 **MSS**
 
@@ -776,7 +820,25 @@ Use case resumes from step 2.
 
 Use case ends.
 
-**Use case: UC08 - Indicating exempted modules**
+___
+
+#### **Use case: UC04 - Calculating MC**
+
+**MSS**
+
+1. User inputs taken modules.
+2. User requests for MC calculation.
+3. ModCraft displays number of MCs taken.
+4. User inputs planned future modules with IP grade.
+5. User requests for MC calculation.
+6. ModCraft displays updated number of MCs (including IP modules).
+Steps 4-6 are repeated for each combination of modules the user tries.
+
+Use case ends.
+
+___
+
+#### **Use case: UC08 - Indicating exempted modules**
 
 **MSS**
 
@@ -794,8 +856,9 @@ Use case ends.
       Steps 1a1 and 1a2 are repeated until the user inputs the correct module code
       Use case resumes from step 2.
 
+___
 
-**Use case: UC09 - S/Uing modules**
+#### **Use case: UC09 - S/Uing modules**
 
 **MSS**
 
