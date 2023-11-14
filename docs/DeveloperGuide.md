@@ -224,45 +224,9 @@ This section describes some noteworthy details on how certain features and comma
 
 <br>
 
-<<<<<<< HEAD
 ### Module Plan Feature
 - how semesters are setup
 - what happens a user attempts to add a duplicate module
-=======
-### Module Database Feature
-
-**Overview:**
-
-ModCraft contains an internal list of all possible modules, which forms the backbone of the application. This `ModuleData` allows for validation of user input and provides the required module information to be displayed.
-
-The module information is stored as `moduleinfo.json` in the `src/main/resources/database` folder. Users are not permitted to access the file as uninformed modifications could cause the application to invariably fail at startup.
-
-**Feature details:**
-
-1.   When the user launches the application, the data is converted from JSON format to the `ModuleData` class, which supports verification and retrieval of `Module` information.
-2.   During command execution, the `ModuleCode` input by the user is validated to exist within `ModuleData`.
-3.   If the `ModuleCode` is found to be invalid, an error message is displayed to the user.
-4.   Otherwise, the command execution continues to retrieve information about the `Module` if needed. The content of this step differs between the different commands, more details are provided for each individual command below.
-
-**Initialization sequence:**
-1. At startup, `MainApp` calls `DatabaseManager#readDatabase` to attempt to parse the `moduleinfo.json` file.
-2. The `DatabaseManager` deserializes the JSON file into a `JsonSerializableModuleData` object by calling `JsonUtil#readJsonResource`. <br>
-   2a. The `JsonSerializableModuleData` object represents a list of `JsonAdaptedDbModule` objects, which are created during deserialization.
-3. The `DatabaseManager` then calls `JsonSerailizableModuleData#toModelType` to create the `ModuleData` object. <br>
-   3a. `JsonSerailizableModuleData` calls `JsonAdaptedDbModule#toModelType` for the creation of each module.
-4. The `ModuleData` is returned to `MainApp` where it is used to initialize `ModelManager`, which is used during command execution.
-5. A `DataLoadingException` is thrown if any of the above steps fail, which could happen if
-   * the file cannot be found,
-   * an error occurs during deserialization, or
-   * the data contains invalid values.
-
-
-This can be shown through following sequence diagram:
-
-<puml src="diagrams/ModuleDataInitSequenceDiagram.puml" />
-
-### Module Plan
->>>>>>> 84ffff64ae410560208cd7cd980c36da0e72aafb
 
 #### Overview:
 
@@ -341,6 +305,8 @@ However, as changes in the `UniqueModuleList` will not propagate to the `Observa
 
 Alternative 1 is ultimately chosen as it helps abstracts out the logic for different semester to the Model component where it is meant to be and having a OOP structure makes it easier to visualise and thus test/maintain code. Which is important as this is a team-based project.
 
+<br>
+
 ### Module Storage Feature
 - how the storage works
 - what happens when it fails to load
@@ -400,8 +366,7 @@ This can be seen in the sequence diagram below
 
 <puml src="diagrams/StorageInitSequenceDiagram.puml" />
 
-
-
+<br>
 
 ### ModuleData
 
@@ -451,6 +416,8 @@ In such cases where the data cannot be read successfully, a `RuntimeException` i
    * Pros: Maintain the completeness and correctness of the information.
    * Cons: Lack of user customization for more advanced users. As module information changes over time, responsibilty falls on the developers to ensure the information is updated and error-free.
 
+<br>
+
 ### Add Module Command
 **Overview:**
 The `add` command is used to add a module to the module plan with the information fields `Module Code`, `Year Taken`,
@@ -490,6 +457,7 @@ The following sequence diagram shows how the `add` command works:
 
 <puml src="diagrams/AddOverallSequenceDiagram.puml" width="450" />
 
+<br>
 
 ### Edit Module Command
 
@@ -510,6 +478,8 @@ And here is a *Sequence Diagram* showing the command being executed:
 <puml src="diagrams/EditExecuteSequenceDiagram.puml" width="450" />
 
 As can be seen, this is a helpful class to store fields that need to be edited.
+
+<br>
 
 ### Delete Module Command
 
@@ -581,6 +551,8 @@ This is shown through the following activity diagram:
 During command execution, the `info` command calls `Module#toInfoString`, as shown in the sequence diagram below:
 
 <puml src="diagrams/InfoCommandSequenceDiagram.puml" />
+
+<br>
 
 ### Calculate CAP Command
 
